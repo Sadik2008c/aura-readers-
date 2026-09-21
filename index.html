@@ -1,67 +1,201 @@
-<!DOCTYPE html>
+he<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aura FFX - Login</title>
+    <title>AURA READERS</title>
     
-    <!-- Firebase SDKs (Compat version for simple HTML integration) -->
+    <!-- Firebase SDKs -->
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
     
     <style>
-        body {
-            background-color: #050b14; color: #fff;
-            font-family: 'Segoe UI', sans-serif;
-            display: flex; justify-content: center; align-items: center;
-            height: 100vh; margin: 0;
+        :root {
+            --bg-main: #050b14;
+            --bg-card: #0a1325;
+            --neon-blue: #00f0ff;
+            --neon-red: #ff3366;
+            --neon-gold: #ffcc00;
+            --neon-green: #00ff88;
+            --text-muted: #8892b0;
         }
+
+        body {
+            background-color: var(--bg-main);
+            color: #fff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
         .login-box {
-            background: linear-gradient(145deg, #0a1325, #070d1a);
+            background: linear-gradient(145deg, var(--bg-card), #070d1a);
             border: 1px solid rgba(0, 240, 255, 0.3);
-            border-radius: 15px; padding: 30px;
-            width: 320px; box-shadow: 0 0 15px rgba(0, 240, 255, 0.1);
+            border-radius: 16px;
+            padding: 30px 24px;
+            width: 100%;
+            max-width: 340px;
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.1);
             text-align: center;
         }
-        .title { color: #00f0ff; font-size: 24px; font-weight: 900; margin-bottom: 20px; text-transform: uppercase; }
+
+        .brand-name {
+            color: var(--neon-blue);
+            font-size: 26px;
+            font-weight: 900;
+            letter-spacing: 2px;
+            margin-bottom: 5px;
+            text-shadow: 0 0 10px rgba(0, 240, 255, 0.4);
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 13px;
+            margin-bottom: 22px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
         input {
-            width: 100%; background: #050b14; border: 1px solid #8892b0;
-            color: #fff; padding: 12px; border-radius: 5px;
-            margin-bottom: 15px; box-sizing: border-box;
+            width: 100%;
+            background: #050b14;
+            border: 1px solid var(--text-muted);
+            color: #fff;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 14px;
+            box-sizing: border-box;
+            font-size: 14px;
+            transition: 0.3s;
         }
-        input:focus { border-color: #00f0ff; outline: none; }
-        .pass-container { position: relative; }
-        .show-pass {
-            position: absolute; right: 10px; top: 12px;
-            color: #00f0ff; cursor: pointer; font-size: 12px; font-weight: bold;
+
+        input:focus {
+            border-color: var(--neon-blue);
+            outline: none;
+            box-shadow: 0 0 8px rgba(0, 240, 255, 0.3);
         }
+
+        /* Password container with animated Monkey icon */
+        .pass-container {
+            position: relative;
+            margin-bottom: 5px;
+        }
+
+        .monkey-toggle {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 22px;
+            cursor: pointer;
+            user-select: none;
+            transition: transform 0.2s;
+        }
+
+        .monkey-toggle:active {
+            transform: translateY(-50%) scale(1.2);
+        }
+
+        /* Password Strength Indicator */
+        .strength-box {
+            display: none;
+            text-align: left;
+            margin-bottom: 15px;
+            padding: 4px 2px;
+        }
+
+        .strength-bar-bg {
+            width: 100%;
+            height: 5px;
+            background: #112240;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 4px;
+        }
+
+        .strength-bar-fill {
+            height: 100%;
+            width: 0%;
+            transition: width 0.3s ease, background-color 0.3s ease;
+        }
+
+        .strength-text {
+            font-size: 11px;
+            font-weight: 600;
+            margin-top: 5px;
+        }
+
+        .strength-tips {
+            font-size: 10.5px;
+            color: var(--text-muted);
+            margin-top: 3px;
+            line-height: 1.3;
+        }
+
         .btn {
-            background: #00f0ff; color: #000; border: none;
-            padding: 12px; border-radius: 6px; font-weight: bold;
-            cursor: pointer; width: 100%; text-transform: uppercase; transition: 0.3s;
+            background: var(--neon-blue);
+            color: #000;
+            border: none;
+            padding: 13px;
+            border-radius: 8px;
+            font-weight: 800;
+            cursor: pointer;
+            width: 100%;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 10px;
+            transition: 0.3s;
         }
-        .btn:hover { background: #fff; box-shadow: 0 0 10px #00f0ff; }
+
+        .btn:hover {
+            background: #fff;
+            box-shadow: 0 0 15px var(--neon-blue);
+        }
+
         .toggle-text {
-            color: #8892b0; font-size: 13px; margin-top: 15px; cursor: pointer;
+            color: var(--text-muted);
+            font-size: 13px;
+            margin-top: 18px;
+            cursor: pointer;
         }
-        .toggle-text span { color: #00f0ff; font-weight: bold; }
+
+        .toggle-text span {
+            color: var(--neon-blue);
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
 
     <div class="login-box">
-        <div class="title" id="formTitle">SYSTEM LOGIN</div>
+        <div class="brand-name">AURA READERS</div>
+        <div class="subtitle" id="formSubtitle">STUDY SYSTEM LOGIN</div>
         
         <div id="signupFields" style="display: none;">
             <input type="text" id="name" placeholder="Display Name (e.g. 2x Sadik)">
-            <input type="text" id="target" placeholder="Target (e.g. BUET/DMC)">
+            <input type="text" id="target" placeholder="Target (e.g. BUET / Medical)">
         </div>
 
         <input type="text" id="username" placeholder="Username (No spaces)">
         
         <div class="pass-container">
-            <input type="password" id="password" placeholder="Password">
-            <div class="show-pass" onclick="togglePass()">SHOW</div>
+            <input type="password" id="password" placeholder="Password" oninput="checkStrength()">
+            <!-- Monkey Emoji: 🙈 = Hide (Default), 🐵 = Show -->
+            <span class="monkey-toggle" id="monkeyIcon" onclick="togglePass()" title="Show/Hide Password">🙈</span>
+        </div>
+
+        <!-- Strength Meter (Only shown in Sign Up) -->
+        <div class="strength-box" id="strengthContainer">
+            <div class="strength-bar-bg">
+                <div class="strength-bar-fill" id="strengthBar"></div>
+            </div>
+            <div class="strength-text" id="strengthText"></div>
+            <div class="strength-tips" id="strengthTips"></div>
         </div>
 
         <button class="btn" id="actionBtn" onclick="processAuth()">LOGIN</button>
@@ -72,7 +206,6 @@
     </div>
 
     <script>
-        // আপনার দেওয়া ফায়ারবেস কনফিগারেশন
         const firebaseConfig = {
             apiKey: "AIzaSyAG0Py4X5uCXy_qlswCe0hE8ci_iOzGc2M",
             authDomain: "aura-readers.firebaseapp.com",
@@ -80,84 +213,160 @@
             storageBucket: "aura-readers.firebasestorage.app",
             messagingSenderId: "809779155847",
             appId: "1:809779155847:web:3eb0a9732f97f6ad503922",
-            // Realtime Database URL (অবশ্যই দিতে হবে)
-            databaseURL: "https://aura-readers-default-rtdb.firebaseio.com" 
+            databaseURL: "https://aura-readers-default-rtdb.firebaseio.com"
         };
         
-        // ফায়ারবেস চালু করা
         firebase.initializeApp(firebaseConfig);
         const db = firebase.database();
 
         let isLogin = true;
 
+        // Switch between Login and Sign Up
         function switchMode() {
             isLogin = !isLogin;
-            document.getElementById('formTitle').innerText = isLogin ? "SYSTEM LOGIN" : "CREATE ACCOUNT";
+            document.getElementById('formSubtitle').innerText = isLogin ? "STUDY SYSTEM LOGIN" : "CREATE ACCOUNT";
             document.getElementById('actionBtn').innerText = isLogin ? "LOGIN" : "SIGN UP";
             document.getElementById('signupFields').style.display = isLogin ? "none" : "block";
+            document.getElementById('strengthContainer').style.display = isLogin ? "none" : "block";
+            
             document.getElementById('toggleAuth').innerHTML = isLogin ? 
                 "Don't have an account? <span>Sign Up</span>" : "Already have an account? <span>Login</span>";
+            
+            // Reset fields
+            document.getElementById('password').value = "";
+            resetStrengthMeter();
+            resetMonkey();
         }
 
+        // Animated Monkey Eye Toggle
         function togglePass() {
-            let passInput = document.getElementById('password');
-            let showBtn = document.querySelector('.show-pass');
+            const passInput = document.getElementById('password');
+            const monkeyIcon = document.getElementById('monkeyIcon');
+
             if (passInput.type === "password") {
                 passInput.type = "text";
-                showBtn.innerText = "HIDE";
+                monkeyIcon.innerText = "🐵"; // চোখ খুলে দেখা
             } else {
                 passInput.type = "password";
-                showBtn.innerText = "SHOW";
+                monkeyIcon.innerText = "🙈"; // চোখ বন্ধ করে হাইড
             }
         }
 
+        function resetMonkey() {
+            document.getElementById('password').type = "password";
+            document.getElementById('monkeyIcon').innerText = "🙈";
+        }
+
+        // Password Strength Logic
+        function checkStrength() {
+            if (isLogin) return; // লগইনের সময় চেক করার প্রয়োজন নেই
+
+            const pass = document.getElementById('password').value;
+            const bar = document.getElementById('strengthBar');
+            const text = document.getElementById('strengthText');
+            const tips = document.getElementById('strengthTips');
+
+            if (pass.length === 0) {
+                resetStrengthMeter();
+                return;
+            }
+
+            let score = 0;
+            let missing = [];
+
+            if (pass.length >= 6) score += 1;
+            else missing.push("কমপক্ষে ৬ অক্ষর");
+
+            if (/[0-9]/.test(pass)) score += 1;
+            else missing.push("সংখ্যা (0-9)");
+
+            if (/[A-Z]/.test(pass)) score += 1;
+            else missing.push("বড় হাতের অক্ষর (A-Z)");
+
+            if (/[^A-Za-z0-9]/.test(pass)) score += 1;
+            else missing.push("স্পেশাল চিহ্ন (@, #, $)");
+
+            if (score <= 1) {
+                bar.style.width = "25%";
+                bar.style.backgroundColor = "var(--neon-red)";
+                text.style.color = "var(--neon-red)";
+                text.innerText = "⚠️ দুর্বল (Weak Password)";
+                tips.innerText = "শক্তিশালী করতে দিন: " + missing.join(", ");
+            } else if (score === 2 || score === 3) {
+                bar.style.width = "65%";
+                bar.style.backgroundColor = "var(--neon-gold)";
+                text.style.color = "var(--neon-gold)";
+                text.innerText = "⚡ মোটামুটি (Medium Password)";
+                tips.innerText = "আরও স্ট্রং করতে দিন: " + missing.join(", ");
+            } else {
+                bar.style.width = "100%";
+                bar.style.backgroundColor = "var(--neon-green)";
+                text.style.color = "var(--neon-green)";
+                text.innerText = "🔥 অত্যন্ত শক্তিশালী (Strong Password)";
+                tips.innerText = "সব নিয়ম পূরণ হয়েছে!";
+            }
+        }
+
+        function resetStrengthMeter() {
+            const bar = document.getElementById('strengthBar');
+            const text = document.getElementById('strengthText');
+            const tips = document.getElementById('strengthTips');
+            bar.style.width = "0%";
+            text.innerText = "";
+            tips.innerText = "";
+        }
+
+        // Firebase Auth Processor
         function processAuth() {
-            let user = document.getElementById('username').value.trim().toLowerCase();
-            let pass = document.getElementById('password').value.trim();
+            const user = document.getElementById('username').value.trim().toLowerCase();
+            const pass = document.getElementById('password').value.trim();
 
-            if (user === "" || pass === "") return alert("Username and Password are required!");
-            if (user.includes(" ")) return alert("Username cannot contain spaces!");
+            if (user === "" || pass === "") return alert("Username এবং Password আবশ্যক!");
+            if (user.includes(" ")) return alert("Username-এ স্পেস ব্যবহার করা যাবে না!");
 
-            let actionBtn = document.getElementById('actionBtn');
+            const actionBtn = document.getElementById('actionBtn');
             actionBtn.innerText = "PROCESSING...";
 
             if (isLogin) {
-                // Login Logic
+                // Login
                 db.ref('users/' + user).once('value').then((snapshot) => {
                     actionBtn.innerText = "LOGIN";
                     if (snapshot.exists() && snapshot.val().password === pass) {
                         localStorage.setItem('auraCurrentUser', user);
-                        alert("Login Successful! Welcome to Aura.");
-                        // মূল পেজে রিডাইরেক্ট (পরে এই পেজটি বানাবো)
-                        // window.location.href = "app.html"; 
+                        alert("Login Successful! Welcome to Aura Readers.");
                     } else {
-                        alert("Invalid Username or Password!");
+                        alert("ভুল Username অথবা Password!");
                     }
-                }).catch(error => {
-                    alert("Error: " + error.message);
+                }).catch(err => {
+                    alert("Error: " + err.message);
                     actionBtn.innerText = "LOGIN";
                 });
             } else {
-                // Signup Logic
-                let name = document.getElementById('name').value.trim();
-                let target = document.getElementById('target').value.trim();
+                // Sign Up
+                const name = document.getElementById('name').value.trim();
+                const target = document.getElementById('target').value.trim();
                 
                 if (name === "") {
                     actionBtn.innerText = "SIGN UP";
-                    return alert("Display name is required!");
+                    return alert("Display Name দিতে হবে!");
                 }
 
-                let avatarUrl = `https://api.dicebear.com/7.x/avataaars/svg?seed=${user}`;
+                if (pass.length < 6) {
+                    actionBtn.innerText = "SIGN UP";
+                    return alert("পাসওয়ার্ড কমপক্ষে ৬ অক্ষরের হতে হবে!");
+                }
+
+                const avatarUrl = `https://api.dicebear.com/7.x/bottts/svg?seed=${user}`;
 
                 db.ref('users/' + user).once('value').then((snapshot) => {
                     if (snapshot.exists()) {
-                        alert("Username already taken! Choose another one.");
+                        alert("এই Username আগেই নেওয়া হয়েছে! অন্য একটি দিন।");
                         actionBtn.innerText = "SIGN UP";
                     } else {
                         db.ref('users/' + user).set({
-                            password: pass, // অ্যাডমিন দেখার জন্য প্লেইন টেক্সট
+                            password: pass,
                             name: name,
-                            target: target || "Undecided",
+                            target: target || "HSC Science",
                             avatar: avatarUrl,
                             xp: 0,
                             level: 1,
@@ -169,7 +378,6 @@
                             alert("Account Created Successfully! Please login.");
                             switchMode();
                             actionBtn.innerText = "LOGIN";
-                            document.getElementById('password').value = "";
                         });
                     }
                 });
