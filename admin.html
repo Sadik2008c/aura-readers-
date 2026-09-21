@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AURA READERS - Admin Panel</title>
+    
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
+
+    <style>
+        :root {
+            --bg-main: #050b14;
+            --bg-card: #0a1325;
+            --neon-blue: #00f0ff;
+            --neon-red: #ff3366;
+            --neon-green: #00ff88;
+            --neon-gold: #ffcc00;
+            --text-muted: #8892b0;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background-color: var(--bg-main);
+            color: #fff;
+            font-family: 'Segoe UI', sans-serif;
+            padding: 20px;
+            padding-bottom: 50px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(0, 240, 255, 0.3);
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+        }
+
+        .header h1 {
+            color: var(--neon-blue);
+            font-size: 22px;
+            letter-spacing: 1px;
+        }
+
+        .btn-logout {
+            background: transparent;
+            border: 1px solid var(--neon-red);
+            color: var(--neon-red);
+            padding: 8px 14px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        /* Stats Cards */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .stat-box {
+            background: var(--bg-card);
+            border: 1px solid rgba(0, 240, 255, 0.2);
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .stat-box h3 { font-size: 24px; color: var(--neon-gold); margin-bottom: 4px; }
+        .stat-box p { font-size: 12px; color: var(--text-muted); text-transform: uppercase; }
+
+        /* User Table */
+        .table-container {
+            width: 100%;
+            overflow-x: auto;
+            background: var(--bg-card);
+            border: 1px solid rgba(0, 240, 255, 0.2);
+            border-radius: 10px;
+            padding: 10px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 13px;
+        }
+
+        th, td {
+            padding: 12px 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        th {
+            color: var(--neon-blue);
+            text-transform: uppercase;
+            font-size: 11px;
+            letter-spacing: 1px;
+        }
+
+        .pass-tag {
+            background: rgba(255, 51, 102, 0.15);
+            color: var(--neon-red);
+            border: 1px solid var(--neon-red);
+            padding: 3px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-weight: bold;
+        }
+
+        .btn-action {
+            background: none;
+            border: 1px solid var(--neon-blue);
+            color: var(--neon-blue);
+            padding: 5px 8px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 11px;
+        }
+        .btn-action:hover { background: var(--neon-blue); color: #000; }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>AURA ADMIN CONTROL ⚡</h1>
+        <button class="btn-logout" onclick="logoutAdmin()">LOGOUT</button>
+    </div>
+
+    <!-- Quick Stats -->
+    <div class="stats-grid">
+        <div class="stat-box">
+            <h3 id="totalUsers">0</h3>
+            <p>Total Users</p>
+        </div>
+        <div class="stat-box">
+            <h3 id="activeSquads">0</h3>
+            <p>Squad Members</p>
+        </div>
+        <div class="stat-box">
+            <h3 id="penaltiesActive">0</h3>
+            <p>Under Penalty</p>
+        </div>
+    </div>
+
+    <!-- All Users Credentials Table -->
+    <h3 style="color: var(--neon-blue); margin-bottom: 12px; font-size: 16px;">ALL USER CREDENTIALS & DATA</h3>
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>Plain Password</th>
+                    <th>Name / Target</th>
+                    <th>XP / Level</th>
+                    <th>Hours</th>
+                    <th>Squad</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="userTableBody">
+                <tr><td colspan="7" style="text-align:center; color:var(--text-muted);">Loading Database...</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        // Security check: Shudhu admin jeno access pay
+        if (localStorage.getItem('auraIsAdmin') !== 'true') {
+            alert("Unauthorized Access! Redirecting to login...");
+            window.location.href = "index.html";
+        }
+
+        // Firebase Config
+        const firebaseConfig = {
+            apiKey: "AIzaSyAG0Py4X5uCXy_qlswCe0hE8ci_iOzGc2M",
+            authDomain: "aura-readers.firebaseapp.com",
+            projectId: "aura-readers",
+            storageBucket: "aura-readers.firebasestorage.app",
+            messagingSenderId: "809779155847",
+            appId: "1:809779155847:web:3eb0a9732f97f6ad503922",
+            databaseURL: "https://aura-readers-default-rtdb.firebaseio.com"
+        };
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.database();
+
+        // Realtime Data Load
+        db.ref('users').on('value', (snapshot) => {
+            const tableBody = document.getElementById('userTableBody');
+            tableBody.innerHTML = "";
+
+            if (!snapshot.exists()) {
+                tableBody.innerHTML = `<tr><td colspan="7" style="text-align:center;">No users registered yet.</td></tr>`;
+                return;
+            }
+
+            let count = 0;
+            let squadCount = 0;
+            let penaltyCount = 0;
+
+            snapshot.forEach((child) => {
+                count++;
+                const u = child.key;
+                const data = child.val();
+
+                if (data.squad && data.squad !== "None") squadCount++;
+                if (data.penaltyActive) penaltyCount++;
+
+                const hrs = ((data.totalSeconds || 0) / 3600).toFixed(1);
+
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td><strong>${u}</strong></td>
+                    <td><span class="pass-tag">${data.password || 'N/A'}</span></td>
+                    <td>${data.name || ''} <br><small style="color:var(--text-muted);">${data.target || ''}</small></td>
+                    <td>${data.xp || 0} (Lvl ${data.level || 1})</td>
+                    <td>${hrs}h</td>
+                    <td>${data.squad || 'None'}</td>
+                    <td>
+                        <button class="btn-action" onclick="changeUserPassword('${u}')">Change Pass</button>
+                    </td>
+                `;
+                tableBody.appendChild(row);
+            });
+
+            document.getElementById('totalUsers').innerText = count;
+            document.getElementById('activeSquads').innerText = squadCount;
+            document.getElementById('penaltiesActive').innerText = penaltyCount;
+        });
+
+        // Admin can overwrite any password directly
+        function changeUserPassword(username) {
+            const newPass = prompt("Enter new password for " + username + ":");
+            if (newPass && newPass.trim() !== "") {
+                db.ref('users/' + username).update({
+                    password: newPass.trim()
+                }).then(() => {
+                    alert("Password updated successfully for " + username);
+                });
+            }
+        }
+
+        function logoutAdmin() {
+            localStorage.removeItem('auraIsAdmin');
+            window.location.href = "index.html";
+        }
+    </script>
+</body>
+</html>
