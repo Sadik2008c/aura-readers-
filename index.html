@@ -245,7 +245,7 @@
 
         .switch-mode-text span { color: var(--neon-blue); font-weight: 700; }
 
-        /* Custom Notification Modal */
+        /* Notification Modal */
         .modal-overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -287,19 +287,19 @@
             width: 100%;
         }
 
-        /* Terms & Privacy Policy Modal */
+        /* Aura Readers Official User Agreement & Privacy Policy Modal */
         .policy-card {
-            background: #070d1a;
+            background: linear-gradient(165deg, #0b1528, #050b16);
             border: 2px solid var(--neon-blue);
-            border-radius: 16px;
+            border-radius: 20px;
             padding: 22px;
-            max-width: 440px;
+            max-width: 460px;
             width: 92%;
             text-align: left;
             max-height: 85vh;
             display: flex;
             flex-direction: column;
-            box-shadow: 0 0 30px rgba(0, 240, 255, 0.2);
+            box-shadow: 0 0 35px rgba(0, 240, 255, 0.25);
             animation: popIn 0.3s ease;
         }
 
@@ -310,7 +310,9 @@
             margin-bottom: 12px;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
+            border-bottom: 1px solid rgba(0, 240, 255, 0.2);
+            padding-bottom: 10px;
         }
 
         .policy-body {
@@ -318,22 +320,32 @@
             padding-right: 8px;
             margin-bottom: 16px;
             font-size: 13.5px;
-            line-height: 1.6;
+            line-height: 1.65;
             color: #cbd5e1;
         }
 
-        .policy-body::-webkit-scrollbar { width: 4px; }
+        .policy-body::-webkit-scrollbar { width: 5px; }
         .policy-body::-webkit-scrollbar-thumb { background: var(--neon-blue); border-radius: 4px; }
 
         .policy-rule-box {
-            background: rgba(10, 19, 37, 0.8);
+            background: rgba(15, 23, 42, 0.7);
             border-left: 3px solid var(--neon-blue);
-            padding: 10px;
-            border-radius: 6px;
-            margin-bottom: 10px;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 12px;
         }
 
-        .policy-rule-box strong { color: var(--neon-gold); font-size: 14px; }
+        .policy-rule-box.bonus-highlight {
+            border-left-color: var(--neon-gold);
+            background: rgba(255, 204, 0, 0.05);
+        }
+
+        .policy-rule-box strong {
+            color: #fff;
+            display: block;
+            margin-bottom: 4px;
+            font-size: 14px;
+        }
 
         .policy-btn-row {
             display: flex;
@@ -342,23 +354,29 @@
 
         .policy-agree-btn {
             background: var(--neon-green);
-            color: #050b14;
+            color: #030712;
             border: none;
-            padding: 12px;
-            border-radius: 8px;
+            padding: 13px;
+            border-radius: 10px;
             font-weight: 900;
             cursor: pointer;
             flex: 2;
-            font-size: 13px;
+            font-size: 13.5px;
             transition: 0.2s;
+            box-shadow: 0 0 15px rgba(0, 255, 136, 0.3);
+        }
+
+        .policy-agree-btn:hover {
+            opacity: 0.92;
+            transform: translateY(-1px);
         }
 
         .policy-decline-btn {
-            background: rgba(255, 51, 102, 0.15);
+            background: rgba(255, 51, 102, 0.1);
             border: 1px solid var(--neon-red);
             color: var(--neon-red);
-            padding: 12px;
-            border-radius: 8px;
+            padding: 13px;
+            border-radius: 10px;
             font-weight: 700;
             cursor: pointer;
             flex: 1;
@@ -457,39 +475,51 @@
         </div>
     </div>
 
-    <!-- Terms & Privacy Policy Modal for Sign-Up -->
+    <!-- Terms & Privacy Policy Protocol Modal -->
     <div class="modal-overlay" id="termsModal">
         <div class="policy-card">
             <div class="policy-header">
-                📜 <span>Terms & Privacy Protocol</span>
+                <span style="font-size: 24px;">📜</span>
+                <div>
+                    <div>AURA READERS PROTOCOL</div>
+                    <div style="font-size: 11px; color: var(--text-muted); font-weight: normal;">Terms of Service & Privacy Agreement</div>
+                </div>
             </div>
+            
             <div class="policy-body">
-                <p style="margin-bottom: 12px; color: var(--neon-blue);">Aura Readers study platforme registration complete korte nicher rules o terms mene neowa baddhotamulok:</p>
+                <p style="margin-bottom: 12px; color: var(--neon-blue); font-weight: 600;">
+                    Aura Readers platform-e shagotom! Porashonar discipline maintain korte nicher policy gulo mene registration somponno korun:
+                </p>
                 
-                <div class="policy-rule-box">
-                    <strong>🛡️ 1. Academic Integrity:</strong>
-                    <p>Stopwatch ba timer faki diye fake study time ba onno kono upaye XP orjon kora nishiddho. System abnormality detect korle automatic penalty hote pare.</p>
+                <div class="policy-rule-box bonus-highlight">
+                    <strong style="color: var(--neon-gold);">🎁 Welcome Scholar Starter Bonus (+50 XP):</strong>
+                    <p>Prothom bar official protocol accept kore account khullei apnar account-e 50 XP starter bonus shathe shathe credit hoye jabe.</p>
                 </div>
 
                 <div class="policy-rule-box">
-                    <strong>⏰ 2. 15-Hour Inactivity Penalty Rule:</strong>
-                    <p>Dharabahikota thik rakhte proti 15 ghonta study session chara thakle streak XP temporary lock hoye jabe. Session start kore unlock korte hobe.</p>
+                    <strong>🛡️ 1. Academic Integrity & Honest Tracking:</strong>
+                    <p>HSC preparation-e timer ba stopwatch on rekhe fake time record ba unnoytik upaye XP barano shompunno nishiddho. Obhab dekhle account automated penalty hobe.</p>
                 </div>
 
                 <div class="policy-rule-box">
-                    <strong>🔒 3. Data Protection & Cloud Access:</strong>
-                    <p>Apnar name, target goal ebong notes database-e secure thakbe. Platform security maintain korar jonno admin theke monitor kora hoy.</p>
+                    <strong>⏰ 2. 15-Hour Streak & Inactivity Penalty Rule:</strong>
+                    <p>Dharabahikota thik rakhte proti 15 ghonta study session chara thakle streak XP temporary lock hobe. Abr ekta study session kore eta unlock korte hobe.</p>
                 </div>
 
                 <div class="policy-rule-box">
-                    <strong>🤝 4. Squad & Respect:</strong>
-                    <p>Community ba squad member-der sathe sustho competition ebong respect maintain korte hobe.</p>
+                    <strong>🔒 3. User Privacy & Cloud Vault:</strong>
+                    <p>Apnar personal notes, target goals, email ebong data amader database-e encrypted thake. Kono third-party advertising network-er sathe info share kora hoy na.</p>
+                </div>
+
+                <div class="policy-rule-box">
+                    <strong>🤝 4. Community & Squad Ethics:</strong>
+                    <p>Squad leaderboard-e shohopathider sathe sustho competition ebong respect maintain korte hobe.</p>
                 </div>
             </div>
 
             <div class="policy-btn-row">
                 <button type="button" class="policy-decline-btn" onclick="declineTerms()">DECLINE</button>
-                <button type="button" class="policy-agree-btn" onclick="acceptTermsAndRegister()">✅ I AGREE & JOIN</button>
+                <button type="button" class="policy-agree-btn" onclick="acceptTermsAndRegister()">✅ I AGREE & JOIN (+50 XP)</button>
             </div>
         </div>
     </div>
@@ -513,62 +543,6 @@
         let isStrongPassword = false;
         let popupCallback = null;
         let pendingUserPayload = null;
-
-        // Social Redirect Result Handler (Facebook & Google mobile session fix)
-        auth.getRedirectResult().then((result) => {
-            if (result && result.user) {
-                const email = result.user.email || "";
-                const u = email ? email.split('@')[0].replace(/[^a-zA-Z0-9]/g, "") : (result.user.displayName.toLowerCase().replace(/[^a-zA-Z0-9]/g, "") || "user_" + Date.now().toString().slice(-4));
-                
-                const providerId = result.credential ? result.credential.providerId : (result.user.providerData[0] ? result.user.providerData[0].providerId : "");
-                const isFb = providerId.includes("facebook");
-
-                db.ref('users/' + u).once('value').then((snap) => {
-                    let isNewUser = !snap.exists();
-                    let updatePayload = {
-                        name: result.user.displayName || "Scholar",
-                        email: email,
-                        target: "HSC Science",
-                        avatar: `https://api.dicebear.com/7.x/bottts/svg?seed=${u}`,
-                        lastActiveSession: Date.now()
-                    };
-
-                    if (isFb) {
-                        updatePayload.facebookConnected = true;
-                        updatePayload.facebookName = result.user.displayName;
-                        updatePayload.facebookUid = result.user.uid;
-                    } else {
-                        updatePayload.googleConnected = true;
-                        updatePayload.googleEmail = email;
-                        updatePayload.googleUid = result.user.uid;
-                    }
-
-                    if (isNewUser) {
-                        updatePayload.xp = 50; // Notun user 50 XP bonus
-                        updatePayload.level = 1;
-                        updatePayload.totalSeconds = 0;
-                        updatePayload.squad = "None";
-                        updatePayload.createdAt = new Date().toISOString();
-                    }
-
-                    db.ref('users/' + u).update(updatePayload).then(() => {
-                        localStorage.setItem('auraCurrentUser', u);
-                        const platformTitle = isFb ? "Facebook Connected" : "Google Connected";
-                        const platformIcon = isFb ? "📘" : "🌐";
-                        const bonusText = isNewUser ? " (Notun User Welcome Bonus: +50 XP!)" : "";
-                        const fullMsg = `Apnar ${isFb ? 'Facebook' : 'Google'} account shofolbhabe connect hoyeche! Welcome, ${result.user.displayName}.${bonusText}`;
-
-                        showPopup(platformIcon, platformTitle, fullMsg, "#00ff88", () => {
-                            window.location.href = "app.html";
-                        });
-                    });
-                });
-            }
-        }).catch((err) => {
-            if (err.code !== "auth/credential-already-in-use") {
-                showPopup("⚠️", "Social Auth Error", err.message, "#ff3366");
-            }
-        });
 
         function showPopup(emoji, title, msg, themeColor = "#00f0ff", callback = null) {
             document.getElementById('popupEmoji').innerText = emoji;
@@ -787,11 +761,13 @@
                         showPopup("🚫", "Username Taken", "This username is already claimed! Choose another.", "#ff3366");
                     } else {
                         pendingUserPayload = {
+                            authType: 'normal',
                             user: user,
                             pass: pass,
                             name: name,
                             email: email,
                             target: target || "HSC Science",
+                            avatar: `https://api.dicebear.com/7.x/bottts/svg?seed=${user}`,
                             savePass: savePass
                         };
                         document.getElementById('termsModal').style.display = "flex";
@@ -811,47 +787,117 @@
             if (!pendingUserPayload) return;
 
             const p = pendingUserPayload;
-            const avatarUrl = `https://api.dicebear.com/7.x/bottts/svg?seed=${p.user}`;
-
-            db.ref('users/' + p.user).set({
-                password: p.pass,
-                name: p.name,
-                email: p.email,
-                target: p.target,
-                avatar: avatarUrl,
-                xp: 50, // Welcome bonus 50 XP
+            
+            let dataRecord = {
+                name: p.name || "Scholar",
+                email: p.email || "",
+                target: p.target || "HSC Science",
+                avatar: p.avatar,
+                xp: 50, // 🔥 50 XP Starter Bonus
                 level: 1,
                 totalSeconds: 0,
                 squad: "None",
                 tasksCompleted: 0,
                 penaltyActive: false,
                 termsAccepted: true,
-                createdAt: new Date().toISOString()
-            }).then(() => {
+                createdAt: new Date().toISOString(),
+                lastActiveSession: Date.now()
+            };
+
+            if (p.authType === 'normal') {
+                dataRecord.password = p.pass;
+            } else if (p.authType === 'social') {
+                if (p.provider === 'google') {
+                    dataRecord.googleConnected = true;
+                    dataRecord.googleEmail = p.email;
+                    dataRecord.googleUid = p.uid;
+                } else if (p.provider === 'facebook') {
+                    dataRecord.facebookConnected = true;
+                    dataRecord.facebookName = p.name;
+                    dataRecord.facebookUid = p.uid;
+                }
+            }
+
+            db.ref('users/' + p.user).set(dataRecord).then(() => {
+                localStorage.setItem('auraCurrentUser', p.user);
                 if (p.savePass) {
                     localStorage.setItem('aura_saved_user', p.user);
                     localStorage.setItem('aura_saved_pass', p.pass);
                 }
-                showPopup("🎉", "ACCOUNT CREATED (+50 XP)", "Welcome bonus 50 XP soho account toiri hoyeche! Ekhon login korun.", "#00ff88", () => {
-                    toggleAuthMode();
+                showPopup("🎉", "AURA CORE READY (+50 XP)", "Terms & Protocol shofolbhabe accept hoyeche! Welcome bonus 50 XP credit kora hoyeche.", "#00ff88", () => {
+                    window.location.href = "app.html";
                 });
             }).catch(err => {
                 showPopup("❌", "Registration Error", err.message, "#ff3366");
             });
         }
 
-        // Google Redirect Login
+        // Google Popup Login with Terms Checking
         function loginWithGoogle() {
             const provider = new firebase.auth.GoogleAuthProvider();
-            auth.signInWithRedirect(provider);
+            auth.signInWithPopup(provider).then((result) => {
+                const email = result.user.email || "";
+                const u = email ? email.split('@')[0].replace(/[^a-zA-Z0-9]/g, "") : ("user_" + Date.now().toString().slice(-4));
+
+                db.ref('users/' + u).once('value').then((snap) => {
+                    if (snap.exists()) {
+                        localStorage.setItem('auraCurrentUser', u);
+                        showPopup("🌐", "Google Connected", `Welcome ${result.user.displayName}!`, "#00ff88", () => {
+                            window.location.href = "app.html";
+                        });
+                    } else {
+                        // Notun user hole terms modal ashbe
+                        pendingUserPayload = {
+                            authType: 'social',
+                            provider: 'google',
+                            user: u,
+                            name: result.user.displayName || "Scholar",
+                            email: email,
+                            uid: result.user.uid,
+                            avatar: result.user.photoURL || `https://api.dicebear.com/7.x/bottts/svg?seed=${u}`,
+                            target: "HSC Science"
+                        };
+                        document.getElementById('termsModal').style.display = "flex";
+                    }
+                });
+            }).catch((err) => {
+                showPopup("⚠️", "Google Auth Error", err.message, "#ff3366");
+            });
         }
 
-        // Facebook Redirect Login
+        // Facebook Popup Login with Terms Checking
         function loginWithFacebook() {
             const provider = new firebase.auth.FacebookAuthProvider();
             provider.addScope('email');
             provider.addScope('public_profile');
-            auth.signInWithRedirect(provider);
+
+            auth.signInWithPopup(provider).then((result) => {
+                const u = (result.user.displayName || "scholar").toLowerCase().replace(/[^a-zA-Z0-9]/g, "") || ("user_" + Date.now().toString().slice(-4));
+
+                db.ref('users/' + u).once('value').then((snap) => {
+                    if (snap.exists()) {
+                        localStorage.setItem('auraCurrentUser', u);
+                        showPopup("📘", "Facebook Connected", `Welcome ${result.user.displayName}!`, "#00ff88", () => {
+                            window.location.href = "app.html";
+                        });
+                    } else {
+                        // Notun user hole terms modal ashbe
+                        pendingUserPayload = {
+                            authType: 'social',
+                            provider: 'facebook',
+                            user: u,
+                            name: result.user.displayName || "Scholar",
+                            email: result.user.email || "",
+                            uid: result.user.uid,
+                            avatar: result.user.photoURL || `https://api.dicebear.com/7.x/bottts/svg?seed=${u}`,
+                            target: "HSC Science"
+                        };
+                        document.getElementById('termsModal').style.display = "flex";
+                    }
+                });
+            }).catch((err) => {
+                showPopup("⚠️", "Facebook Auth Error", err.message, "#ff3366");
+            });
         }
     </script>
 </body>
