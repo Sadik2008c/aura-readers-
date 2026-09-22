@@ -512,9 +512,40 @@
         let isLoginState = true;
         let isStrongPassword = false;
         let popupCallback = null;
-
-        // Pending Registration Data Container
         let pendingUserPayload = null;
+
+        // হ্যান্ডেল ফেসবুক রিডাইরেক্ট রেসপন্স (মোবাইল ব্রাউজার ফিক্স)
+        auth.getRedirectResult().then((result) => {
+            if (result && result.user) {
+                const u = result.user.displayName.toLowerCase().replace(/[^a-zA-Z0-9]/g, "") || "user_" + Date.now().toString().slice(-4);
+                
+                db.ref('users/' + u).once('value').then((snap) => {
+                    if (!snap.exists()) {
+                        // ফেসবুক দিয়ে প্রথম লগইনেও পাবে ৫০ XP
+                        db.ref('users/' + u).set({
+                            name: result.user.displayName || "Scholar",
+                            email: result.user.email || "",
+                            target: "HSC Science",
+                            avatar: `https://api.dicebear.com/7.x/bottts/svg?seed=${u}`,
+                            xp: 50,
+                            level: 1,
+                            totalSeconds: 0,
+                            squad: "None",
+                            facebookConnected: true,
+                            createdAt: new Date().toISOString()
+                        });
+                    }
+                    localStorage.setItem('auraCurrentUser', u);
+                    showPopup("📘", "Facebook Connected", `Welcome ${result.user.displayName}! (+50 XP)`, "#00ff88", () => {
+                        window.location.href = "app.html";
+                    });
+                });
+            }
+        }).catch((err) => {
+            if (err.code !== "auth/credential-already-in-use") {
+                showPopup("⚠️", "Facebook Auth Error", err.message, "#ff3366");
+            }
+        });
 
         function showPopup(emoji, title, msg, themeColor = "#00f0ff", callback = null) {
             document.getElementById('popupEmoji').innerText = emoji;
@@ -671,7 +702,6 @@
             submitBtn.innerText = "CONNECTING...";
 
             if (isLoginState) {
-                // Login Flow
                 db.ref('users/' + user).once('value').then((snapshot) => {
                     submitBtn.innerText = "LOG IN";
                     if (snapshot.exists() && snapshot.val().password === pass) {
@@ -706,7 +736,6 @@
                 });
 
             } else {
-                // Sign Up Flow - Verification & Terms Modal Trigger
                 const name = document.getElementById('fullName').value.trim();
                 const email = document.getElementById('userEmail').value.trim();
                 const target = document.getElementById('targetGoal').value.trim();
@@ -734,7 +763,6 @@
                     if (snapshot.exists()) {
                         showPopup("🚫", "Username Taken", "This username is already claimed! Choose another.", "#ff3366");
                     } else {
-                        // Store temporary data and trigger Terms Modal
                         pendingUserPayload = {
                             user: user,
                             pass: pass,
@@ -749,7 +777,6 @@
             }
         }
 
-        // Terms Actions
         function declineTerms() {
             document.getElementById('termsModal').style.display = "none";
             pendingUserPayload = null;
@@ -763,13 +790,14 @@
             const p = pendingUserPayload;
             const avatarUrl = `https://api.dicebear.com/7.x/bottts/svg?seed=${p.user}`;
 
+            // নতুন ইউজারের ৫০ XP ওয়েলকাম বোনাস
             db.ref('users/' + p.user).set({
                 password: p.pass,
                 name: p.name,
                 email: p.email,
                 target: p.target,
                 avatar: avatarUrl,
-                xp: 0,
+                xp: 50,
                 level: 1,
                 totalSeconds: 0,
                 squad: "None",
@@ -782,7 +810,7 @@
                     localStorage.setItem('aura_saved_user', p.user);
                     localStorage.setItem('aura_saved_pass', p.pass);
                 }
-                showPopup("🎉", "ACCOUNT CREATED", "Welcome to the Aura Core! Please proceed to login.", "#00ff88", () => {
+                showPopup("🎉", "ACCOUNT CREATED (+50 XP)", "ওয়েলকাম বোনাস ৫০ XP সহ অ্যাকাউন্ট তৈরি হয়েছে! লগইন করুন।", "#00ff88", () => {
                     toggleAuthMode();
                 });
             }).catch(err => {
@@ -790,31 +818,44 @@
             });
         }
 
-        // Social Logins (Google & Facebook)
+        // Google Login
         function loginWithGoogle() {
             const provider = new firebase.auth.GoogleAuthProvider();
             auth.signInWithPopup(provider).then((result) => {
                 const u = result.user.email.split('@')[0].replace(/[^a-zA-Z0-9]/g, "");
-                localStorage.setItem('auraCurrentUser', u);
-                showPopup("🌐", "Google Connected", `Welcome ${result.user.displayName}!`, "#00ff88", () => {
-                    window.location.href = "app.html";
+                
+                db.ref('users/' + u).once('value').then((snap) => {
+                    if (!snap.exists()) {
+                        // গুগল দিয়ে প্রথম সাইন-ইন করলেও পাবে ৫০ XP
+                        db.ref('users/' + u).set({
+                            name: result.user.displayName || "Scholar",
+                            email: result.user.email || "",
+                            target: "HSC Science",
+                            avatar: `https://api.dicebear.com/7.x/bottts/svg?seed=${u}`,
+                            xp: 50,
+                            level: 1,
+                            totalSeconds: 0,
+                            squad: "None",
+                            googleConnected: true,
+                            createdAt: new Date().toISOString()
+                        });
+                    }
+                    localStorage.setItem('auraCurrentUser', u);
+                    showPopup("🌐", "Google Connected", `Welcome ${result.user.displayName}! (+50 XP)`, "#00ff88", () => {
+                        window.location.href = "app.html";
+                    });
                 });
             }).catch((err) => {
                 showPopup("⚠️", "Google Auth Error", err.message, "#ff3366");
             });
         }
 
+        // Facebook Login (Mobile Redirect System)
         function loginWithFacebook() {
             const provider = new firebase.auth.FacebookAuthProvider();
-            auth.signInWithPopup(provider).then((result) => {
-                const u = result.user.displayName.toLowerCase().replace(/[^a-zA-Z0-9]/g, "");
-                localStorage.setItem('auraCurrentUser', u);
-                showPopup("📘", "Facebook Connected", `Welcome ${result.user.displayName}!`, "#00ff88", () => {
-                    window.location.href = "app.html";
-                });
-            }).catch((err) => {
-                showPopup("⚠️", "Facebook Auth Error", err.message, "#ff3366");
-            });
+            provider.addScope('email');
+            provider.addScope('public_profile');
+            auth.signInWithRedirect(provider);
         }
     </script>
 </body>
