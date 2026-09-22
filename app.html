@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bn">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,7 +23,7 @@
             --border-glow: rgba(0, 240, 255, 0.25);
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
         body { background-color: var(--bg-main); color: #fff; min-height: 100vh; padding-bottom: 70px; }
 
         /* Top Bar */
@@ -41,7 +41,7 @@
         }
         .brand { font-size: 20px; font-weight: 900; color: var(--neon-blue); letter-spacing: 1.5px; text-shadow: 0 0 10px rgba(0,240,255,0.4); }
         .user-chip { display: flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 700; color: var(--neon-green); }
-        .logout-btn { background: rgba(255, 51, 102, 0.15); border: 1px solid var(--neon-red); color: var(--neon-red); padding: 5px 12px; border-radius: 6px; cursor: pointer; font-size: 11px; font-weight: bold; }
+        .logout-btn { background: rgba(255, 51, 102, 0.15); border: 1px solid var(--neon-red); color: var(--neon-red); padding: 6px 14px; border-radius: 6px; cursor: pointer; font-size: 11px; font-weight: bold; }
 
         /* Main Container */
         .container { max-width: 900px; margin: 0 auto; padding: 18px; }
@@ -156,29 +156,32 @@
             background: rgba(255,255,255,0.05);
             border: 1px solid rgba(255,255,255,0.15);
             color: #fff;
-            padding: 10px;
+            padding: 12px;
             border-radius: 8px;
             cursor: pointer;
-            font-size: 12px;
+            font-size: 13px;
             font-weight: bold;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 6px;
+            gap: 8px;
+            transition: 0.2s;
         }
-        .btn-connect.connected { border-color: var(--neon-green); color: var(--neon-green); pointer-events: none; }
+        .btn-connect:hover { border-color: var(--neon-blue); background: rgba(0, 240, 255, 0.1); }
+        .btn-connect.connected { border-color: var(--neon-green); color: var(--neon-green); background: rgba(0, 255, 136, 0.1); pointer-events: none; }
 
         /* Modal */
         .modal {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.85); display: none; justify-content: center; align-items: center; z-index: 999;
+            backdrop-filter: blur(4px);
         }
         .modal-box { background: #0a1325; border: 2px solid var(--neon-blue); border-radius: 14px; padding: 22px; width: 90%; max-width: 320px; text-align: center; }
     </style>
 </head>
 <body>
 
-    <!-- Header Navigation -->
+    <!-- Top Bar Navigation -->
     <div class="top-nav">
         <div class="brand">⚡ AURA READERS</div>
         <div class="user-chip">
@@ -217,14 +220,14 @@
 
             <!-- 15 Hour Inactive Penalty Warning -->
             <div class="penalty-warning" id="penaltySection" style="display: none; margin-bottom: 15px;">
-                ⚠️ <span><strong>PENALTY WARNING:</strong> You have been away for over 15 hours! Daily streak XP is locked until you log a study session.</span>
+                ⚠️ <span><strong>সতর্কবার্তা:</strong> আপনি ১৫ ঘণ্টার বেশি সময় স্টাডি সেশনের বাইরে আছেন! একটি সেশন শেষ করে স্ট্রিক সচল করুন।</span>
             </div>
 
             <!-- Study Session Launcher -->
             <div class="cyber-card">
                 <div class="card-title">🎯 FOCUS CORE (HSC SCIENCE)</div>
                 
-                <label style="font-size: 11px; color: var(--neon-blue); text-transform: uppercase;">Select Subject</label>
+                <label style="font-size: 11px; color: var(--neon-blue); text-transform: uppercase;">বিষয় নির্বাচন করুন</label>
                 <select id="studySubjectSelect" onchange="updateStudyPaperOptions()">
                     <option value="Bangla">বাংলা (Bangla)</option>
                     <option value="English">English</option>
@@ -235,7 +238,7 @@
                     <option value="ICT">তথ্য ও যোগাযোগ প্রযুক্তি (ICT)</option>
                 </select>
 
-                <label style="font-size: 11px; color: var(--neon-blue); text-transform: uppercase;">Select Paper</label>
+                <label style="font-size: 11px; color: var(--neon-blue); text-transform: uppercase;">পত্র নির্বাচন করুন</label>
                 <select id="studyPaperSelect">
                     <option value="1st Paper">১ম পত্র (1st Paper)</option>
                     <option value="2nd Paper">২য় পত্র (2nd Paper)</option>
@@ -248,7 +251,7 @@
                 <div class="timer-ctrls">
                     <button class="btn-action" id="startTimerBtn" onclick="toggleTimer()">START STUDYING</button>
                 </div>
-                <p style="font-size: 11px; color: var(--text-muted); text-align: center;">প্রতি ১ মিনিট পড়াশোনায় ১ XP যোগ হবে।</p>
+                <p style="font-size: 11px; color: var(--text-muted); text-align: center;">প্রতি ১ মিনিট পড়াশোনায় ১ XP যোগ হবে। মিনিমাম ১ মিনিট পড়লে ডাটাবেসে সেভ হবে।</p>
             </div>
         </div>
 
@@ -256,7 +259,7 @@
         <div id="notesTab" class="tab-content">
             <div class="cyber-card">
                 <div class="card-title">📚 STRUCTURED HSC NOTES VAULT</div>
-                <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 12px;">বিষয় ➡️ পত্র ➡️ অধ্যায় ➡️ টাইপ সিলেক্ট করে নোটস খুঁজুন অথবা নতুন নোটস সেভ করুন।</p>
+                <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 12px;">বিষয় ➡️ পত্র ➡️ অধ্যায় ➡️ ক্যাটাগরি অনুযায়ী নোটস সেভ করুন ও পড়ুন।</p>
                 
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
                     <div>
@@ -315,7 +318,7 @@
                 <p style="font-size: 12px; color: var(--text-muted);">আপনার বর্তমান স্কোয়াড: <strong id="userSquadName" style="color: var(--neon-green);">None</strong></p>
                 
                 <div style="display: flex; gap: 8px; margin-top: 10px;">
-                    <input type="text" id="newSquadInput" placeholder="Enter squad name to join / create">
+                    <input type="text" id="newSquadInput" placeholder="স্কোয়াডের নাম লিখে জয়েন করুন">
                     <button class="btn-action" onclick="joinOrCreateSquad()" style="padding: 10px 14px; font-size: 12px;">JOIN</button>
                 </div>
             </div>
@@ -331,7 +334,7 @@
             <div class="cyber-card">
                 <div class="card-title">⚙️ CONNECT SOCIAL ACCOUNTS</div>
                 <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 12px;">
-                    আপনার অ্যাকাউন্টের সাথে Google বা Facebook লিংক করে নিন। লিংক করা থাকলে পরবর্তীতে সরাসরি এক ক্লিকেই লগইন করতে পারবেন!
+                    আপনার অ্যাকাউন্টের সাথে Google বা Facebook লিংক করে রাখুন। পরবর্তীতে সরাসরি সোশাল লগইন বাটন দিয়ে অ্যাকাউন্ট অ্যাক্সেস করতে পারবেন!
                 </p>
 
                 <div class="connect-box">
@@ -391,14 +394,15 @@
         // Redirect Result Handler for Social Linking (Mobile Browser Fix)
         auth.getRedirectResult().then((result) => {
             if (result && result.user && currentUser) {
-                const providerId = result.credential ? result.credential.providerId : "";
+                const providerId = result.credential ? result.credential.providerId : (result.user.providerData[0] ? result.user.providerData[0].providerId : "");
+                
                 if (providerId.includes("facebook")) {
                     db.ref('users/' + currentUser).update({
                         facebookConnected: true,
                         facebookName: result.user.displayName,
                         facebookUid: result.user.uid
                     }).then(() => {
-                        openModal("📘", "Facebook Connected", "Facebook account link don sɔksɛs!");
+                        openModal("📘", "Facebook Connected", "আপনার ফেসবুক অ্যাকাউন্ট সফলভাবে লিঙ্ক করা হয়েছে!");
                     });
                 } else if (providerId.includes("google")) {
                     db.ref('users/' + currentUser).update({
@@ -406,7 +410,7 @@
                         googleEmail: result.user.email,
                         googleUid: result.user.uid
                     }).then(() => {
-                        openModal("🌐", "Google Connected", "Google account link don sɔksɛs!");
+                        openModal("🌐", "Google Connected", "আপনার গুগল অ্যাকাউন্ট সফলভাবে লিঙ্ক করা হয়েছে!");
                     });
                 }
             }
@@ -512,7 +516,7 @@
 
         function saveStudySession() {
             if (elapsedSeconds < 60) {
-                openModal("⏱️", "Session Too Short", "Yu nid fɔ rid at lis 1 minit bifo yu get XP!");
+                openModal("⏱️", "Session Too Short", "এক্সপি পেতে হলে কমপক্ষে ১ মিনিট পড়াশোনা করতে হবে!");
                 return;
             }
 
@@ -526,7 +530,7 @@
                 lastActiveSession: Date.now(),
                 penaltyActive: false
             }).then(() => {
-                openModal("🔥", "BOOST ACHIEVED", `Yu don rid fɔ ${Math.floor(elapsedSeconds/60)} minit ɛn yu get +${earnedXp} XP!`);
+                openModal("🔥", "BOOST ACHIEVED", `চমৎকার! আপনি ${Math.floor(elapsedSeconds/60)} মিনিট পড়াশোনা করেছেন এবং +${earnedXp} XP অর্জন করেছেন!`);
             });
         }
 
@@ -539,7 +543,7 @@
             const content = document.getElementById('noteContent').value.trim();
 
             if (!chap || !content) {
-                openModal("⚠️", "Not Inkomplit", "Rayt di chapta nem ɛn di not kɔntɛnt!");
+                openModal("⚠️", "নোট অসম্পূর্ণ", "অধ্যায়ের নাম এবং নোটের বিবরণ পূরণ করুন!");
                 return;
             }
 
@@ -554,7 +558,7 @@
             }).then(() => {
                 document.getElementById('noteChapter').value = "";
                 document.getElementById('noteContent').value = "";
-                openModal("✅", "Not Don Sev", "Di not don sev pan yu vault!");
+                openModal("✅", "নোট সংরক্ষিত", "নোটটি আপনার পার্সোনাল ভল্টে সফলভাবে সেভ হয়েছে!");
             });
         }
 
@@ -563,7 +567,7 @@
             list.innerHTML = "";
             const data = snap.val();
             if (!data) {
-                list.innerHTML = '<p style="font-size: 12px; color: var(--text-muted); text-align: center;">No not nɔ de yet.</p>';
+                list.innerHTML = '<p style="font-size: 12px; color: var(--text-muted); text-align: center;">এখনো কোনো নোট সেভ করা হয়নি।</p>';
                 return;
             }
             Object.keys(data).reverse().forEach(key => {
@@ -581,7 +585,7 @@
             });
         });
 
-        // 7. Social Linking (Redirect System fɔ foun brauza)
+        // 7. Social Linking (Redirect System)
         function linkGoogleAccount() {
             const provider = new firebase.auth.GoogleAuthProvider();
             auth.signInWithRedirect(provider);
@@ -600,7 +604,7 @@
             if (!squadName) return;
             db.ref('users/' + currentUser).update({ squad: squadName }).then(() => {
                 document.getElementById('newSquadInput').value = "";
-                openModal("🛡️", "Squad Updated", `Yu don jɔyn di squad: ${squadName}!`);
+                openModal("🛡️", "Squad Updated", `আপনি সফলভাবে '${squadName}' স্কোয়াডে যোগ দিয়েছেন!`);
             });
         }
 
