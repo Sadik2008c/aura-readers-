@@ -3,11 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AURA READERS - Authentication</title>
+    <title>AURA READERS - Cyber Portal</title>
     
     <!-- Firebase Compat SDKs -->
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
     
     <style>
         :root {
@@ -20,11 +21,7 @@
             --text-muted: #8892b0;
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
             background-color: var(--bg-main);
@@ -41,9 +38,9 @@
             background: linear-gradient(145deg, var(--bg-card), #070d1a);
             border: 1px solid rgba(0, 240, 255, 0.35);
             border-radius: 18px;
-            padding: 32px 24px;
+            padding: 30px 24px;
             width: 100%;
-            max-width: 360px;
+            max-width: 380px;
             box-shadow: 0 0 25px rgba(0, 240, 255, 0.15);
             text-align: center;
             position: relative;
@@ -61,15 +58,12 @@
         .subtitle {
             color: var(--text-muted);
             font-size: 12px;
-            margin-bottom: 22px;
+            margin-bottom: 20px;
             text-transform: uppercase;
             letter-spacing: 1.5px;
         }
 
-        .input-group {
-            text-align: left;
-            margin-bottom: 14px;
-        }
+        .input-group { text-align: left; margin-bottom: 12px; }
 
         .input-group label {
             display: block;
@@ -80,33 +74,30 @@
             font-weight: 600;
         }
 
-        input[type="text"], input[type="password"] {
+        input[type="text"], input[type="password"], input[type="email"] {
             width: 100%;
             background: #050b14;
             border: 1px solid #1e293b;
             color: #fff;
-            padding: 13px 14px;
+            padding: 12px 14px;
             border-radius: 8px;
             font-size: 14px;
             outline: none;
             transition: all 0.3s ease;
         }
 
-        input[type="text"]:focus, input[type="password"]:focus {
+        input:focus {
             border-color: var(--neon-blue);
             box-shadow: 0 0 10px rgba(0, 240, 255, 0.25);
         }
 
-        /* Password container with Monkey Toggle */
         .password-wrapper {
             position: relative;
             display: flex;
             align-items: center;
         }
 
-        .password-wrapper input {
-            padding-right: 48px;
-        }
+        .password-wrapper input { padding-right: 48px; }
 
         .monkey-btn {
             position: absolute;
@@ -116,24 +107,16 @@
             cursor: pointer;
             font-size: 22px;
             user-select: none;
-            transition: transform 0.2s;
-            outline: none;
         }
 
-        .monkey-btn:active {
-            transform: scale(1.25);
-        }
-
-        /* Password Strength Box */
         #strengthSection {
             display: none;
             text-align: left;
-            margin-top: -6px;
-            margin-bottom: 14px;
+            margin-top: -4px;
+            margin-bottom: 12px;
             background: rgba(0, 0, 0, 0.3);
             padding: 10px;
             border-radius: 8px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         .meter-container {
@@ -161,35 +144,21 @@
 
         .rules-checklist {
             list-style: none;
-            margin-top: 8px;
+            margin-top: 6px;
             font-size: 11px;
             color: var(--text-muted);
         }
 
-        .rules-checklist li {
-            margin-bottom: 3px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
+        .rules-checklist li.valid { color: var(--neon-green); }
+        .rules-checklist li.invalid { color: var(--neon-red); }
 
-        .rules-checklist li.valid {
-            color: var(--neon-green);
-        }
-
-        .rules-checklist li.invalid {
-            color: var(--neon-red);
-        }
-
-        /* Remember / Save password options */
         .options-row {
             display: flex;
             align-items: center;
             justify-content: space-between;
             font-size: 12px;
             color: var(--text-muted);
-            margin-bottom: 18px;
-            padding: 0 2px;
+            margin-bottom: 16px;
         }
 
         .checkbox-container {
@@ -197,19 +166,15 @@
             align-items: center;
             gap: 6px;
             cursor: pointer;
-            user-select: none;
         }
 
-        .checkbox-container input {
-            accent-color: var(--neon-blue);
-            cursor: pointer;
-        }
+        .checkbox-container input { accent-color: var(--neon-blue); }
 
         .auth-btn {
             background: var(--neon-blue);
             color: #050b14;
             border: none;
-            padding: 14px;
+            padding: 13px;
             border-radius: 8px;
             font-weight: 900;
             cursor: pointer;
@@ -225,16 +190,101 @@
             box-shadow: 0 0 20px var(--neon-blue);
         }
 
+        /* Social Auth Buttons */
+        .divider {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            margin: 18px 0;
+            color: var(--text-muted);
+            font-size: 11px;
+            text-transform: uppercase;
+        }
+
+        .divider::before, .divider::after {
+            content: '';
+            flex: 1;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .divider span { padding: 0 10px; }
+
+        .social-btns {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .btn-social {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: #fff;
+            padding: 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: 0.3s;
+        }
+
+        .btn-social:hover {
+            border-color: var(--neon-blue);
+            background: rgba(0, 240, 255, 0.1);
+        }
+
         .switch-mode-text {
             color: var(--text-muted);
             font-size: 13px;
-            margin-top: 20px;
+            margin-top: 15px;
             cursor: pointer;
         }
 
-        .switch-mode-text span {
-            color: var(--neon-blue);
-            font-weight: 700;
+        .switch-mode-text span { color: var(--neon-blue); font-weight: 700; }
+
+        /* Custom Popup Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            backdrop-filter: blur(4px);
+        }
+
+        .popup-card {
+            background: #0a1325;
+            border: 2px solid var(--neon-blue);
+            border-radius: 16px;
+            padding: 25px;
+            max-width: 320px;
+            width: 90%;
+            text-align: center;
+            animation: popIn 0.3s ease;
+        }
+
+        @keyframes popIn {
+            from { transform: scale(0.7); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .popup-emoji { font-size: 45px; margin-bottom: 10px; }
+        .popup-title { font-size: 18px; font-weight: bold; margin-bottom: 8px; }
+        .popup-msg { font-size: 13px; color: var(--text-muted); margin-bottom: 18px; line-height: 1.4; }
+        .popup-close-btn {
+            background: var(--neon-blue);
+            color: #000;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
         }
     </style>
 </head>
@@ -246,35 +296,36 @@
 
         <form id="authForm" onsubmit="handleAuthSubmit(event)" autocomplete="on">
             
-            <!-- Extra sign-up fields -->
             <div id="signUpFields" style="display: none;">
                 <div class="input-group">
                     <label>Display Name</label>
-                    <input type="text" id="fullName" name="name" placeholder="e.g. 2x Sadik" autocomplete="name">
+                    <input type="text" id="fullName" placeholder="e.g. 2x Sadik">
+                </div>
+
+                <div class="input-group">
+                    <label>Valid Email (Spam Proof)</label>
+                    <input type="email" id="userEmail" placeholder="yourname@gmail.com">
                 </div>
 
                 <div class="input-group">
                     <label>Target Goal</label>
-                    <input type="text" id="targetGoal" name="target" placeholder="e.g. BUET / Medical / DU" autocomplete="organization">
+                    <input type="text" id="targetGoal" placeholder="e.g. BUET / Medical">
                 </div>
             </div>
 
-            <!-- Username field -->
             <div class="input-group">
                 <label>Username</label>
-                <input type="text" id="userName" name="username" placeholder="Username (no spaces)" required autocomplete="username">
+                <input type="text" id="userName" placeholder="Username (no spaces)" required>
             </div>
 
-            <!-- Password field with Monkey Toggle -->
             <div class="input-group">
                 <label>Password</label>
                 <div class="password-wrapper">
-                    <input type="password" id="userPass" name="password" placeholder="Enter password" required autocomplete="current-password">
-                    <button type="button" class="monkey-btn" id="monkeyIcon" onclick="togglePasswordVisibility()" title="Show/Hide">🙈</button>
+                    <input type="password" id="userPass" placeholder="Enter password" required>
+                    <button type="button" class="monkey-btn" id="monkeyIcon" onclick="togglePasswordVisibility()">🙈</button>
                 </div>
             </div>
 
-            <!-- Real-time Password Strength Box (Active during Sign Up) -->
             <div id="strengthSection">
                 <div class="meter-container">
                     <div class="meter-fill" id="meterFill"></div>
@@ -284,32 +335,51 @@
                     <span id="scorePercent">0%</span>
                 </div>
                 <ul class="rules-checklist">
-                    <li id="ruleLength" class="invalid">❌ কমপক্ষে ৬ টি অক্ষর</li>
-                    <li id="ruleUpper" class="invalid">❌ বড় হাতের অক্ষর (A-Z)</li>
-                    <li id="ruleNumber" class="invalid">❌ অন্তত ১ টি সংখ্যা (0-9)</li>
-                    <li id="ruleSpecial" class="invalid">❌ স্পেশাল চিহ্ন (@, #, $, %, ইত্যাদি)</li>
+                    <li id="ruleLength" class="invalid">❌ Minimum 6 characters</li>
+                    <li id="ruleUpper" class="invalid">❌ Uppercase letter (A-Z)</li>
+                    <li id="ruleNumber" class="invalid">❌ Number (0-9)</li>
+                    <li id="ruleSpecial" class="invalid">❌ Special character (@, #, $, etc.)</li>
                 </ul>
             </div>
 
-            <!-- Save Password & Preferences -->
             <div class="options-row">
                 <label class="checkbox-container">
                     <input type="checkbox" id="savePasswordCheck">
                     <span>Save password</span>
                 </label>
-                <span id="resetNotice" style="color: var(--text-muted); cursor: pointer;" onclick="alert('পাসওয়ার্ড রিকভার করতে আপনার অ্যাডমিনকে জানান।')">Need help?</span>
+                <span style="color: var(--text-muted); cursor: pointer;" onclick="showPopup('🔑', 'Password Help', 'Contact admin on WhatsApp/Messenger to restore your account credentials.', '#ffcc00')">Forgot?</span>
             </div>
 
             <button type="submit" class="auth-btn" id="submitBtn">LOG IN</button>
         </form>
+
+        <div class="divider"><span>OR CONTINUE WITH</span></div>
+
+        <div class="social-btns">
+            <button type="button" class="btn-social" onclick="loginWithGoogle()">
+                🌐 Google
+            </button>
+            <button type="button" class="btn-social" onclick="loginWithFacebook()">
+                📘 Facebook
+            </button>
+        </div>
 
         <div class="switch-mode-text" id="toggleSwitch" onclick="toggleAuthMode()">
             Don't have an account? <span>Sign Up</span>
         </div>
     </div>
 
+    <!-- Custom Neon Alert Modal -->
+    <div class="modal-overlay" id="customModal">
+        <div class="popup-card" id="popupCard">
+            <div class="popup-emoji" id="popupEmoji">⚡</div>
+            <div class="popup-title" id="popupTitle">Alert</div>
+            <div class="popup-msg" id="popupMsg">Message here</div>
+            <button class="popup-close-btn" id="popupCloseBtn" onclick="closePopup()">OK</button>
+        </div>
+    </div>
+
     <script>
-        // 1. Firebase Initialization
         const firebaseConfig = {
             apiKey: "AIzaSyAG0Py4X5uCXy_qlswCe0hE8ci_iOzGc2M",
             authDomain: "aura-readers.firebaseapp.com",
@@ -322,11 +392,33 @@
         
         firebase.initializeApp(firebaseConfig);
         const db = firebase.database();
+        const auth = firebase.auth();
 
         let isLoginState = true;
         let isStrongPassword = false;
+        let popupCallback = null;
 
-        // Auto-fill saved credentials on page load
+        // Custom Popup System
+        function showPopup(emoji, title, msg, themeColor = "#00f0ff", callback = null) {
+            document.getElementById('popupEmoji').innerText = emoji;
+            document.getElementById('popupTitle').innerText = title;
+            document.getElementById('popupTitle').style.color = themeColor;
+            document.getElementById('popupCard').style.borderColor = themeColor;
+            document.getElementById('popupCloseBtn').style.backgroundColor = themeColor;
+            document.getElementById('popupMsg').innerText = msg;
+            popupCallback = callback;
+            document.getElementById('customModal').style.display = "flex";
+        }
+
+        function closePopup() {
+            document.getElementById('customModal').style.display = "none";
+            if (popupCallback) {
+                popupCallback();
+                popupCallback = null;
+            }
+        }
+
+        // Auto-fill saved credentials
         window.addEventListener('DOMContentLoaded', () => {
             const savedUser = localStorage.getItem('aura_saved_user');
             const savedPass = localStorage.getItem('aura_saved_pass');
@@ -337,21 +429,18 @@
             }
         });
 
-        // 2. Monkey Show / Hide Toggle
         function togglePasswordVisibility() {
             const passInput = document.getElementById('userPass');
             const monkey = document.getElementById('monkeyIcon');
-
             if (passInput.type === "password") {
                 passInput.type = "text";
-                monkey.innerText = "🐵"; // চোখ খুলে দেখাচ্ছে
+                monkey.innerText = "🐵";
             } else {
                 passInput.type = "password";
-                monkey.innerText = "🙈"; // চোখ বন্ধ করে লুকিয়ে রেখেছে
+                monkey.innerText = "🙈";
             }
         }
 
-        // 3. Switch between Login & Sign Up
         function toggleAuthMode() {
             isLoginState = !isLoginState;
             const passInput = document.getElementById('userPass');
@@ -361,28 +450,23 @@
             document.getElementById('signUpFields').style.display = isLoginState ? "none" : "block";
             document.getElementById('strengthSection').style.display = isLoginState ? "none" : "block";
             
-            passInput.setAttribute('autocomplete', isLoginState ? 'current-password' : 'new-password');
             document.getElementById('toggleSwitch').innerHTML = isLoginState ? 
                 "Don't have an account? <span>Sign Up</span>" : "Already have an account? <span>Login</span>";
 
-            // Reset password field and monkey
             passInput.type = "password";
             document.getElementById('monkeyIcon').innerText = "🙈";
             evaluatePasswordStrength();
         }
 
-        // 4. Real-time Password Strength Evaluator
         const passInputField = document.getElementById('userPass');
         passInputField.addEventListener('input', evaluatePasswordStrength);
         passInputField.addEventListener('keyup', evaluatePasswordStrength);
 
         function evaluatePasswordStrength() {
             if (isLoginState) return;
-
             const val = passInputField.value;
             let checksPassed = 0;
 
-            // Check rules
             const hasLength = val.length >= 6;
             const hasUpper = /[A-Z]/.test(val);
             const hasNumber = /[0-9]/.test(val);
@@ -424,7 +508,7 @@
                 label.innerText = "MEDIUM";
                 label.style.color = "var(--neon-gold)";
                 percent.innerText = checksPassed === 2 ? "50%" : "75%";
-                isStrongPassword = false; // still requires all criteria for strict safety
+                isStrongPassword = false;
             } else if (checksPassed === 4) {
                 fill.style.width = "100%";
                 fill.style.backgroundColor = "var(--neon-green)";
@@ -446,7 +530,11 @@
             }
         }
 
-        // 5. Submit Handler
+        // Email syntax validation
+        function isValidEmailAddress(email) {
+            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+        }
+
         function handleAuthSubmit(e) {
             e.preventDefault();
 
@@ -456,24 +544,23 @@
             const submitBtn = document.getElementById('submitBtn');
 
             if (!user || !pass) {
-                alert("সব ফিল্ড পূরণ করুন!");
+                showPopup("⚠️", "Missing Information", "Please enter both username and password!", "#ff3366");
                 return;
             }
 
             if (user.includes(" ")) {
-                alert("ইউজারনেমে স্পেস ব্যবহার করা যাবে না!");
+                showPopup("🚫", "Invalid Username", "Username cannot contain any spaces!", "#ff3366");
                 return;
             }
 
-            submitBtn.innerText = "PROCESSING...";
+            submitBtn.innerText = "CONNECTING...";
 
             if (isLoginState) {
-                // Login
+                // Login Verification
                 db.ref('users/' + user).once('value').then((snapshot) => {
                     submitBtn.innerText = "LOG IN";
                     if (snapshot.exists() && snapshot.val().password === pass) {
                         
-                        // Save Password Locally if checked
                         if (savePass) {
                             localStorage.setItem('aura_saved_user', user);
                             localStorage.setItem('aura_saved_pass', pass);
@@ -483,44 +570,64 @@
                         }
 
                         localStorage.setItem('auraCurrentUser', user);
-                        alert("স্বাগতম! লগইন সফল হয়েছে।");
+
+                        // Master Admin / Database Admin Check
+                        const isBoss = (user === "sadik1" || snapshot.val().role === "admin");
+                        if (isBoss) {
+                            localStorage.setItem('auraIsAdmin', 'true');
+                            showPopup("👑", "ACCESS GRANTED BOSS", "Welcome Commander Sadik! Entering Aura Control Terminal...", "#00f0ff", () => {
+                                window.location.href = "admin.html";
+                            });
+                        } else {
+                            localStorage.setItem('auraIsAdmin', 'false');
+                            showPopup("🔥", "WELCOME SCHOLAR", `Login successful! Good luck with your study session, @${user}.`, "#00ff88", () => {
+                                window.location.href = "app.html";
+                            });
+                        }
+
                     } else {
-                        alert("ভুল ইউজারনেম অথবা পাসওয়ার্ড!");
+                        showPopup("❌", "Authentication Failed", "Incorrect password or username. Please verify your credentials!", "#ff3366");
                     }
                 }).catch(err => {
-                    alert("Error: " + err.message);
                     submitBtn.innerText = "LOG IN";
+                    showPopup("⚠️", "Database Error", err.message, "#ff3366");
                 });
 
             } else {
-                // Sign Up
+                // Register Verification
                 const name = document.getElementById('fullName').value.trim();
+                const email = document.getElementById('userEmail').value.trim();
                 const target = document.getElementById('targetGoal').value.trim();
 
                 if (!name) {
                     submitBtn.innerText = "REGISTER ACCOUNT";
-                    alert("দয়া করে আপনার Display Name লিখুন!");
+                    showPopup("⚠️", "Missing Name", "Display Name is required to identify you.", "#ffcc00");
                     return;
                 }
 
-                // Block registration if password is weak
+                if (!isValidEmailAddress(email)) {
+                    submitBtn.innerText = "REGISTER ACCOUNT";
+                    showPopup("📧", "Invalid Email", "Please provide a genuine verified email (e.g. @gmail.com) to stop spam!", "#ff3366");
+                    return;
+                }
+
                 if (!isStrongPassword) {
                     submitBtn.innerText = "REGISTER ACCOUNT";
-                    alert("পাসওয়ার্ড দুর্বল! সব শর্ত (বড় হাতের অক্ষর, সংখ্যা, স্পেশাল চিহ্ন) পূরণ করে শক্তিশালী করুন।");
+                    showPopup("🛡️", "Weak Password", "Please fulfill all 4 security rules before creating account.", "#ff3366");
                     return;
                 }
 
                 db.ref('users/' + user).once('value').then((snapshot) => {
                     if (snapshot.exists()) {
-                        alert("এই ইউজারনেমটি আগেই নেওয়া হয়েছে! অন্য একটি দিন।");
                         submitBtn.innerText = "REGISTER ACCOUNT";
+                        showPopup("🚫", "Username Taken", "This username already belongs to another member. Pick another!", "#ff3366");
                     } else {
                         const avatarUrl = `https://api.dicebear.com/7.x/bottts/svg?seed=${user}`;
                         
-                        // Database push with visible plain password for Admin inspection
                         db.ref('users/' + user).set({
                             password: pass,
                             name: name,
+                            email: email,
                             target: target || "HSC Science",
                             avatar: avatarUrl,
                             xp: 0,
@@ -535,13 +642,41 @@
                                 localStorage.setItem('aura_saved_user', user);
                                 localStorage.setItem('aura_saved_pass', pass);
                             }
-                            alert("অ্যাকাউন্ট তৈরি সম্পন্ন হয়েছে! এখন লগইন করুন।");
-                            toggleAuthMode();
                             submitBtn.innerText = "LOG IN";
+                            showPopup("🎉", "ACCOUNT CREATED", "Your profile has been stored safely! Please proceed to login.", "#00ff88", () => {
+                                toggleAuthMode();
+                            });
                         });
                     }
                 });
             }
+        }
+
+        // Social Logins
+        function loginWithGoogle() {
+            const provider = new firebase.auth.GoogleAuthProvider();
+            auth.signInWithPopup(provider).then((result) => {
+                const u = result.user.email.split('@')[0].replace(/[^a-zA-Z0-9]/g, "");
+                localStorage.setItem('auraCurrentUser', u);
+                showPopup("🌐", "Google Connected", `Welcome ${result.user.displayName}!`, "#00ff88", () => {
+                    window.location.href = "app.html";
+                });
+            }).catch((err) => {
+                showPopup("⚠️", "Google Auth Error", err.message, "#ff3366");
+            });
+        }
+
+        function loginWithFacebook() {
+            const provider = new firebase.auth.FacebookAuthProvider();
+            auth.signInWithPopup(provider).then((result) => {
+                const u = result.user.displayName.toLowerCase().replace(/[^a-zA-Z0-9]/g, "");
+                localStorage.setItem('auraCurrentUser', u);
+                showPopup("📘", "Facebook Connected", `Welcome ${result.user.displayName}!`, "#00ff88", () => {
+                    window.location.href = "app.html";
+                });
+            }).catch((err) => {
+                showPopup("⚠️", "Facebook Auth Error", err.message, "#ff3366");
+            });
         }
     </script>
 </body>
