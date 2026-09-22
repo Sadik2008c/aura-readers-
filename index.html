@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bn">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -293,10 +293,10 @@
             border: 2px solid var(--neon-blue);
             border-radius: 20px;
             padding: 22px;
-            max-width: 460px;
+            max-width: 480px;
             width: 92%;
             text-align: left;
-            max-height: 85vh;
+            max-height: 86vh;
             display: flex;
             flex-direction: column;
             box-shadow: 0 0 35px rgba(0, 240, 255, 0.25);
@@ -340,11 +340,23 @@
             background: rgba(255, 204, 0, 0.05);
         }
 
+        .policy-rule-box.warning-highlight {
+            border-left-color: var(--neon-red);
+            background: rgba(255, 51, 102, 0.05);
+        }
+
         .policy-rule-box strong {
             color: #fff;
             display: block;
-            margin-bottom: 4px;
+            margin-bottom: 5px;
             font-size: 14px;
+        }
+
+        .policy-rule-box p {
+            margin: 0;
+            font-size: 13px;
+            color: #cbd5e1;
+            line-height: 1.6;
         }
 
         .policy-btn-row {
@@ -394,30 +406,30 @@
             
             <div id="signUpFields" style="display: none;">
                 <div class="input-group">
-                    <label>Display Name</label>
-                    <input type="text" id="fullName" placeholder="e.g. 2x Sadik">
+                    <label>নাম (Display Name)</label>
+                    <input type="text" id="fullName" placeholder="e.g. Sadik">
                 </div>
 
                 <div class="input-group">
-                    <label>Valid Email (Spam Proof)</label>
+                    <label>ভেরিফাইড ইমেইল (Valid Email)</label>
                     <input type="email" id="userEmail" placeholder="yourname@gmail.com">
                 </div>
 
                 <div class="input-group">
-                    <label>Target Goal</label>
-                    <input type="text" id="targetGoal" placeholder="e.g. BUET / Medical / DU">
+                    <label>টার্গেট ড্রিম (Target Goal)</label>
+                    <input type="text" id="targetGoal" placeholder="e.g. BUET / Medical / DU Science">
                 </div>
             </div>
 
             <div class="input-group">
-                <label>Username</label>
-                <input type="text" id="userName" placeholder="Username (no spaces)" required>
+                <label>ইউজারনেম (Username)</label>
+                <input type="text" id="userName" placeholder="ইউজারনেম (স্পেস ছাড়া)" required>
             </div>
 
             <div class="input-group">
-                <label>Password</label>
+                <label>পাসওয়ার্ড (Password)</label>
                 <div class="password-wrapper">
-                    <input type="password" id="userPass" placeholder="Enter password" required>
+                    <input type="password" id="userPass" placeholder="পাসওয়ার্ড লিখুন" required>
                     <button type="button" class="monkey-btn" id="monkeyIcon" onclick="togglePasswordVisibility()">🙈</button>
                 </div>
             </div>
@@ -431,10 +443,10 @@
                     <span id="scorePercent">0%</span>
                 </div>
                 <ul class="rules-checklist">
-                    <li id="ruleLength" class="invalid">❌ Minimum 6 characters</li>
-                    <li id="ruleUpper" class="invalid">❌ Uppercase letter (A-Z)</li>
-                    <li id="ruleNumber" class="invalid">❌ Number (0-9)</li>
-                    <li id="ruleSpecial" class="invalid">❌ Special character (@, #, $, etc.)</li>
+                    <li id="ruleLength" class="invalid">❌ কমপক্ষে ৬ ডিজিটের হতে হবে</li>
+                    <li id="ruleUpper" class="invalid">❌ বড় হাতের অক্ষর (A-Z) থাকতে হবে</li>
+                    <li id="ruleNumber" class="invalid">❌ সংখ্যা (0-9) থাকতে হবে</li>
+                    <li id="ruleSpecial" class="invalid">❌ স্পেশাল ক্যারেক্টার (@, #, $, ইত্যাদি)</li>
                 </ul>
             </div>
 
@@ -443,13 +455,13 @@
                     <input type="checkbox" id="savePasswordCheck">
                     <span>Save password</span>
                 </label>
-                <span style="color: var(--text-muted); cursor: pointer;" onclick="showPopup('🔑', 'Password Help', 'Contact admin to restore or reset your account.', '#ffcc00')">Forgot?</span>
+                <span style="color: var(--text-muted); cursor: pointer;" onclick="showPopup('🔑', 'পাসওয়ার্ড সাহায্য', 'অ্যাকাউন্ট রিস্টোর করতে অ্যাডমিনের সাথে যোগাযোগ করুন।', '#ffcc00')">Forgot?</span>
             </div>
 
             <button type="submit" class="auth-btn" id="submitBtn">LOG IN</button>
         </form>
 
-        <div class="divider"><span>OR CONTINUE WITH</span></div>
+        <div class="divider"><span>অথবা লগইন করুন</span></div>
 
         <div class="social-btns">
             <button type="button" class="btn-social" onclick="loginWithGoogle()">
@@ -461,7 +473,7 @@
         </div>
 
         <div class="switch-mode-text" id="toggleSwitch" onclick="toggleAuthMode()">
-            Don't have an account? <span>Sign Up</span>
+            নতুন শিক্ষার্থী? <span>Sign Up</span>
         </div>
     </div>
 
@@ -471,55 +483,60 @@
             <div class="popup-emoji" id="popupEmoji">⚡</div>
             <div class="popup-title" id="popupTitle">Alert</div>
             <div class="popup-msg" id="popupMsg">Message here</div>
-            <button class="popup-close-btn" id="popupCloseBtn" onclick="closePopup()">OK</button>
+            <button class="popup-close-btn" id="popupCloseBtn" onclick="closePopup()">ঠিক আছে</button>
         </div>
     </div>
 
-    <!-- Terms & Privacy Policy Protocol Modal -->
+    <!-- Official User Agreement & Privacy Policy Protocol Modal -->
     <div class="modal-overlay" id="termsModal">
         <div class="policy-card">
             <div class="policy-header">
                 <span style="font-size: 24px;">📜</span>
                 <div>
-                    <div>AURA READERS PROTOCOL</div>
-                    <div style="font-size: 11px; color: var(--text-muted); font-weight: normal;">Terms of Service & Privacy Agreement</div>
+                    <div>AURA READERS অফিশিয়াল প্রটোকল</div>
+                    <div style="font-size: 11px; color: var(--text-muted); font-weight: normal;">ইউজার চুক্তি ও প্রাইভেসি নীতিমালা (HSC Science)</div>
                 </div>
             </div>
             
             <div class="policy-body">
                 <p style="margin-bottom: 12px; color: var(--neon-blue); font-weight: 600;">
-                    Aura Readers platform-e shagotom! Porashonar discipline maintain korte nicher policy gulo mene registration somponno korun:
+                    Aura Readers স্টাডি প্ল্যাটফর্মে আপনাকে স্বাগতম! উচ্চমাধ্যমিক পড়াশোনায় নিয়মানুবর্তিতা ও সুস্থ শিক্ষার পরিবেশ নিশ্চিত করতে নিচের শর্তাবলী মেনে নেওয়া বাধ্যতামূলক:
                 </p>
                 
                 <div class="policy-rule-box bonus-highlight">
-                    <strong style="color: var(--neon-gold);">🎁 Welcome Scholar Starter Bonus (+50 XP):</strong>
-                    <p>Prothom bar official protocol accept kore account khullei apnar account-e 50 XP starter bonus shathe shathe credit hoye jabe.</p>
+                    <strong style="color: var(--neon-gold);">🎁 ১. নতুন শিক্ষার্থী ওয়েলকাম বোনাস (+৫০ XP):</strong>
+                    <p>সততার সাথে পড়াশোনা শুরু করার অঙ্গীকার হিসেবে প্রথমবার প্রটোকল গ্রহণ করলেই আপনার অ্যাকাউন্টে স্বয়ংক্রিয়ভাবে ৫০ XP ওয়েলকাম বোনাস যোগ করা হবে।</p>
                 </div>
 
                 <div class="policy-rule-box">
-                    <strong>🛡️ 1. Academic Integrity & Honest Tracking:</strong>
-                    <p>HSC preparation-e timer ba stopwatch on rekhe fake time record ba unnoytik upaye XP barano shompunno nishiddho. Obhab dekhle account automated penalty hobe.</p>
+                    <strong>🛡️ ২. সততা ও স্টাডি ট্র্যাকিং নীতিমালা:</strong>
+                    <p>প্ল্যাটফর্মের মূল উদ্দেশ্য এইচএসসি প্রস্তুতিকে সুদৃঢ় করা। টাইমার অন রেখে পড়াশোনা না করা, ব্যাকগ্রাউন্ডে ভুয়া সময় বাড়ানো বা অনৈতিক উপায়ে XP বৃদ্ধি করা সম্পূর্ণ নিষিদ্ধ। সিস্টেম অসঙ্গতি শনাক্ত করলে স্বয়ংক্রিয়ভাবে পয়েন্ট কাটা হতে পারে।</p>
+                </div>
+
+                <div class="policy-rule-box warning-highlight">
+                    <strong style="color: #ff99aa;">⏰ ৩. ১৫ ঘণ্টা ইনঅ্যাক্টিভ ও স্ট্রিক রুল:</strong>
+                    <p>প্রতিদিনের পড়াশোনার ধারাবাহিকতা বজায় রাখতে ১৫ ঘণ্টার বেশি সময় স্টাডি সেশনের বাইরে থাকলে দৈনিক স্ট্রিক বোনাস সাময়িক লক হয়ে যাবে। পুনরায় একটি সেশন শেষ করে তা সচল করতে হবে।</p>
                 </div>
 
                 <div class="policy-rule-box">
-                    <strong>⏰ 2. 15-Hour Streak & Inactivity Penalty Rule:</strong>
-                    <p>Dharabahikota thik rakhte proti 15 ghonta study session chara thakle streak XP temporary lock hobe. Abr ekta study session kore eta unlock korte hobe.</p>
+                    <strong>🔒 ৪. ডাটা নিরাপত্তা ও গোপনীয়তা সংরক্ষণ:</strong>
+                    <p>আপনার সংরক্ষিত স্টাডি নোটস, টার্গেট গোল, ডিসপ্লে নাম এবং ইমেইল আমাদের ডাটাবেসে সুরক্ষিত থাকে। কোনো বাণিজ্যিক বিজ্ঞাপন সংস্থা বা তৃতীয় পক্ষের কাছে ব্যক্তিগত তথ্য হস্তান্তর করা হয় না।</p>
                 </div>
 
                 <div class="policy-rule-box">
-                    <strong>🔒 3. User Privacy & Cloud Vault:</strong>
-                    <p>Apnar personal notes, target goals, email ebong data amader database-e encrypted thake. Kono third-party advertising network-er sathe info share kora hoy na.</p>
+                    <strong>📚 ৫. নোটস ও রিসোর্স ব্যবস্থাপনা:</strong>
+                    <p>নোটস ভল্টে সংরক্ষিত প্রতিটি CQ, MCQ কিংবা শর্ট শিটের স্বত্বাধিকার আপনার নিজের। যেকোনো সময় আপনি তা দেখতে ও প্রয়োজন অনুযায়ী সম্পাদনা করতে পারবেন।</p>
                 </div>
 
                 <div class="policy-rule-box">
-                    <strong>🤝 4. Community & Squad Ethics:</strong>
-                    <p>Squad leaderboard-e shohopathider sathe sustho competition ebong respect maintain korte hobe.</p>
+                    <strong>🤝 ৬. স্কোয়াড ও পারস্পরিক সম্মানবোধ:</strong>
+                    <p>স্কোয়াড ও গ্লোবাল লিডারবোর্ডে সহপাঠী শিক্ষার্থীদের প্রতি শ্রদ্ধাশীল ও ইতিবাচক প্রতিযোগিতামূলক মনোভাব বজায় রাখতে হবে। প্ল্যাটফর্মে কোনো আপত্তিকর নাম বা আচরণ গ্রহণযোগ্য নয়।</p>
                 </div>
             </div>
 
             <div class="policy-btn-row">
-                <button type="button" class="policy-decline-btn" onclick="declineTerms()">DECLINE</button>
-                <button type="button" class="policy-agree-btn" onclick="acceptTermsAndRegister()">✅ I AGREE & JOIN (+50 XP)</button>
+                <button type="button" class="policy-decline-btn" onclick="declineTerms()">বাতিল</button>
+                <button type="button" class="policy-agree-btn" onclick="acceptTermsAndRegister()">✅ সম্মতি ও যোগদান (+৫০ XP)</button>
             </div>
         </div>
     </div>
@@ -590,12 +607,12 @@
             const passInput = document.getElementById('userPass');
             
             document.getElementById('formHeader').innerText = isLoginState ? "PORTAL LOGIN" : "CREATE ACCOUNT";
-            document.getElementById('submitBtn').innerText = isLoginState ? "LOG IN" : "REGISTER ACCOUNT";
+            document.getElementById('submitBtn').innerText = isLoginState ? "লগইন করুন" : "অ্যাকাউন্ট তৈরি করুন";
             document.getElementById('signUpFields').style.display = isLoginState ? "none" : "block";
             document.getElementById('strengthSection').style.display = isLoginState ? "none" : "block";
             
             document.getElementById('toggleSwitch').innerHTML = isLoginState ? 
-                "Don't have an account? <span>Sign Up</span>" : "Already have an account? <span>Login</span>";
+                "নতুন শিক্ষার্থী? <span>Sign Up</span>" : "আগে থেকেই অ্যাকাউন্ট আছে? <span>Login</span>";
 
             passInput.type = "password";
             document.getElementById('monkeyIcon').innerText = "🙈";
@@ -642,21 +659,21 @@
             if (checksPassed <= 1) {
                 fill.style.width = "25%";
                 fill.style.backgroundColor = "var(--neon-red)";
-                label.innerText = "VERY WEAK";
+                label.innerText = "খুব দুর্বল";
                 label.style.color = "var(--neon-red)";
                 percent.innerText = "25%";
                 isStrongPassword = false;
             } else if (checksPassed === 2 || checksPassed === 3) {
                 fill.style.width = checksPassed === 2 ? "50%" : "75%";
                 fill.style.backgroundColor = "var(--neon-gold)";
-                label.innerText = "MEDIUM";
+                label.innerText = "মোটামুটি";
                 label.style.color = "var(--neon-gold)";
                 percent.innerText = checksPassed === 2 ? "50%" : "75%";
                 isStrongPassword = false;
             } else if (checksPassed === 4) {
                 fill.style.width = "100%";
                 fill.style.backgroundColor = "var(--neon-green)";
-                label.innerText = "STRONG 🔥";
+                label.innerText = "নিরাপদ 🔥";
                 label.style.color = "var(--neon-green)";
                 percent.innerText = "100%";
                 isStrongPassword = true;
@@ -687,12 +704,12 @@
             const submitBtn = document.getElementById('submitBtn');
 
             if (!user || !pass) {
-                showPopup("⚠️", "Missing Information", "Please enter both username and password!", "#ff3366");
+                showPopup("⚠️", "তথ্য অসম্পূর্ণ", "ইউজারনেম এবং পাসওয়ার্ড উভয়ই পূরণ করতে হবে!", "#ff3366");
                 return;
             }
 
             if (user.includes(" ")) {
-                showPopup("🚫", "Invalid Username", "Username cannot contain any spaces!", "#ff3366");
+                showPopup("🚫", "ইউজারনেম সঠিক নয়", "ইউজারনেমে কোনো স্পেস রাখা যাবে না!", "#ff3366");
                 return;
             }
 
@@ -700,7 +717,7 @@
 
             if (isLoginState) {
                 db.ref('users/' + user).once('value').then((snapshot) => {
-                    submitBtn.innerText = "LOG IN";
+                    submitBtn.innerText = "লগইন করুন";
                     if (snapshot.exists() && snapshot.val().password === pass) {
                         if (savePass) {
                             localStorage.setItem('aura_saved_user', user);
@@ -715,21 +732,21 @@
                         const isBoss = (user === "sadik1" || snapshot.val().role === "admin");
                         if (isBoss) {
                             localStorage.setItem('auraIsAdmin', 'true');
-                            showPopup("👑", "ACCESS GRANTED BOSS", "Welcome Commander Sadik! Entering Control Terminal...", "#00f0ff", () => {
+                            showPopup("👑", "ACCESS GRANTED BOSS", "কন্ট্রোল টার্মিনালে স্বাগতম অ্যাডমিন!", "#00f0ff", () => {
                                 window.location.href = "admin.html";
                             });
                         } else {
                             localStorage.setItem('auraIsAdmin', 'false');
-                            showPopup("🔥", "WELCOME SCHOLAR", `Login successful! Good luck, @${user}.`, "#00ff88", () => {
+                            showPopup("🔥", "WELCOME SCHOLAR", `লগইন সফল হয়েছে! শুভকামনা, @${user}।`, "#00ff88", () => {
                                 window.location.href = "app.html";
                             });
                         }
                     } else {
-                        showPopup("❌", "Authentication Failed", "Incorrect password or username. Please check your credentials!", "#ff3366");
+                        showPopup("❌", "লগইন ব্যর্থ", "ভুল ইউজারনেম অথবা পাসওয়ার্ড দেওয়া হয়েছে!", "#ff3366");
                     }
                 }).catch(err => {
-                    submitBtn.innerText = "LOG IN";
-                    showPopup("⚠️", "Database Error", err.message, "#ff3366");
+                    submitBtn.innerText = "লগইন করুন";
+                    showPopup("⚠️", "ডাটাবেস ত্রুটি", err.message, "#ff3366");
                 });
 
             } else {
@@ -738,27 +755,27 @@
                 const target = document.getElementById('targetGoal').value.trim();
 
                 if (!name) {
-                    submitBtn.innerText = "REGISTER ACCOUNT";
-                    showPopup("⚠️", "Missing Name", "Display Name is required to identify you.", "#ffcc00");
+                    submitBtn.innerText = "অ্যাকাউন্ট তৈরি করুন";
+                    showPopup("⚠️", "নাম প্রয়োজন", "আপনার একটি ডিসপ্লে নাম প্রদান করুন।", "#ffcc00");
                     return;
                 }
 
                 if (!isValidEmailAddress(email)) {
-                    submitBtn.innerText = "REGISTER ACCOUNT";
-                    showPopup("📧", "Invalid Email", "Please provide a genuine verified email (e.g. @gmail.com)!", "#ff3366");
+                    submitBtn.innerText = "অ্যাকাউন্ট তৈরি করুন";
+                    showPopup("📧", "ইমেইল সঠিক নয়", "একটি সঠিক জিমেইল অ্যাড্রেস লিখুন!", "#ff3366");
                     return;
                 }
 
                 if (!isStrongPassword) {
-                    submitBtn.innerText = "REGISTER ACCOUNT";
-                    showPopup("🛡️", "Weak Password", "Please fulfill all 4 security rules before registering!", "#ff3366");
+                    submitBtn.innerText = "অ্যাকাউন্ট তৈরি করুন";
+                    showPopup("🛡️", "দুর্বল পাসওয়ার্ড", "পাসওয়ার্ডের ৪টি নিরাপত্তা শর্তই পূরণ করুন!", "#ff3366");
                     return;
                 }
 
                 db.ref('users/' + user).once('value').then((snapshot) => {
-                    submitBtn.innerText = "REGISTER ACCOUNT";
+                    submitBtn.innerText = "অ্যাকাউন্ট তৈরি করুন";
                     if (snapshot.exists()) {
-                        showPopup("🚫", "Username Taken", "This username is already claimed! Choose another.", "#ff3366");
+                        showPopup("🚫", "ইউজারনেম রয়েছে", "এই ইউজারনেম দিয়ে আগে থেকেই অ্যাকাউন্ট খোলা আছে!", "#ff3366");
                     } else {
                         pendingUserPayload = {
                             authType: 'normal',
@@ -779,7 +796,7 @@
         function declineTerms() {
             document.getElementById('termsModal').style.display = "none";
             pendingUserPayload = null;
-            showPopup("⚠️", "Registration Cancelled", "You must agree to the Terms & Privacy Protocol to use Aura Readers.", "#ff3366");
+            showPopup("⚠️", "রেজিস্ট্রেশন বাতিল", "Aura Readers প্ল্যাটফর্ম ব্যবহারের জন্য প্রটোকল গ্রহণ করা বাধ্যতামূলক।", "#ff3366");
         }
 
         function acceptTermsAndRegister() {
@@ -793,7 +810,7 @@
                 email: p.email || "",
                 target: p.target || "HSC Science",
                 avatar: p.avatar,
-                xp: 50, // 🔥 50 XP Starter Bonus
+                xp: 50, // ৫০ XP বোনাস
                 level: 1,
                 totalSeconds: 0,
                 squad: "None",
@@ -824,11 +841,11 @@
                     localStorage.setItem('aura_saved_user', p.user);
                     localStorage.setItem('aura_saved_pass', p.pass);
                 }
-                showPopup("🎉", "AURA CORE READY (+50 XP)", "Terms & Protocol shofolbhabe accept hoyeche! Welcome bonus 50 XP credit kora hoyeche.", "#00ff88", () => {
+                showPopup("🎉", "AURA CORE UNLOCKED", "প্রটোকল সফলভাবে গৃহীত হয়েছে এবং ৫০ XP ওয়েলকাম বোনাস যুক্ত হয়েছে!", "#00ff88", () => {
                     window.location.href = "app.html";
                 });
             }).catch(err => {
-                showPopup("❌", "Registration Error", err.message, "#ff3366");
+                showPopup("❌", "ত্রুটি", err.message, "#ff3366");
             });
         }
 
@@ -842,11 +859,10 @@
                 db.ref('users/' + u).once('value').then((snap) => {
                     if (snap.exists()) {
                         localStorage.setItem('auraCurrentUser', u);
-                        showPopup("🌐", "Google Connected", `Welcome ${result.user.displayName}!`, "#00ff88", () => {
+                        showPopup("🌐", "Google Connected", `স্বাগতম ${result.user.displayName}!`, "#00ff88", () => {
                             window.location.href = "app.html";
                         });
                     } else {
-                        // Notun user hole terms modal ashbe
                         pendingUserPayload = {
                             authType: 'social',
                             provider: 'google',
@@ -877,11 +893,10 @@
                 db.ref('users/' + u).once('value').then((snap) => {
                     if (snap.exists()) {
                         localStorage.setItem('auraCurrentUser', u);
-                        showPopup("📘", "Facebook Connected", `Welcome ${result.user.displayName}!`, "#00ff88", () => {
+                        showPopup("📘", "Facebook Connected", `স্বাগতম ${result.user.displayName}!`, "#00ff88", () => {
                             window.location.href = "app.html";
                         });
                     } else {
-                        // Notun user hole terms modal ashbe
                         pendingUserPayload = {
                             authType: 'social',
                             provider: 'facebook',
