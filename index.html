@@ -464,26 +464,26 @@
                 📜 <span>Terms & Privacy Protocol</span>
             </div>
             <div class="policy-body">
-                <p style="margin-bottom: 12px; color: var(--neon-blue);">Aura Readers স্টাডি প্ল্যাটফর্মে রেজিস্ট্রেশন সম্পন্ন করতে নিচের নিয়মাবলী ও শর্তসমূহ মেনে নেওয়া বাধ্যতামূলক:</p>
+                <p style="margin-bottom: 12px; color: var(--neon-blue);">Aura Readers study platforme registration complete korte nicher rules o terms mene neowa baddhotamulok:</p>
                 
                 <div class="policy-rule-box">
-                    <strong>🛡️ ১. একাগ্রতা ও সততা নীতি (Academic Integrity):</strong>
-                    <p>স্টপওয়াচ বা টাইমার ফাঁকি দিয়ে ভুয়া স্টাডি টাইম বা অনৈতিক উপায়ে XP অর্জন করা সম্পূর্ণ নিষিদ্ধ। সিস্টেম অসঙ্গতি শনাক্ত করলে স্বয়ংক্রিয়ভাবে অ্যাকাউন্ট পেনাল্টি হতে পারে।</p>
+                    <strong>🛡️ 1. Academic Integrity:</strong>
+                    <p>Stopwatch ba timer faki diye fake study time ba onno kono upaye XP orjon kora nishiddho. System abnormality detect korle automatic penalty hote pare.</p>
                 </div>
 
                 <div class="policy-rule-box">
-                    <strong>⏰ ২. ১৫ ঘণ্টা ইনঅ্যাক্টিভ পেনাল্টি রুল:</strong>
-                    <p>ধারাবাহিকতা বজায় রাখতে প্রতি ১৫ ঘণ্টা স্টাডি সেশনের বাইরে থাকলে দৈনিক স্ট্রিক XP সাময়িক লক হয়ে যাবে। একটি সফল সেশন শুরু করে আবার সচল করতে হবে।</p>
+                    <strong>⏰ 2. 15-Hour Inactivity Penalty Rule:</strong>
+                    <p>Dharabahikota thik rakhte proti 15 ghonta study session chara thakle streak XP temporary lock hoye jabe. Session start kore unlock korte hobe.</p>
                 </div>
 
                 <div class="policy-rule-box">
-                    <strong>🔒 ৩. ডাটা সুরক্ষা ও অ্যাকাউন্ট অ্যাক্সেস:</strong>
-                    <p>আপনার নাম, টার্গেট গোল এবং নোটস ক্লাউড ডাটাবেসে সুরক্ষিত থাকবে। অ্যাডমিন প্যানেল থেকে শুধুমাত্র প্ল্যাটফর্মের শৃঙ্খলা বজায় রাখতে অ্যাকাউন্টের নিরাপত্তা পর্যবেক্ষণ করা হয়।</p>
+                    <strong>🔒 3. Data Protection & Cloud Access:</strong>
+                    <p>Apnar name, target goal ebong notes database-e secure thakbe. Platform security maintain korar jonno admin theke monitor kora hoy.</p>
                 </div>
 
                 <div class="policy-rule-box">
-                    <strong>🤝 ৪. স্কোয়াড ও পারস্পরিক সম্মান:</strong>
-                    <p>কমিউনিটি বা স্কোয়াডে সহপাঠীদের সাথে সুস্থ প্রতিযোগিতামূলক মনোভাব ও সম্মান বজায় রাখতে হবে।</p>
+                    <strong>🤝 4. Squad & Respect:</strong>
+                    <p>Community ba squad member-der sathe sustho competition ebong respect maintain korte hobe.</p>
                 </div>
             </div>
 
@@ -514,36 +514,59 @@
         let popupCallback = null;
         let pendingUserPayload = null;
 
-        // হ্যান্ডেল ফেসবুক রিডাইরেক্ট রেসপন্স (মোবাইল ব্রাউজার ফিক্স)
+        // Social Redirect Result Handler (Facebook & Google mobile session fix)
         auth.getRedirectResult().then((result) => {
             if (result && result.user) {
-                const u = result.user.displayName.toLowerCase().replace(/[^a-zA-Z0-9]/g, "") || "user_" + Date.now().toString().slice(-4);
+                const email = result.user.email || "";
+                const u = email ? email.split('@')[0].replace(/[^a-zA-Z0-9]/g, "") : (result.user.displayName.toLowerCase().replace(/[^a-zA-Z0-9]/g, "") || "user_" + Date.now().toString().slice(-4));
                 
+                const providerId = result.credential ? result.credential.providerId : (result.user.providerData[0] ? result.user.providerData[0].providerId : "");
+                const isFb = providerId.includes("facebook");
+
                 db.ref('users/' + u).once('value').then((snap) => {
-                    if (!snap.exists()) {
-                        // ফেসবুক দিয়ে প্রথম লগইনেও পাবে ৫০ XP
-                        db.ref('users/' + u).set({
-                            name: result.user.displayName || "Scholar",
-                            email: result.user.email || "",
-                            target: "HSC Science",
-                            avatar: `https://api.dicebear.com/7.x/bottts/svg?seed=${u}`,
-                            xp: 50,
-                            level: 1,
-                            totalSeconds: 0,
-                            squad: "None",
-                            facebookConnected: true,
-                            createdAt: new Date().toISOString()
-                        });
+                    let isNewUser = !snap.exists();
+                    let updatePayload = {
+                        name: result.user.displayName || "Scholar",
+                        email: email,
+                        target: "HSC Science",
+                        avatar: `https://api.dicebear.com/7.x/bottts/svg?seed=${u}`,
+                        lastActiveSession: Date.now()
+                    };
+
+                    if (isFb) {
+                        updatePayload.facebookConnected = true;
+                        updatePayload.facebookName = result.user.displayName;
+                        updatePayload.facebookUid = result.user.uid;
+                    } else {
+                        updatePayload.googleConnected = true;
+                        updatePayload.googleEmail = email;
+                        updatePayload.googleUid = result.user.uid;
                     }
-                    localStorage.setItem('auraCurrentUser', u);
-                    showPopup("📘", "Facebook Connected", `Welcome ${result.user.displayName}! (+50 XP)`, "#00ff88", () => {
-                        window.location.href = "app.html";
+
+                    if (isNewUser) {
+                        updatePayload.xp = 50; // Notun user 50 XP bonus
+                        updatePayload.level = 1;
+                        updatePayload.totalSeconds = 0;
+                        updatePayload.squad = "None";
+                        updatePayload.createdAt = new Date().toISOString();
+                    }
+
+                    db.ref('users/' + u).update(updatePayload).then(() => {
+                        localStorage.setItem('auraCurrentUser', u);
+                        const platformTitle = isFb ? "Facebook Connected" : "Google Connected";
+                        const platformIcon = isFb ? "📘" : "🌐";
+                        const bonusText = isNewUser ? " (Notun User Welcome Bonus: +50 XP!)" : "";
+                        const fullMsg = `Apnar ${isFb ? 'Facebook' : 'Google'} account shofolbhabe connect hoyeche! Welcome, ${result.user.displayName}.${bonusText}`;
+
+                        showPopup(platformIcon, platformTitle, fullMsg, "#00ff88", () => {
+                            window.location.href = "app.html";
+                        });
                     });
                 });
             }
         }).catch((err) => {
             if (err.code !== "auth/credential-already-in-use") {
-                showPopup("⚠️", "Facebook Auth Error", err.message, "#ff3366");
+                showPopup("⚠️", "Social Auth Error", err.message, "#ff3366");
             }
         });
 
@@ -790,14 +813,13 @@
             const p = pendingUserPayload;
             const avatarUrl = `https://api.dicebear.com/7.x/bottts/svg?seed=${p.user}`;
 
-            // নতুন ইউজারের ৫০ XP ওয়েলকাম বোনাস
             db.ref('users/' + p.user).set({
                 password: p.pass,
                 name: p.name,
                 email: p.email,
                 target: p.target,
                 avatar: avatarUrl,
-                xp: 50,
+                xp: 50, // Welcome bonus 50 XP
                 level: 1,
                 totalSeconds: 0,
                 squad: "None",
@@ -810,7 +832,7 @@
                     localStorage.setItem('aura_saved_user', p.user);
                     localStorage.setItem('aura_saved_pass', p.pass);
                 }
-                showPopup("🎉", "ACCOUNT CREATED (+50 XP)", "ওয়েলকাম বোনাস ৫০ XP সহ অ্যাকাউন্ট তৈরি হয়েছে! লগইন করুন।", "#00ff88", () => {
+                showPopup("🎉", "ACCOUNT CREATED (+50 XP)", "Welcome bonus 50 XP soho account toiri hoyeche! Ekhon login korun.", "#00ff88", () => {
                     toggleAuthMode();
                 });
             }).catch(err => {
@@ -818,39 +840,13 @@
             });
         }
 
-        // Google Login
+        // Google Redirect Login
         function loginWithGoogle() {
             const provider = new firebase.auth.GoogleAuthProvider();
-            auth.signInWithPopup(provider).then((result) => {
-                const u = result.user.email.split('@')[0].replace(/[^a-zA-Z0-9]/g, "");
-                
-                db.ref('users/' + u).once('value').then((snap) => {
-                    if (!snap.exists()) {
-                        // গুগল দিয়ে প্রথম সাইন-ইন করলেও পাবে ৫০ XP
-                        db.ref('users/' + u).set({
-                            name: result.user.displayName || "Scholar",
-                            email: result.user.email || "",
-                            target: "HSC Science",
-                            avatar: `https://api.dicebear.com/7.x/bottts/svg?seed=${u}`,
-                            xp: 50,
-                            level: 1,
-                            totalSeconds: 0,
-                            squad: "None",
-                            googleConnected: true,
-                            createdAt: new Date().toISOString()
-                        });
-                    }
-                    localStorage.setItem('auraCurrentUser', u);
-                    showPopup("🌐", "Google Connected", `Welcome ${result.user.displayName}! (+50 XP)`, "#00ff88", () => {
-                        window.location.href = "app.html";
-                    });
-                });
-            }).catch((err) => {
-                showPopup("⚠️", "Google Auth Error", err.message, "#ff3366");
-            });
+            auth.signInWithRedirect(provider);
         }
 
-        // Facebook Login (Mobile Redirect System)
+        // Facebook Redirect Login
         function loginWithFacebook() {
             const provider = new firebase.auth.FacebookAuthProvider();
             provider.addScope('email');
