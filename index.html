@@ -245,7 +245,7 @@
 
         .switch-mode-text span { color: var(--neon-blue); font-weight: 700; }
 
-        /* Custom Popup Modal */
+        /* Custom Notification Modal */
         .modal-overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -254,26 +254,26 @@
             justify-content: center;
             align-items: center;
             z-index: 9999;
-            backdrop-filter: blur(4px);
+            backdrop-filter: blur(5px);
         }
 
         .popup-card {
             background: #0a1325;
             border: 2px solid var(--neon-blue);
             border-radius: 16px;
-            padding: 25px;
-            max-width: 320px;
+            padding: 24px;
+            max-width: 330px;
             width: 90%;
             text-align: center;
             animation: popIn 0.3s ease;
         }
 
         @keyframes popIn {
-            from { transform: scale(0.7); opacity: 0; }
+            from { transform: scale(0.8); opacity: 0; }
             to { transform: scale(1); opacity: 1; }
         }
 
-        .popup-emoji { font-size: 45px; margin-bottom: 10px; }
+        .popup-emoji { font-size: 45px; margin-bottom: 8px; }
         .popup-title { font-size: 18px; font-weight: bold; margin-bottom: 8px; }
         .popup-msg { font-size: 13px; color: var(--text-muted); margin-bottom: 18px; line-height: 1.4; }
         .popup-close-btn {
@@ -285,6 +285,84 @@
             font-weight: bold;
             cursor: pointer;
             width: 100%;
+        }
+
+        /* Terms & Privacy Policy Modal */
+        .policy-card {
+            background: #070d1a;
+            border: 2px solid var(--neon-blue);
+            border-radius: 16px;
+            padding: 22px;
+            max-width: 440px;
+            width: 92%;
+            text-align: left;
+            max-height: 85vh;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 0 30px rgba(0, 240, 255, 0.2);
+            animation: popIn 0.3s ease;
+        }
+
+        .policy-header {
+            font-size: 18px;
+            font-weight: 800;
+            color: var(--neon-blue);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .policy-body {
+            overflow-y: auto;
+            padding-right: 8px;
+            margin-bottom: 16px;
+            font-size: 13.5px;
+            line-height: 1.6;
+            color: #cbd5e1;
+        }
+
+        .policy-body::-webkit-scrollbar { width: 4px; }
+        .policy-body::-webkit-scrollbar-thumb { background: var(--neon-blue); border-radius: 4px; }
+
+        .policy-rule-box {
+            background: rgba(10, 19, 37, 0.8);
+            border-left: 3px solid var(--neon-blue);
+            padding: 10px;
+            border-radius: 6px;
+            margin-bottom: 10px;
+        }
+
+        .policy-rule-box strong { color: var(--neon-gold); font-size: 14px; }
+
+        .policy-btn-row {
+            display: flex;
+            gap: 10px;
+        }
+
+        .policy-agree-btn {
+            background: var(--neon-green);
+            color: #050b14;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: 900;
+            cursor: pointer;
+            flex: 2;
+            font-size: 13px;
+            transition: 0.2s;
+        }
+
+        .policy-decline-btn {
+            background: rgba(255, 51, 102, 0.15);
+            border: 1px solid var(--neon-red);
+            color: var(--neon-red);
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: 700;
+            cursor: pointer;
+            flex: 1;
+            font-size: 13px;
         }
     </style>
 </head>
@@ -309,7 +387,7 @@
 
                 <div class="input-group">
                     <label>Target Goal</label>
-                    <input type="text" id="targetGoal" placeholder="e.g. BUET / Medical">
+                    <input type="text" id="targetGoal" placeholder="e.g. BUET / Medical / DU">
                 </div>
             </div>
 
@@ -347,7 +425,7 @@
                     <input type="checkbox" id="savePasswordCheck">
                     <span>Save password</span>
                 </label>
-                <span style="color: var(--text-muted); cursor: pointer;" onclick="showPopup('🔑', 'Password Help', 'Contact admin on WhatsApp/Messenger to restore your account credentials.', '#ffcc00')">Forgot?</span>
+                <span style="color: var(--text-muted); cursor: pointer;" onclick="showPopup('🔑', 'Password Help', 'Contact admin to restore or reset your account.', '#ffcc00')">Forgot?</span>
             </div>
 
             <button type="submit" class="auth-btn" id="submitBtn">LOG IN</button>
@@ -369,13 +447,50 @@
         </div>
     </div>
 
-    <!-- Custom Neon Alert Modal -->
+    <!-- Notification Popup Modal -->
     <div class="modal-overlay" id="customModal">
         <div class="popup-card" id="popupCard">
             <div class="popup-emoji" id="popupEmoji">⚡</div>
             <div class="popup-title" id="popupTitle">Alert</div>
             <div class="popup-msg" id="popupMsg">Message here</div>
             <button class="popup-close-btn" id="popupCloseBtn" onclick="closePopup()">OK</button>
+        </div>
+    </div>
+
+    <!-- Terms & Privacy Policy Modal for Sign-Up -->
+    <div class="modal-overlay" id="termsModal">
+        <div class="policy-card">
+            <div class="policy-header">
+                📜 <span>Terms & Privacy Protocol</span>
+            </div>
+            <div class="policy-body">
+                <p style="margin-bottom: 12px; color: var(--neon-blue);">Aura Readers স্টাডি প্ল্যাটফর্মে রেজিস্ট্রেশন সম্পন্ন করতে নিচের নিয়মাবলী ও শর্তসমূহ মেনে নেওয়া বাধ্যতামূলক:</p>
+                
+                <div class="policy-rule-box">
+                    <strong>🛡️ ১. একাগ্রতা ও সততা নীতি (Academic Integrity):</strong>
+                    <p>স্টপওয়াচ বা টাইমার ফাঁকি দিয়ে ভুয়া স্টাডি টাইম বা অনৈতিক উপায়ে XP অর্জন করা সম্পূর্ণ নিষিদ্ধ। সিস্টেম অসঙ্গতি শনাক্ত করলে স্বয়ংক্রিয়ভাবে অ্যাকাউন্ট পেনাল্টি হতে পারে।</p>
+                </div>
+
+                <div class="policy-rule-box">
+                    <strong>⏰ ২. ১৫ ঘণ্টা ইনঅ্যাক্টিভ পেনাল্টি রুল:</strong>
+                    <p>ধারাবাহিকতা বজায় রাখতে প্রতি ১৫ ঘণ্টা স্টাডি সেশনের বাইরে থাকলে দৈনিক স্ট্রিক XP সাময়িক লক হয়ে যাবে। একটি সফল সেশন শুরু করে আবার সচল করতে হবে।</p>
+                </div>
+
+                <div class="policy-rule-box">
+                    <strong>🔒 ৩. ডাটা সুরক্ষা ও অ্যাকাউন্ট অ্যাক্সেস:</strong>
+                    <p>আপনার নাম, টার্গেট গোল এবং নোটস ক্লাউড ডাটাবেসে সুরক্ষিত থাকবে। অ্যাডমিন প্যানেল থেকে শুধুমাত্র প্ল্যাটফর্মের শৃঙ্খলা বজায় রাখতে অ্যাকাউন্টের নিরাপত্তা পর্যবেক্ষণ করা হয়।</p>
+                </div>
+
+                <div class="policy-rule-box">
+                    <strong>🤝 ৪. স্কোয়াড ও পারস্পরিক সম্মান:</strong>
+                    <p>কমিউনিটি বা স্কোয়াডে সহপাঠীদের সাথে সুস্থ প্রতিযোগিতামূলক মনোভাব ও সম্মান বজায় রাখতে হবে।</p>
+                </div>
+            </div>
+
+            <div class="policy-btn-row">
+                <button type="button" class="policy-decline-btn" onclick="declineTerms()">DECLINE</button>
+                <button type="button" class="policy-agree-btn" onclick="acceptTermsAndRegister()">✅ I AGREE & JOIN</button>
+            </div>
         </div>
     </div>
 
@@ -398,7 +513,9 @@
         let isStrongPassword = false;
         let popupCallback = null;
 
-        // Custom Popup System
+        // Pending Registration Data Container
+        let pendingUserPayload = null;
+
         function showPopup(emoji, title, msg, themeColor = "#00f0ff", callback = null) {
             document.getElementById('popupEmoji').innerText = emoji;
             document.getElementById('popupTitle').innerText = title;
@@ -418,7 +535,6 @@
             }
         }
 
-        // Auto-fill saved credentials
         window.addEventListener('DOMContentLoaded', () => {
             const savedUser = localStorage.getItem('aura_saved_user');
             const savedPass = localStorage.getItem('aura_saved_pass');
@@ -530,7 +646,6 @@
             }
         }
 
-        // Email syntax validation
         function isValidEmailAddress(email) {
             return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
         }
@@ -556,11 +671,10 @@
             submitBtn.innerText = "CONNECTING...";
 
             if (isLoginState) {
-                // Login Verification
+                // Login Flow
                 db.ref('users/' + user).once('value').then((snapshot) => {
                     submitBtn.innerText = "LOG IN";
                     if (snapshot.exists() && snapshot.val().password === pass) {
-                        
                         if (savePass) {
                             localStorage.setItem('aura_saved_user', user);
                             localStorage.setItem('aura_saved_pass', pass);
@@ -571,22 +685,20 @@
 
                         localStorage.setItem('auraCurrentUser', user);
 
-                        // Master Admin / Database Admin Check
                         const isBoss = (user === "sadik1" || snapshot.val().role === "admin");
                         if (isBoss) {
                             localStorage.setItem('auraIsAdmin', 'true');
-                            showPopup("👑", "ACCESS GRANTED BOSS", "Welcome Commander Sadik! Entering Aura Control Terminal...", "#00f0ff", () => {
+                            showPopup("👑", "ACCESS GRANTED BOSS", "Welcome Commander Sadik! Entering Control Terminal...", "#00f0ff", () => {
                                 window.location.href = "admin.html";
                             });
                         } else {
                             localStorage.setItem('auraIsAdmin', 'false');
-                            showPopup("🔥", "WELCOME SCHOLAR", `Login successful! Good luck with your study session, @${user}.`, "#00ff88", () => {
+                            showPopup("🔥", "WELCOME SCHOLAR", `Login successful! Good luck, @${user}.`, "#00ff88", () => {
                                 window.location.href = "app.html";
                             });
                         }
-
                     } else {
-                        showPopup("❌", "Authentication Failed", "Incorrect password or username. Please verify your credentials!", "#ff3366");
+                        showPopup("❌", "Authentication Failed", "Incorrect password or username. Please check your credentials!", "#ff3366");
                     }
                 }).catch(err => {
                     submitBtn.innerText = "LOG IN";
@@ -594,7 +706,7 @@
                 });
 
             } else {
-                // Register Verification
+                // Sign Up Flow - Verification & Terms Modal Trigger
                 const name = document.getElementById('fullName').value.trim();
                 const email = document.getElementById('userEmail').value.trim();
                 const target = document.getElementById('targetGoal').value.trim();
@@ -607,52 +719,78 @@
 
                 if (!isValidEmailAddress(email)) {
                     submitBtn.innerText = "REGISTER ACCOUNT";
-                    showPopup("📧", "Invalid Email", "Please provide a genuine verified email (e.g. @gmail.com) to stop spam!", "#ff3366");
+                    showPopup("📧", "Invalid Email", "Please provide a genuine verified email (e.g. @gmail.com)!", "#ff3366");
                     return;
                 }
 
                 if (!isStrongPassword) {
                     submitBtn.innerText = "REGISTER ACCOUNT";
-                    showPopup("🛡️", "Weak Password", "Please fulfill all 4 security rules before creating account.", "#ff3366");
+                    showPopup("🛡️", "Weak Password", "Please fulfill all 4 security rules before registering!", "#ff3366");
                     return;
                 }
 
                 db.ref('users/' + user).once('value').then((snapshot) => {
+                    submitBtn.innerText = "REGISTER ACCOUNT";
                     if (snapshot.exists()) {
-                        submitBtn.innerText = "REGISTER ACCOUNT";
-                        showPopup("🚫", "Username Taken", "This username already belongs to another member. Pick another!", "#ff3366");
+                        showPopup("🚫", "Username Taken", "This username is already claimed! Choose another.", "#ff3366");
                     } else {
-                        const avatarUrl = `https://api.dicebear.com/7.x/bottts/svg?seed=${user}`;
-                        
-                        db.ref('users/' + user).set({
-                            password: pass,
+                        // Store temporary data and trigger Terms Modal
+                        pendingUserPayload = {
+                            user: user,
+                            pass: pass,
                             name: name,
                             email: email,
                             target: target || "HSC Science",
-                            avatar: avatarUrl,
-                            xp: 0,
-                            level: 1,
-                            totalSeconds: 0,
-                            squad: "None",
-                            tasksCompleted: 0,
-                            penaltyActive: false,
-                            createdAt: new Date().toISOString()
-                        }).then(() => {
-                            if (savePass) {
-                                localStorage.setItem('aura_saved_user', user);
-                                localStorage.setItem('aura_saved_pass', pass);
-                            }
-                            submitBtn.innerText = "LOG IN";
-                            showPopup("🎉", "ACCOUNT CREATED", "Your profile has been stored safely! Please proceed to login.", "#00ff88", () => {
-                                toggleAuthMode();
-                            });
-                        });
+                            savePass: savePass
+                        };
+                        document.getElementById('termsModal').style.display = "flex";
                     }
                 });
             }
         }
 
-        // Social Logins
+        // Terms Actions
+        function declineTerms() {
+            document.getElementById('termsModal').style.display = "none";
+            pendingUserPayload = null;
+            showPopup("⚠️", "Registration Cancelled", "You must agree to the Terms & Privacy Protocol to use Aura Readers.", "#ff3366");
+        }
+
+        function acceptTermsAndRegister() {
+            document.getElementById('termsModal').style.display = "none";
+            if (!pendingUserPayload) return;
+
+            const p = pendingUserPayload;
+            const avatarUrl = `https://api.dicebear.com/7.x/bottts/svg?seed=${p.user}`;
+
+            db.ref('users/' + p.user).set({
+                password: p.pass,
+                name: p.name,
+                email: p.email,
+                target: p.target,
+                avatar: avatarUrl,
+                xp: 0,
+                level: 1,
+                totalSeconds: 0,
+                squad: "None",
+                tasksCompleted: 0,
+                penaltyActive: false,
+                termsAccepted: true,
+                createdAt: new Date().toISOString()
+            }).then(() => {
+                if (p.savePass) {
+                    localStorage.setItem('aura_saved_user', p.user);
+                    localStorage.setItem('aura_saved_pass', p.pass);
+                }
+                showPopup("🎉", "ACCOUNT CREATED", "Welcome to the Aura Core! Please proceed to login.", "#00ff88", () => {
+                    toggleAuthMode();
+                });
+            }).catch(err => {
+                showPopup("❌", "Registration Error", err.message, "#ff3366");
+            });
+        }
+
+        // Social Logins (Google & Facebook)
         function loginWithGoogle() {
             const provider = new firebase.auth.GoogleAuthProvider();
             auth.signInWithPopup(provider).then((result) => {
