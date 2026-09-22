@@ -137,17 +137,6 @@
         select:focus, input[type="text"]:focus, textarea:focus { border-color: var(--neon-blue); }
 
         /* Notes Breadcrumb Hierarchy */
-        .notes-flow { display: flex; flex-direction: column; gap: 10px; }
-        .breadcrumb-trail {
-            background: rgba(0, 240, 255, 0.08);
-            border: 1px dashed var(--neon-blue);
-            padding: 10px 14px;
-            border-radius: 8px;
-            font-size: 13px;
-            font-weight: bold;
-            color: var(--neon-blue);
-        }
-
         .note-item {
             background: rgba(5, 11, 20, 0.8);
             border: 1px solid rgba(255,255,255,0.06);
@@ -202,10 +191,10 @@
         
         <!-- Tab Controls -->
         <div class="tab-bar">
-            <button class="tab-btn active" onclick="switchTab('studyTab')">⏱️ Study Tracker</button>
-            <button class="tab-btn" onclick="switchTab('notesTab')">📚 HSC Notes Vault</button>
-            <button class="tab-btn" onclick="switchTab('squadTab')">🛡️ Squad & Leaderboard</button>
-            <button class="tab-btn" onclick="switchTab('profileTab')">⚙️ Profile & Social Link</button>
+            <button class="tab-btn active" onclick="switchTab('studyTab', this)">⏱️ Study Tracker</button>
+            <button class="tab-btn" onclick="switchTab('notesTab', this)">📚 HSC Notes Vault</button>
+            <button class="tab-btn" onclick="switchTab('squadTab', this)">🛡️ Squad & Leaderboard</button>
+            <button class="tab-btn" onclick="switchTab('profileTab', this)">⚙️ Profile & Social Link</button>
         </div>
 
         <!-- 1. STUDY TRACKER TAB -->
@@ -259,7 +248,7 @@
                 <div class="timer-ctrls">
                     <button class="btn-action" id="startTimerBtn" onclick="toggleTimer()">START STUDYING</button>
                 </div>
-                <p style="font-size: 11px; color: var(--text-muted); text-align: center;">প্রতি ১ মিনিট পড়াশোনায় ১ XP যোগ হবে। মিনিমাম ১০ মিনিট পড়লে ডাটাবেসে সেভ হবে।</p>
+                <p style="font-size: 11px; color: var(--text-muted); text-align: center;">প্রতি ১ মিনিট পড়াশোনায় ১ XP যোগ হবে।</p>
             </div>
         </div>
 
@@ -269,7 +258,6 @@
                 <div class="card-title">📚 STRUCTURED HSC NOTES VAULT</div>
                 <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 12px;">বিষয় ➡️ পত্র ➡️ অধ্যায় ➡️ টাইপ সিলেক্ট করে নোটস খুঁজুন অথবা নতুন নোটস সেভ করুন।</p>
                 
-                <!-- Hierarchy Selection -->
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
                     <div>
                         <label style="font-size: 10px; color: var(--neon-blue);">১. বিষয়</label>
@@ -312,7 +300,6 @@
                 <button class="btn-action" onclick="saveHscNote()" style="width: 100%; font-size: 13px;">💾 SAVE NOTE TO VAULT</button>
             </div>
 
-            <!-- Notes List Section -->
             <div class="cyber-card">
                 <div class="card-title">📖 SAVED NOTES LIST</div>
                 <div id="notesContainer">
@@ -378,7 +365,7 @@
     </div>
 
     <script>
-        // 1. Firebase Initialization
+        // 1. Firebase Configuration
         const firebaseConfig = {
             apiKey: "AIzaSyAG0Py4X5uCXy_qlswCe0hE8ci_iOzGc2M",
             authDomain: "aura-readers.firebaseapp.com",
@@ -392,7 +379,7 @@
         const db = firebase.database();
         const auth = firebase.auth();
 
-        // 2. Authentication Protection
+        // 2. Authentication Check
         const currentUser = localStorage.getItem('auraCurrentUser');
         if (!currentUser) {
             window.location.href = "index.html";
@@ -401,7 +388,35 @@
         document.getElementById('navUserName').innerText = "@" + currentUser;
         document.getElementById('profUser').innerText = currentUser;
 
-        // 3. User Data Listener & Penalty Evaluation
+        // Redirect Result Handler for Social Linking (Mobile Browser Fix)
+        auth.getRedirectResult().then((result) => {
+            if (result && result.user && currentUser) {
+                const providerId = result.credential ? result.credential.providerId : "";
+                if (providerId.includes("facebook")) {
+                    db.ref('users/' + currentUser).update({
+                        facebookConnected: true,
+                        facebookName: result.user.displayName,
+                        facebookUid: result.user.uid
+                    }).then(() => {
+                        openModal("📘", "Facebook Connected", "Facebook account link don sɔksɛs!");
+                    });
+                } else if (providerId.includes("google")) {
+                    db.ref('users/' + currentUser).update({
+                        googleConnected: true,
+                        googleEmail: result.user.email,
+                        googleUid: result.user.uid
+                    }).then(() => {
+                        openModal("🌐", "Google Connected", "Google account link don sɔksɛs!");
+                    });
+                }
+            }
+        }).catch((err) => {
+            if (err.code !== "auth/credential-already-in-use") {
+                openModal("⚠️", "Linking Error", err.message);
+            }
+        });
+
+        // 3. User Data Listener
         let userData = {};
         db.ref('users/' + currentUser).on('value', (snap) => {
             userData = snap.val() || {};
@@ -418,7 +433,7 @@
             const currentLvl = Math.floor((userData.xp || 0) / 100) + 1;
             document.getElementById('levelDisplay').innerText = "Lvl " + currentLvl;
 
-            // Check Social Link Status
+            // Check Social Link
             if (userData.googleConnected) {
                 const gBtn = document.getElementById('btnGoogleLink');
                 gBtn.classList.add('connected');
@@ -430,7 +445,7 @@
                 fbBtn.innerText = "✅ Facebook Connected";
             }
 
-            // 15 Hour Inactive Penalty Verification
+            // 15-Hour Inactivity Check
             if (userData.lastActiveSession) {
                 const diffHours = (Date.now() - userData.lastActiveSession) / (1000 * 60 * 60);
                 if (diffHours >= 15) {
@@ -441,7 +456,7 @@
             }
         });
 
-        // 4. Study Subject & Paper Dropdown Logic
+        // 4. Subject and Paper Dropdowns
         function updateStudyPaperOptions() {
             const sub = document.getElementById('studySubjectSelect').value;
             const paperSelect = document.getElementById('studyPaperSelect');
@@ -462,7 +477,7 @@
             }
         }
 
-        // 5. Timer Core Logic
+        // 5. Study Timer Core Logic
         let timerActive = false;
         let timerInterval = null;
         let elapsedSeconds = 0;
@@ -497,11 +512,11 @@
 
         function saveStudySession() {
             if (elapsedSeconds < 60) {
-                openModal("⏱️", "Session Too Short", "১ মিনিটের কম পড়ার জন্য কোনো XP যোগ হয়নি। মনোযোগ দিয়ে পড়ুন!");
+                openModal("⏱️", "Session Too Short", "Yu nid fɔ rid at lis 1 minit bifo yu get XP!");
                 return;
             }
 
-            const earnedXp = Math.floor(elapsedSeconds / 60); // ১ মিনিটে ১ XP
+            const earnedXp = Math.floor(elapsedSeconds / 60);
             const currentTotalSec = (userData.totalSeconds || 0) + elapsedSeconds;
             const currentTotalXp = (userData.xp || 0) + earnedXp;
 
@@ -511,7 +526,7 @@
                 lastActiveSession: Date.now(),
                 penaltyActive: false
             }).then(() => {
-                openModal("🔥", "BOOST ACHIEVED", `চমৎকার! আপনি ${Math.floor(elapsedSeconds/60)} মিনিট পড়েছেন এবং +${earnedXp} XP অর্জন করেছেন!`);
+                openModal("🔥", "BOOST ACHIEVED", `Yu don rid fɔ ${Math.floor(elapsedSeconds/60)} minit ɛn yu get +${earnedXp} XP!`);
             });
         }
 
@@ -524,7 +539,7 @@
             const content = document.getElementById('noteContent').value.trim();
 
             if (!chap || !content) {
-                openModal("⚠️", "নোট অসম্পূর্ণ", "অধ্যায়ের নাম এবং নোটের কনটেন্ট পূরণ করুন!");
+                openModal("⚠️", "Not Inkomplit", "Rayt di chapta nem ɛn di not kɔntɛnt!");
                 return;
             }
 
@@ -539,17 +554,16 @@
             }).then(() => {
                 document.getElementById('noteChapter').value = "";
                 document.getElementById('noteContent').value = "";
-                openModal("✅", "নোট সংরক্ষিত", "নোটটি আপনার পার্সোনাল ভল্টে সেভ করা হয়েছে!");
+                openModal("✅", "Not Don Sev", "Di not don sev pan yu vault!");
             });
         }
 
-        // Load Notes Live
         db.ref('hsc_notes/' + currentUser).on('value', (snap) => {
             const list = document.getElementById('notesContainer');
             list.innerHTML = "";
             const data = snap.val();
             if (!data) {
-                list.innerHTML = '<p style="font-size: 12px; color: var(--text-muted); text-align: center;">এখনো কোনো নোট সেভ করেননি।</p>';
+                list.innerHTML = '<p style="font-size: 12px; color: var(--text-muted); text-align: center;">No not nɔ de yet.</p>';
                 return;
             }
             Object.keys(data).reverse().forEach(key => {
@@ -567,35 +581,17 @@
             });
         });
 
-        // 7. Social Linking System (Google & Facebook)
+        // 7. Social Linking (Redirect System fɔ foun brauza)
         function linkGoogleAccount() {
             const provider = new firebase.auth.GoogleAuthProvider();
-            auth.signInWithPopup(provider).then((result) => {
-                db.ref('users/' + currentUser).update({
-                    googleConnected: true,
-                    googleEmail: result.user.email,
-                    googleUid: result.user.uid
-                }).then(() => {
-                    openModal("🌐", "Google Connected", "গুগল অ্যাকাউন্ট সফলভাবে আপনার প্রফাইলের সাথে লিঙ্ক করা হয়েছে!");
-                });
-            }).catch(err => {
-                openModal("❌", "Google Auth Error", err.message);
-            });
+            auth.signInWithRedirect(provider);
         }
 
         function linkFacebookAccount() {
             const provider = new firebase.auth.FacebookAuthProvider();
-            auth.signInWithPopup(provider).then((result) => {
-                db.ref('users/' + currentUser).update({
-                    facebookConnected: true,
-                    facebookName: result.user.displayName,
-                    facebookUid: result.user.uid
-                }).then(() => {
-                    openModal("📘", "Facebook Connected", "ফেসবুক অ্যাকাউন্ট সফলভাবে লিঙ্ক করা হয়েছে!");
-                });
-            }).catch(err => {
-                openModal("❌", "Facebook Auth Error", err.message);
-            });
+            provider.addScope('email');
+            provider.addScope('public_profile');
+            auth.signInWithRedirect(provider);
         }
 
         // 8. Squad & Leaderboard
@@ -604,7 +600,7 @@
             if (!squadName) return;
             db.ref('users/' + currentUser).update({ squad: squadName }).then(() => {
                 document.getElementById('newSquadInput').value = "";
-                openModal("🛡️", "Squad Updated", `আপনি সফলভাবে ${squadName} স্কোয়াডে যোগ দিয়েছেন!`);
+                openModal("🛡️", "Squad Updated", `Yu don jɔyn di squad: ${squadName}!`);
             });
         }
 
@@ -628,11 +624,13 @@
         });
 
         // Tab Switcher
-        function switchTab(tabId) {
+        function switchTab(tabId, element) {
             document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
             document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
             document.getElementById(tabId).classList.add('active');
-            event.target.classList.add('active');
+            if (element) {
+                element.classList.add('active');
+            }
         }
 
         // Modal Helpers
