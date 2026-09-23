@@ -30,7 +30,7 @@
         .top-nav {
             background: rgba(10, 19, 37, 0.95);
             border-bottom: 1px solid var(--border-glow);
-            padding: 14px 20px;
+            padding: 12px 18px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -39,9 +39,118 @@
             z-index: 100;
             backdrop-filter: blur(8px);
         }
-        .brand { font-size: 20px; font-weight: 900; color: var(--neon-blue); letter-spacing: 1.5px; text-shadow: 0 0 10px rgba(0,240,255,0.4); }
-        .user-chip { display: flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 700; color: var(--neon-green); }
-        .logout-btn { background: rgba(255, 51, 102, 0.15); border: 1px solid var(--neon-red); color: var(--neon-red); padding: 6px 14px; border-radius: 6px; cursor: pointer; font-size: 11px; font-weight: bold; }
+        .brand { font-size: 19px; font-weight: 900; color: var(--neon-blue); letter-spacing: 1.5px; }
+        .user-chip { display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 700; color: var(--neon-green); }
+        .nav-avatar-img { width: 34px; height: 34px; border-radius: 50%; border: 2px solid var(--neon-blue); object-fit: cover; background: #000; }
+        .logout-btn { 
+            background: rgba(255, 51, 102, 0.15); 
+            border: 1px solid var(--neon-red); 
+            color: var(--neon-red); 
+            padding: 6px 14px; 
+            border-radius: 6px; 
+            cursor: pointer; 
+            font-size: 11px; 
+            font-weight: bold; 
+            display: flex; 
+            align-items: center; 
+            gap: 5px;
+            transition: all 0.2s ease;
+        }
+        .logout-btn:hover { background: var(--neon-red); color: #fff; box-shadow: 0 0 10px rgba(255,51,102,0.4); }
+
+        /* Logout Door Exit Animation Overlay */
+        .logout-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(3, 7, 18, 0.92);
+            backdrop-filter: blur(8px);
+            z-index: 999999;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .door-portal-stage {
+            width: 140px;
+            height: 180px;
+            position: relative;
+            perspective: 800px;
+            margin-bottom: 20px;
+        }
+
+        /* Door Frame */
+        .door-frame {
+            width: 100%;
+            height: 100%;
+            border: 4px solid var(--neon-blue);
+            border-bottom: 4px solid var(--neon-green);
+            border-radius: 10px 10px 0 0;
+            position: relative;
+            box-shadow: 0 0 25px rgba(0, 240, 255, 0.4), inset 0 0 30px rgba(0, 240, 255, 0.2);
+            background: radial-gradient(circle, rgba(0,240,255,0.2) 0%, rgba(5,11,20,0.9) 100%);
+            overflow: hidden;
+        }
+
+        /* Door Leaf opening in 3D */
+        .door-leaf {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: linear-gradient(135deg, #0e1e38, #070d18);
+            border-right: 2px solid var(--neon-blue);
+            transform-origin: left;
+            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 12px;
+        }
+
+        .door-handle {
+            width: 6px;
+            height: 18px;
+            background: var(--neon-gold);
+            border-radius: 3px;
+            box-shadow: 0 0 8px var(--neon-gold);
+        }
+
+        .door-portal-stage.door-open .door-leaf {
+            transform: rotateY(-80deg);
+        }
+
+        /* Walking Person SVG */
+        .walking-man {
+            position: absolute;
+            bottom: 4px;
+            left: 20px;
+            width: 38px;
+            height: 60px;
+            opacity: 0;
+            filter: drop-shadow(0 0 6px var(--neon-green));
+            transition: all 1.2s ease-in-out;
+        }
+
+        .door-portal-stage.door-open .walking-man {
+            opacity: 1;
+            transform: translateX(50px) scale(0.65);
+            filter: drop-shadow(0 0 12px var(--neon-blue));
+        }
+
+        .logout-text {
+            font-size: 15px;
+            font-weight: 800;
+            color: var(--neon-blue);
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            text-shadow: 0 0 10px rgba(0,240,255,0.5);
+            animation: pulseText 1s infinite alternate;
+        }
+
+        @keyframes pulseText {
+            from { opacity: 0.7; }
+            to { opacity: 1; }
+        }
 
         /* Main Container */
         .container { max-width: 900px; margin: 0 auto; padding: 18px; }
@@ -136,7 +245,7 @@
         }
         select:focus, input[type="text"]:focus, textarea:focus { border-color: var(--neon-blue); }
 
-        /* Notes Breadcrumb Hierarchy */
+        /* Notes List */
         .note-item {
             background: rgba(5, 11, 20, 0.8);
             border: 1px solid rgba(255,255,255,0.06);
@@ -167,8 +276,7 @@
             gap: 8px;
             transition: 0.2s;
         }
-        .btn-connect:hover { border-color: var(--neon-blue); background: rgba(0, 240, 255, 0.1); }
-        .btn-connect.connected { border-color: var(--neon-green); color: var(--neon-green); background: rgba(0, 255, 136, 0.1); pointer-events: none; }
+        .btn-connect.connected { border-color: var(--neon-green); color: var(--neon-green); pointer-events: none; }
 
         /* Modal */
         .modal {
@@ -181,12 +289,41 @@
 </head>
 <body>
 
+    <!-- Logout Animation Overlay -->
+    <div class="logout-overlay" id="logoutOverlay">
+        <div class="door-portal-stage" id="doorStage">
+            <div class="door-frame">
+                <!-- Human walking silhouette SVG -->
+                <svg class="walking-man" viewBox="0 0 24 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="12" cy="5" r="4" fill="#00ff88"/>
+                    <!-- Torso -->
+                    <path d="M12 9 L12 21" stroke="#00ff88" stroke-width="3" stroke-linecap="round"/>
+                    <!-- Legs in walking pose -->
+                    <path d="M12 21 L8 34" stroke="#00ff88" stroke-width="2.5" stroke-linecap="round"/>
+                    <path d="M12 21 L16 34" stroke="#00ff88" stroke-width="2.5" stroke-linecap="round"/>
+                    <!-- Arms swinging -->
+                    <path d="M12 12 L7 20" stroke="#00ff88" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M12 12 L17 19" stroke="#00ff88" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+
+                <!-- 3D Door Leaf -->
+                <div class="door-leaf">
+                    <div class="door-handle"></div>
+                </div>
+            </div>
+        </div>
+        <div class="logout-text">🚪 ডিসকানেক্টিং কোর...</div>
+    </div>
+
     <!-- Top Bar Navigation -->
     <div class="top-nav">
         <div class="brand">⚡ AURA READERS</div>
         <div class="user-chip">
+            <img id="navAvatar" src="" class="nav-avatar-img">
             <span id="navUserName">Scholar</span>
-            <button class="logout-btn" onclick="logoutSession()">LOGOUT</button>
+            <button class="logout-btn" onclick="startDoorLogout()">
+                🚪 LOGOUT
+            </button>
         </div>
     </div>
 
@@ -197,19 +334,18 @@
             <button class="tab-btn active" onclick="switchTab('studyTab', this)">⏱️ Study Tracker</button>
             <button class="tab-btn" onclick="switchTab('notesTab', this)">📚 HSC Notes Vault</button>
             <button class="tab-btn" onclick="switchTab('squadTab', this)">🛡️ Squad & Leaderboard</button>
-            <button class="tab-btn" onclick="switchTab('profileTab', this)">⚙️ Profile & Social Link</button>
+            <button class="tab-btn" onclick="switchTab('profileTab', this)">⚙️ Profile & Settings</button>
         </div>
 
         <!-- 1. STUDY TRACKER TAB -->
         <div id="studyTab" class="tab-content active">
-            
             <div class="stat-grid">
                 <div class="stat-box">
                     <div class="stat-val" id="totalHoursDisplay">0.0h</div>
                     <div class="stat-lbl">Study Time</div>
                 </div>
                 <div class="stat-box">
-                    <div class="stat-val" id="xpDisplay">0</div>
+                    <div class="stat-val" id="xpDisplay">50</div>
                     <div class="stat-lbl">Total XP</div>
                 </div>
                 <div class="stat-box">
@@ -218,12 +354,10 @@
                 </div>
             </div>
 
-            <!-- 15 Hour Inactive Penalty Warning -->
             <div class="penalty-warning" id="penaltySection" style="display: none; margin-bottom: 15px;">
                 ⚠️ <span><strong>সতর্কবার্তা:</strong> আপনি ১৫ ঘণ্টার বেশি সময় স্টাডি সেশনের বাইরে আছেন! একটি সেশন শেষ করে স্ট্রিক সচল করুন।</span>
             </div>
 
-            <!-- Study Session Launcher -->
             <div class="cyber-card">
                 <div class="card-title">🎯 FOCUS CORE (HSC SCIENCE)</div>
                 
@@ -251,7 +385,7 @@
                 <div class="timer-ctrls">
                     <button class="btn-action" id="startTimerBtn" onclick="toggleTimer()">START STUDYING</button>
                 </div>
-                <p style="font-size: 11px; color: var(--text-muted); text-align: center;">প্রতি ১ মিনিট পড়াশোনায় ১ XP যোগ হবে। মিনিমাম ১ মিনিট পড়লে ডাটাবেসে সেভ হবে।</p>
+                <p style="font-size: 11px; color: var(--text-muted); text-align: center;">প্রতি ১ মিনিট পড়াশোনায় ১ XP যোগ হবে।</p>
             </div>
         </div>
 
@@ -259,7 +393,6 @@
         <div id="notesTab" class="tab-content">
             <div class="cyber-card">
                 <div class="card-title">📚 STRUCTURED HSC NOTES VAULT</div>
-                <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 12px;">বিষয় ➡️ পত্র ➡️ অধ্যায় ➡️ ক্যাটাগরি অনুযায়ী নোটস সেভ করুন ও পড়ুন।</p>
                 
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
                     <div>
@@ -289,7 +422,7 @@
                         <input type="text" id="noteChapter" placeholder="যেমন: Chapter 2">
                     </div>
                     <div>
-                        <label style="font-size: 10px; color: var(--neon-blue);">৪. নোটের ক্যাটাগরি</label>
+                        <label style="font-size: 10px; color: var(--neon-blue);">৪. ক্যাটাগরি</label>
                         <select id="noteType">
                             <option value="CQ Notes">CQ Notes (সৃজনশীল নোটস)</option>
                             <option value="MCQ Sheet">MCQ Sheet (জ্ঞান ও অনুধাবন)</option>
@@ -329,14 +462,23 @@
             </div>
         </div>
 
-        <!-- 4. PROFILE & SOCIAL CONNECT TAB -->
+        <!-- 4. PROFILE & SETTINGS TAB -->
         <div id="profileTab" class="tab-content">
+            <div class="cyber-card" style="text-align: center;">
+                <img id="profAvatarBig" src="" style="width: 80px; height: 80px; border-radius: 50%; border: 3px solid var(--neon-blue); object-fit: cover; margin-bottom: 10px; background: #000;">
+                <br>
+                <label for="avatarUploadInput" class="btn-action" style="font-size: 11px; padding: 6px 14px; cursor: pointer; display: inline-block;">📸 ছবি আপলোড করুন</label>
+                <input type="file" id="avatarUploadInput" accept="image/*" style="display: none;" onchange="handleAvatarUpload(event)">
+                
+                <div style="text-align: left; margin-top: 18px;">
+                    <p style="font-size: 13px;">Username: <strong id="profUser" style="color: var(--neon-blue);"></strong></p>
+                    <p style="font-size: 13px; margin-top: 6px;">Display Name: <span id="profName"></span></p>
+                    <p style="font-size: 13px; margin-top: 6px;">Target Goal: <span id="profTarget" style="color: var(--neon-gold);"></span></p>
+                </div>
+            </div>
+
             <div class="cyber-card">
                 <div class="card-title">⚙️ CONNECT SOCIAL ACCOUNTS</div>
-                <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 12px;">
-                    আপনার অ্যাকাউন্টের সাথে Google বা Facebook লিংক করে রাখুন। পরবর্তীতে সরাসরি সোশাল লগইন বাটন দিয়ে অ্যাকাউন্ট অ্যাক্সেস করতে পারবেন!
-                </p>
-
                 <div class="connect-box">
                     <button class="btn-connect" id="btnGoogleLink" onclick="linkGoogleAccount()">
                         🌐 Connect Google
@@ -345,13 +487,6 @@
                         📘 Connect Facebook
                     </button>
                 </div>
-            </div>
-
-            <div class="cyber-card">
-                <div class="card-title">👤 SCHOLAR IDENTITY</div>
-                <p style="font-size: 13px;">Username: <strong id="profUser" style="color: var(--neon-blue);"></strong></p>
-                <p style="font-size: 13px; margin-top: 5px;">Display Name: <span id="profName"></span></p>
-                <p style="font-size: 13px; margin-top: 5px;">Target Goal: <span id="profTarget" style="color: var(--neon-gold);"></span></p>
             </div>
         </div>
 
@@ -368,7 +503,6 @@
     </div>
 
     <script>
-        // 1. Firebase Configuration
         const firebaseConfig = {
             apiKey: "AIzaSyAG0Py4X5uCXy_qlswCe0hE8ci_iOzGc2M",
             authDomain: "aura-readers.firebaseapp.com",
@@ -382,7 +516,6 @@
         const db = firebase.database();
         const auth = firebase.auth();
 
-        // 2. Authentication Check
         const currentUser = localStorage.getItem('auraCurrentUser');
         if (!currentUser) {
             window.location.href = "index.html";
@@ -391,36 +524,7 @@
         document.getElementById('navUserName').innerText = "@" + currentUser;
         document.getElementById('profUser').innerText = currentUser;
 
-        // Redirect Result Handler for Social Linking (Mobile Browser Fix)
-        auth.getRedirectResult().then((result) => {
-            if (result && result.user && currentUser) {
-                const providerId = result.credential ? result.credential.providerId : (result.user.providerData[0] ? result.user.providerData[0].providerId : "");
-                
-                if (providerId.includes("facebook")) {
-                    db.ref('users/' + currentUser).update({
-                        facebookConnected: true,
-                        facebookName: result.user.displayName,
-                        facebookUid: result.user.uid
-                    }).then(() => {
-                        openModal("📘", "Facebook Connected", "আপনার ফেসবুক অ্যাকাউন্ট সফলভাবে লিঙ্ক করা হয়েছে!");
-                    });
-                } else if (providerId.includes("google")) {
-                    db.ref('users/' + currentUser).update({
-                        googleConnected: true,
-                        googleEmail: result.user.email,
-                        googleUid: result.user.uid
-                    }).then(() => {
-                        openModal("🌐", "Google Connected", "আপনার গুগল অ্যাকাউন্ট সফলভাবে লিঙ্ক করা হয়েছে!");
-                    });
-                }
-            }
-        }).catch((err) => {
-            if (err.code !== "auth/credential-already-in-use") {
-                openModal("⚠️", "Linking Error", err.message);
-            }
-        });
-
-        // 3. User Data Listener
+        // User Data Realtime Listener
         let userData = {};
         db.ref('users/' + currentUser).on('value', (snap) => {
             userData = snap.val() || {};
@@ -429,19 +533,23 @@
             document.getElementById('profTarget').innerText = userData.target || "HSC Science";
             document.getElementById('userSquadName').innerText = userData.squad || "None";
 
+            const defaultAv = `https://api.dicebear.com/7.x/bottts/svg?seed=${currentUser}`;
+            const avatarUrl = userData.avatar || defaultAv;
+            document.getElementById('navAvatar').src = avatarUrl;
+            document.getElementById('profAvatarBig').src = avatarUrl;
+
             const totalSec = userData.totalSeconds || 0;
             const hours = (totalSec / 3600).toFixed(1);
             document.getElementById('totalHoursDisplay').innerText = hours + "h";
-            document.getElementById('xpDisplay').innerText = userData.xp || 0;
+            document.getElementById('xpDisplay').innerText = userData.xp || 50;
 
-            const currentLvl = Math.floor((userData.xp || 0) / 100) + 1;
+            const currentLvl = Math.floor((userData.xp || 50) / 100) + 1;
             document.getElementById('levelDisplay').innerText = "Lvl " + currentLvl;
 
-            // Check Social Link
             if (userData.googleConnected) {
                 const gBtn = document.getElementById('btnGoogleLink');
                 gBtn.classList.add('connected');
-                gBtn.innerText = "✅ Google Connected (" + (userData.googleEmail || "") + ")";
+                gBtn.innerText = "✅ Google Connected";
             }
             if (userData.facebookConnected) {
                 const fbBtn = document.getElementById('btnFacebookLink');
@@ -449,7 +557,6 @@
                 fbBtn.innerText = "✅ Facebook Connected";
             }
 
-            // 15-Hour Inactivity Check
             if (userData.lastActiveSession) {
                 const diffHours = (Date.now() - userData.lastActiveSession) / (1000 * 60 * 60);
                 if (diffHours >= 15) {
@@ -460,7 +567,27 @@
             }
         });
 
-        // 4. Subject and Paper Dropdowns
+        // Profile Picture Upload Handler
+        function handleAvatarUpload(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            if (file.size > 1024 * 1024 * 1.5) {
+                openModal("⚠️", "ফাইল অনেক বড়", "দয়া করে ১.৫ MB এর চেয়ে ছোট ছবি আপলোড করুন!");
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const base64Img = e.target.result;
+                db.ref('users/' + currentUser).update({ avatar: base64Img }).then(() => {
+                    openModal("📸", "ছবি সংরক্ষিত", "আপনার প্রোফাইল ছবি সফলভাবে আপডেট হয়েছে!");
+                });
+            };
+            reader.readAsDataURL(file);
+        }
+
+        // Subject and Paper Dropdowns
         function updateStudyPaperOptions() {
             const sub = document.getElementById('studySubjectSelect').value;
             const paperSelect = document.getElementById('studyPaperSelect');
@@ -481,7 +608,7 @@
             }
         }
 
-        // 5. Study Timer Core Logic
+        // Timer Logic
         let timerActive = false;
         let timerInterval = null;
         let elapsedSeconds = 0;
@@ -522,7 +649,7 @@
 
             const earnedXp = Math.floor(elapsedSeconds / 60);
             const currentTotalSec = (userData.totalSeconds || 0) + elapsedSeconds;
-            const currentTotalXp = (userData.xp || 0) + earnedXp;
+            const currentTotalXp = (userData.xp || 50) + earnedXp;
 
             db.ref('users/' + currentUser).update({
                 totalSeconds: currentTotalSec,
@@ -530,11 +657,11 @@
                 lastActiveSession: Date.now(),
                 penaltyActive: false
             }).then(() => {
-                openModal("🔥", "BOOST ACHIEVED", `চমৎকার! আপনি ${Math.floor(elapsedSeconds/60)} মিনিট পড়াশোনা করেছেন এবং +${earnedXp} XP অর্জন করেছেন!`);
+                openModal("🔥", "BOOST ACHIEVED", `চমৎকার! আপনি ${Math.floor(elapsedSeconds/60)} মিনিট পড়েছেন এবং +${earnedXp} XP অর্জন করেছেন!`);
             });
         }
 
-        // 6. Notes Hierarchy Vault
+        // Notes Hierarchy Vault
         function saveHscNote() {
             const sub = document.getElementById('noteSub').value;
             const paper = document.getElementById('notePaper').value;
@@ -558,7 +685,7 @@
             }).then(() => {
                 document.getElementById('noteChapter').value = "";
                 document.getElementById('noteContent').value = "";
-                openModal("✅", "নোট সংরক্ষিত", "নোটটি আপনার পার্সোনাল ভল্টে সফলভাবে সেভ হয়েছে!");
+                openModal("✅", "নোট সংরক্ষিত", "নোটটি আপনার পার্সোনাল ভল্টে সংরক্ষিত হয়েছে!");
             });
         }
 
@@ -585,20 +712,40 @@
             });
         });
 
-        // 7. Social Linking (Redirect System)
+        // Link Accounts
         function linkGoogleAccount() {
             const provider = new firebase.auth.GoogleAuthProvider();
-            auth.signInWithRedirect(provider);
+            auth.signInWithPopup(provider).then((result) => {
+                db.ref('users/' + currentUser).update({
+                    googleConnected: true,
+                    googleEmail: result.user.email,
+                    googleUid: result.user.uid
+                }).then(() => {
+                    openModal("🌐", "Google Connected", "গুগল অ্যাকাউন্ট সফলভাবে যুক্ত হয়েছে!");
+                });
+            }).catch(err => {
+                openModal("❌", "Google Auth Error", err.message);
+            });
         }
 
         function linkFacebookAccount() {
             const provider = new firebase.auth.FacebookAuthProvider();
             provider.addScope('email');
             provider.addScope('public_profile');
-            auth.signInWithRedirect(provider);
+            auth.signInWithPopup(provider).then((result) => {
+                db.ref('users/' + currentUser).update({
+                    facebookConnected: true,
+                    facebookName: result.user.displayName,
+                    facebookUid: result.user.uid
+                }).then(() => {
+                    openModal("📘", "Facebook Connected", "ফেসবুক অ্যাকাউন্ট সফলভাবে যুক্ত হয়েছে!");
+                });
+            }).catch(err => {
+                openModal("❌", "Facebook Auth Error", err.message);
+            });
         }
 
-        // 8. Squad & Leaderboard
+        // Squad Logic
         function joinOrCreateSquad() {
             const squadName = document.getElementById('newSquadInput').value.trim();
             if (!squadName) return;
@@ -621,7 +768,7 @@
                 row.style.cssText = "display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.05);";
                 row.innerHTML = `
                     <span><strong>#${index + 1}</strong> @${item.user} (${item.squad || 'No Squad'})</span>
-                    <span style="color: var(--neon-gold); font-weight: bold;">${item.xp || 0} XP</span>
+                    <span style="color: var(--neon-gold); font-weight: bold;">${item.xp || 50} XP</span>
                 `;
                 board.appendChild(row);
             });
@@ -648,10 +795,24 @@
             document.getElementById('sysModal').style.display = "none";
         }
 
-        function logoutSession() {
-            localStorage.removeItem('auraCurrentUser');
-            localStorage.removeItem('auraIsAdmin');
-            window.location.href = "index.html";
+        // 🚪 Cyber Door Exit Logout Sequence
+        function startDoorLogout() {
+            const overlay = document.getElementById('logoutOverlay');
+            const doorStage = document.getElementById('doorStage');
+            
+            overlay.style.display = 'flex';
+            
+            // ১. গেট খুলবে এবং মানুষটি হেঁটে পার হবে
+            setTimeout(() => {
+                doorStage.classList.add('door-open');
+            }, 100);
+
+            // ২. অ্যানিমেশন সম্পূর্ণ হওয়ার পর সেশন ক্লিয়ার হয়ে রিডাইরেক্ট হবে
+            setTimeout(() => {
+                localStorage.removeItem('auraCurrentUser');
+                localStorage.removeItem('auraIsAdmin');
+                window.location.href = "index.html";
+            }, 1400);
         }
     </script>
 </body>
