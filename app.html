@@ -233,7 +233,7 @@
             margin-bottom: 18px;
             box-shadow: 0 0 20px rgba(0,0,0,0.4);
         }
-        .card-title { font-size: 15.5px; font-weight: 800; color: var(--neon-blue); margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+        .card-title { font-size: 15.5px; font-weight: 800; color: var(--neon-blue); margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between; gap: 8px; }
 
         /* Dashboard Hero Section */
         .hero-welcome-card {
@@ -385,6 +385,18 @@
             color: #050b14;
         }
 
+        /* Squad Tier Badges */
+        .tier-badge {
+            font-size: 11px;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+            display: inline-block;
+        }
+        .tier-rookie { background: rgba(136, 146, 176, 0.2); border: 1px solid var(--text-muted); color: #cbd5e1; }
+        .tier-elite { background: rgba(0, 240, 255, 0.15); border: 1px solid var(--neon-blue); color: var(--neon-blue); }
+        .tier-limitless { background: rgba(255, 204, 0, 0.15); border: 1px solid var(--neon-gold); color: var(--neon-gold); }
+
         /* Squad Forms & Management Layout */
         .squad-management-grid {
             display: grid;
@@ -409,6 +421,33 @@
             margin-bottom: 10px;
             text-transform: uppercase;
         }
+
+        /* Invite Badge Box */
+        .invite-box {
+            background: rgba(0, 240, 255, 0.08);
+            border: 1px dashed var(--neon-blue);
+            padding: 10px;
+            border-radius: 8px;
+            margin-top: 10px;
+            font-size: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Auto Rank Badge */
+        .role-badge {
+            font-size: 10px;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 800;
+            text-transform: uppercase;
+        }
+        .role-commander { background: rgba(255, 204, 0, 0.2); border: 1px solid var(--neon-gold); color: var(--neon-gold); }
+        .role-captain { background: rgba(0, 240, 255, 0.2); border: 1px solid var(--neon-blue); color: var(--neon-blue); }
+        .role-vice { background: rgba(188, 19, 254, 0.2); border: 1px solid var(--neon-purple); color: var(--neon-purple); }
+        .role-vanguard { background: rgba(0, 255, 136, 0.2); border: 1px solid var(--neon-green); color: var(--neon-green); }
+        .role-cadet { background: rgba(255, 255, 255, 0.1); color: var(--text-muted); }
 
         /* Activity Timeline */
         .activity-timeline { display: flex; flex-direction: column; gap: 8px; }
@@ -722,23 +761,22 @@
                     </div>
                 </div>
 
-                <!-- Announcements Preview -->
+                <!-- Live Announcements & Squad Notice Board -->
                 <div class="cyber-card" style="margin-bottom: 0;">
-                    <div class="card-title">📢 ANNOUNCEMENTS & NOTICES</div>
+                    <div class="card-title">
+                        <span>📢 NOTICE BOARD</span>
+                        <span style="font-size: 11px; color: var(--neon-gold);">Squad Codes & Tiers</span>
+                    </div>
                     <div class="activity-timeline" id="announcementsList">
                         <div class="activity-row boost">
                             <div>
-                                <div class="activity-desc">⚡ ভেরিফাইড স্কোয়াড সিস্টেম লাইভ</div>
-                                <div style="font-size: 11.5px; color: var(--text-muted); margin-top: 2px;">এখন থেকে ৪-ডিজিট সিক্রেট পিন ও অস্তিত্ব যাচাই করে স্কোয়াডে জয়েন করা যাবে।</div>
+                                <div class="activity-desc">⚡ টায়ার-বেসড মেরিট স্কোয়াড সিস্টেম লাইভ</div>
+                                <div style="font-size: 11.5px; color: var(--text-muted); margin-top: 2px;">অধ্যবসায় ও XP রিকোয়ারমেন্ট পূরণ করে যোগ্য স্কোয়াডে যুক্ত হোন।</div>
                             </div>
-                            <span class="activity-time">Admin</span>
+                            <span class="activity-time">Official</span>
                         </div>
-                        <div class="activity-row">
-                            <div>
-                                <div class="activity-desc">🎁 দৈনিক ২০ XP স্ট্রিক বোনাস সক্রিয়</div>
-                                <div style="font-size: 11.5px; color: var(--text-muted); margin-top: 2px;">প্রতিদিন প্রথম লগইনে স্বয়ংক্রিয়ভাবে পয়েন্ট অ্যাকাউন্টে যুক্ত হবে।</div>
-                            </div>
-                            <span class="activity-time">Daily</span>
+                        <div id="publicSquadNotices">
+                            <!-- Live Squad Invite Notices will load here -->
                         </div>
                     </div>
                 </div>
@@ -873,42 +911,74 @@
         </div>
 
         <!-- ==============================================
-             3. SQUAD TAB (Verified & Secured Architecture)
+             3. SQUAD TAB (Meritocratic Tier & Auto-Rank)
         ============================================== -->
         <div id="squadTab" class="tab-content">
             
-            <!-- Current Squad Active Card -->
+            <!-- Current Squad Active Card with Dynamic Glory & Members -->
             <div class="cyber-card">
-                <div class="card-title">🛡️ MY SQUAD STATUS</div>
-                <div id="currentSquadCard" style="background: rgba(5, 11, 20, 0.7); border: 1px solid rgba(0, 240, 255, 0.2); padding: 15px; border-radius: 12px;">
-                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                <div class="card-title">
+                    <span>🛡️ MY SQUAD CORE</span>
+                    <span id="activeSquadTierBadge"></span>
+                </div>
+                
+                <div id="currentSquadCard" style="background: rgba(5, 11, 20, 0.7); border: 1px solid rgba(0, 240, 255, 0.2); padding: 16px; border-radius: 12px;">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 10px;">
                         <div>
-                            <div style="font-size: 18px; font-weight: 900; color: var(--neon-green);" id="activeSquadTitle">No Squad</div>
-                            <div style="font-size: 12px; color: var(--text-muted); margin-top: 3px;" id="activeSquadDesc">আপনি কোনো স্কোয়াডে যুক্ত নেই। নিচে থেকে জয়েন করুন অথবা তৈরি করুন।</div>
+                            <div style="display: flex; align-items: center; gap: 8px;">
+                                <div style="font-size: 19px; font-weight: 900; color: var(--neon-green);" id="activeSquadTitle">No Squad</div>
+                                <span id="myAutoRankBadge"></span>
+                            </div>
+                            <div style="font-size: 12px; color: var(--text-muted); margin-top: 4px;" id="activeSquadDesc">আপনি কোনো স্কোয়াডে যুক্ত নেই। নিচে থেকে শর্তপূরণ করে জয়েন করুন।</div>
+                            <div style="font-size: 11.5px; color: var(--neon-gold); margin-top: 6px;" id="squadGloryStats"></div>
                         </div>
                         <button id="leaveSquadBtn" onclick="leaveCurrentSquad()" style="display: none; background: rgba(255,51,102,0.15); border: 1px solid var(--neon-red); color: var(--neon-red); padding: 6px 14px; border-radius: 8px; cursor: pointer; font-size: 11.5px; font-weight: bold;">Leave</button>
+                    </div>
+                    
+                    <!-- Shareable Squad Code for Inviting friends -->
+                    <div class="invite-box" id="squadInviteBox" style="display: none;">
+                        <div>
+                            <span>Squad Code: <strong style="color: var(--neon-blue);" id="displaySquadCode">SQ-0000</strong></span> | 
+                            <span>PIN: <strong style="color: var(--neon-gold);" id="displaySquadPin">****</strong></span>
+                        </div>
+                        <button onclick="copySquadInvite()" style="background: var(--neon-blue); color: #000; border: none; padding: 4px 8px; border-radius: 4px; font-size: 11px; font-weight: bold; cursor: pointer;">📋 Copy Invite</button>
+                    </div>
+
+                    <!-- Auto-Rank Member Roster (Infinity Support) -->
+                    <div id="squadMembersRoster" style="margin-top: 15px; display: none;">
+                        <div style="font-size: 12px; font-weight: 800; color: var(--neon-blue); margin-bottom: 8px; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 10px;">
+                            👥 SQUAD HIERARCHY & MEMBERS (Auto Assigned)
+                        </div>
+                        <div id="membersHierarchyList" style="display: flex; flex-direction: column; gap: 6px;"></div>
                     </div>
                 </div>
 
                 <!-- Squad Creation and Joining Panel -->
                 <div class="squad-management-grid">
                     
-                    <!-- 1. Join Existing Verified Squad -->
+                    <!-- 1. Join Existing Verified Squad via Code & PIN -->
                     <div class="squad-panel">
-                        <div class="squad-panel-title">🔑 Join Existing Squad</div>
-                        <p style="font-size: 11px; color: var(--text-muted); margin-bottom: 10px;">বিদ্যমান স্কোয়াডের নাম এবং ৪-ডিজিট পিন দিয়ে ভেরিফাই করুন:</p>
+                        <div class="squad-panel-title">🔑 Join Squad (Merit Checked)</div>
+                        <p style="font-size: 11px; color: var(--text-muted); margin-bottom: 10px;">স্কোয়াড কোড ও পিন দিন (আপনার পড়ার সময় ও XP স্বয়ংক্রিয়ভাবে যাচাই করা হবে):</p>
                         
-                        <input type="text" id="joinSquadNameInput" placeholder="সঠিক স্কোয়াড নেম">
+                        <input type="text" id="joinSquadCodeInput" placeholder="Squad Code (e.g. SQ-1234)">
                         <input type="password" id="joinSquadPinInput" placeholder="৪-সংখ্যার সিকিউরিটি পিন" maxlength="4">
-                        <button class="btn-action" style="width: 100%; font-size: 12.5px; padding: 10px;" onclick="joinVerifiedSquad()">VERIFY & JOIN</button>
+                        <button class="btn-action" style="width: 100%; font-size: 12.5px; padding: 10px;" onclick="joinVerifiedSquadByCode()">VERIFY ELIGIBILITY & JOIN</button>
                     </div>
 
-                    <!-- 2. Create Brand New Squad -->
+                    <!-- 2. Create Brand New Squad with Tier -->
                     <div class="squad-panel">
-                        <div class="squad-panel-title">⚡ Create New Squad</div>
-                        <p style="font-size: 11px; color: var(--text-muted); margin-bottom: 10px;">নতুন স্কোয়াড তৈরি করুন এবং বন্ধুদের ইনভাইট করার পিন সেট করুন:</p>
+                        <div class="squad-panel-title">⚡ Create Tier-Based Squad</div>
+                        <p style="font-size: 11px; color: var(--text-muted); margin-bottom: 10px;">টার্গেট পড়ার যোগ্যতা নির্ধারণ করে স্কোয়াড তৈরি করুন:</p>
                         
                         <input type="text" id="createSquadNameInput" placeholder="ইউনিক স্কোয়াড নেম">
+                        
+                        <select id="createSquadTierSelect">
+                            <option value="rookie">🥉 Rookie Squad (কমপক্ষে দৈনিক শর্ত নেই)</option>
+                            <option value="elite">🥈 Elite Squad (দৈনিক ৩+ ঘণ্টা পড়া & ৩০০+ XP)</option>
+                            <option value="limitless">👑 Limitless Domain (দৈনিক ৬+ ঘণ্টা পড়া & ১০০০+ XP)</option>
+                        </select>
+
                         <select id="createSquadSubjectSelect">
                             <option value="Physics Focus">Physics Focus</option>
                             <option value="Chemistry Focus">Chemistry Focus</option>
@@ -917,7 +987,7 @@
                             <option value="All Rounder (HSC)">All Rounder (HSC Science)</option>
                         </select>
                         <input type="password" id="createSquadPinInput" placeholder="সদস্যদের জন্য ৪-সংখ্যার পিন দিন" maxlength="4">
-                        <button class="btn-action" style="width: 100%; font-size: 12.5px; padding: 10px; background: var(--neon-green);" onclick="createNewVerifiedSquad()">CREATE SQUAD</button>
+                        <button class="btn-action" style="width: 100%; font-size: 12.5px; padding: 10px; background: var(--neon-green);" onclick="createNewVerifiedSquad()">GENERATE SQUAD</button>
                     </div>
 
                 </div>
@@ -1047,6 +1117,24 @@
         document.getElementById('navUserName').innerText = "@" + currentUser;
         document.getElementById('profUser').innerText = currentUser;
 
+        // 🟢 Realtime Online/Offline Presence Engine
+        const myStatusRef = db.ref('users/' + currentUser + '/onlineStatus');
+        const connectedRef = db.ref('.info/connected');
+
+        connectedRef.on('value', (snap) => {
+            if (snap.val() === true) {
+                myStatusRef.onDisconnect().set({
+                    isOnline: false,
+                    lastSeen: firebase.database.ServerValue.TIMESTAMP
+                });
+
+                myStatusRef.set({
+                    isOnline: true,
+                    lastSeen: firebase.database.ServerValue.TIMESTAMP
+                });
+            }
+        });
+
         function getTimeGreeting() {
             const hr = new Date().getHours();
             if (hr >= 5 && hr < 12) return "শুভ সকাল";
@@ -1151,21 +1239,30 @@
             const minLeft = Math.max(0, userTargetMins - Math.floor(goalAchievedSec / 60));
             document.getElementById('goalRemainingText').innerText = minLeft > 0 ? `আর ${minLeft} মিনিট পড়লে আজকের লক্ষ্য পূরণ হবে` : "🎉 আজকের লক্ষ্য সম্পূর্ণ হয়েছে!";
 
-            // 🛡️ Squad State Engine
+            // 🛡️ Squad State Engine with Merit Tier Checking
             const userSquad = userData.squad || "None";
             document.getElementById('dashSquadPreview').innerText = userSquad !== "None" ? userSquad : "None";
             
             if (userSquad !== "None") {
                 document.getElementById('dashSquadSub').innerText = "Verified Squad 🛡️";
                 document.getElementById('activeSquadTitle').innerText = userSquad;
-                document.getElementById('activeSquadDesc').innerText = "আপনি এই স্কোয়াডের একজন সক্রিয় সদস্য।";
                 document.getElementById('leaveSquadBtn').style.display = "block";
-                document.getElementById('dashSquadStateText').innerHTML = `আপনি বর্তমানে <strong>${userSquad}</strong> স্কোয়াডের সদস্য!`;
+                document.getElementById('dashSquadStateText').innerHTML = `আপনি বর্তমানে <strong>${userSquad}</strong> স্কোয়াডের গর্বিত সদস্য!`;
+                
+                const squadKey = userData.squadKey;
+                if (squadKey) {
+                    loadSquadLiveDetails(squadKey);
+                }
             } else {
                 document.getElementById('dashSquadSub').innerText = "No Squad";
                 document.getElementById('activeSquadTitle').innerText = "No Squad";
-                document.getElementById('activeSquadDesc').innerText = "আপনি কোনো স্কোয়াডে যুক্ত নেই। নিচে থেকে জয়েন করুন অথবা তৈরি করুন।";
+                document.getElementById('activeSquadDesc').innerText = "আপনি কোনো স্কোয়াডে যুক্ত নেই। নিচে থেকে শর্তপূরণ করে জয়েন করুন।";
                 document.getElementById('leaveSquadBtn').style.display = "none";
+                document.getElementById('squadInviteBox').style.display = "none";
+                document.getElementById('squadMembersRoster').style.display = "none";
+                document.getElementById('activeSquadTierBadge').innerHTML = "";
+                document.getElementById('myAutoRankBadge').innerHTML = "";
+                document.getElementById('squadGloryStats').innerText = "";
                 document.getElementById('dashSquadStateText').innerText = "আপনি এখনো কোনো স্টাডি স্কোয়াডে যুক্ত হননি।";
             }
 
@@ -1202,7 +1299,136 @@
             }
         });
 
-        // Daily Login 20 XP Logic
+        // 🛡️ Load Squad Realtime Hierarchy, Glory & Auto-Rank
+        function loadSquadLiveDetails(squadKey) {
+            db.ref('squads/' + squadKey).on('value', snap => {
+                if (!snap.exists()) return;
+                const sq = snap.val();
+
+                // 1. Tier Badge
+                const tier = sq.tier || 'rookie';
+                let tierHtml = '';
+                if (tier === 'limitless') tierHtml = '<span class="tier-badge tier-limitless">👑 LIMITLESS SQUAD</span>';
+                else if (tier === 'elite') tierHtml = '<span class="tier-badge tier-elite">🥈 ELITE SQUAD</span>';
+                else tierHtml = '<span class="tier-badge tier-rookie">🥉 ROOKIE SQUAD</span>';
+                document.getElementById('activeSquadTierBadge').innerHTML = tierHtml;
+
+                // 2. Invite details
+                document.getElementById('squadInviteBox').style.display = "flex";
+                document.getElementById('displaySquadCode').innerText = sq.code || squadKey.toUpperCase();
+                document.getElementById('displaySquadPin').innerText = sq.pin || "0000";
+
+                // 3. Squad Glory & Dynamic Level Engine
+                const memberUsernames = Object.keys(sq.members || {});
+                document.getElementById('activeSquadDesc').innerText = `Focus: ${sq.subject || 'All Rounder'} | Total Scholars: ${memberUsernames.length} (Infinite Cap)`;
+
+                // Calculate Members XP for Auto-Rank Hierarchy
+                Promise.all(memberUsernames.map(u => db.ref('users/' + u).once('value'))).then(userSnaps => {
+                    let memberList = [];
+                    let totalSquadSec = 0;
+                    let totalSquadXp = 0;
+
+                    userSnaps.forEach(uSnap => {
+                        if (uSnap.exists()) {
+                            const val = uSnap.val();
+                            const uSec = val.totalSeconds || 0;
+                            const uXp = val.xp || 50;
+                            totalSquadSec += uSec;
+                            totalSquadXp += uXp;
+                            memberList.push({
+                                user: uSnap.key,
+                                name: val.name || uSnap.key,
+                                xp: uXp,
+                                totalHours: (uSec / 3600).toFixed(1),
+                                isOnline: val.onlineStatus && val.onlineStatus.isOnline
+                            });
+                        }
+                    });
+
+                    // Sort Members descending by XP (Meritocratic Auto Hierarchy)
+                    memberList.sort((a, b) => b.xp - a.xp);
+
+                    // Squad Glory Level (Every 500 XP is 1 Squad Glory Level)
+                    const squadLvl = Math.floor(totalSquadXp / 500) + 1;
+                    document.getElementById('squadGloryStats').innerHTML = `🔥 <strong>Squad Glory Level: ${squadLvl}</strong> | Total Team XP: ${totalSquadXp} | Team Study: ${(totalSquadSec/3600).toFixed(1)} hrs`;
+
+                    // Render Squad Members Hierarchy List
+                    const rosterBox = document.getElementById('squadMembersRoster');
+                    const listContainer = document.getElementById('membersHierarchyList');
+                    listContainer.innerHTML = "";
+                    rosterBox.style.display = "block";
+
+                    memberList.forEach((m, index) => {
+                        let roleTitle = "Cadet";
+                        let roleClass = "role-cadet";
+
+                        if (index === 0) { roleTitle = "👑 Team Commander"; roleClass = "role-commander"; }
+                        else if (index === 1) { roleTitle = "🎖️ Captain"; roleClass = "role-captain"; }
+                        else if (index === 2) { roleTitle = "⭐ Vice-Captain"; roleClass = "role-vice"; }
+                        else if (index <= 4) { roleTitle = "🛡️ Vanguard"; roleClass = "role-vanguard"; }
+
+                        if (m.user === currentUser) {
+                            document.getElementById('myAutoRankBadge').innerHTML = `<span class="role-badge ${roleClass}">${roleTitle}</span>`;
+                        }
+
+                        const statusDot = m.isOnline ? '<span style="color:var(--neon-green);">🟢</span>' : '<span style="color:var(--text-muted);">⚪</span>';
+                        
+                        const row = document.createElement('div');
+                        row.className = "activity-row";
+                        row.style.padding = "7px 10px";
+                        row.innerHTML = `
+                            <div>
+                                ${statusDot} <strong>@${m.user}</strong> (${m.name}) 
+                                <span class="role-badge ${roleClass}" style="margin-left: 5px;">${roleTitle}</span>
+                                <div style="font-size: 10.5px; color: var(--text-muted); margin-top: 2px;">Study: ${m.totalHours}h | Rank Score: ${m.xp} XP</div>
+                            </div>
+                            <span style="color: var(--neon-gold); font-size: 12px; font-weight: bold;">#${index + 1}</span>
+                        `;
+                        listContainer.appendChild(row);
+                    });
+                });
+            });
+        }
+
+        // 📢 Live Squad Notice Board Loader with Tiers
+        db.ref('squads').limitToLast(6).on('value', (snap) => {
+            const list = document.getElementById('publicSquadNotices');
+            list.innerHTML = "";
+            const data = snap.val();
+            if (!data) return;
+
+            Object.keys(data).reverse().forEach(key => {
+                const sq = data[key];
+                const tier = sq.tier || 'rookie';
+                let tierTag = '<span class="tier-badge tier-rookie">Rookie</span>';
+                if (tier === 'elite') tierTag = '<span class="tier-badge tier-elite">Elite (3h+ Req)</span>';
+                if (tier === 'limitless') tierTag = '<span class="tier-badge tier-limitless">Limitless (6h+ Req)</span>';
+
+                const row = document.createElement('div');
+                row.className = "activity-row";
+                row.style.borderLeftColor = tier === 'limitless' ? 'var(--neon-gold)' : (tier === 'elite' ? 'var(--neon-blue)' : 'var(--text-muted)');
+                row.innerHTML = `
+                    <div>
+                        <div class="activity-desc">🛡️ <strong>${sq.name}</strong> ${tierTag}</div>
+                        <div style="font-size: 11px; color: var(--neon-blue); margin-top: 2px;">
+                            Code: <strong style="color:#fff;">${sq.code || key.toUpperCase()}</strong> | Focus: ${sq.subject}
+                        </div>
+                    </div>
+                    <span class="activity-time" style="color:var(--neon-gold);">PIN: ${sq.pin}</span>
+                `;
+                list.appendChild(row);
+            });
+        });
+
+        function copySquadInvite() {
+            const code = document.getElementById('displaySquadCode').innerText;
+            const pin = document.getElementById('displaySquadPin').innerText;
+            const text = `Join my Squad on Aura Readers!\nSquad: ${userData.squad}\nCode: ${code}\nPIN: ${pin}`;
+            navigator.clipboard.writeText(text).then(() => {
+                openModal("📋", "Copied", "স্কোয়াড ইনভাইট কোড ও পিন কপি করা হয়েছে! বন্ধুদের সাথে শেয়ার করুন।");
+            });
+        }
+
         function checkAndAwardDailyLoginBonus() {
             const todayStr = new Date().toISOString().split('T')[0];
             const lastRewardDate = userData.lastDailyBonusDate;
@@ -1218,7 +1444,6 @@
             }
         }
 
-        // Custom Daily Goal Setter
         function setCustomDailyGoal() {
             const currentGoal = userData.dailyGoalMins ? (userData.dailyGoalMins / 60) : 3;
             const newHrs = prompt("আজকে কত ঘণ্টা পড়ার লক্ষ্য নির্ধারণ করতে চান? (যেমন: 2, 4, 6):", currentGoal);
@@ -1235,12 +1460,13 @@
         }
 
         // 🛡️ ============================================
-        // SECURE SQUAD ENGINE: Create, Join, & Verify
+        // TIER-BASED MERITOCRATIC SQUAD SYSTEM
         // ============================================
 
-        // 1. Create New Verified Squad
+        // 1. Create New Squad with Tier & Requirement
         function createNewVerifiedSquad() {
             const nameInput = document.getElementById('createSquadNameInput').value.trim();
+            const tier = document.getElementById('createSquadTierSelect').value;
             const subject = document.getElementById('createSquadSubjectSelect').value;
             const pin = document.getElementById('createSquadPinInput').value.trim();
 
@@ -1254,38 +1480,50 @@
                 return;
             }
 
-            const squadKey = nameInput.toLowerCase().replace(/[^a-z0-9]/g, "_");
+            // Creator's Merit Verification
+            const userTotalHours = (userData.totalSeconds || 0) / 3600;
+            const userXp = userData.xp || 50;
 
-            db.ref('squads/' + squadKey).once('value').then((snap) => {
-                if (snap.exists()) {
-                    openModal("🚫", "নাম আগে থেকেই আছে", "এই নামে ইতোমধ্যে একটি স্কোয়াড তৈরি করা আছে! অন্য নাম দিন।");
-                } else {
-                    // Create Squad Record
-                    db.ref('squads/' + squadKey).set({
-                        name: nameInput,
-                        subject: subject,
-                        pin: pin,
-                        creator: currentUser,
-                        createdAt: Date.now(),
-                        members: { [currentUser]: true }
-                    }).then(() => {
-                        // Attach to user profile
-                        db.ref('users/' + currentUser).update({ squad: nameInput });
-                        document.getElementById('createSquadNameInput').value = "";
-                        document.getElementById('createSquadPinInput').value = "";
-                        openModal("🎉", "স্কোয়াড তৈরি সফল", `'${nameInput}' স্কোয়াড সফলভাবে তৈরি হয়েছে! পিন: ${pin}`);
-                    });
-                }
+            if (tier === 'limitless' && (userTotalHours < 6 || userXp < 500)) {
+                openModal("🚫", "অযোগ্যতা শনাক্ত", "Limitless Domain স্কোয়াড তৈরি করতে আপনার প্রোফাইলে ন্যূনতম ৬ ঘণ্টা পড়ার রেকর্ড এবং ৫০০+ XP থাকতে হবে!");
+                return;
+            }
+
+            if (tier === 'elite' && (userTotalHours < 2 || userXp < 200)) {
+                openModal("🚫", "অযোগ্যতা শনাক্ত", "Elite Squad তৈরি করতে আপনার প্রোফাইলে ন্যূনতম ২ ঘণ্টা পড়ার রেকর্ড এবং ২০০+ XP থাকতে হবে!");
+                return;
+            }
+
+            const autoCode = "SQ-" + Math.floor(1000 + Math.random() * 9000);
+            const squadKey = autoCode.toLowerCase();
+
+            db.ref('squads/' + squadKey).set({
+                name: nameInput,
+                code: autoCode,
+                tier: tier,
+                subject: subject,
+                pin: pin,
+                creator: currentUser,
+                createdAt: Date.now(),
+                members: { [currentUser]: true }
+            }).then(() => {
+                db.ref('users/' + currentUser).update({ 
+                    squad: nameInput,
+                    squadKey: squadKey 
+                });
+                document.getElementById('createSquadNameInput').value = "";
+                document.getElementById('createSquadPinInput').value = "";
+                openModal("🎉", "স্কোয়াড তৈরি সফল", `অভিনন্দন! স্কোয়াড তৈরি হয়েছে।\nTier: ${tier.toUpperCase()}\nCode: ${autoCode}\nPIN: ${pin}\nসদস্যরা শর্ত পূরণ করলেই যুক্ত হতে পারবে।`);
             });
         }
 
-        // 2. Join Existing Squad with Exact Name & PIN Verification
-        function joinVerifiedSquad() {
-            const nameInput = document.getElementById('joinSquadNameInput').value.trim();
+        // 2. Join Squad with Automatic Merit & Rule Verification
+        function joinVerifiedSquadByCode() {
+            const codeInput = document.getElementById('joinSquadCodeInput').value.trim().toUpperCase();
             const pinInput = document.getElementById('joinSquadPinInput').value.trim();
 
-            if (!nameInput) {
-                openModal("⚠️", "স্কোয়াড নেম দিন", "যে স্কোয়াডে জয়েন করতে চান তার নাম লিখুন!");
+            if (!codeInput) {
+                openModal("⚠️", "Squad Code দিন", "নোটিস বোর্ড বা লিডারের কাছ থেকে পাওয়া Squad Code দিন!");
                 return;
             }
 
@@ -1294,24 +1532,50 @@
                 return;
             }
 
-            const squadKey = nameInput.toLowerCase().replace(/[^a-z0-9]/g, "_");
+            const squadKey = codeInput.toLowerCase();
 
             db.ref('squads/' + squadKey).once('value').then((snap) => {
                 if (!snap.exists()) {
-                    openModal("❌", "স্কোয়াড খুঁজে পাওয়া যায়নি", `'${nameInput}' নামে কোনো স্কোয়াড তৈরি করা হয়নি! নাম চেক করুন অথবা নতুন তৈরি করুন।`);
+                    openModal("❌", "কোড খুঁজে পাওয়া যায়নি", `'${codeInput}' কোডের কোনো স্কোয়াড পাওয়া যায়নি! নোটিস বোর্ড চেক করুন।`);
                 } else {
                     const squadData = snap.val();
                     if (squadData.pin !== pinInput) {
-                        openModal("🔒", "ভুল পিন কোড", "প্রদত্ত পিন কোডটি সঠিক নয়! স্কোয়াড লিডারের কাছ থেকে সঠিক পিন জেনে নিন।");
-                    } else {
-                        // Success: Add user to squad members and update profile
-                        db.ref(`squads/${squadKey}/members/${currentUser}`).set(true);
-                        db.ref('users/' + currentUser).update({ squad: squadData.name }).then(() => {
-                            document.getElementById('joinSquadNameInput').value = "";
-                            document.getElementById('joinSquadPinInput').value = "";
-                            openModal("🛡️", "জয়েন সফল হয়েছে", `অভিনন্দন! আপনি সফলভাবে '${squadData.name}' স্কোয়াডে যুক্ত হয়েছেন!`);
-                        });
+                        openModal("🔒", "ভুল পিন কোড", "প্রদত্ত পিন কোডটি সঠিক নয়! সঠিক পিন প্রদান করুন।");
+                        return;
                     }
+
+                    // 🔍 Automatic Requirement Checker
+                    const userTotalHours = (userData.totalSeconds || 0) / 3600;
+                    const userXp = userData.xp || 50;
+                    const tier = squadData.tier || 'rookie';
+
+                    // Requirement 1: Low quality user trying to join High tier
+                    if (tier === 'limitless' && (userTotalHours < 6 || userXp < 1000)) {
+                        openModal("🛡️", "প্রবেশাধিকার সংরক্ষিত", `এই স্কোয়াডটি 'Limitless Domain' স্তরের! এখানে জয়েন করতে দৈনিক ন্যূনতম ৬ ঘণ্টা পড়ার অভিজ্ঞতা এবং ১০০০+ XP অর্জন করতে হবে। আপনার বর্তমান সময়: ${userTotalHours.toFixed(1)}h ও ${userXp} XP।`);
+                        return;
+                    }
+
+                    if (tier === 'elite' && (userTotalHours < 3 || userXp < 300)) {
+                        openModal("🛡️", "যোগ্যতা অপূর্ণ", `এই 'Elite Squad'-এ যুক্ত হতে ন্যূনতম ৩ ঘণ্টা পড়ার রেকর্ড ও ৩০০+ XP আবশ্যক। আগে স্টাডি ট্র্যাকার ব্যবহার করে পড়া বাড়ান!`);
+                        return;
+                    }
+
+                    // Requirement 2: High quality user trying to join Rookie tier
+                    if (tier === 'rookie' && (userTotalHours >= 15 && userXp >= 2000)) {
+                        const confirmDowngrade = confirm(`আপনি একজন টপ-লেভেল স্কলার (পড়ার সময়: ${userTotalHours.toFixed(1)}h)! এই রুকি স্কোয়াডটি নতুনদের জন্য। আপনি কি সত্যিই এখানে জয়েন করবেন? নাকি Elite/Limitless স্কোয়াডে যাবেন?`);
+                        if (!confirmDowngrade) return;
+                    }
+
+                    // If verified, proceed to join
+                    db.ref(`squads/${squadKey}/members/${currentUser}`).set(true);
+                    db.ref('users/' + currentUser).update({ 
+                        squad: squadData.name,
+                        squadKey: squadKey 
+                    }).then(() => {
+                        document.getElementById('joinSquadCodeInput').value = "";
+                        document.getElementById('joinSquadPinInput').value = "";
+                        openModal("🔥", "MERIT VERIFIED", `অভিনন্দন! আপনি সব শর্ত পূরণ করে '${squadData.name}' স্কোয়াডে যুক্ত হয়েছেন!`);
+                    });
                 }
             });
         }
@@ -1319,12 +1583,17 @@
         // 3. Leave Current Squad
         function leaveCurrentSquad() {
             const currentSquad = userData.squad;
+            const squadKey = userData.squadKey;
             if (!currentSquad || currentSquad === "None") return;
 
-            if (confirm(`আপনি কি সত্যিই '${currentSquad}' স্কোয়াড ত্যাগ করতে চান?`)) {
-                const squadKey = currentSquad.toLowerCase().replace(/[^a-z0-9]/g, "_");
-                db.ref(`squads/${squadKey}/members/${currentUser}`).remove();
-                db.ref('users/' + currentUser).update({ squad: "None" }).then(() => {
+            if (confirm(`আপনি কি সত্যিই '${currentSquad}' স্কোয়াড ত্যাগ করতে চান? এতে স্কোয়াডের আপনার অর্জিত গ্লোরি ও পদ স্থগিত হবে।`)) {
+                if (squadKey) {
+                    db.ref(`squads/${squadKey}/members/${currentUser}`).remove();
+                }
+                db.ref('users/' + currentUser).update({ 
+                    squad: "None",
+                    squadKey: null 
+                }).then(() => {
                     openModal("🚪", "স্কোয়াড ত্যাগ", "আপনি সফলভাবে স্কোয়াড থেকে বের হয়ে এসেছেন।");
                 });
             }
@@ -1351,7 +1620,6 @@
                     .then(data => {
                         box.innerHTML = '';
 
-                        // Always provide typed custom option at the top
                         const customOption = document.createElement('div');
                         customOption.className = 'map-suggest-item';
                         customOption.style.background = 'rgba(0, 240, 255, 0.08)';
@@ -1362,7 +1630,6 @@
                         };
                         box.appendChild(customOption);
 
-                        // If Map API returns matches
                         if (data && data.length > 0) {
                             data.forEach(item => {
                                 const div = document.createElement('div');
@@ -1387,7 +1654,6 @@
             }, 250);
         }
 
-        // Close map suggestion on outside click
         document.addEventListener('click', function(e) {
             const box = document.getElementById('mapSuggestions');
             const input = document.getElementById('mapSearchInstInput');
@@ -1642,7 +1908,7 @@
             });
         }
 
-        // Leaderboard Realtime Loader
+        // Leaderboard Realtime Loader with Live Online/Offline Dot
         db.ref('users').orderByChild('xp').limitToLast(10).on('value', (snap) => {
             const board = document.getElementById('leaderboardList');
             board.innerHTML = "";
@@ -1652,10 +1918,18 @@
             });
             arr.reverse();
             arr.forEach((item, index) => {
+                const isOnline = item.onlineStatus && item.onlineStatus.isOnline;
+                const statusBadge = isOnline 
+                    ? '<span style="color: var(--neon-green); font-size: 11px; font-weight: bold;">🟢 Online</span>' 
+                    : '<span style="color: var(--text-muted); font-size: 11px;">⚪ Offline</span>';
+
                 const row = document.createElement('div');
-                row.style.cssText = "display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.05);";
+                row.style.cssText = "display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.05);";
                 row.innerHTML = `
-                    <span><strong>#${index + 1}</strong> @${item.user} (${item.squad || 'No Squad'})</span>
+                    <div>
+                        <span><strong>#${index + 1}</strong> @${item.user} (${item.squad || 'No Squad'})</span>
+                        <div style="margin-top: 3px;">${statusBadge}</div>
+                    </div>
                     <span style="color: var(--neon-gold); font-weight: bold;">${item.xp || 50} XP</span>
                 `;
                 board.appendChild(row);
@@ -1673,11 +1947,16 @@
             document.getElementById('sysModal').style.display = "none";
         }
 
-        // Cyber Door Exit Logout Sequence
+        // Cyber Door Exit Logout Sequence with Instant Server Offline Trigger
         function startDoorLogout() {
             const overlay = document.getElementById('logoutOverlay');
             const doorStage = document.getElementById('doorStage');
             
+            db.ref('users/' + currentUser + '/onlineStatus').set({
+                isOnline: false,
+                lastSeen: Date.now()
+            });
+
             overlay.style.display = 'flex';
             
             setTimeout(() => {
