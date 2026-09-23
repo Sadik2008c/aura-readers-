@@ -19,7 +19,6 @@
             --neon-gold: #ffcc00;
             --neon-green: #00ff88;
             --text-muted: #8892b0;
-            --infinite-void: #7928ca;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -34,79 +33,57 @@
             min-height: 100vh;
             padding: 25px 15px;
             background-image: 
-                radial-gradient(circle at 50% 15%, rgba(0, 240, 255, 0.12) 0%, transparent 50%),
-                radial-gradient(circle at 80% 85%, rgba(121, 40, 202, 0.1) 0%, transparent 45%);
+                radial-gradient(circle at 50% 12%, rgba(0, 240, 255, 0.15) 0%, transparent 55%),
+                radial-gradient(circle at 80% 85%, rgba(121, 40, 202, 0.12) 0%, transparent 50%);
         }
 
         .auth-card {
             background: linear-gradient(150deg, var(--bg-card), #060e1d);
             border: 1px solid rgba(0, 240, 255, 0.35);
-            border-radius: 20px;
+            border-radius: 22px;
             padding: 24px 22px;
             width: 100%;
-            max-width: 390px;
-            box-shadow: 0 0 35px rgba(0, 240, 255, 0.15), 0 0 50px rgba(121, 40, 202, 0.1);
+            max-width: 395px;
+            box-shadow: 0 0 35px rgba(0, 240, 255, 0.18);
             text-align: center;
             position: relative;
         }
 
-        /* Gojo Satoru Interactive Avatar Header */
-        .gojo-stage {
-            width: 105px;
-            height: 105px;
+        /* Real Gojo Frame */
+        .gojo-avatar-frame {
+            width: 110px;
+            height: 110px;
             margin: 0 auto 12px auto;
             position: relative;
+            border-radius: 50%;
+            padding: 4px;
+            background: linear-gradient(45deg, var(--neon-blue), #7928ca);
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.4);
             display: flex;
             justify-content: center;
             align-items: center;
-        }
-
-        .gojo-glow-ring {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            border: 2px dashed var(--neon-blue);
-            box-shadow: 0 0 20px rgba(0, 240, 255, 0.4), inset 0 0 15px rgba(121, 40, 202, 0.3);
-            animation: rotateAura 12s linear infinite;
-        }
-
-        @keyframes rotateAura {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        .gojo-svg {
-            width: 88px;
-            height: 88px;
-            z-index: 2;
-            transition: transform 0.3s ease;
-        }
-
-        /* Eyes & Blindfold Animation States */
-        .six-eyes {
-            fill: #00f0ff;
-            filter: drop-shadow(0 0 5px #00f0ff);
             transition: all 0.3s ease;
         }
 
-        .blindfold {
-            fill: #090e18;
-            stroke: #00f0ff;
-            stroke-width: 1.5;
-            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-            transform-origin: center;
+        .gojo-img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #050b14;
+            transition: transform 0.3s ease;
         }
 
-        /* State Classes */
-        .gojo-stage.eyes-covered .blindfold {
-            transform: translateY(0px) scaleY(1);
-            opacity: 1;
+        /* Subtle Floating Animation on Typing */
+        .gojo-typing {
+            animation: gojoFloat 1.8s ease-in-out infinite alternate;
+            box-shadow: 0 0 30px rgba(0, 240, 255, 0.7);
         }
 
-        .gojo-stage.eyes-peek .blindfold {
-            transform: translateY(-8px) scaleY(0.5);
-            opacity: 0.85;
+        @keyframes gojoFloat {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-4px) rotate(1.5deg); }
+            100% { transform: translateY(0px) rotate(-1.5deg); }
         }
 
         .brand-logo {
@@ -312,20 +289,20 @@
         .modal-overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.85);
+            background: rgba(0, 0, 0, 0.88);
             display: none;
             justify-content: center;
             align-items: center;
             z-index: 9999;
-            backdrop-filter: blur(5px);
+            backdrop-filter: blur(6px);
         }
 
         .popup-card {
             background: #0a1325;
             border: 2px solid var(--neon-blue);
-            border-radius: 16px;
-            padding: 24px;
-            max-width: 330px;
+            border-radius: 18px;
+            padding: 22px;
+            max-width: 340px;
             width: 90%;
             text-align: center;
             animation: popIn 0.3s ease;
@@ -334,6 +311,23 @@
         @keyframes popIn {
             from { transform: scale(0.85); opacity: 0; }
             to { transform: scale(1); opacity: 1; }
+        }
+
+        .popup-img-container {
+            width: 130px;
+            height: 130px;
+            margin: 0 auto 12px auto;
+            border-radius: 50%;
+            border: 3px solid var(--neon-green);
+            box-shadow: 0 0 25px rgba(0, 255, 136, 0.5);
+            overflow: hidden;
+            display: none;
+        }
+
+        .popup-img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         .popup-emoji { font-size: 42px; margin-bottom: 8px; }
@@ -350,7 +344,7 @@
             width: 100%;
         }
 
-        /* Official User Agreement Protocol Modal */
+        /* Policy Modal */
         .policy-card {
             background: linear-gradient(165deg, #0b1528, #050b16);
             border: 2px solid var(--neon-blue);
@@ -403,11 +397,6 @@
             background: rgba(255, 204, 0, 0.05);
         }
 
-        .policy-rule-box.warning-highlight {
-            border-left-color: var(--neon-red);
-            background: rgba(255, 51, 102, 0.05);
-        }
-
         .policy-rule-box strong {
             color: #fff;
             display: block;
@@ -438,8 +427,6 @@
             box-shadow: 0 0 15px rgba(0, 255, 136, 0.3);
         }
 
-        .policy-agree-btn:hover { opacity: 0.92; transform: translateY(-1px); }
-
         .policy-decline-btn {
             background: rgba(255, 51, 102, 0.1);
             border: 1px solid var(--neon-red);
@@ -457,32 +444,9 @@
 
     <div class="auth-card">
         
-        <!-- Gojo Satoru Character Element -->
-        <div class="gojo-stage eyes-peek" id="gojoStage">
-            <div class="gojo-glow-ring"></div>
-            
-            <svg class="gojo-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <!-- Spiky Snow White Hair -->
-                <path d="M50 12 L44 26 L36 16 L35 30 L25 22 L28 38 L18 34 L25 48 L15 50 L26 62 L22 75 L35 70 L38 85 L50 82 L62 85 L65 70 L78 75 L74 62 L85 50 L75 48 L82 34 L72 38 L75 22 L65 30 L64 16 L56 26 Z" fill="#E2E8F0" filter="drop-shadow(0 0 4px rgba(255,255,255,0.7))"/>
-                
-                <!-- Face -->
-                <path d="M30 46 C30 68 38 78 50 78 C62 78 70 68 70 46 Z" fill="#FFE5D9"/>
-                
-                <!-- Six Eyes Glow -->
-                <circle cx="42" cy="54" r="3.5" class="six-eyes"/>
-                <circle cx="42" cy="54" r="1.5" fill="#fff"/>
-                <circle cx="58" cy="54" r="3.5" class="six-eyes"/>
-                <circle cx="58" cy="54" r="1.5" fill="#fff"/>
-                
-                <!-- Confident Smirk -->
-                <path d="M46 68 Q50 71 55 67" stroke="#1E293B" stroke-width="1.6" stroke-linecap="round"/>
-                
-                <!-- High Collar Dark Coat -->
-                <path d="M26 80 L36 74 L50 78 L64 74 L74 80 L78 100 L22 100 Z" fill="#0B132B"/>
-                
-                <!-- Interactive Blindfold -->
-                <rect x="28" y="47" width="44" height="15" rx="3" class="blindfold" id="gojoBlindfold"/>
-            </svg>
+        <!-- Gojo Satoru Interactive Picture -->
+        <div class="gojo-avatar-frame" id="gojoFrame">
+            <img src="gojo-vibe.jpg" class="gojo-img" id="gojoDisplayImg" alt="Gojo Satoru" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=gojo'">
         </div>
 
         <div class="brand-logo">AURA READERS</div>
@@ -493,29 +457,29 @@
             <div id="signUpFields" style="display: none;">
                 <div class="input-group">
                     <label>নাম (Display Name)</label>
-                    <input type="text" id="fullName" placeholder="e.g. Sadik">
+                    <input type="text" id="fullName" placeholder="e.g. Sadik" onfocus="triggerGojoMotion(true)" onblur="triggerGojoMotion(false)">
                 </div>
 
                 <div class="input-group">
                     <label>ভেরিফাইড ইমেইল (Valid Email)</label>
-                    <input type="email" id="userEmail" placeholder="yourname@gmail.com">
+                    <input type="email" id="userEmail" placeholder="yourname@gmail.com" onfocus="triggerGojoMotion(true)" onblur="triggerGojoMotion(false)">
                 </div>
 
                 <div class="input-group">
                     <label>টার্গেট ড্রিম (Target Goal)</label>
-                    <input type="text" id="targetGoal" placeholder="e.g. BUET / Medical / DU Science">
+                    <input type="text" id="targetGoal" placeholder="e.g. BUET / Medical / DU Science" onfocus="triggerGojoMotion(true)" onblur="triggerGojoMotion(false)">
                 </div>
             </div>
 
             <div class="input-group">
                 <label>ইউজারনেম (Username)</label>
-                <input type="text" id="userName" placeholder="ইউজারনেম (স্পেস ছাড়া)" required onfocus="setGojoState('peek')" onblur="setGojoState('peek')">
+                <input type="text" id="userName" placeholder="ইউজারনেম (স্পেস ছাড়া)" required onfocus="triggerGojoMotion(true)" onblur="triggerGojoMotion(false)">
             </div>
 
             <div class="input-group">
                 <label>পাসওয়ার্ড (Password)</label>
                 <div class="password-wrapper">
-                    <input type="password" id="userPass" placeholder="পাসওয়ার্ড লিখুন" required onfocus="setGojoState('covered')" onblur="setGojoState('peek')">
+                    <input type="password" id="userPass" placeholder="পাসওয়ার্ড লিখুন" required onfocus="triggerGojoMotion(true)" onblur="triggerGojoMotion(false)">
                     <button type="button" class="monkey-btn" id="monkeyIcon" onclick="togglePasswordVisibility()">🙈</button>
                 </div>
             </div>
@@ -563,9 +527,14 @@
         </div>
     </div>
 
-    <!-- Notification Modal -->
+    <!-- Notification Modal With Six Pack Victory Picture Feature -->
     <div class="modal-overlay" id="customModal">
         <div class="popup-card" id="popupCard">
+            <!-- Gojo Victory Picture Container -->
+            <div class="popup-img-container" id="popupVictoryContainer">
+                <img src="gojo-victory.jpg" alt="Gojo Six Pack Victory" onerror="this.src='gojo-vibe.jpg'">
+            </div>
+            
             <div class="popup-emoji" id="popupEmoji">⚡</div>
             <div class="popup-title" id="popupTitle">Alert</div>
             <div class="popup-msg" id="popupMsg">Message here</div>
@@ -573,7 +542,7 @@
         </div>
     </div>
 
-    <!-- Official User Agreement & Privacy Policy Protocol Modal -->
+    <!-- User Agreement Protocol Modal -->
     <div class="modal-overlay" id="termsModal">
         <div class="policy-card">
             <div class="policy-header">
@@ -596,27 +565,22 @@
 
                 <div class="policy-rule-box">
                     <strong>🛡️ ২. সততা ও স্টাডি ট্র্যাকিং নীতিমালা:</strong>
-                    <p>প্ল্যাটফর্মের মূল উদ্দেশ্য এইচএসসি প্রস্তুতিকে সুদৃঢ় করা। টাইমার অন রেখে পড়াশোনা না করা, ব্যাকগ্রাউন্ডে ভুয়া সময় বাড়ানো বা অনৈতিক উপায়ে XP বৃদ্ধি করা সম্পূর্ণ নিষিদ্ধ। সিস্টেম অসঙ্গতি শনাক্ত করলে স্বয়ংক্রিয়ভাবে পয়েন্ট কাটা হতে পারে।</p>
+                    <p>প্ল্যাটফর্মের মূল উদ্দেশ্য এইচএসসি প্রস্তুতিকে সুদৃঢ় করা। টাইমার অন রেখে পড়াশোনা না করা, ব্যাকগ্রাউন্ডে ভুয়া সময় বাড়ানো বা অনৈতিক উপায়ে XP বৃদ্ধি করা সম্পূর্ণ নিষিদ্ধ।</p>
                 </div>
 
-                <div class="policy-rule-box warning-highlight">
-                    <strong style="color: #ff99aa;">⏰ ৩. ১৫ ঘণ্টা ইনঅ্যাক্টিভ ও স্ট্রিক রুল:</strong>
-                    <p>প্রতিদিনের পড়াশোনার ধারাবাহিকতা বজায় রাখতে ১৫ ঘণ্টার বেশি সময় স্টাডি সেশনের বাইরে থাকলে দৈনিক স্ট্রিক বোনাস সাময়িক লক হয়ে যাবে। পুনরায় একটি সেশন শেষ করে তা সচল করতে হবে।</p>
+                <div class="policy-rule-box">
+                    <strong>⏰ ৩. ১৫ ঘণ্টা ইনঅ্যাক্টিভ ও স্ট্রিক রুল:</strong>
+                    <p>প্রতিদিনের পড়াশোনার ধারাবাহিকতা বজায় রাখতে ১৫ ঘণ্টার বেশি সময় স্টাডি সেশনের বাইরে থাকলে দৈনিক স্ট্রিক বোনাস সাময়িক লক হয়ে যাবে।</p>
                 </div>
 
                 <div class="policy-rule-box">
                     <strong>🔒 ৪. ডাটা নিরাপত্তা ও গোপনীয়তা সংরক্ষণ:</strong>
-                    <p>আপনার সংরক্ষিত স্টাডি নোটস, টার্গেট গোল, ডিসপ্লে নাম এবং ইমেইল আমাদের ডাটাবেসে সুরক্ষিত থাকে। কোনো বাণিজ্যিক বিজ্ঞাপন সংস্থা বা তৃতীয় পক্ষের কাছে ব্যক্তিগত তথ্য হস্তান্তর করা হয় না।</p>
+                    <p>আপনার সংরক্ষিত স্টাডি নোটস, টার্গেট গোল, ডিসপ্লে নাম এবং ইমেইল আমাদের ডাটাবেসে সুরক্ষিত থাকে। কোনো তৃতীয় পক্ষের কাছে তথ্য শেয়ার করা হয় না।</p>
                 </div>
 
                 <div class="policy-rule-box">
-                    <strong>📚 ৫. নোটস ও রিসোর্স ব্যবস্থাপনা:</strong>
-                    <p>নোটস ভল্টে সংরক্ষিত প্রতিটি CQ, MCQ কিংবা শর্ট শিটের স্বত্বাধিকার আপনার নিজের। যেকোনো সময় আপনি তা দেখতে ও প্রয়োজন অনুযায়ী সম্পাদনা করতে পারবেন।</p>
-                </div>
-
-                <div class="policy-rule-box">
-                    <strong>🤝 ৬. স্কোয়াড ও পারস্পরিক সম্মানবোধ:</strong>
-                    <p>স্কোয়াড ও গ্লোবাল লিডারবোর্ডে সহপাঠী শিক্ষার্থীদের প্রতি শ্রদ্ধাশীল ও ইতিবাচক প্রতিযোগিতামূলক মনোভাব বজায় রাখতে হবে। প্ল্যাটফর্মে কোনো আপত্তিকর নাম বা আচরণ গ্রহণযোগ্য নয়।</p>
+                    <strong>🤝 ৫. স্কোয়াড ও পারস্পরিক সম্মানবোধ:</strong>
+                    <p>স্কোয়াড ও গ্লোবাল লিডারবোর্ডে সহপাঠী শিক্ষার্থীদের প্রতি শ্রদ্ধাশীল ও ইতিবাচক প্রতিযোগিতামূলক মনোভাব বজায় রাখতে হবে।</p>
                 </div>
             </div>
 
@@ -647,20 +611,30 @@
         let popupCallback = null;
         let pendingUserPayload = null;
 
-        // Gojo Interactive State Changer
-        function setGojoState(state) {
-            const stage = document.getElementById('gojoStage');
-            if (state === 'covered') {
-                stage.classList.remove('eyes-peek');
-                stage.classList.add('eyes-covered');
+        // Gojo Typing Motion Animation Trigger
+        function triggerGojoMotion(isActive) {
+            const frame = document.getElementById('gojoFrame');
+            if (isActive) {
+                frame.classList.add('gojo-typing');
             } else {
-                stage.classList.remove('eyes-covered');
-                stage.classList.add('eyes-peek');
+                frame.classList.remove('gojo-typing');
             }
         }
 
-        function showPopup(emoji, title, msg, themeColor = "#00f0ff", callback = null) {
-            document.getElementById('popupEmoji').innerText = emoji;
+        // Popup with optional Six-Pack Victory Pic
+        function showPopup(emoji, title, msg, themeColor = "#00f0ff", callback = null, isVictory = false) {
+            const victoryBox = document.getElementById('popupVictoryContainer');
+            const emojiEl = document.getElementById('popupEmoji');
+            
+            if (isVictory) {
+                victoryBox.style.display = "block";
+                emojiEl.style.display = "none";
+            } else {
+                victoryBox.style.display = "none";
+                emojiEl.style.display = "block";
+                emojiEl.innerText = emoji;
+            }
+
             document.getElementById('popupTitle').innerText = title;
             document.getElementById('popupTitle').style.color = themeColor;
             document.getElementById('popupCard').style.borderColor = themeColor;
@@ -694,11 +668,9 @@
             if (passInput.type === "password") {
                 passInput.type = "text";
                 monkey.innerText = "🐵";
-                setGojoState('peek');
             } else {
                 passInput.type = "password";
                 monkey.innerText = "🙈";
-                setGojoState('covered');
             }
         }
 
@@ -716,7 +688,6 @@
 
             passInput.type = "password";
             document.getElementById('monkeyIcon').innerText = "🙈";
-            setGojoState('peek');
             evaluatePasswordStrength();
         }
 
@@ -831,17 +802,12 @@
                         localStorage.setItem('auraCurrentUser', user);
 
                         const isBoss = (user === "sadik1" || snapshot.val().role === "admin");
-                        if (isBoss) {
-                            localStorage.setItem('auraIsAdmin', 'true');
-                            showPopup("👑", "ACCESS GRANTED BOSS", "কন্ট্রোল টার্মিনালে স্বাগতম অ্যাডমিন!", "#00f0ff", () => {
-                                window.location.href = "admin.html";
-                            });
-                        } else {
-                            localStorage.setItem('auraIsAdmin', 'false');
-                            showPopup("🔥", "WELCOME SCHOLAR", `লগইন সফল হয়েছে! শুভকামনা, @${user}।`, "#00ff88", () => {
-                                window.location.href = "app.html";
-                            });
-                        }
+                        
+                        // 🔥 Six Pack Gojo Victory Popup on Success!
+                        showPopup("", "LIMITLESS DOMAIN UNLOCKED", `লগইন সফল হয়েছে! শুভকামনা, @${user}।`, "#00ff88", () => {
+                            window.location.href = isBoss ? "admin.html" : "app.html";
+                        }, true);
+
                     } else {
                         showPopup("❌", "লগইন ব্যর্থ", "ভুল ইউজারনেম অথবা পাসওয়ার্ড দেওয়া হয়েছে!", "#ff3366");
                     }
@@ -911,7 +877,7 @@
                 email: p.email || "",
                 target: p.target || "HSC Science",
                 avatar: p.avatar,
-                xp: 50, // ৫০ XP বোনাস
+                xp: 50,
                 level: 1,
                 totalSeconds: 0,
                 squad: "None",
@@ -942,15 +908,17 @@
                     localStorage.setItem('aura_saved_user', p.user);
                     localStorage.setItem('aura_saved_pass', p.pass);
                 }
-                showPopup("🎉", "AURA CORE UNLOCKED", "প্রটোকল সফলভাবে গৃহীত হয়েছে এবং ৫০ XP ওয়েলকাম বোনাস যুক্ত হয়েছে!", "#00ff88", () => {
+                
+                // 🔥 Six Pack Gojo Victory Popup on Register!
+                showPopup("", "AURA CORE UNLOCKED (+50 XP)", "প্রটোকল সফলভাবে গৃহীত হয়েছে এবং ৫০ XP বোনাস যোগ হয়েছে!", "#00ff88", () => {
                     window.location.href = "app.html";
-                });
+                }, true);
             }).catch(err => {
                 showPopup("❌", "ত্রুটি", err.message, "#ff3366");
             });
         }
 
-        // Google Popup Login with Terms Checking
+        // Google Popup Login with Terms Checking & Victory State
         function loginWithGoogle() {
             const provider = new firebase.auth.GoogleAuthProvider();
             auth.signInWithPopup(provider).then((result) => {
@@ -960,9 +928,9 @@
                 db.ref('users/' + u).once('value').then((snap) => {
                     if (snap.exists()) {
                         localStorage.setItem('auraCurrentUser', u);
-                        showPopup("🌐", "Google Connected", `স্বাগতম ${result.user.displayName}!`, "#00ff88", () => {
+                        showPopup("", "Google Connected", `স্বাগতম ${result.user.displayName}!`, "#00ff88", () => {
                             window.location.href = "app.html";
-                        });
+                        }, true);
                     } else {
                         pendingUserPayload = {
                             authType: 'social',
@@ -982,7 +950,7 @@
             });
         }
 
-        // Facebook Popup Login with Terms Checking
+        // Facebook Popup Login with Terms Checking & Victory State
         function loginWithFacebook() {
             const provider = new firebase.auth.FacebookAuthProvider();
             provider.addScope('email');
@@ -994,9 +962,9 @@
                 db.ref('users/' + u).once('value').then((snap) => {
                     if (snap.exists()) {
                         localStorage.setItem('auraCurrentUser', u);
-                        showPopup("📘", "Facebook Connected", `স্বাগতম ${result.user.displayName}!`, "#00ff88", () => {
+                        showPopup("", "Facebook Connected", `স্বাগতম ${result.user.displayName}!`, "#00ff88", () => {
                             window.location.href = "app.html";
-                        });
+                        }, true);
                     } else {
                         pendingUserPayload = {
                             authType: 'social',
