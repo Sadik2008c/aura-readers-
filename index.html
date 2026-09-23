@@ -289,7 +289,6 @@
 
         .switch-mode-text span { color: var(--neon-blue); font-weight: 700; }
 
-        /* Notification Modal */
         .modal-overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -348,7 +347,6 @@
             width: 100%;
         }
 
-        /* Policy Modal */
         .policy-card {
             background: linear-gradient(165deg, #0b1528, #050b16);
             border: 2px solid var(--neon-blue);
@@ -455,9 +453,8 @@
 
     <div class="auth-card">
         
-        <!-- Gojo Satoru Interactive Picture -->
         <div class="gojo-avatar-frame" id="gojoFrame">
-            <img src="gojo-vibe.jpg" class="gojo-img" id="gojoDisplayImg" alt="Gojo Satoru" onerror="this.src='gojo-vibe.jpg'">
+            <img src="gojo-vibe.jpg" class="gojo-img" id="gojoDisplayImg" alt="Gojo Satoru" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=gojo'">
         </div>
 
         <div class="brand-logo">AURA READERS</div>
@@ -595,23 +592,23 @@
                 </div>
 
                 <div class="policy-rule-box">
-                    <strong>🛡️ ২. সততা ও স্টাডি ট্র্যাকিং নীতিমালা:</strong>
-                    <p>প্ল্যাটফর্মের মূল উদ্দেশ্য এইচএসসি প্রস্তুতিকে সুদৃঢ় করা। টাইমার অন রেখে পড়াশোনা না করা, ব্যাকগ্রাউন্ডে ভুয়া সময় বাড়ানো বা অনৈতিক উপায়ে XP বৃদ্ধি করা সম্পূর্ণ নিষিদ্ধ।</p>
+                    <strong>📧 ২. জিমেইল ভেরিফিকেশন নীতিমালা:</strong>
+                    <p>অ্যাকাউন্ট খোলার পর আপনার জিমেইলে অফিশিয়াল ভেরিফিকেশন লিঙ্ক যাবে। ভেরিফাইড হলে আপনার প্রোফাইল গ্রিন ব্যাজ পাবে।</p>
+                </div>
+
+                <div class="policy-rule-box">
+                    <strong>🛡️ ৩. সততা ও স্টাডি ট্র্যাকিং নীতিমালা:</strong>
+                    <p>প্ল্যাটফর্মের মূল উদ্দেশ্য এইচএসসি প্রস্তুতিকে সুদৃঢ় করা। টাইমার অন রেখে পড়াশোনা না করা বা অনৈতিক উপায়ে XP বৃদ্ধি করা সম্পূর্ণ নিষিদ্ধ।</p>
                 </div>
 
                 <div class="policy-rule-box warning-highlight">
-                    <strong style="color: #ff99aa;">⏰ ৩. ১৫ ঘণ্টা ইনঅ্যাক্টিভ ও স্ট্রিক রুল:</strong>
+                    <strong style="color: #ff99aa;">⏰ ৪. ১৫ ঘণ্টা ইনঅ্যাক্টিভ ও স্ট্রিক রুল:</strong>
                     <p>প্রতিদিনের পড়াশোনার ধারাবাহিকতা বজায় রাখতে ১৫ ঘণ্টার বেশি সময় স্টাডি সেশনের বাইরে থাকলে দৈনিক স্ট্রিক বোনাস সাময়িক লক হয়ে যাবে।</p>
                 </div>
 
                 <div class="policy-rule-box">
-                    <strong>🔒 ৪. ডাটা নিরাপত্তা ও গোপনীয়তা সংরক্ষণ:</strong>
+                    <strong>🔒 ৫. ডাটা নিরাপত্তা ও গোপনীয়তা সংরক্ষণ:</strong>
                     <p>আপনার সংরক্ষিত স্টাডি নোটস, প্রতিষ্ঠান, বয়স, টার্গেট গোল এবং ইমেইল আমাদের ডাটাবেসে সুরক্ষিত থাকে। কোনো তৃতীয় পক্ষের কাছে তথ্য শেয়ার করা হয় না।</p>
-                </div>
-
-                <div class="policy-rule-box">
-                    <strong>🤝 ৫. স্কোয়াড ও পারস্পরিক সম্মানবোধ:</strong>
-                    <p>স্কোয়াড ও গ্লোবাল লিডারবোর্ডে সহপাঠী শিক্ষার্থীদের প্রতি শ্রদ্ধাশীল ও ইতিবাচক প্রতিযোগিতামূলক মনোভাব বজায় রাখতে হবে।</p>
                 </div>
             </div>
 
@@ -854,7 +851,7 @@
 
                 if (!name) {
                     submitBtn.innerText = "অ্যাকাউন্ট তৈরি করুন";
-                    showPopup("⚠️", "নাম প্রয়োজন", "আপনার ডিসপ্লে নাম প্রদান করুন।", "#ffcc00");
+                    showPopup("⚠️", "নাম প্রয়োজন", "আপনার একটি ডিসপ্লে নাম প্রদান করুন।", "#ffcc00");
                     return;
                 }
 
@@ -924,6 +921,7 @@
                 institutionType: p.institutionType || "College",
                 institutionName: p.institutionName || "N/A",
                 email: p.email || "",
+                emailVerified: (p.authType === 'social'), // Google is auto-verified
                 target: p.target || "HSC Science",
                 avatar: p.avatar || 'gojo-vibe.jpg',
                 xp: 50,
@@ -951,6 +949,29 @@
                 }
             }
 
+            // Create Firebase Auth User and Send Email Verification for Normal Registration
+            if (p.authType === 'normal') {
+                auth.createUserWithEmailAndPassword(p.email, p.pass).then((userCred) => {
+                    if (userCred.user) {
+                        userCred.user.sendEmailVerification();
+                        dataRecord.authUid = userCred.user.uid;
+                    }
+                    saveUserDataAndProceed(p, dataRecord, true);
+                }).catch((authErr) => {
+                    if (authErr.code === 'auth/email-already-in-use') {
+                        saveUserDataAndProceed(p, dataRecord, false);
+                    } else {
+                        showPopup("⚠️", "Auth Registration Note", authErr.message, "#ffcc00", () => {
+                            saveUserDataAndProceed(p, dataRecord, false);
+                        });
+                    }
+                });
+            } else {
+                saveUserDataAndProceed(p, dataRecord, false);
+            }
+        }
+
+        function saveUserDataAndProceed(p, dataRecord, verificationSent) {
             db.ref('users/' + p.user).set(dataRecord).then(() => {
                 localStorage.setItem('auraCurrentUser', p.user);
                 if (p.savePass) {
@@ -958,7 +979,11 @@
                     localStorage.setItem('aura_saved_pass', p.pass);
                 }
                 
-                showPopup("", "AURA CORE UNLOCKED (+50 XP)", "প্রটোকল সফলভাবে গৃহীত হয়েছে এবং ৫০ XP বোনাস যোগ হয়েছে!", "#00ff88", () => {
+                const noticeMsg = verificationSent 
+                    ? "৫০ XP বোনাস সহ অ্যাকাউন্ট তৈরি হয়েছে! আপনার জিমেইলে অফিশিয়াল ভেরিফিকেশন লিঙ্ক পাঠানো হয়েছে।"
+                    : "প্রটোকল সফলভাবে গৃহীত হয়েছে এবং ৫০ XP বোনাস যোগ হয়েছে!";
+
+                showPopup("", "AURA CORE UNLOCKED (+50 XP)", noticeMsg, "#00ff88", () => {
                     window.location.href = "app.html";
                 }, true);
             }).catch(err => {
@@ -974,8 +999,10 @@
 
                 db.ref('users/' + u).once('value').then((snap) => {
                     if (snap.exists()) {
+                        // Ensure Google users are marked verified
+                        db.ref('users/' + u).update({ emailVerified: true, googleConnected: true });
                         localStorage.setItem('auraCurrentUser', u);
-                        showPopup("", "Google Connected", `স্বাগতম ${result.user.displayName}!`, "#00ff88", () => {
+                        showPopup("", "Google Connected", `স্বাগতম ${result.user.displayName}! (Verified Scholar)`, "#00ff88", () => {
                             window.location.href = "app.html";
                         }, true);
                     } else {
