@@ -385,6 +385,25 @@
             color: #050b14;
         }
 
+        /* Battle Room Challenge Card */
+        .battle-room-card {
+            background: rgba(10, 19, 37, 0.85);
+            border: 1px solid rgba(255, 51, 102, 0.35);
+            border-left: 4px solid var(--neon-red);
+            border-radius: 10px;
+            padding: 12px 14px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            animation: fadeIn 0.3s ease;
+        }
+        .battle-room-card:hover {
+            box-shadow: 0 0 15px rgba(255, 51, 102, 0.25);
+            border-color: var(--neon-red);
+        }
+
         /* Squad Tier Badges */
         .tier-badge {
             font-size: 11px;
@@ -564,6 +583,7 @@
             transition: 0.2s;
         }
         .btn-action.stop { background: var(--neon-red); color: #fff; }
+        .btn-action.gold { background: var(--neon-gold); color: #000; }
         .btn-action:hover { opacity: 0.9; transform: scale(1.02); }
 
         select, input[type="text"], input[type="number"], input[type="password"], textarea {
@@ -797,13 +817,13 @@
                 <div class="cyber-card" style="margin-bottom: 0;">
                     <div class="card-title">
                         <span>📢 NOTICE BOARD</span>
-                        <span style="font-size: 11px; color: var(--neon-gold);">Squad Codes & Tiers</span>
+                        <span style="font-size: 11px; color: var(--neon-gold);">Squad Codes & Challenges</span>
                     </div>
                     <div class="activity-timeline" id="announcementsList">
                         <div class="activity-row boost">
                             <div>
-                                <div class="activity-desc">⚡ টায়ার-বেসড মেরিট স্কোয়াড ও ব্যাটল অ্যারেনা লাইভ</div>
-                                <div style="font-size: 11.5px; color: var(--text-muted); margin-top: 2px;">XP বাজি ধরে ১v১ ও স্কোয়াড বনাম স্কোয়াড MCQ লড়াইয়ে নামুন!</div>
+                                <div class="activity-desc">⚡ লাইভ MCQ ব্যাটল ও ওপেন রুমস সক্রিয়</div>
+                                <div style="font-size: 11.5px; color: var(--text-muted); margin-top: 2px;">Battle Arena ট্যাবে গিয়ে যেকোনো বিষয় ও চ্যাপ্টারে চ্যালেন্জ গ্রহণ করুন!</div>
                             </div>
                             <span class="activity-time">Official</span>
                         </div>
@@ -857,12 +877,12 @@
                 
                 <label style="font-size: 11px; color: var(--neon-blue); text-transform: uppercase;">বিষয় নির্বাচন করুন</label>
                 <select id="studySubjectSelect" onchange="updateStudyPaperOptions()">
-                    <option value="Bangla">বাংলা (Bangla)</option>
-                    <option value="English">English</option>
                     <option value="Physics">পদার্থবিজ্ঞান (Physics)</option>
                     <option value="Chemistry">রসায়ন (Chemistry)</option>
                     <option value="HigherMath">উচ্চতর গণিত (Higher Math)</option>
                     <option value="Biology">জীববিজ্ঞান (Biology)</option>
+                    <option value="Bangla">বাংলা (Bangla)</option>
+                    <option value="English">English</option>
                     <option value="ICT">তথ্য ও যোগাযোগ প্রযুক্তি (ICT)</option>
                 </select>
 
@@ -894,12 +914,12 @@
                     <div>
                         <label style="font-size: 10px; color: var(--neon-blue);">১. বিষয়</label>
                         <select id="noteSub" onchange="onNoteSubChange()">
-                            <option value="Bangla">বাংলা (Bangla)</option>
-                            <option value="English">English</option>
                             <option value="Physics">পদার্থবিজ্ঞান (Physics)</option>
                             <option value="Chemistry">রসায়ন (Chemistry)</option>
                             <option value="HigherMath">উচ্চতর গণিত (Higher Math)</option>
                             <option value="Biology">জীববিজ্ঞান (Biology)</option>
+                            <option value="Bangla">বাংলা (Bangla)</option>
+                            <option value="English">English</option>
                             <option value="ICT">ICT (একটিই পত্র)</option>
                         </select>
                     </div>
@@ -941,12 +961,15 @@
         </div>
 
         <!-- ==============================================
-             3. ⚔️ LIVE MCQ BATTLE ARENA (1v1 / NvN / Stake XP)
+             3. ⚔️ LIVE MCQ BATTLE ARENA (Full Subject & Realtime Notice)
         ============================================== -->
         <div id="battleTab" class="tab-content">
             <div class="battle-arena-box">
                 <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,51,102,0.3); padding-bottom: 10px; margin-bottom: 15px;">
-                    <div style="font-size: 18px; font-weight: 900; color: var(--neon-red);">⚔️ CYBER MCQ BATTLE ARENA</div>
+                    <div>
+                        <div style="font-size: 18px; font-weight: 900; color: var(--neon-red);">⚔️ CYBER MCQ BATTLE ARENA</div>
+                        <div style="font-size: 11.5px; color: var(--text-muted);">Select Subject, Chapter, Stake XP & Challenge all Scholars!</div>
+                    </div>
                     <div class="battle-timer" id="battleCountdown">15s</div>
                 </div>
 
@@ -954,10 +977,29 @@
                 <div id="battleSetupSection">
                     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px;">
                         <div>
-                            <label style="font-size: 11px; color: var(--neon-blue);">লড়াইয়ের ধরণ</label>
+                            <label style="font-size: 11px; color: var(--neon-blue);">লড়াইয়ের বিষয় (Subject)</label>
+                            <select id="battleSubjectSelect" onchange="updateBattleChapterOptions()">
+                                <option value="Physics">পদার্থবিজ্ঞান (Physics)</option>
+                                <option value="Chemistry">রসায়ন (Chemistry)</option>
+                                <option value="HigherMath">উচ্চতর গণিত (Higher Math)</option>
+                                <option value="Biology">জীববিজ্ঞান (Biology)</option>
+                                <option value="ICT">ICT</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label style="font-size: 11px; color: var(--neon-blue);">অধ্যায় / টপিক (Chapter)</label>
+                            <select id="battleChapterSelect">
+                                <!-- Dynamically loaded chapters -->
+                            </select>
+                        </div>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px;">
+                        <div>
+                            <label style="font-size: 11px; color: var(--neon-blue);">লড়াইয়ের ধরণ (Battle Format)</label>
                             <select id="battleModeSelect">
                                 <option value="1v1">1 vs 1 (Solo Scholar Duel)</option>
-                                <option value="squad_vs_squad">Squad vs Squad (Clash of Domains)</option>
+                                <option value="nvn_squad">Squad vs Squad (NvN Guild War) 🛡️</option>
                             </select>
                         </div>
                         <div>
@@ -971,44 +1013,60 @@
                         </div>
                     </div>
 
-                    <div style="margin-bottom: 12px;">
-                        <label style="font-size: 11px; color: var(--neon-blue);">প্রতি প্রশ্নের সময় (Fair Timer: কমপক্ষে ১০ সেকেন্ড)</label>
+                    <div style="margin-bottom: 14px;">
+                        <label style="font-size: 11px; color: var(--neon-blue);">প্রতি প্রশ্নের সময় (Fair Timer Guard: কমপক্ষে ১০ সেকেন্ড)</label>
                         <input type="number" id="battleTimeInput" min="10" max="60" value="15" placeholder="ন্যূনতম 10 সেকেন্ড">
                     </div>
 
-                    <button class="btn-action" style="background: var(--neon-red); color: #fff; width: 100%; font-size: 13.5px;" onclick="startMcqBattle()">
-                        🔥 ENTER MATCH & FIGHT
-                    </button>
+                    <div style="display: flex; gap: 10px;">
+                        <button class="btn-action" style="background: var(--neon-red); color: #fff; flex: 2; font-size: 13.5px;" onclick="broadcastBattleRoom()">
+                            📢 HOST & BROADCAST CHALLENGE
+                        </button>
+                        <button class="btn-action gold" style="flex: 1; font-size: 13.5px;" onclick="startInstantBotFight()">
+                            ⚡ PRACTICE BOT
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Realtime Live Challenge Requests Board -->
+                <div id="liveChallengesBoard" style="margin-top: 22px; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 14px;">
+                    <div style="font-size: 13px; font-weight: 800; color: var(--neon-gold); margin-bottom: 10px; display: flex; justify-content: space-between;">
+                        <span>📡 LIVE BATTLE CHALLENGES (Open Rooms)</span>
+                        <span style="font-size: 11px; color: var(--neon-green);" id="liveRoomCount">0 Available</span>
+                    </div>
+                    <div id="liveRoomsList">
+                        <p style="font-size: 12px; color: var(--text-muted); text-align: center;">কোনো সক্রিয় চ্যালেঞ্জ নেই। আপনি নিজেই একটি চ্যালেঞ্জ হোস্ট করুন!</p>
+                    </div>
                 </div>
 
                 <!-- Battle Stage Interactive View -->
                 <div id="battleActiveStage" style="display: none; margin-top: 15px;">
-                    <div style="font-size: 12px; color: var(--neon-green); font-weight: bold; margin-bottom: 6px;" id="battleSubjectHeader">PHYSICS MCQ</div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                        <span style="font-size: 12px; color: var(--neon-green); font-weight: bold;" id="battleSubjectHeader">PHYSICS MCQ</span>
+                        <span style="font-size: 12px; color: var(--neon-gold); font-weight: bold;" id="battleScoreLive">Duel Mode</span>
+                    </div>
                     <div style="font-size: 15px; font-weight: 700; color: #fff; margin-bottom: 15px; line-height: 1.45;" id="battleQuestionText">প্রশ্ন লোড হচ্ছে...</div>
 
-                    <div id="battleOptionsGrid">
-                        <!-- 4 Interactive MCQ options -->
-                    </div>
+                    <div id="battleOptionsGrid"></div>
                 </div>
             </div>
         </div>
 
         <!-- ==============================================
-             4. SQUAD TAB (Meritocratic Tier & Auto-Rank)
+             4. SQUAD / GUILD TAB (Meritocratic Tier & Auto-Rank)
         ============================================== -->
         <div id="squadTab" class="tab-content">
             
-            <!-- Current Squad Active Card with Dynamic Glory, Custom Avatar & Slogan -->
             <div class="cyber-card">
                 <div class="card-title">
-                    <span>🛡️ MY SQUAD CORE</span>
+                    <span>🛡️ MY GUILD / SQUAD CORE</span>
                     <span id="activeSquadTierBadge"></span>
                 </div>
                 
                 <div id="currentSquadCard" style="background: rgba(5, 11, 20, 0.7); border: 1px solid rgba(0, 240, 255, 0.2); padding: 16px; border-radius: 12px;">
                     
                     <div style="display: flex; gap: 15px; align-items: flex-start;">
-                        <img id="squadAvatarImg" src="gojo-vibe.jpg" style="width: 65px; height: 65px; border-radius: 12px; border: 2px solid var(--neon-blue); object-fit: cover; background: #000;">
+                        <img id="squadAvatarImg" src="gojo-vibe.jpg" style="width: 70px; height: 70px; border-radius: 12px; border: 2px solid var(--neon-blue); object-fit: cover; background: #000; box-shadow: 0 0 10px rgba(0,240,255,0.3);">
                         
                         <div style="flex: 1;">
                             <div style="display: flex; align-items: center; justify-content: space-between;">
@@ -1025,7 +1083,6 @@
                         </div>
                     </div>
                     
-                    <!-- Shareable Squad Code for Inviting friends -->
                     <div class="invite-box" id="squadInviteBox" style="display: none;">
                         <div>
                             <span>Squad Code: <strong style="color: var(--neon-blue);" id="displaySquadCode">SQ-0000</strong></span> | 
@@ -1034,18 +1091,30 @@
                         <button onclick="copySquadInvite()" style="background: var(--neon-blue); color: #000; border: none; padding: 4px 8px; border-radius: 4px; font-size: 11px; font-weight: bold; cursor: pointer;">📋 Copy Invite</button>
                     </div>
 
-                    <!-- Leader Customization Station -->
-                    <div id="squadLeaderCustomPanel" style="display: none; margin-top: 14px; background: rgba(0,240,255,0.05); padding: 12px; border-radius: 8px; border: 1px dashed var(--neon-blue);">
-                        <div style="font-size: 11.5px; font-weight: bold; color: var(--neon-gold); margin-bottom: 6px;">👑 SQUAD COMMANDER SETTINGS</div>
+                    <!-- Commander Guild Customization Panel (Direct File Upload) -->
+                    <div id="squadLeaderCustomPanel" style="display: none; margin-top: 14px; background: rgba(0,240,255,0.05); padding: 14px; border-radius: 10px; border: 1px dashed var(--neon-blue);">
+                        <div style="font-size: 12px; font-weight: bold; color: var(--neon-gold); margin-bottom: 8px;">👑 GUILD COMMANDER SETTINGS</div>
+                        
+                        <label style="font-size: 11px; color: var(--neon-blue);">Guild Slogan</label>
                         <input type="text" id="editSquadSlogan" placeholder="স্কোয়াড স্লোগান লিখুন (e.g. Limitless Domain)">
-                        <input type="text" id="editSquadAvatarUrl" placeholder="কাস্টম লোগো/ব্যানার ইমেজ লিঙ্ক">
-                        <button class="btn-action" style="padding: 6px 12px; font-size: 11px; width: 100%;" onclick="saveSquadCustomization()">SAVE SQUAD PROFILE</button>
+                        
+                        <label style="font-size: 11px; color: var(--neon-blue);">Welcome Message</label>
+                        <input type="text" id="editSquadWelcomeMsg" placeholder="মেম্বারদের জন্য ওয়েলকাম মেসেজ...">
+
+                        <div style="margin: 10px 0;">
+                            <label style="font-size: 11px; color: var(--neon-blue); display: block; margin-bottom: 4px;">Guild Logo / Avatar Upload (গ্যালারি থেকে ছবি বেছে নিন)</label>
+                            <label for="guildAvatarFileInput" class="btn-action" style="font-size: 11px; padding: 7px 14px; cursor: pointer; display: inline-block;">📸 Choose Guild Logo</label>
+                            <input type="file" id="guildAvatarFileInput" accept="image/*" style="display: none;" onchange="handleGuildAvatarUpload(event)">
+                            <span id="guildUploadStatus" style="font-size: 11px; color: var(--neon-green); margin-left: 8px;"></span>
+                        </div>
+
+                        <button class="btn-action" style="padding: 8px 14px; font-size: 12px; width: 100%; margin-top: 6px;" onclick="saveSquadCustomization()">SAVE GUILD PROFILE</button>
                     </div>
 
                     <!-- Auto-Rank Member Roster (Infinity Support) -->
                     <div id="squadMembersRoster" style="margin-top: 15px; display: none;">
                         <div style="font-size: 12px; font-weight: 800; color: var(--neon-blue); margin-bottom: 8px; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 10px;">
-                            👥 SQUAD MERIT HIERARCHY (Auto Assigned by XP & Level)
+                            👥 GUILD MERIT HIERARCHY (Auto Assigned by XP & Level)
                         </div>
                         <div id="membersHierarchyList" style="display: flex; flex-direction: column; gap: 6px;"></div>
                     </div>
@@ -1064,7 +1133,7 @@
                         <button class="btn-action" style="width: 100%; font-size: 12.5px; padding: 10px;" onclick="joinVerifiedSquadByCode()">VERIFY ELIGIBILITY & JOIN</button>
                     </div>
 
-                    <!-- 2. Create Brand New Squad with Tier -->
+                    <!-- 2. Create Brand New Squad with Tier & Custom Logo -->
                     <div class="squad-panel">
                         <div class="squad-panel-title">⚡ Create Tier-Based Squad</div>
                         <p style="font-size: 11px; color: var(--text-muted); margin-bottom: 10px;">টার্গেট পড়ার যোগ্যতা নির্ধারণ করে স্কোয়াড তৈরি করুন:</p>
@@ -1136,7 +1205,6 @@
                 </div>
             </div>
 
-            <!-- Edit Academic Profile & Map Verified Institution Card -->
             <div class="cyber-card">
                 <div class="card-title">⚙️ EDIT ACADEMIC PROFILE & MAP VERIFY</div>
                 
@@ -1155,7 +1223,6 @@
                     </div>
                 </div>
 
-                <!-- Verified Maps Auto-Search Box -->
                 <div class="map-search-box">
                     <label style="font-size: 11px; color: var(--neon-blue);">প্রতিষ্ঠানের নাম (Search or Type Directly 🗺️)</label>
                     <input type="text" id="mapSearchInstInput" placeholder="টাইপ করুন (যেমন: Gaibandha Govt College)..." oninput="searchInstitutionOnMap(this.value)">
@@ -1245,6 +1312,7 @@
         // 3. User Data Realtime Listener & Daily 20 XP Engine
         let userData = {};
         let dailyBonusChecked = false;
+        let uploadedGuildAvatarBase64 = null;
 
         db.ref('users/' + currentUser).on('value', (snap) => {
             userData = snap.val() || {};
@@ -1254,7 +1322,6 @@
             document.getElementById('dashGreeting').innerHTML = `${greeting}, <span>${displayName}</span> 👋`;
             document.getElementById('profName').innerText = displayName;
 
-            // Target, Institution & Age
             const targetGoal = userData.target || "HSC Science";
             document.getElementById('dashTargetBadge').innerText = "🎯 " + targetGoal;
             document.getElementById('profTarget').innerText = targetGoal;
@@ -1268,36 +1335,24 @@
             document.getElementById('dashInstBadge').innerText = "🏛️ " + instName;
             document.getElementById('profInst').innerText = instName + instType;
 
-            // Pre-fill inputs in edit form
-            if (userData.age) {
-                document.getElementById('editAgeInput').value = userData.age;
-            }
-            if (userData.institutionType) {
-                document.getElementById('editInstTypeSelect').value = userData.institutionType;
-            }
-            if (userData.institutionName) {
-                document.getElementById('mapSearchInstInput').value = userData.institutionName;
-            }
+            if (userData.age) document.getElementById('editAgeInput').value = userData.age;
+            if (userData.institutionType) document.getElementById('editInstTypeSelect').value = userData.institutionType;
+            if (userData.institutionName) document.getElementById('mapSearchInstInput').value = userData.institutionName;
 
-            // Verification Check
             const isVerified = (userData.emailVerified === true) || (auth.currentUser && auth.currentUser.emailVerified);
             if (isVerified) {
                 document.getElementById('profVerificationBadge').innerHTML = '<span style="color: var(--neon-green); font-weight: bold;">✅ Verified Scholar</span>';
-                if (!userData.emailVerified) {
-                    db.ref('users/' + currentUser).update({ emailVerified: true });
-                }
+                if (!userData.emailVerified) db.ref('users/' + currentUser).update({ emailVerified: true });
             } else {
                 document.getElementById('profVerificationBadge').innerHTML = '<span style="color: var(--neon-gold); font-weight: bold;">⚠️ Pending (Check Gmail)</span>';
             }
 
-            // Avatar Display
             const defaultAv = 'gojo-vibe.jpg';
             const userAvatar = userData.avatar;
             const avatarUrl = (userAvatar && !userAvatar.includes('dicebear')) ? userAvatar : defaultAv;
             document.getElementById('navAvatar').src = avatarUrl;
             document.getElementById('profAvatarBig').src = avatarUrl;
 
-            // Study Time & XP Calculations
             const totalSec = userData.totalSeconds || 0;
             const hours = (totalSec / 3600).toFixed(1);
             document.getElementById('totalHoursDisplay').innerText = hours + "h";
@@ -1311,7 +1366,6 @@
             document.getElementById('xpDisplay').innerText = currentXp;
             document.getElementById('dashTotalXp').innerText = currentXp;
 
-            // Level Engine
             const currentLvl = Math.floor(currentXp / 100) + 1;
             document.getElementById('levelDisplay').innerText = "Lvl " + currentLvl;
             document.getElementById('dashCurrentLvl').innerText = "Lvl " + currentLvl;
@@ -1326,7 +1380,6 @@
             document.getElementById('dashXpProgressBar').style.width = progressPercent + "%";
             document.getElementById('dashXpRemainingText').innerText = `পরবর্তী লেভেলে পৌঁছাতে আরও ${xpCeil - currentXp} XP প্রয়োজন 🔥`;
 
-            // Daily Target Calculation
             const userTargetMins = userData.dailyGoalMins || 180;
             const goalTargetSec = userTargetMins * 60;
             const goalAchievedSec = totalSec % goalTargetSec;
@@ -1338,7 +1391,6 @@
             const minLeft = Math.max(0, userTargetMins - Math.floor(goalAchievedSec / 60));
             document.getElementById('goalRemainingText').innerText = minLeft > 0 ? `আর ${minLeft} মিনিট পড়লে আজকের লক্ষ্য পূরণ হবে` : "🎉 আজকের লক্ষ্য সম্পূর্ণ হয়েছে!";
 
-            // 🛡️ Squad State Engine with Merit Tier Checking
             const userSquad = userData.squad || "None";
             document.getElementById('dashSquadPreview').innerText = userSquad !== "None" ? userSquad : "None";
             
@@ -1349,9 +1401,7 @@
                 document.getElementById('dashSquadStateText').innerHTML = `আপনি বর্তমানে <strong>${userSquad}</strong> স্কোয়াডের সদস্য!`;
                 
                 const squadKey = userData.squadKey;
-                if (squadKey) {
-                    loadSquadLiveDetails(squadKey);
-                }
+                if (squadKey) loadSquadLiveDetails(squadKey);
             } else {
                 document.getElementById('dashSquadSub').innerText = "No Squad";
                 document.getElementById('activeSquadTitle').innerText = "No Squad";
@@ -1366,7 +1416,6 @@
                 document.getElementById('dashSquadStateText').innerText = "আপনি এখনো কোনো স্টাডি স্কোয়াডে যুক্ত হননি।";
             }
 
-            // Streak Verification
             if (userData.lastActiveSession) {
                 const diffHours = (Date.now() - userData.lastActiveSession) / (1000 * 60 * 60);
                 if (diffHours >= 15) {
@@ -1380,7 +1429,6 @@
                 }
             }
 
-            // Social Connected Status
             if (userData.googleConnected) {
                 const gBtn = document.getElementById('btnGoogleLink');
                 gBtn.classList.add('connected');
@@ -1392,20 +1440,18 @@
                 fbBtn.innerText = "✅ Facebook Connected";
             }
 
-            // Daily 20 XP Login Reward Awarder
             if (!dailyBonusChecked && userData.createdAt) {
                 dailyBonusChecked = true;
                 checkAndAwardDailyLoginBonus();
             }
         });
 
-        // 🛡️ Load Squad Realtime Hierarchy (Auto-Rank by XP + Level) & Customization
+        // 🛡️ Load Squad Realtime Hierarchy (Auto Rank: XP + Level)
         function loadSquadLiveDetails(squadKey) {
             db.ref('squads/' + squadKey).on('value', snap => {
                 if (!snap.exists()) return;
                 const sq = snap.val();
 
-                // 1. Tier Badge
                 const tier = sq.tier || 'rookie';
                 let tierHtml = '';
                 if (tier === 'limitless') tierHtml = '<span class="tier-badge tier-limitless">👑 LIMITLESS SQUAD</span>';
@@ -1413,19 +1459,16 @@
                 else tierHtml = '<span class="tier-badge tier-rookie">🥉 ROOKIE SQUAD</span>';
                 document.getElementById('activeSquadTierBadge').innerHTML = tierHtml;
 
-                // 2. Custom Avatar, Slogan & Description
                 if (sq.avatarUrl) {
                     document.getElementById('squadAvatarImg').src = sq.avatarUrl;
                 }
                 document.getElementById('squadSloganText').innerText = sq.slogan ? `"${sq.slogan}"` : '"Knowledge is Power"';
                 document.getElementById('activeSquadDesc').innerText = sq.welcomeMsg || `Focus: ${sq.subject || 'All Rounder'} | Infinity Cap`;
 
-                // 3. Invite details
                 document.getElementById('squadInviteBox').style.display = "flex";
                 document.getElementById('displaySquadCode').innerText = sq.code || squadKey.toUpperCase();
                 document.getElementById('displaySquadPin').innerText = sq.pin || "0000";
 
-                // 4. Calculate Members Composite Score (XP + Level) for Auto-Rank
                 const memberUsernames = Object.keys(sq.members || {});
                 Promise.all(memberUsernames.map(u => db.ref('users/' + u).once('value'))).then(userSnaps => {
                     let memberList = [];
@@ -1441,7 +1484,6 @@
                             totalSquadSec += uSec;
                             totalSquadXp += uXp;
                             
-                            // Auto Merit Rank Score Formula
                             const meritScore = uXp + (uLvl * 150);
 
                             memberList.push({
@@ -1456,14 +1498,11 @@
                         }
                     });
 
-                    // Sort descending by merit score
                     memberList.sort((a, b) => b.meritScore - a.meritScore);
 
-                    // Squad Glory Level
                     const squadLvl = Math.floor(totalSquadXp / 500) + 1;
                     document.getElementById('squadGloryStats').innerHTML = `🔥 <strong>Glory Lvl: ${squadLvl}</strong> | Total Team XP: ${totalSquadXp} | Team Study: ${(totalSquadSec/3600).toFixed(1)} hrs`;
 
-                    // Render Hierarchy List
                     const rosterBox = document.getElementById('squadMembersRoster');
                     const listContainer = document.getElementById('membersHierarchyList');
                     listContainer.innerHTML = "";
@@ -1501,90 +1540,282 @@
                         listContainer.appendChild(row);
                     });
 
-                    // Show Commander Settings only to Team Commander (#1 Rank)
                     document.getElementById('squadLeaderCustomPanel').style.display = isUserCommander ? "block" : "none";
+                    if (isUserCommander) {
+                        if (sq.slogan) document.getElementById('editSquadSlogan').value = sq.slogan;
+                        if (sq.welcomeMsg) document.getElementById('editSquadWelcomeMsg').value = sq.welcomeMsg;
+                    }
                 });
             });
         }
 
-        // Save Squad Customization
+        // Direct File Upload for Guild Avatar
+        function handleGuildAvatarUpload(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            if (file.size > 1024 * 1024 * 1.5) {
+                openModal("⚠️", "ফাইল অনেক বড়", "দয়া করে ১.৫ MB এর চেয়ে ছোট ছবি আপলোড করুন!");
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                uploadedGuildAvatarBase64 = e.target.result;
+                document.getElementById('guildUploadStatus').innerText = "✅ Image Selected!";
+            };
+            reader.readAsDataURL(file);
+        }
+
         function saveSquadCustomization() {
             const squadKey = userData.squadKey;
             if (!squadKey) return;
 
             const slogan = document.getElementById('editSquadSlogan').value.trim();
-            const avatarUrl = document.getElementById('editSquadAvatarUrl').value.trim();
+            const welcome = document.getElementById('editSquadWelcomeMsg').value.trim();
 
             let updatePayload = {};
             if (slogan) updatePayload.slogan = slogan;
-            if (avatarUrl) updatePayload.avatarUrl = avatarUrl;
+            if (welcome) updatePayload.welcomeMsg = welcome;
+            if (uploadedGuildAvatarBase64) updatePayload.avatarUrl = uploadedGuildAvatarBase64;
 
             db.ref('squads/' + squadKey).update(updatePayload).then(() => {
-                openModal("👑", "Squad Profile Updated", "স্কোয়াড প্রোফাইল সফলভাবে আপডেট করা হয়েছে!");
+                uploadedGuildAvatarBase64 = null;
+                document.getElementById('guildUploadStatus').innerText = "";
+                openModal("👑", "Guild Updated", "স্কোয়াডের লোগো, স্লোগান ও মেসেজ সফলভাবে সংরক্ষিত হয়েছে!");
             });
         }
 
         // ⚔️ ============================================
-        // LIVE MCQ BATTLE ARENA (1v1 / NvN / Realtime Stake)
+        // DYNAMIC SUBJECT & CHAPTER MCQ BANK
         // ============================================
-        const mcqQuestionsBank = [
-            {
-                subject: "Physics 1st Paper",
-                q: "কোনো ভেক্টর A = 3i + 4j হলে, এর মান (Magnitude) কত?",
-                options: ["5", "7", "1", "25"],
-                correct: 0
-            },
-            {
-                subject: "Chemistry 1st Paper",
-                q: "পর্যায় সারণীর কোন গ্রুপের মৌলগুলোকে হ্যালোজেন বলা হয়?",
-                options: ["Group 1", "Group 2", "Group 17", "Group 18"],
-                correct: 2
-            },
-            {
-                subject: "Higher Math",
-                q: "d/dx(sin 2x) এর অন্তরক সহগ কোনটি?",
-                options: ["cos 2x", "2 cos 2x", "-2 cos 2x", "cos^2 x"],
-                correct: 1
-            },
-            {
-                subject: "Biology 1st Paper",
-                q: "কোষের প্রোটিন ফ্যাক্টরি বলা হয় কোন অঙ্গাণুকে?",
-                options: ["মাইটোকন্ড্রিয়া", "লাইসোজোম", "রাইবোসোম", "গলগি বডি"],
-                correct: 2
-            }
-        ];
+        const hscSubjectChapters = {
+            "Physics": [
+                "ভেক্টর (Vector)",
+                "গতিবিদ্যা (Dynamics)",
+                "কাজ, শক্তি ও ক্ষমতা",
+                "পদার্থের গাঠনিক ধর্ম",
+                "তাপগতিবিদ্যা (Thermodynamics)",
+                "স্থির তড়িৎ ও চল তড়িৎ"
+            ],
+            "Chemistry": [
+                "গুণগত রসায়ন (Qualitative Chemistry)",
+                "পর্যায় সারণী ও বন্ধন",
+                "মৌলের পর্যায়বৃত্ত ধর্ম",
+                "জৈব যৌগ (Organic Chemistry)",
+                "পরিবেশ রসায়ন",
+                "তড়িৎ রসায়ন"
+            ],
+            "HigherMath": [
+                "ম্যাট্রিক্স ও নির্ণায়ক",
+                "সরলরেখা ও বৃত্ত",
+                "ত্রিকোণমিতি (Trigonometry)",
+                "অন্তরীকরণ (Differentiation)",
+                "যোগজীকরণ (Integration)",
+                "কনিক্স ও জটিল সংখ্যা"
+            ],
+            "Biology": [
+                "কোষ ও এর গঠন (Cell Structure)",
+                "কোষ বিভাজন (Cell Division)",
+                "অণুজীব (Microorganisms)",
+                "উদ্ভিদ শারীরতত্ত্ব",
+                "মানব শারীরতত্ত্ব (রক্ত ও সংবহন)",
+                "জিনতত্ত্ব ও বিবর্তন"
+            ],
+            "ICT": [
+                "তথ্য ও যোগাযোগ প্রযুক্তি বিশ্ব ও বাংলাদেশ",
+                "কমিউনিকেশন সিস্টেমস ও নেটওয়ার্কিং",
+                "সংখ্যা পদ্ধতি ও ডিজিটাল ডিভাইস",
+                "এইচটিএমএল (HTML Web Design)",
+                "সি প্রোগ্রামিং (C Programming)"
+            ]
+        };
+
+        const battleQuestionsDatabase = {
+            "Physics": [
+                { q: "কোনো ভেক্টর A = 3i + 4j হলে, এর মান (Magnitude) কত?", options: ["5", "7", "1", "25"], correct: 0 },
+                { q: "নিউটনের ৩য় সূত্র অনুযায়ী ক্রিয়া ও প্রতিক্রিয়ার মধ্যবর্তী কোণ কত?", options: ["0°", "90°", "180°", "360°"], correct: 2 },
+                { q: "কাজের একক কোনটি?", options: ["ওয়াট", "জুল", "নিউটন", "প্যাসকেল"], correct: 1 }
+            ],
+            "Chemistry": [
+                { q: "পর্যায় সারণীর কোন গ্রুপের মৌলগুলোকে হ্যালোজেন বলা হয়?", options: ["Group 1", "Group 2", "Group 17", "Group 18"], correct: 2 },
+                { q: "সবচেয়ে সক্রিয় ক্ষার ধাতু কোনটি?", options: ["Li", "Na", "K", "Cs"], correct: 3 },
+                { q: "ইথেন অণুতে কার্বন-কার্বন বন্ধন দূরত্ব কত?", options: ["0.154 nm", "0.134 nm", "0.120 nm", "0.109 nm"], correct: 0 }
+            ],
+            "HigherMath": [
+                { q: "d/dx(sin 2x) এর অন্তরক সহগ কোনটি?", options: ["cos 2x", "2 cos 2x", "-2 cos 2x", "cos^2 x"], correct: 1 },
+                { q: "∫ e^(3x) dx এর মান কোনটি?", options: ["3e^(3x)", "(1/3)e^(3x)", "e^(3x)", "e^(x)"], correct: 1 },
+                { q: "বৃত্তের সমীকরণ x^2 + y^2 = 16 হলে ব্যাসার্ধ কত?", options: ["2", "4", "8", "16"], correct: 1 }
+            ],
+            "Biology": [
+                { q: "কোষের প্রোটিন ফ্যাক্টরি বলা হয় কোন অঙ্গাণুকে?", options: ["মাইটোকন্ড্রিয়া", "লাইসোজোম", "রাইবোসোম", "গলগি বডি"], correct: 2 },
+                { q: "রক্তের সার্বজনীন দাতা গ্রুপ কোনটি?", options: ["A", "B", "AB", "O negative"], correct: 3 },
+                { q: "ডিএনএ (DNA) এর হেলিক্স মডেল কে আবিষ্কার করেন?", options: ["ওয়াটসন ও ক্রিক", "রবার্ট হুক", "মেন্ডেল", "ডারউইন"], correct: 0 }
+            ],
+            "ICT": [
+                { q: "বাইনারি সংখ্যা (1011)২ এর ডেসিমাল মান কত?", options: ["9", "11", "13", "15"], correct: 1 },
+                { q: "HTML এ হাইপারলিংক তৈরির ট্যাগ কোনটি?", options: ["<link>", "<a>", "<href>", "<nav>"], correct: 1 },
+                { q: "C প্রোগ্রামিং ভাষায় পূর্ণসংখ্যার ডেটা টাইপ কোনটি?", options: ["float", "char", "int", "double"], correct: 2 }
+            ]
+        };
+
+        function updateBattleChapterOptions() {
+            const sub = document.getElementById('battleSubjectSelect').value;
+            const chapSelect = document.getElementById('battleChapterSelect');
+            chapSelect.innerHTML = "";
+            const chapters = hscSubjectChapters[sub] || ["General Syllabus"];
+            chapters.forEach(chap => {
+                const opt = document.createElement('option');
+                opt.value = chap;
+                opt.innerText = chap;
+                chapSelect.appendChild(opt);
+            });
+        }
+
+        // Initialize Chapter select on page load
+        updateBattleChapterOptions();
 
         let battleTimerInterval = null;
         let currentBattleQuestion = null;
         let currentBattleStake = 20;
+        let activeRoomKey = null;
 
-        function startMcqBattle() {
+        // 📢 Host & Broadcast Battle Challenge to Everyone
+        function broadcastBattleRoom() {
+            const sub = document.getElementById('battleSubjectSelect').value;
+            const chap = document.getElementById('battleChapterSelect').value;
             const mode = document.getElementById('battleModeSelect').value;
             const stake = parseInt(document.getElementById('battleStakeSelect').value);
             const timeLimit = parseInt(document.getElementById('battleTimeInput').value);
 
-            // Fair Timer Guard: Must be at least 10 seconds
             if (isNaN(timeLimit) || timeLimit < 10) {
-                openModal("⚠️", "অবৈধ সময়সীমা", "প্রশ্ন পড়ে ভেবে উত্তর দেওয়ার জন্য প্রতি প্রশ্নের সময় কমপক্ষে ১০ সেকেন্ড হতে হবে!");
+                openModal("⚠️", "অবৈধ সময়সীমা", "Fair Timer Guard: প্রতি প্রশ্নের সময় কমপক্ষে ১০ সেকেন্ড হতে হবে!");
                 return;
             }
 
-            // Check if user has enough XP for stake
             const userXp = userData.xp || 50;
             if (userXp < stake) {
-                openModal("🚫", "পর্যাপ্ত XP নেই", `এই ম্যাচ খেলতে কমপক্ষে ${stake} XP বাজি ধরতে হবে! আপনার বর্তমান ব্যালেন্স: ${userXp} XP।`);
+                openModal("🚫", "পর্যাপ্ত XP নেই", `চ্যালেঞ্জ হোস্ট করতে কমপক্ষে ${stake} XP বাজি ধরতে হবে!`);
                 return;
             }
 
+            if (mode === "nvn_squad" && (!userData.squad || userData.squad === "None")) {
+                openModal("🛡️", "স্কোয়াড প্রয়োজন", "Squad War হোস্ট করতে হলে একটি স্কোয়াডে যুক্ত থাকতে হবে!");
+                return;
+            }
+
+            const roomId = "WAR_" + Date.now();
+            db.ref('battle_rooms/' + roomId).set({
+                host: currentUser,
+                hostSquad: userData.squad || "Independent",
+                subject: sub,
+                chapter: chap,
+                mode: mode,
+                stake: stake,
+                timeLimit: timeLimit,
+                status: "waiting",
+                createdAt: Date.now()
+            }).then(() => {
+                openModal("📡", "চ্যালেঞ্জ ব্রডকাস্ট সফল", `আপনার ${sub} [${chap}] চ্যালেঞ্জটি সকল শিক্ষার্থীর নোটিস বোর্ডে ব্রডকাস্ট হয়েছে! কেউ এক্সেপ্ট করলেই লড়াই শুরু হবে।`);
+            });
+        }
+
+        // 📡 Realtime Battle Rooms Listener for Notice Board & Arena
+        db.ref('battle_rooms').orderByChild('status').equalTo('waiting').limitToLast(5).on('value', snap => {
+            const container = document.getElementById('liveRoomsList');
+            const counter = document.getElementById('liveRoomCount');
+            const data = snap.val();
+            
+            if (!data) {
+                container.innerHTML = '<p style="font-size: 12px; color: var(--text-muted); text-align: center;">কোনো সক্রিয় চ্যালেঞ্জ নেই। আপনি নিজেই একটি চ্যালেঞ্জ হোস্ট করুন!</p>';
+                counter.innerText = "0 Available";
+                return;
+            }
+
+            const rooms = Object.keys(data);
+            counter.innerText = `${rooms.length} Active Challenges`;
+            container.innerHTML = "";
+
+            rooms.reverse().forEach(rKey => {
+                const room = data[rKey];
+                const isMyRoom = (room.host === currentUser);
+
+                const card = document.createElement('div');
+                card.className = "battle-room-card";
+                card.innerHTML = `
+                    <div>
+                        <div style="font-size: 13px; font-weight: 800; color: #fff;">
+                            ${room.subject} ➡️ <span style="color: var(--neon-blue);">${room.chapter}</span>
+                        </div>
+                        <div style="font-size: 11px; color: var(--text-muted); margin-top: 3px;">
+                            Host: <strong style="color: var(--neon-green);">@${room.host}</strong> (${room.hostSquad}) | Mode: <strong>${room.mode.toUpperCase()}</strong> | Time: <strong>${room.timeLimit}s</strong>
+                        </div>
+                    </div>
+                    <div style="text-align: right;">
+                        <div style="font-size: 13px; font-weight: 900; color: var(--neon-gold); margin-bottom: 5px;">🔥 ${room.stake} XP Stake</div>
+                        ${isMyRoom ? 
+                            `<button onclick="cancelMyBattleRoom('${rKey}')" style="background: rgba(255,51,102,0.2); border: 1px solid var(--neon-red); color: #fff; padding: 4px 10px; border-radius: 6px; font-size: 11px; cursor: pointer;">Cancel</button>` : 
+                            `<button onclick="acceptLiveBattleRoom('${rKey}')" style="background: var(--neon-green); color: #000; border: none; font-weight: 900; padding: 6px 12px; border-radius: 6px; font-size: 11px; cursor: pointer;">⚔️ ACCEPT & FIGHT</button>`
+                        }
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        });
+
+        function cancelMyBattleRoom(rKey) {
+            db.ref('battle_rooms/' + rKey).remove().then(() => {
+                openModal("🚪", "Room Cancelled", "আপনার চ্যালেঞ্জ রুমটি সফলভাবে বাতিল করা হয়েছে।");
+            });
+        }
+
+        function acceptLiveBattleRoom(rKey) {
+            db.ref('battle_rooms/' + rKey).once('value').then(snap => {
+                if (!snap.exists() || snap.val().status !== 'waiting') {
+                    openModal("⚠️", "ম্যাচ পাওয়া যায়নি", "এই চ্যালেঞ্জটি ইতোমধ্যে অন্য কেউ গ্রহণ করেছে বা বাতিল হয়েছে!");
+                    return;
+                }
+                const room = snap.val();
+                const userXp = userData.xp || 50;
+                if (userXp < room.stake) {
+                    openModal("🚫", "পর্যাপ্ত XP নেই", `এই চ্যালেঞ্জ গ্রহণ করতে কমপক্ষে ${room.stake} XP ব্যালেন্স প্রয়োজন!`);
+                    return;
+                }
+
+                // Lock the room
+                db.ref('battle_rooms/' + rKey).update({
+                    status: 'active',
+                    challenger: currentUser,
+                    challengerSquad: userData.squad || "Independent"
+                }).then(() => {
+                    activeRoomKey = rKey;
+                    startActiveBattleGame(room.subject, room.chapter, room.stake, room.timeLimit, room.mode);
+                });
+            });
+        }
+
+        function startInstantBotFight() {
+            const sub = document.getElementById('battleSubjectSelect').value;
+            const chap = document.getElementById('battleChapterSelect').value;
+            const stake = parseInt(document.getElementById('battleStakeSelect').value);
+            const timeLimit = Math.max(10, parseInt(document.getElementById('battleTimeInput').value));
+            startActiveBattleGame(sub, chap, stake, timeLimit, "bot_practice");
+        }
+
+        function startActiveBattleGame(subject, chapter, stake, timeLimit, mode) {
             currentBattleStake = stake;
 
-            // Pick Random Question
-            const randomIdx = Math.floor(Math.random() * mcqQuestionsBank.length);
-            currentBattleQuestion = mcqQuestionsBank[randomIdx];
+            // Pick Question from bank based on subject
+            const qList = battleQuestionsDatabase[subject] || battleQuestionsDatabase["Physics"];
+            const randomIdx = Math.floor(Math.random() * qList.length);
+            currentBattleQuestion = qList[randomIdx];
 
             document.getElementById('battleSetupSection').style.display = "none";
+            document.getElementById('liveChallengesBoard').style.display = "none";
             document.getElementById('battleActiveStage').style.display = "block";
-            document.getElementById('battleSubjectHeader').innerText = `${currentBattleQuestion.subject} [Stake: ${stake} XP | Mode: ${mode.toUpperCase()}]`;
+
+            document.getElementById('battleSubjectHeader').innerText = `${subject} [${chapter}] | Mode: ${mode.toUpperCase()}`;
+            document.getElementById('battleScoreLive').innerText = `Stake: ${stake} XP`;
             document.getElementById('battleQuestionText').innerText = currentBattleQuestion.q;
 
             const optContainer = document.getElementById('battleOptionsGrid');
@@ -1598,7 +1829,6 @@
                 optContainer.appendChild(btn);
             });
 
-            // Start Fair Countdown Timer
             let remainingSec = timeLimit;
             document.getElementById('battleCountdown').innerText = remainingSec + "s";
             
@@ -1621,8 +1851,14 @@
 
         function finishBattleSession(isWinner, isTimeout) {
             document.getElementById('battleSetupSection').style.display = "block";
+            document.getElementById('liveChallengesBoard').style.display = "block";
             document.getElementById('battleActiveStage').style.display = "none";
             document.getElementById('battleCountdown').innerText = "15s";
+
+            if (activeRoomKey) {
+                db.ref('battle_rooms/' + activeRoomKey).remove();
+                activeRoomKey = null;
+            }
 
             const userXp = userData.xp || 50;
 
@@ -1634,7 +1870,10 @@
             } else if (isWinner) {
                 const newXp = userXp + currentBattleStake;
                 db.ref('users/' + currentUser).update({ xp: newXp }).then(() => {
-                    openModal("🎉", "VICTORY ACHIEVED", `সঠিক উত্তর! আপনি প্রতিপক্ষকে পরাজিত করে +${currentBattleStake} XP জিতে নিয়েছেন!`);
+                    if (userData.squadKey) {
+                        db.ref(`squads/${userData.squadKey}/gloryScore`).transaction(cur => (cur || 0) + currentBattleStake);
+                    }
+                    openModal("🏆", "VICTORY ACHIEVED", `চমৎকার! আপনি সঠিক উত্তর দিয়ে প্রতিপক্ষকে হারিয়ে +${currentBattleStake} XP জিতে নিয়েছেন!`);
                 });
             } else {
                 const newXp = Math.max(0, userXp - currentBattleStake);
@@ -1713,7 +1952,7 @@
             }
         }
 
-        // 🛡️ Create New Squad with Tier & Requirement
+        // 🛡️ Create New Squad with Tier
         function createNewVerifiedSquad() {
             const nameInput = document.getElementById('createSquadNameInput').value.trim();
             const slogan = document.getElementById('createSquadSloganInput').value.trim();
@@ -1823,7 +2062,6 @@
             });
         }
 
-        // Leave Squad
         function leaveCurrentSquad() {
             const currentSquad = userData.squad;
             const squadKey = userData.squadKey;
@@ -1842,7 +2080,6 @@
             }
         }
 
-        // Hybrid Live Map & Custom Search Engine
         let mapSearchDebounce = null;
         function searchInstitutionOnMap(query) {
             clearTimeout(mapSearchDebounce);
@@ -1939,9 +2176,7 @@
             document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
             document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
             document.getElementById(tabId).classList.add('active');
-            if (element) {
-                element.classList.add('active');
-            }
+            if (element) element.classList.add('active');
         }
 
         function switchToTabDirect(tabId, buttonId) {
