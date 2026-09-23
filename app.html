@@ -422,7 +422,7 @@
         .info-cell label { font-size: 11px; color: var(--text-muted); text-transform: uppercase; display: block; }
         .info-cell span { font-weight: 700; color: #fff; }
 
-        /* Map Auto-Suggest styling */
+        /* Hybrid Live Map & Custom Search List */
         .map-search-box {
             position: relative;
             margin-top: 5px;
@@ -435,11 +435,11 @@
             background: #081124;
             border: 1px solid var(--neon-blue);
             border-radius: 8px;
-            max-height: 200px;
+            max-height: 220px;
             overflow-y: auto;
             z-index: 1000;
             display: none;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.8);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.85);
         }
         .map-suggest-item {
             padding: 10px 12px;
@@ -448,6 +448,7 @@
             border-bottom: 1px solid rgba(255,255,255,0.06);
             cursor: pointer;
             text-align: left;
+            transition: background 0.2s;
         }
         .map-suggest-item:hover {
             background: rgba(0, 240, 255, 0.15);
@@ -922,8 +923,8 @@
 
                 <!-- Verified Maps Auto-Search Box -->
                 <div class="map-search-box">
-                    <label style="font-size: 11px; color: var(--neon-blue);">প্রতিষ্ঠানের নাম (Search on Live Map 🗺️)</label>
-                    <input type="text" id="mapSearchInstInput" placeholder="টাইপ করুন (যেমন: Dhaka College বা Rajshahi College)..." oninput="searchInstitutionOnMap(this.value)">
+                    <label style="font-size: 11px; color: var(--neon-blue);">প্রতিষ্ঠানের নাম (Search or Type Directly 🗺️)</label>
+                    <input type="text" id="mapSearchInstInput" placeholder="টাইপ করুন (যেমন: Gaibandha Govt College)..." oninput="searchInstitutionOnMap(this.value)">
                     <div class="map-suggest-list" id="mapSuggestions"></div>
                 </div>
 
@@ -1015,14 +1016,14 @@
             document.getElementById('dashInstBadge').innerText = "🏛️ " + instName;
             document.getElementById('profInst').innerText = instName + instType;
 
-            // Pre-fill inputs in edit form if not already modified
-            if (!document.getElementById('editAgeInput').value && userData.age) {
+            // Pre-fill inputs in edit form
+            if (userData.age) {
                 document.getElementById('editAgeInput').value = userData.age;
             }
             if (userData.institutionType) {
                 document.getElementById('editInstTypeSelect').value = userData.institutionType;
             }
-            if (!document.getElementById('mapSearchInstInput').value && userData.institutionName) {
+            if (userData.institutionName) {
                 document.getElementById('mapSearchInstInput').value = userData.institutionName;
             }
 
@@ -1118,7 +1119,7 @@
                 fbBtn.innerText = "✅ Facebook Connected";
             }
 
-            // 🎁 Daily 20 XP Login Reward Awarder
+            // Daily 20 XP Login Reward Awarder
             if (!dailyBonusChecked && userData.createdAt) {
                 dailyBonusChecked = true;
                 checkAndAwardDailyLoginBonus();
@@ -1141,44 +1142,61 @@
             }
         }
 
-        // 4. OpenStreetMap / Nominatim Live Suggestion Engine
+        // 4. Hybrid Live Map & Custom Search Engine
         let mapSearchDebounce = null;
         function searchInstitutionOnMap(query) {
             clearTimeout(mapSearchDebounce);
             const box = document.getElementById('mapSuggestions');
+            const trimmed = query ? query.trim() : '';
             
-            if (!query || query.trim().length < 3) {
+            if (!trimmed || trimmed.length < 2) {
                 box.style.display = 'none';
                 box.innerHTML = '';
                 return;
             }
 
             mapSearchDebounce = setTimeout(() => {
-                const url = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(query + ' Bangladesh')}&countrycodes=bd&format=jsonv2&limit=5`;
+                const url = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(trimmed)}&countrycodes=bd&format=jsonv2&limit=8`;
                 
                 fetch(url)
                     .then(res => res.json())
                     .then(data => {
                         box.innerHTML = '';
+
+                        // Always provide typed custom option at the top
+                        const customOption = document.createElement('div');
+                        customOption.className = 'map-suggest-item';
+                        customOption.style.background = 'rgba(0, 240, 255, 0.08)';
+                        customOption.innerHTML = `✏️ <strong>Use Custom: "${trimmed}"</strong><br><small style="color: var(--neon-gold);">সরাসরি এই নামটি সেট করতে ট্যাপ করুন</small>`;
+                        customOption.onclick = function() {
+                            document.getElementById('mapSearchInstInput').value = trimmed;
+                            box.style.display = 'none';
+                        };
+                        box.appendChild(customOption);
+
+                        // If Map API returns matches
                         if (data && data.length > 0) {
                             data.forEach(item => {
                                 const div = document.createElement('div');
                                 div.className = 'map-suggest-item';
-                                div.innerHTML = `📍 <strong>${item.name || item.display_name.split(',')[0]}</strong><br><small style="color: #8892b0;">${item.display_name}</small>`;
+                                const primaryName = item.name || item.display_name.split(',')[0];
+                                div.innerHTML = `📍 <strong>${primaryName}</strong><br><small style="color: #8892b0;">${item.display_name}</small>`;
                                 div.onclick = function() {
-                                    document.getElementById('mapSearchInstInput').value = item.name || item.display_name.split(',')[0];
+                                    document.getElementById('mapSearchInstInput').value = primaryName;
                                     box.style.display = 'none';
                                 };
                                 box.appendChild(div);
                             });
-                            box.style.display = 'block';
-                        } else {
-                            box.style.display = 'none';
                         }
+                        box.style.display = 'block';
                     }).catch(() => {
-                        box.style.display = 'none';
+                        box.innerHTML = `
+                            <div class="map-suggest-item" onclick="document.getElementById('mapSearchInstInput').value = '${trimmed}'; document.getElementById('mapSuggestions').style.display='none';">
+                                ✏️ <strong>Use Name: "${trimmed}"</strong>
+                            </div>`;
+                        box.style.display = 'block';
                     });
-            }, 350);
+            }, 250);
         }
 
         // Close map suggestion on outside click
@@ -1211,7 +1229,13 @@
                 institutionType: instType,
                 institutionName: instName
             }).then(() => {
+                document.getElementById('dashInstBadge').innerText = "🏛️ " + instName;
+                document.getElementById('dashAgeBadge').innerText = "👤 " + age + " yrs";
+                document.getElementById('profInst').innerText = instName + ` (${instType})`;
+                document.getElementById('profAge').innerText = age + " yrs";
                 openModal("✅", "প্রোফাইল সংরক্ষিত", "আপনার শিক্ষা প্রতিষ্ঠান ও বয়স সফলভাবে আপডেট করা হয়েছে!");
+            }).catch(err => {
+                openModal("❌", "ত্রুটি", err.message);
             });
         }
 
