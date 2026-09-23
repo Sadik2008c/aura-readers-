@@ -254,6 +254,26 @@
             gap: 10px;
         }
 
+        /* Profile Details Box */
+        .profile-info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            text-align: left;
+            margin-top: 15px;
+            background: rgba(5, 11, 20, 0.6);
+            padding: 14px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        @media (max-width: 500px) {
+            .profile-info-grid { grid-template-columns: 1fr; }
+        }
+
+        .info-cell { font-size: 13px; line-height: 1.5; }
+        .info-cell label { font-size: 11px; color: var(--text-muted); text-transform: uppercase; display: block; }
+        .info-cell span { font-weight: 700; color: #fff; }
+
         /* Timer Core */
         .timer-display { font-size: 48px; font-weight: 900; color: var(--neon-blue); letter-spacing: 2px; text-shadow: 0 0 15px rgba(0,240,255,0.4); text-align: center; margin: 15px 0; }
         .timer-ctrls { display: flex; justify-content: center; gap: 10px; margin-bottom: 15px; }
@@ -510,10 +530,32 @@
                 <label for="avatarUploadInput" class="btn-action" style="font-size: 11px; padding: 6px 14px; cursor: pointer; display: inline-block;">📸 ছবি পরিবর্তন করুন</label>
                 <input type="file" id="avatarUploadInput" accept="image/*" style="display: none;" onchange="handleAvatarUpload(event)">
                 
-                <div style="text-align: left; margin-top: 18px;">
-                    <p style="font-size: 13px;">Username: <strong id="profUser" style="color: var(--neon-blue);"></strong></p>
-                    <p style="font-size: 13px; margin-top: 6px;">Display Name: <span id="profName"></span></p>
-                    <p style="font-size: 13px; margin-top: 6px;">Target Goal: <span id="profTarget" style="color: var(--neon-gold);"></span></p>
+                <!-- Detailed Profile Information Grid -->
+                <div class="profile-info-grid">
+                    <div class="info-cell">
+                        <label>Username</label>
+                        <span id="profUser" style="color: var(--neon-blue);"></span>
+                    </div>
+                    <div class="info-cell">
+                        <label>Display Name</label>
+                        <span id="profName"></span>
+                    </div>
+                    <div class="info-cell">
+                        <label>Age & Level</label>
+                        <span id="profAge"></span>
+                    </div>
+                    <div class="info-cell">
+                        <label>Institution</label>
+                        <span id="profInst" style="color: var(--neon-blue);"></span>
+                    </div>
+                    <div class="info-cell">
+                        <label>Target Dream</label>
+                        <span id="profTarget" style="color: var(--neon-gold);"></span>
+                    </div>
+                    <div class="info-cell">
+                        <label>Verification Status</label>
+                        <span id="profVerificationBadge"></span>
+                    </div>
                 </div>
             </div>
 
@@ -564,7 +606,7 @@
         document.getElementById('navUserName').innerText = "@" + currentUser;
         document.getElementById('profUser').innerText = currentUser;
 
-        // User Data Realtime Listener with Stylish Gojo Default Avatar
+        // User Data Realtime Listener with School, College, Age & Verification
         let userData = {};
         db.ref('users/' + currentUser).on('value', (snap) => {
             userData = snap.val() || {};
@@ -572,6 +614,25 @@
             document.getElementById('profName').innerText = userData.name || "Scholar";
             document.getElementById('profTarget').innerText = userData.target || "HSC Science";
             document.getElementById('userSquadName').innerText = userData.squad || "None";
+
+            // Institution & Age Reflection
+            const ageVal = userData.age ? (userData.age + " yrs") : "18 yrs";
+            document.getElementById('profAge').innerText = ageVal;
+            
+            const instName = userData.institutionName || "General College";
+            const instType = userData.institutionType ? ` (${userData.institutionType})` : "";
+            document.getElementById('profInst').innerText = instName + instType;
+
+            // Verification Check (Google Auth is auto-verified, normal registration checks database or firebase auth state)
+            const isVerified = (userData.emailVerified === true) || (auth.currentUser && auth.currentUser.emailVerified);
+            if (isVerified) {
+                document.getElementById('profVerificationBadge').innerHTML = '<span style="color: var(--neon-green); font-weight: bold;">✅ Verified Scholar</span>';
+                if (!userData.emailVerified) {
+                    db.ref('users/' + currentUser).update({ emailVerified: true });
+                }
+            } else {
+                document.getElementById('profVerificationBadge').innerHTML = '<span style="color: var(--neon-gold); font-weight: bold;">⚠️ Pending (Check Gmail)</span>';
+            }
 
             // Default Avatar is Gojo Satoru, otherwise user's custom uploaded picture
             const defaultAv = 'gojo-vibe.jpg';
@@ -768,9 +829,10 @@
                 db.ref('users/' + currentUser).update({
                     googleConnected: true,
                     googleEmail: result.user.email,
-                    googleUid: result.user.uid
+                    googleUid: result.user.uid,
+                    emailVerified: true
                 }).then(() => {
-                    openModal("🌐", "Google Connected", "গুগল অ্যাকাউন্ট সফলভাবে যুক্ত হয়েছে!");
+                    openModal("🌐", "Google Connected", "গুগল অ্যাকাউন্ট সফলভাবে যুক্ত ও ভেরিফাই হয়েছে!");
                 });
             }).catch(err => {
                 openModal("❌", "Google Auth Error", err.message);
