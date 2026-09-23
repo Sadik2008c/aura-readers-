@@ -43,13 +43,12 @@
             border-radius: 22px;
             padding: 24px 22px;
             width: 100%;
-            max-width: 395px;
+            max-width: 410px;
             box-shadow: 0 0 35px rgba(0, 240, 255, 0.18);
             text-align: center;
             position: relative;
         }
 
-        /* Real Gojo Frame */
         .gojo-avatar-frame {
             width: 110px;
             height: 110px;
@@ -74,7 +73,6 @@
             transition: transform 0.3s ease;
         }
 
-        /* Subtle Floating Animation on Typing */
         .gojo-typing {
             animation: gojoFloat 1.8s ease-in-out infinite alternate;
             box-shadow: 0 0 30px rgba(0, 240, 255, 0.7);
@@ -114,7 +112,7 @@
             font-weight: 600;
         }
 
-        input[type="text"], input[type="password"], input[type="email"] {
+        input[type="text"], input[type="password"], input[type="email"], input[type="number"], select {
             width: 100%;
             background: #050b14;
             border: 1px solid #1e293b;
@@ -126,9 +124,15 @@
             transition: all 0.3s ease;
         }
 
-        input:focus {
+        input:focus, select:focus {
             border-color: var(--neon-blue);
             box-shadow: 0 0 10px rgba(0, 240, 255, 0.25);
+        }
+
+        .input-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
         }
 
         .password-wrapper {
@@ -397,6 +401,11 @@
             background: rgba(255, 204, 0, 0.05);
         }
 
+        .policy-rule-box.warning-highlight {
+            border-left-color: var(--neon-red);
+            background: rgba(255, 51, 102, 0.05);
+        }
+
         .policy-rule-box strong {
             color: #fff;
             display: block;
@@ -427,6 +436,8 @@
             box-shadow: 0 0 15px rgba(0, 255, 136, 0.3);
         }
 
+        .policy-agree-btn:hover { opacity: 0.92; transform: translateY(-1px); }
+
         .policy-decline-btn {
             background: rgba(255, 51, 102, 0.1);
             border: 1px solid var(--neon-red);
@@ -446,7 +457,7 @@
         
         <!-- Gojo Satoru Interactive Picture -->
         <div class="gojo-avatar-frame" id="gojoFrame">
-            <img src="gojo-vibe.jpg" class="gojo-img" id="gojoDisplayImg" alt="Gojo Satoru" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=gojo'">
+            <img src="gojo-vibe.jpg" class="gojo-img" id="gojoDisplayImg" alt="Gojo Satoru" onerror="this.src='gojo-vibe.jpg'">
         </div>
 
         <div class="brand-logo">AURA READERS</div>
@@ -460,14 +471,35 @@
                     <input type="text" id="fullName" placeholder="e.g. Sadik" onfocus="triggerGojoMotion(true)" onblur="triggerGojoMotion(false)">
                 </div>
 
+                <div class="input-row">
+                    <div class="input-group">
+                        <label>বয়স (Age)</label>
+                        <input type="number" id="userAge" placeholder="e.g. 18" min="10" max="60" onfocus="triggerGojoMotion(true)" onblur="triggerGojoMotion(false)">
+                    </div>
+
+                    <div class="input-group">
+                        <label>ক্যাটাগরি</label>
+                        <select id="userInstType" onfocus="triggerGojoMotion(true)" onblur="triggerGojoMotion(false)">
+                            <option value="College">College (কলেজ)</option>
+                            <option value="School">School (স্কুল)</option>
+                            <option value="University">University (ভার্সিটি)</option>
+                        </select>
+                    </div>
+                </div>
+
                 <div class="input-group">
-                    <label>ভেরিফাইড ইমেইল (Valid Email)</label>
-                    <input type="email" id="userEmail" placeholder="yourname@gmail.com" onfocus="triggerGojoMotion(true)" onblur="triggerGojoMotion(false)">
+                    <label>প্রতিষ্ঠান (School / College / University)</label>
+                    <input type="text" id="userInstName" placeholder="e.g. Dhaka College / Rangpur Zilla School" onfocus="triggerGojoMotion(true)" onblur="triggerGojoMotion(false)">
                 </div>
 
                 <div class="input-group">
                     <label>টার্গেট ড্রিম (Target Goal)</label>
                     <input type="text" id="targetGoal" placeholder="e.g. BUET / Medical / DU Science" onfocus="triggerGojoMotion(true)" onblur="triggerGojoMotion(false)">
+                </div>
+
+                <div class="input-group">
+                    <label>ভেরিফাইড ইমেইল (Valid Email)</label>
+                    <input type="email" id="userEmail" placeholder="yourname@gmail.com" onfocus="triggerGojoMotion(true)" onblur="triggerGojoMotion(false)">
                 </div>
             </div>
 
@@ -530,7 +562,6 @@
     <!-- Notification Modal With Six Pack Victory Picture Feature -->
     <div class="modal-overlay" id="customModal">
         <div class="popup-card" id="popupCard">
-            <!-- Gojo Victory Picture Container -->
             <div class="popup-img-container" id="popupVictoryContainer">
                 <img src="gojo-victory.jpg" alt="Gojo Six Pack Victory" onerror="this.src='gojo-vibe.jpg'">
             </div>
@@ -568,14 +599,14 @@
                     <p>প্ল্যাটফর্মের মূল উদ্দেশ্য এইচএসসি প্রস্তুতিকে সুদৃঢ় করা। টাইমার অন রেখে পড়াশোনা না করা, ব্যাকগ্রাউন্ডে ভুয়া সময় বাড়ানো বা অনৈতিক উপায়ে XP বৃদ্ধি করা সম্পূর্ণ নিষিদ্ধ।</p>
                 </div>
 
-                <div class="policy-rule-box">
-                    <strong>⏰ ৩. ১৫ ঘণ্টা ইনঅ্যাক্টিভ ও স্ট্রিক রুল:</strong>
+                <div class="policy-rule-box warning-highlight">
+                    <strong style="color: #ff99aa;">⏰ ৩. ১৫ ঘণ্টা ইনঅ্যাক্টিভ ও স্ট্রিক রুল:</strong>
                     <p>প্রতিদিনের পড়াশোনার ধারাবাহিকতা বজায় রাখতে ১৫ ঘণ্টার বেশি সময় স্টাডি সেশনের বাইরে থাকলে দৈনিক স্ট্রিক বোনাস সাময়িক লক হয়ে যাবে।</p>
                 </div>
 
                 <div class="policy-rule-box">
                     <strong>🔒 ৪. ডাটা নিরাপত্তা ও গোপনীয়তা সংরক্ষণ:</strong>
-                    <p>আপনার সংরক্ষিত স্টাডি নোটস, টার্গেট গোল, ডিসপ্লে নাম এবং ইমেইল আমাদের ডাটাবেসে সুরক্ষিত থাকে। কোনো তৃতীয় পক্ষের কাছে তথ্য শেয়ার করা হয় না।</p>
+                    <p>আপনার সংরক্ষিত স্টাডি নোটস, প্রতিষ্ঠান, বয়স, টার্গেট গোল এবং ইমেইল আমাদের ডাটাবেসে সুরক্ষিত থাকে। কোনো তৃতীয় পক্ষের কাছে তথ্য শেয়ার করা হয় না।</p>
                 </div>
 
                 <div class="policy-rule-box">
@@ -611,7 +642,6 @@
         let popupCallback = null;
         let pendingUserPayload = null;
 
-        // Gojo Typing Motion Animation Trigger
         function triggerGojoMotion(isActive) {
             const frame = document.getElementById('gojoFrame');
             if (isActive) {
@@ -621,7 +651,6 @@
             }
         }
 
-        // Popup with optional Six-Pack Victory Pic
         function showPopup(emoji, title, msg, themeColor = "#00f0ff", callback = null, isVictory = false) {
             const victoryBox = document.getElementById('popupVictoryContainer');
             const emojiEl = document.getElementById('popupEmoji');
@@ -803,7 +832,6 @@
 
                         const isBoss = (user === "sadik1" || snapshot.val().role === "admin");
                         
-                        // 🔥 Six Pack Gojo Victory Popup on Success!
                         showPopup("", "LIMITLESS DOMAIN UNLOCKED", `লগইন সফল হয়েছে! শুভকামনা, @${user}।`, "#00ff88", () => {
                             window.location.href = isBoss ? "admin.html" : "app.html";
                         }, true);
@@ -818,12 +846,27 @@
 
             } else {
                 const name = document.getElementById('fullName').value.trim();
-                const email = document.getElementById('userEmail').value.trim();
+                const age = document.getElementById('userAge').value.trim();
+                const instType = document.getElementById('userInstType').value;
+                const instName = document.getElementById('userInstName').value.trim();
                 const target = document.getElementById('targetGoal').value.trim();
+                const email = document.getElementById('userEmail').value.trim();
 
                 if (!name) {
                     submitBtn.innerText = "অ্যাকাউন্ট তৈরি করুন";
-                    showPopup("⚠️", "নাম প্রয়োজন", "আপনার একটি ডিসপ্লে নাম প্রদান করুন।", "#ffcc00");
+                    showPopup("⚠️", "নাম প্রয়োজন", "আপনার ডিসপ্লে নাম প্রদান করুন।", "#ffcc00");
+                    return;
+                }
+
+                if (!age || age < 10) {
+                    submitBtn.innerText = "অ্যাকাউন্ট তৈরি করুন";
+                    showPopup("⚠️", "বয়স প্রয়োজন", "অনুগ্রহ করে আপনার সঠিক বয়স লিখুন।", "#ffcc00");
+                    return;
+                }
+
+                if (!instName) {
+                    submitBtn.innerText = "অ্যাকাউন্ট তৈরি করুন";
+                    showPopup("⚠️", "প্রতিষ্ঠান প্রয়োজন", "আপনার স্কুল, কলেজ বা বিশ্ববিদ্যালয়ের নাম লিখুন।", "#ffcc00");
                     return;
                 }
 
@@ -849,9 +892,12 @@
                             user: user,
                             pass: pass,
                             name: name,
+                            age: age,
+                            institutionType: instType,
+                            institutionName: instName,
                             email: email,
                             target: target || "HSC Science",
-                            avatar: `https://api.dicebear.com/7.x/bottts/svg?seed=${user}`,
+                            avatar: 'gojo-vibe.jpg',
                             savePass: savePass
                         };
                         document.getElementById('termsModal').style.display = "flex";
@@ -874,9 +920,12 @@
             
             let dataRecord = {
                 name: p.name || "Scholar",
+                age: p.age || "N/A",
+                institutionType: p.institutionType || "College",
+                institutionName: p.institutionName || "N/A",
                 email: p.email || "",
                 target: p.target || "HSC Science",
-                avatar: p.avatar,
+                avatar: p.avatar || 'gojo-vibe.jpg',
                 xp: 50,
                 level: 1,
                 totalSeconds: 0,
@@ -909,7 +958,6 @@
                     localStorage.setItem('aura_saved_pass', p.pass);
                 }
                 
-                // 🔥 Six Pack Gojo Victory Popup on Register!
                 showPopup("", "AURA CORE UNLOCKED (+50 XP)", "প্রটোকল সফলভাবে গৃহীত হয়েছে এবং ৫০ XP বোনাস যোগ হয়েছে!", "#00ff88", () => {
                     window.location.href = "app.html";
                 }, true);
@@ -918,7 +966,6 @@
             });
         }
 
-        // Google Popup Login with Terms Checking & Victory State
         function loginWithGoogle() {
             const provider = new firebase.auth.GoogleAuthProvider();
             auth.signInWithPopup(provider).then((result) => {
@@ -937,9 +984,12 @@
                             provider: 'google',
                             user: u,
                             name: result.user.displayName || "Scholar",
+                            age: "18",
+                            institutionType: "College",
+                            institutionName: "General College",
                             email: email,
                             uid: result.user.uid,
-                            avatar: result.user.photoURL || `https://api.dicebear.com/7.x/bottts/svg?seed=${u}`,
+                            avatar: result.user.photoURL || 'gojo-vibe.jpg',
                             target: "HSC Science"
                         };
                         document.getElementById('termsModal').style.display = "flex";
@@ -950,7 +1000,6 @@
             });
         }
 
-        // Facebook Popup Login with Terms Checking & Victory State
         function loginWithFacebook() {
             const provider = new firebase.auth.FacebookAuthProvider();
             provider.addScope('email');
@@ -971,9 +1020,12 @@
                             provider: 'facebook',
                             user: u,
                             name: result.user.displayName || "Scholar",
+                            age: "18",
+                            institutionType: "College",
+                            institutionName: "General College",
                             email: result.user.email || "",
                             uid: result.user.uid,
-                            avatar: result.user.photoURL || `https://api.dicebear.com/7.x/bottts/svg?seed=${u}`,
+                            avatar: result.user.photoURL || 'gojo-vibe.jpg',
                             target: "HSC Science"
                         };
                         document.getElementById('termsModal').style.display = "flex";
