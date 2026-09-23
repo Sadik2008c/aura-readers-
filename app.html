@@ -350,7 +350,7 @@
             margin-bottom: 15px;
         }
 
-        /* Group Hub Preview & Announcements */
+        /* Hub Split Grid: Groups & Announcements */
         .hub-split-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -362,7 +362,7 @@
         }
 
         .hub-empty-state {
-            padding: 24px 15px;
+            padding: 20px 15px;
             text-align: center;
             color: var(--text-muted);
             font-size: 13px;
@@ -383,6 +383,31 @@
         .btn-hub-cta:hover {
             background: var(--neon-blue);
             color: #050b14;
+        }
+
+        /* Squad Forms & Management Layout */
+        .squad-management-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        @media (max-width: 600px) {
+            .squad-management-grid { grid-template-columns: 1fr; }
+        }
+
+        .squad-panel {
+            background: rgba(5, 11, 20, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 15px;
+        }
+        .squad-panel-title {
+            font-size: 13px;
+            font-weight: 800;
+            color: var(--neon-blue);
+            margin-bottom: 10px;
+            text-transform: uppercase;
         }
 
         /* Activity Timeline */
@@ -471,7 +496,7 @@
         .btn-action.stop { background: var(--neon-red); color: #fff; }
         .btn-action:hover { opacity: 0.9; transform: scale(1.02); }
 
-        select, input[type="text"], input[type="number"], textarea {
+        select, input[type="text"], input[type="number"], input[type="password"], textarea {
             width: 100%;
             background: #050b14;
             border: 1px solid #1e293b;
@@ -482,7 +507,7 @@
             outline: none;
             margin-bottom: 10px;
         }
-        select:focus, input[type="text"]:focus, input[type="number"]:focus, textarea:focus { border-color: var(--neon-blue); }
+        select:focus, input[type="text"]:focus, input[type="number"]:focus, input[type="password"]:focus, textarea:focus { border-color: var(--neon-blue); }
 
         .note-item {
             background: rgba(5, 11, 20, 0.8);
@@ -621,7 +646,7 @@
                 </div>
                 <div class="action-card" onclick="switchToTabDirect('squadTab', 'squadTabBtn')">
                     <span class="action-icon">🛡️</span>
-                    <span class="action-name">Find Squad</span>
+                    <span class="action-name">My Squad</span>
                 </div>
                 <div class="action-card" onclick="switchToTabDirect('squadTab', 'squadTabBtn')">
                     <span class="action-icon">🏆</span>
@@ -659,16 +684,19 @@
                 <div class="stat-box">
                     <div class="stat-val" id="dashSquadPreview">None</div>
                     <div class="stat-lbl">My Squad</div>
-                    <div class="stat-sub">Study Group</div>
+                    <div class="stat-sub" id="dashSquadSub">No Squad</div>
                 </div>
             </div>
 
-            <!-- Daily Study Goal Tracker Card -->
+            <!-- Interactive Daily Study Target Controller -->
             <div class="cyber-card">
-                <div class="card-title">🎯 TODAY'S STUDY GOAL</div>
+                <div class="card-title">
+                    <span>🎯 TODAY'S STUDY GOAL</span>
+                    <button onclick="setCustomDailyGoal()" style="background: none; border: 1px solid rgba(0,240,255,0.3); color: var(--neon-blue); font-size: 11px; padding: 3px 8px; border-radius: 5px; cursor: pointer;">Change Goal ⚙️</button>
+                </div>
                 <div class="daily-goal-box">
                     <div style="display: flex; justify-content: space-between; font-size: 13px; font-weight: bold; margin-bottom: 8px;">
-                        <span>দৈনিক পড়ার লক্ষ্যমাত্রা: <span style="color: var(--neon-gold);" id="goalTargetText">৩ ঘণ্টা (৩০০ XP)</span></span>
+                        <span>দৈনিক পড়ার লক্ষ্যমাত্রা: <span style="color: var(--neon-gold);" id="goalTargetText">৩ ঘণ্টা</span></span>
                         <span style="color: var(--neon-blue);" id="goalPercentText">0% সম্পন্ন</span>
                     </div>
                     <div class="progress-bar-bg" style="height: 8px;">
@@ -690,7 +718,7 @@
                     <div class="hub-empty-state" id="dashSquadHubContainer">
                         <div class="empty-icon">🛡️</div>
                         <p id="dashSquadStateText">আপনি এখনো কোনো স্টাডি স্কোয়াডে যুক্ত হননি।</p>
-                        <button class="btn-hub-cta" onclick="switchToTabDirect('squadTab', 'squadTabBtn')">Find or Create Squad</button>
+                        <button class="btn-hub-cta" onclick="switchToTabDirect('squadTab', 'squadTabBtn')">Squad Manager</button>
                     </div>
                 </div>
 
@@ -700,17 +728,17 @@
                     <div class="activity-timeline" id="announcementsList">
                         <div class="activity-row boost">
                             <div>
-                                <div class="activity-desc">⚡ দৈনিক লগইনে +২০ XP বোনাস চালু হয়েছে</div>
-                                <div style="font-size: 11.5px; color: var(--text-muted); margin-top: 2px;">প্রতিদিন প্ল্যাটফর্মে এসে পড়াশোনা অব্যাহত রাখুন।</div>
+                                <div class="activity-desc">⚡ ভেরিফাইড স্কোয়াড সিস্টেম লাইভ</div>
+                                <div style="font-size: 11.5px; color: var(--text-muted); margin-top: 2px;">এখন থেকে ৪-ডিজিট সিক্রেট পিন ও অস্তিত্ব যাচাই করে স্কোয়াডে জয়েন করা যাবে।</div>
                             </div>
-                            <span class="activity-time">Daily</span>
+                            <span class="activity-time">Admin</span>
                         </div>
                         <div class="activity-row">
                             <div>
-                                <div class="activity-desc">🎁 ৫০ XP ওয়েলকাম বোনাস সক্রিয়</div>
-                                <div style="font-size: 11.5px; color: var(--text-muted); margin-top: 2px;">নিয়মিত স্টাডি ট্র্যাকার ব্যবহার করে লেভেল আপ করুন।</div>
+                                <div class="activity-desc">🎁 দৈনিক ২০ XP স্ট্রিক বোনাস সক্রিয়</div>
+                                <div style="font-size: 11.5px; color: var(--text-muted); margin-top: 2px;">প্রতিদিন প্রথম লগইনে স্বয়ংক্রিয়ভাবে পয়েন্ট অ্যাকাউন্টে যুক্ত হবে।</div>
                             </div>
-                            <span class="activity-time">Official</span>
+                            <span class="activity-time">Daily</span>
                         </div>
                     </div>
                 </div>
@@ -845,16 +873,53 @@
         </div>
 
         <!-- ==============================================
-             3. SQUAD TAB
+             3. SQUAD TAB (Verified & Secured Architecture)
         ============================================== -->
         <div id="squadTab" class="tab-content">
+            
+            <!-- Current Squad Active Card -->
             <div class="cyber-card">
-                <div class="card-title">🛡️ SQUAD SYSTEM</div>
-                <p style="font-size: 12px; color: var(--text-muted);">আপনার বর্তমান স্কোয়াড: <strong id="userSquadName" style="color: var(--neon-green);">None</strong></p>
-                
-                <div style="display: flex; gap: 8px; margin-top: 10px;">
-                    <input type="text" id="newSquadInput" placeholder="স্কোয়াডের নাম লিখে জয়েন করুন">
-                    <button class="btn-action" onclick="joinOrCreateSquad()" style="padding: 10px 14px; font-size: 12px;">JOIN</button>
+                <div class="card-title">🛡️ MY SQUAD STATUS</div>
+                <div id="currentSquadCard" style="background: rgba(5, 11, 20, 0.7); border: 1px solid rgba(0, 240, 255, 0.2); padding: 15px; border-radius: 12px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                            <div style="font-size: 18px; font-weight: 900; color: var(--neon-green);" id="activeSquadTitle">No Squad</div>
+                            <div style="font-size: 12px; color: var(--text-muted); margin-top: 3px;" id="activeSquadDesc">আপনি কোনো স্কোয়াডে যুক্ত নেই। নিচে থেকে জয়েন করুন অথবা তৈরি করুন।</div>
+                        </div>
+                        <button id="leaveSquadBtn" onclick="leaveCurrentSquad()" style="display: none; background: rgba(255,51,102,0.15); border: 1px solid var(--neon-red); color: var(--neon-red); padding: 6px 14px; border-radius: 8px; cursor: pointer; font-size: 11.5px; font-weight: bold;">Leave</button>
+                    </div>
+                </div>
+
+                <!-- Squad Creation and Joining Panel -->
+                <div class="squad-management-grid">
+                    
+                    <!-- 1. Join Existing Verified Squad -->
+                    <div class="squad-panel">
+                        <div class="squad-panel-title">🔑 Join Existing Squad</div>
+                        <p style="font-size: 11px; color: var(--text-muted); margin-bottom: 10px;">বিদ্যমান স্কোয়াডের নাম এবং ৪-ডিজিট পিন দিয়ে ভেরিফাই করুন:</p>
+                        
+                        <input type="text" id="joinSquadNameInput" placeholder="সঠিক স্কোয়াড নেম">
+                        <input type="password" id="joinSquadPinInput" placeholder="৪-সংখ্যার সিকিউরিটি পিন" maxlength="4">
+                        <button class="btn-action" style="width: 100%; font-size: 12.5px; padding: 10px;" onclick="joinVerifiedSquad()">VERIFY & JOIN</button>
+                    </div>
+
+                    <!-- 2. Create Brand New Squad -->
+                    <div class="squad-panel">
+                        <div class="squad-panel-title">⚡ Create New Squad</div>
+                        <p style="font-size: 11px; color: var(--text-muted); margin-bottom: 10px;">নতুন স্কোয়াড তৈরি করুন এবং বন্ধুদের ইনভাইট করার পিন সেট করুন:</p>
+                        
+                        <input type="text" id="createSquadNameInput" placeholder="ইউনিক স্কোয়াড নেম">
+                        <select id="createSquadSubjectSelect">
+                            <option value="Physics Focus">Physics Focus</option>
+                            <option value="Chemistry Focus">Chemistry Focus</option>
+                            <option value="Higher Math Focus">Higher Math Focus</option>
+                            <option value="Biology Focus">Biology Focus</option>
+                            <option value="All Rounder (HSC)">All Rounder (HSC Science)</option>
+                        </select>
+                        <input type="password" id="createSquadPinInput" placeholder="সদস্যদের জন্য ৪-সংখ্যার পিন দিন" maxlength="4">
+                        <button class="btn-action" style="width: 100%; font-size: 12.5px; padding: 10px; background: var(--neon-green);" onclick="createNewVerifiedSquad()">CREATE SQUAD</button>
+                    </div>
+
                 </div>
             </div>
 
@@ -1075,21 +1140,32 @@
             document.getElementById('dashXpRemainingText').innerText = `পরবর্তী লেভেলে পৌঁছাতে আরও ${xpCeil - currentXp} XP প্রয়োজন 🔥`;
 
             // Daily Target Calculation
-            const goalTargetSec = 180 * 60;
+            const userTargetMins = userData.dailyGoalMins || 180;
+            const goalTargetSec = userTargetMins * 60;
             const goalAchievedSec = totalSec % goalTargetSec;
             const goalPercent = Math.min(100, Math.round((goalAchievedSec / goalTargetSec) * 100));
+            
+            document.getElementById('goalTargetText').innerText = `${(userTargetMins/60).toFixed(1)} ঘণ্টা (${userTargetMins} মিনিট)`;
             document.getElementById('goalProgressBar').style.width = goalPercent + "%";
             document.getElementById('goalPercentText').innerText = goalPercent + "% সম্পন্ন";
-            const minLeft = Math.max(0, 180 - Math.floor(goalAchievedSec / 60));
+            const minLeft = Math.max(0, userTargetMins - Math.floor(goalAchievedSec / 60));
             document.getElementById('goalRemainingText').innerText = minLeft > 0 ? `আর ${minLeft} মিনিট পড়লে আজকের লক্ষ্য পূরণ হবে` : "🎉 আজকের লক্ষ্য সম্পূর্ণ হয়েছে!";
 
-            // Squad Preview
+            // 🛡️ Squad State Engine
             const userSquad = userData.squad || "None";
-            document.getElementById('userSquadName').innerText = userSquad;
             document.getElementById('dashSquadPreview').innerText = userSquad !== "None" ? userSquad : "None";
+            
             if (userSquad !== "None") {
-                document.getElementById('dashSquadStateText').innerHTML = `আপনি বর্তমানে <strong>${userSquad}</strong> স্কোয়াডের গর্বিত সদস্য!`;
+                document.getElementById('dashSquadSub').innerText = "Verified Squad 🛡️";
+                document.getElementById('activeSquadTitle').innerText = userSquad;
+                document.getElementById('activeSquadDesc').innerText = "আপনি এই স্কোয়াডের একজন সক্রিয় সদস্য।";
+                document.getElementById('leaveSquadBtn').style.display = "block";
+                document.getElementById('dashSquadStateText').innerHTML = `আপনি বর্তমানে <strong>${userSquad}</strong> স্কোয়াডের সদস্য!`;
             } else {
+                document.getElementById('dashSquadSub').innerText = "No Squad";
+                document.getElementById('activeSquadTitle').innerText = "No Squad";
+                document.getElementById('activeSquadDesc').innerText = "আপনি কোনো স্কোয়াডে যুক্ত নেই। নিচে থেকে জয়েন করুন অথবা তৈরি করুন।";
+                document.getElementById('leaveSquadBtn').style.display = "none";
                 document.getElementById('dashSquadStateText').innerText = "আপনি এখনো কোনো স্টাডি স্কোয়াডে যুক্ত হননি।";
             }
 
@@ -1138,6 +1214,118 @@
                     lastDailyBonusDate: todayStr
                 }).then(() => {
                     openModal("🎁", "DAILY LOGIN BONUS", "প্রতিদিনের ধারাবাহিকতার জন্য আপনি +২০ XP বোনাস পেয়েছেন!");
+                });
+            }
+        }
+
+        // Custom Daily Goal Setter
+        function setCustomDailyGoal() {
+            const currentGoal = userData.dailyGoalMins ? (userData.dailyGoalMins / 60) : 3;
+            const newHrs = prompt("আজকে কত ঘণ্টা পড়ার লক্ষ্য নির্ধারণ করতে চান? (যেমন: 2, 4, 6):", currentGoal);
+            if (newHrs !== null) {
+                const parsed = parseFloat(newHrs);
+                if (!isNaN(parsed) && parsed > 0 && parsed <= 16) {
+                    db.ref('users/' + currentUser).update({ dailyGoalMins: Math.round(parsed * 60) }).then(() => {
+                        openModal("🎯", "লক্ষ্যমাত্রা নির্ধারিত", `আজকের পড়ার টার্গেট ${parsed} ঘণ্টায় সেট করা হয়েছে!`);
+                    });
+                } else {
+                    openModal("⚠️", "ভুল ইনপুট", "দয়া করে ১ থেকে ১৬ ঘণ্টার মধ্যে একটি বাস্তবসম্মত সময় দিন!");
+                }
+            }
+        }
+
+        // 🛡️ ============================================
+        // SECURE SQUAD ENGINE: Create, Join, & Verify
+        // ============================================
+
+        // 1. Create New Verified Squad
+        function createNewVerifiedSquad() {
+            const nameInput = document.getElementById('createSquadNameInput').value.trim();
+            const subject = document.getElementById('createSquadSubjectSelect').value;
+            const pin = document.getElementById('createSquadPinInput').value.trim();
+
+            if (!nameInput || nameInput.length < 3) {
+                openModal("⚠️", "নাম অসম্পূর্ণ", "স্কোয়াডের নাম কমপক্ষে ৩ অক্ষরের হতে হবে!");
+                return;
+            }
+
+            if (!pin || pin.length !== 4 || isNaN(pin)) {
+                openModal("⚠️", "৪-ডিজিট পিন আবশ্যক", "সদস্যদের যুক্ত করার জন্য একটি ৪-সংখ্যার পিন কোড দিন (যেমন: 1234)!");
+                return;
+            }
+
+            const squadKey = nameInput.toLowerCase().replace(/[^a-z0-9]/g, "_");
+
+            db.ref('squads/' + squadKey).once('value').then((snap) => {
+                if (snap.exists()) {
+                    openModal("🚫", "নাম আগে থেকেই আছে", "এই নামে ইতোমধ্যে একটি স্কোয়াড তৈরি করা আছে! অন্য নাম দিন।");
+                } else {
+                    // Create Squad Record
+                    db.ref('squads/' + squadKey).set({
+                        name: nameInput,
+                        subject: subject,
+                        pin: pin,
+                        creator: currentUser,
+                        createdAt: Date.now(),
+                        members: { [currentUser]: true }
+                    }).then(() => {
+                        // Attach to user profile
+                        db.ref('users/' + currentUser).update({ squad: nameInput });
+                        document.getElementById('createSquadNameInput').value = "";
+                        document.getElementById('createSquadPinInput').value = "";
+                        openModal("🎉", "স্কোয়াড তৈরি সফল", `'${nameInput}' স্কোয়াড সফলভাবে তৈরি হয়েছে! পিন: ${pin}`);
+                    });
+                }
+            });
+        }
+
+        // 2. Join Existing Squad with Exact Name & PIN Verification
+        function joinVerifiedSquad() {
+            const nameInput = document.getElementById('joinSquadNameInput').value.trim();
+            const pinInput = document.getElementById('joinSquadPinInput').value.trim();
+
+            if (!nameInput) {
+                openModal("⚠️", "স্কোয়াড নেম দিন", "যে স্কোয়াডে জয়েন করতে চান তার নাম লিখুন!");
+                return;
+            }
+
+            if (!pinInput) {
+                openModal("🔑", "সিকিউরিটি পিন দিন", "এই স্কোয়াডে জয়েন করার ৪-সংখ্যার পিন প্রদান করুন!");
+                return;
+            }
+
+            const squadKey = nameInput.toLowerCase().replace(/[^a-z0-9]/g, "_");
+
+            db.ref('squads/' + squadKey).once('value').then((snap) => {
+                if (!snap.exists()) {
+                    openModal("❌", "স্কোয়াড খুঁজে পাওয়া যায়নি", `'${nameInput}' নামে কোনো স্কোয়াড তৈরি করা হয়নি! নাম চেক করুন অথবা নতুন তৈরি করুন।`);
+                } else {
+                    const squadData = snap.val();
+                    if (squadData.pin !== pinInput) {
+                        openModal("🔒", "ভুল পিন কোড", "প্রদত্ত পিন কোডটি সঠিক নয়! স্কোয়াড লিডারের কাছ থেকে সঠিক পিন জেনে নিন।");
+                    } else {
+                        // Success: Add user to squad members and update profile
+                        db.ref(`squads/${squadKey}/members/${currentUser}`).set(true);
+                        db.ref('users/' + currentUser).update({ squad: squadData.name }).then(() => {
+                            document.getElementById('joinSquadNameInput').value = "";
+                            document.getElementById('joinSquadPinInput').value = "";
+                            openModal("🛡️", "জয়েন সফল হয়েছে", `অভিনন্দন! আপনি সফলভাবে '${squadData.name}' স্কোয়াডে যুক্ত হয়েছেন!`);
+                        });
+                    }
+                }
+            });
+        }
+
+        // 3. Leave Current Squad
+        function leaveCurrentSquad() {
+            const currentSquad = userData.squad;
+            if (!currentSquad || currentSquad === "None") return;
+
+            if (confirm(`আপনি কি সত্যিই '${currentSquad}' স্কোয়াড ত্যাগ করতে চান?`)) {
+                const squadKey = currentSquad.toLowerCase().replace(/[^a-z0-9]/g, "_");
+                db.ref(`squads/${squadKey}/members/${currentUser}`).remove();
+                db.ref('users/' + currentUser).update({ squad: "None" }).then(() => {
+                    openModal("🚪", "স্কোয়াড ত্যাগ", "আপনি সফলভাবে স্কোয়াড থেকে বের হয়ে এসেছেন।");
                 });
             }
         }
@@ -1451,16 +1639,6 @@
                 });
             }).catch(err => {
                 openModal("❌", "Facebook Auth Error", err.message);
-            });
-        }
-
-        // Squad Logic
-        function joinOrCreateSquad() {
-            const squadName = document.getElementById('newSquadInput').value.trim();
-            if (!squadName) return;
-            db.ref('users/' + currentUser).update({ squad: squadName }).then(() => {
-                document.getElementById('newSquadInput').value = "";
-                openModal("🛡️", "Squad Updated", `আপনি সফলভাবে '${squadName}' স্কোয়াডে যোগ দিয়েছেন!`);
             });
         }
 
