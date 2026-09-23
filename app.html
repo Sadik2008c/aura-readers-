@@ -20,13 +20,13 @@
             --neon-green: #00ff88;
             --neon-purple: #bc13fe;
             --text-muted: #8892b0;
-            --border-glow: rgba(0, 240, 255, 0.25);
+            --border-glow: rgba(0, 240, 255, 0.22);
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        body { background-color: var(--bg-main); color: #fff; min-height: 100vh; padding-bottom: 70px; }
+        body { background-color: var(--bg-main); color: #fff; min-height: 100vh; padding-bottom: 75px; }
 
-        /* Top Bar */
+        /* Top Navigation */
         .top-nav {
             background: rgba(10, 19, 37, 0.95);
             border-bottom: 1px solid var(--border-glow);
@@ -191,10 +191,9 @@
             to { opacity: 1; }
         }
 
-        /* Main Container */
-        .container { max-width: 900px; margin: 0 auto; padding: 18px; }
+        /* Container & Tabs */
+        .container { max-width: 950px; margin: 0 auto; padding: 16px; }
 
-        /* Tabs */
         .tab-bar {
             display: flex;
             gap: 8px;
@@ -225,34 +224,183 @@
         .tab-content.active { display: block; animation: fadeIn 0.3s ease; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Card Component */
+        /* Cyber Cards */
         .cyber-card {
             background: linear-gradient(145deg, var(--bg-card), #070d1a);
             border: 1px solid var(--border-glow);
-            border-radius: 14px;
+            border-radius: 16px;
             padding: 20px;
             margin-bottom: 18px;
             box-shadow: 0 0 20px rgba(0,0,0,0.4);
         }
-        .card-title { font-size: 16px; font-weight: 800; color: var(--neon-blue); margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+        .card-title { font-size: 15.5px; font-weight: 800; color: var(--neon-blue); margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
 
-        /* Profile & Penalty Banner */
-        .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 12px; margin-bottom: 15px; }
-        .stat-box { background: rgba(5, 11, 20, 0.7); border: 1px solid rgba(255,255,255,0.08); padding: 12px; border-radius: 10px; text-align: center; }
-        .stat-val { font-size: 20px; font-weight: 900; color: var(--neon-gold); }
-        .stat-lbl { font-size: 11px; color: var(--text-muted); text-transform: uppercase; margin-top: 4px; }
-        
-        .penalty-warning {
-            background: rgba(255, 51, 102, 0.1);
-            border: 1px solid var(--neon-red);
-            padding: 12px;
-            border-radius: 10px;
+        /* Dashboard Hero Section */
+        .hero-welcome-card {
+            background: linear-gradient(135deg, rgba(0,240,255,0.1), rgba(121,40,202,0.15)), #081124;
+            border: 1px solid rgba(0,240,255,0.35);
+            border-radius: 18px;
+            padding: 22px;
+            margin-bottom: 18px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 25px rgba(0, 240, 255, 0.12);
+        }
+
+        .hero-top-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        .hero-greeting { font-size: 20px; font-weight: 900; color: #fff; margin-bottom: 4px; }
+        .hero-greeting span { color: var(--neon-blue); }
+        .hero-subtext { font-size: 13px; color: var(--text-muted); }
+        .hero-meta-badges { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+        .meta-pill {
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.12);
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 11.5px;
+            color: #cbd5e1;
+            font-weight: 600;
+        }
+
+        /* XP & Level Progress Bar */
+        .xp-level-container {
+            margin-top: 18px;
+            background: rgba(5, 11, 20, 0.6);
+            border: 1px solid rgba(0,240,255,0.2);
+            padding: 14px;
+            border-radius: 12px;
+        }
+
+        .xp-header {
+            display: flex;
+            justify-content: space-between;
             font-size: 12px;
-            color: #ff99aa;
+            font-weight: 800;
+            margin-bottom: 6px;
+        }
+        .xp-header .lvl-name { color: var(--neon-gold); }
+        .xp-header .xp-pts { color: var(--neon-blue); }
+
+        .progress-bar-bg {
+            width: 100%;
+            height: 10px;
+            background: #0f1c33;
+            border-radius: 6px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.08);
+            position: relative;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--neon-blue), var(--neon-green));
+            border-radius: 6px;
+            transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 0 10px rgba(0,240,255,0.5);
+        }
+
+        .xp-footer-note { font-size: 11px; color: var(--text-muted); margin-top: 6px; text-align: right; }
+
+        /* Quick Action Station Grid */
+        .quick-actions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            gap: 10px;
+            margin-bottom: 18px;
+        }
+        .action-card {
+            background: rgba(10, 19, 37, 0.9);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 12px;
+            padding: 14px 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            user-select: none;
+        }
+        .action-card:hover {
+            border-color: var(--neon-blue);
+            transform: translateY(-2px);
+            box-shadow: 0 0 15px rgba(0,240,255,0.25);
+            background: rgba(0,240,255,0.05);
+        }
+        .action-icon { font-size: 24px; margin-bottom: 6px; display: block; }
+        .action-name { font-size: 12px; font-weight: 800; color: #fff; }
+
+        /* Stats Grid Component */
+        .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(135px, 1fr)); gap: 12px; margin-bottom: 18px; }
+        .stat-box { background: rgba(5, 11, 20, 0.7); border: 1px solid rgba(255,255,255,0.08); padding: 14px 12px; border-radius: 12px; text-align: center; position: relative; }
+        .stat-val { font-size: 22px; font-weight: 900; color: var(--neon-gold); }
+        .stat-lbl { font-size: 11px; color: var(--text-muted); text-transform: uppercase; margin-top: 4px; }
+        .stat-sub { font-size: 10.5px; color: var(--neon-green); margin-top: 3px; font-weight: 600; }
+
+        /* Daily Goal Card */
+        .daily-goal-box {
+            background: rgba(5, 11, 20, 0.6);
+            border: 1px solid rgba(255,204,0,0.25);
+            border-radius: 12px;
+            padding: 14px;
+            margin-bottom: 15px;
+        }
+
+        /* Group Hub Preview & Announcements */
+        .hub-split-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 18px;
+        }
+        @media (max-width: 650px) {
+            .hub-split-grid { grid-template-columns: 1fr; }
+        }
+
+        .hub-empty-state {
+            padding: 24px 15px;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 13px;
+        }
+        .hub-empty-state .empty-icon { font-size: 32px; margin-bottom: 8px; opacity: 0.8; }
+        .btn-hub-cta {
+            background: rgba(0, 240, 255, 0.1);
+            border: 1px solid var(--neon-blue);
+            color: var(--neon-blue);
+            font-size: 12px;
+            font-weight: 800;
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: all 0.2s;
+        }
+        .btn-hub-cta:hover {
+            background: var(--neon-blue);
+            color: #050b14;
+        }
+
+        /* Activity Timeline */
+        .activity-timeline { display: flex; flex-direction: column; gap: 8px; }
+        .activity-row {
             display: flex;
             align-items: center;
-            gap: 10px;
+            justify-content: space-between;
+            padding: 10px 12px;
+            background: rgba(5, 11, 20, 0.6);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-left: 3px solid var(--neon-blue);
+            border-radius: 8px;
+            font-size: 12.5px;
         }
+        .activity-row.boost { border-left-color: var(--neon-gold); }
+        .activity-desc { color: #cbd5e1; font-weight: 600; }
+        .activity-time { font-size: 11px; color: var(--text-muted); }
 
         /* Profile Details Box */
         .profile-info-grid {
@@ -375,12 +523,10 @@
                 <span id="navUserName">Scholar</span>
             </div>
 
-            <!-- Settings Icon Button -->
             <button class="settings-nav-btn" onclick="navigateToProfileTab()" title="Settings & Social Links">
                 ⚙️
             </button>
 
-            <!-- Logout Button -->
             <button class="logout-btn" onclick="startDoorLogout()">
                 🚪 LOGOUT
             </button>
@@ -389,16 +535,175 @@
 
     <div class="container">
         
-        <!-- Tab Controls -->
+        <!-- Tab Controls with Dashboard as Landing Tab -->
         <div class="tab-bar">
-            <button class="tab-btn active" onclick="switchTab('studyTab', this)">⏱️ Study Tracker</button>
-            <button class="tab-btn" onclick="switchTab('notesTab', this)">📚 HSC Notes Vault</button>
-            <button class="tab-btn" onclick="switchTab('squadTab', this)">🛡️ Squad & Leaderboard</button>
+            <button class="tab-btn active" id="dashboardTabBtn" onclick="switchTab('dashboardTab', this)">📊 Dashboard</button>
+            <button class="tab-btn" id="studyTabBtn" onclick="switchTab('studyTab', this)">⏱️ Study Tracker</button>
+            <button class="tab-btn" id="notesTabBtn" onclick="switchTab('notesTab', this)">📚 HSC Notes Vault</button>
+            <button class="tab-btn" id="squadTabBtn" onclick="switchTab('squadTab', this)">🛡️ Squad & Leaderboard</button>
             <button class="tab-btn" id="profileTabBtn" onclick="switchTab('profileTab', this)">⚙️ Profile & Settings</button>
         </div>
 
-        <!-- 1. STUDY TRACKER TAB -->
-        <div id="studyTab" class="tab-content active">
+        <!-- ==============================================
+             0. PROFESSIONAL STUDENT DASHBOARD (PHASE 1)
+        ============================================== -->
+        <div id="dashboardTab" class="tab-content active">
+            
+            <!-- Hero Welcome Card -->
+            <div class="hero-welcome-card">
+                <div class="hero-top-row">
+                    <div>
+                        <div class="hero-greeting" id="dashGreeting">স্বাগতম, <span>Scholar</span> 👋</div>
+                        <div class="hero-subtext">Ready to make today's study session count? প্রতিটি মিনিট আপনাকে স্বপ্নের কাছে নিয়ে যাচ্ছে!</div>
+                        <div class="hero-meta-badges">
+                            <span class="meta-pill" id="dashInstBadge">🏛️ College</span>
+                            <span class="meta-pill" id="dashTargetBadge">🎯 HSC Science</span>
+                            <span class="meta-pill" id="dashAgeBadge">👤 18 yrs</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dynamic Level & XP Progress Bar -->
+                <div class="xp-level-container">
+                    <div class="xp-header">
+                        <span class="lvl-name" id="dashLvlHeader">LEVEL 1 SCHOLAR</span>
+                        <span class="xp-pts" id="dashXpHeader">50 / 100 XP</span>
+                    </div>
+                    <div class="progress-bar-bg">
+                        <div class="progress-bar-fill" id="dashXpProgressBar" style="width: 50%;"></div>
+                    </div>
+                    <div class="xp-footer-note" id="dashXpRemainingText">পরবর্তী লেভেলে পৌঁছাতে আরও ৫০ XP প্রয়োজন 🔥</div>
+                </div>
+            </div>
+
+            <!-- Quick Action Station -->
+            <div class="quick-actions-grid">
+                <div class="action-card" onclick="switchToTabDirect('studyTab', 'studyTabBtn')">
+                    <span class="action-icon">▶️</span>
+                    <span class="action-name">Start Studying</span>
+                </div>
+                <div class="action-card" onclick="switchToTabDirect('notesTab', 'notesTabBtn')">
+                    <span class="action-icon">📚</span>
+                    <span class="action-name">Open Notes</span>
+                </div>
+                <div class="action-card" onclick="switchToTabDirect('squadTab', 'squadTabBtn')">
+                    <span class="action-icon">🛡️</span>
+                    <span class="action-name">Find Squad</span>
+                </div>
+                <div class="action-card" onclick="switchToTabDirect('squadTab', 'squadTabBtn')">
+                    <span class="action-icon">🏆</span>
+                    <span class="action-name">Leaderboard</span>
+                </div>
+            </div>
+
+            <!-- Quick Stats Grid -->
+            <div class="stat-grid">
+                <div class="stat-box">
+                    <div class="stat-val" id="dashTodayTime">0h 0m</div>
+                    <div class="stat-lbl">Today's Study</div>
+                    <div class="stat-sub">Active Today 🔥</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-val" id="dashTotalTime">0.0h</div>
+                    <div class="stat-lbl">Total Time</div>
+                    <div class="stat-sub">Lifetime Study</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-val" id="dashTotalXp">50</div>
+                    <div class="stat-lbl">Total XP</div>
+                    <div class="stat-sub">Aura Rank Points</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-val" id="dashCurrentLvl">Lvl 1</div>
+                    <div class="stat-lbl">Rank Level</div>
+                    <div class="stat-sub">Limitless Domain</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-val" id="dashStreakStatus">Active</div>
+                    <div class="stat-lbl">Daily Streak</div>
+                    <div class="stat-sub" style="color: var(--neon-gold);">15h Rule Ok</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-val" id="dashSquadPreview">None</div>
+                    <div class="stat-lbl">My Squad</div>
+                    <div class="stat-sub">Study Group</div>
+                </div>
+            </div>
+
+            <!-- Daily Study Goal Tracker Card -->
+            <div class="cyber-card">
+                <div class="card-title">🎯 TODAY'S STUDY GOAL</div>
+                <div class="daily-goal-box">
+                    <div style="display: flex; justify-content: space-between; font-size: 13px; font-weight: bold; margin-bottom: 8px;">
+                        <span>দৈনিক পড়ার লক্ষ্যমাত্রা: <span style="color: var(--neon-gold);" id="goalTargetText">৩ ঘণ্টা (৩০০ XP)</span></span>
+                        <span style="color: var(--neon-blue);" id="goalPercentText">0% সম্পন্ন</span>
+                    </div>
+                    <div class="progress-bar-bg" style="height: 8px;">
+                        <div class="progress-bar-fill" id="goalProgressBar" style="width: 0%; background: linear-gradient(90deg, var(--neon-gold), var(--neon-green));"></div>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 10px;">
+                        <span style="font-size: 11px; color: var(--text-muted);" id="goalRemainingText">আর ১৮০ মিনিট পড়লে আজকের লক্ষ্য পূরণ হবে</span>
+                        <button class="btn-hub-cta" style="margin: 0; padding: 6px 14px;" onclick="switchToTabDirect('studyTab', 'studyTabBtn')">Study Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hub Split Grid: Groups & Announcements -->
+            <div class="hub-split-grid">
+                
+                <!-- My Groups Preview -->
+                <div class="cyber-card" style="margin-bottom: 0;">
+                    <div class="card-title">👥 MY STUDY SQUAD</div>
+                    <div class="hub-empty-state" id="dashSquadHubContainer">
+                        <div class="empty-icon">🛡️</div>
+                        <p id="dashSquadStateText">আপনি এখনো কোনো স্টাডি স্কোয়াডে যুক্ত হননি।</p>
+                        <button class="btn-hub-cta" onclick="switchToTabDirect('squadTab', 'squadTabBtn')">Find or Create Squad</button>
+                    </div>
+                </div>
+
+                <!-- Announcements Preview -->
+                <div class="cyber-card" style="margin-bottom: 0;">
+                    <div class="card-title">📢 ANNOUNCEMENTS & NOTICES</div>
+                    <div class="activity-timeline" id="announcementsList">
+                        <div class="activity-row boost">
+                            <div>
+                                <div class="activity-desc">⚡ Aura Readers Phase 1 লাইভ হয়েছে</div>
+                                <div style="font-size: 11.5px; color: var(--text-muted); margin-top: 2px;">প্রফেশনাল স্টুডেন্ট ড্যাশবোর্ড সক্রিয়। মন দিয়ে পড়াশোনা করুন!</div>
+                            </div>
+                            <span class="activity-time">Admin</span>
+                        </div>
+                        <div class="activity-row">
+                            <div>
+                                <div class="activity-desc">🎁 ৫০ XP ওয়েলকাম বোনাস সক্রিয়</div>
+                                <div style="font-size: 11.5px; color: var(--text-muted); margin-top: 2px;">নিয়মিত স্টাডি ট্র্যাকার ব্যবহার করে লেভেল আপ করুন।</div>
+                            </div>
+                            <span class="activity-time">Official</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Recent Activity Timeline Feed -->
+            <div class="cyber-card" style="margin-top: 18px;">
+                <div class="card-title">⚡ RECENT STUDY ACTIVITIES</div>
+                <div class="activity-timeline" id="recentActivityList">
+                    <div class="activity-row">
+                        <div>
+                            <span class="activity-desc">🎉 Aura Core এ সফলভাবে রেজিস্ট্রেশন সম্পন্ন করেছেন</span>
+                            <div style="font-size: 11px; color: var(--neon-green); margin-top: 2px;">+50 XP Welcome Bonus Awarded</div>
+                        </div>
+                        <span class="activity-time">Joined</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- ==============================================
+             1. STUDY TRACKER TAB (Preserved Existing System)
+        ============================================== -->
+        <div id="studyTab" class="tab-content">
             <div class="stat-grid">
                 <div class="stat-box">
                     <div class="stat-val" id="totalHoursDisplay">0.0h</div>
@@ -449,7 +754,9 @@
             </div>
         </div>
 
-        <!-- 2. HSC NOTES VAULT TAB -->
+        <!-- ==============================================
+             2. HSC NOTES VAULT TAB (Preserved Existing System)
+        ============================================== -->
         <div id="notesTab" class="tab-content">
             <div class="cyber-card">
                 <div class="card-title">📚 STRUCTURED HSC NOTES VAULT</div>
@@ -504,7 +811,9 @@
             </div>
         </div>
 
-        <!-- 3. SQUAD TAB -->
+        <!-- ==============================================
+             3. SQUAD TAB (Preserved Existing System)
+        ============================================== -->
         <div id="squadTab" class="tab-content">
             <div class="cyber-card">
                 <div class="card-title">🛡️ SQUAD SYSTEM</div>
@@ -522,7 +831,9 @@
             </div>
         </div>
 
-        <!-- 4. PROFILE & SETTINGS TAB -->
+        <!-- ==============================================
+             4. PROFILE & SETTINGS TAB (Preserved Existing System)
+        ============================================== -->
         <div id="profileTab" class="tab-content">
             <div class="cyber-card" style="text-align: center;">
                 <img id="profAvatarBig" src="gojo-vibe.jpg" style="width: 85px; height: 85px; border-radius: 50%; border: 3px solid var(--neon-blue); object-fit: cover; margin-bottom: 10px; background: #050b14; box-shadow: 0 0 15px rgba(0, 240, 255, 0.4);" onerror="this.src='gojo-vibe.jpg'">
@@ -530,7 +841,6 @@
                 <label for="avatarUploadInput" class="btn-action" style="font-size: 11px; padding: 6px 14px; cursor: pointer; display: inline-block;">📸 ছবি পরিবর্তন করুন</label>
                 <input type="file" id="avatarUploadInput" accept="image/*" style="display: none;" onchange="handleAvatarUpload(event)">
                 
-                <!-- Detailed Profile Information Grid -->
                 <div class="profile-info-grid">
                     <div class="info-cell">
                         <label>Username</label>
@@ -585,6 +895,7 @@
     </div>
 
     <script>
+        // 1. Firebase Initialization
         const firebaseConfig = {
             apiKey: "AIzaSyAG0Py4X5uCXy_qlswCe0hE8ci_iOzGc2M",
             authDomain: "aura-readers.firebaseapp.com",
@@ -598,6 +909,7 @@
         const db = firebase.database();
         const auth = firebase.auth();
 
+        // 2. Authentication Check
         const currentUser = localStorage.getItem('auraCurrentUser');
         if (!currentUser) {
             window.location.href = "index.html";
@@ -606,24 +918,40 @@
         document.getElementById('navUserName').innerText = "@" + currentUser;
         document.getElementById('profUser').innerText = currentUser;
 
-        // User Data Realtime Listener with School, College, Age & Verification
+        // Dynamic Time Greeting Generator
+        function getTimeGreeting() {
+            const hr = new Date().getHours();
+            if (hr >= 5 && hr < 12) return "শুভ সকাল";
+            if (hr >= 12 && hr < 17) return "শুভ দুপুর";
+            if (hr >= 17 && hr < 21) return "শুভ সন্ধ্যা";
+            return "স্বাগতম";
+        }
+
+        // 3. User Data Realtime Listener & Dashboard Engine
         let userData = {};
         db.ref('users/' + currentUser).on('value', (snap) => {
             userData = snap.val() || {};
             
-            document.getElementById('profName').innerText = userData.name || "Scholar";
-            document.getElementById('profTarget').innerText = userData.target || "HSC Science";
-            document.getElementById('userSquadName').innerText = userData.squad || "None";
+            const displayName = userData.name || "Scholar";
+            const greeting = getTimeGreeting();
+            document.getElementById('dashGreeting').innerHTML = `${greeting}, <span>${displayName}</span> 👋`;
+            document.getElementById('profName').innerText = displayName;
 
-            // Institution & Age Reflection
+            // Target, Institution & Age
+            const targetGoal = userData.target || "HSC Science";
+            document.getElementById('dashTargetBadge').innerText = "🎯 " + targetGoal;
+            document.getElementById('profTarget').innerText = targetGoal;
+
             const ageVal = userData.age ? (userData.age + " yrs") : "18 yrs";
+            document.getElementById('dashAgeBadge').innerText = "👤 " + ageVal;
             document.getElementById('profAge').innerText = ageVal;
-            
+
             const instName = userData.institutionName || "General College";
             const instType = userData.institutionType ? ` (${userData.institutionType})` : "";
+            document.getElementById('dashInstBadge').innerText = "🏛️ " + instName;
             document.getElementById('profInst').innerText = instName + instType;
 
-            // Verification Check (Google Auth is auto-verified, normal registration checks database or firebase auth state)
+            // Verification Check
             const isVerified = (userData.emailVerified === true) || (auth.currentUser && auth.currentUser.emailVerified);
             if (isVerified) {
                 document.getElementById('profVerificationBadge').innerHTML = '<span style="color: var(--neon-green); font-weight: bold;">✅ Verified Scholar</span>';
@@ -634,22 +962,77 @@
                 document.getElementById('profVerificationBadge').innerHTML = '<span style="color: var(--neon-gold); font-weight: bold;">⚠️ Pending (Check Gmail)</span>';
             }
 
-            // Default Avatar is Gojo Satoru, otherwise user's custom uploaded picture
+            // Avatar Display
             const defaultAv = 'gojo-vibe.jpg';
             const userAvatar = userData.avatar;
             const avatarUrl = (userAvatar && !userAvatar.includes('dicebear')) ? userAvatar : defaultAv;
-            
             document.getElementById('navAvatar').src = avatarUrl;
             document.getElementById('profAvatarBig').src = avatarUrl;
 
+            // Study Time & XP Calculations
             const totalSec = userData.totalSeconds || 0;
             const hours = (totalSec / 3600).toFixed(1);
             document.getElementById('totalHoursDisplay').innerText = hours + "h";
-            document.getElementById('xpDisplay').innerText = userData.xp || 50;
+            document.getElementById('dashTotalTime').innerText = hours + "h";
 
-            const currentLvl = Math.floor((userData.xp || 50) / 100) + 1;
+            // Estimated Today's Study Calculation
+            const todayMin = Math.floor((totalSec % 3600) / 60);
+            const todayHr = Math.floor((totalSec % 86400) / 3600);
+            document.getElementById('dashTodayTime').innerText = `${todayHr}h ${todayMin}m`;
+
+            const currentXp = userData.xp || 50;
+            document.getElementById('xpDisplay').innerText = currentXp;
+            document.getElementById('dashTotalXp').innerText = currentXp;
+
+            // Reusable Level Engine (100 XP per Level)
+            const currentLvl = Math.floor(currentXp / 100) + 1;
             document.getElementById('levelDisplay').innerText = "Lvl " + currentLvl;
+            document.getElementById('dashCurrentLvl').innerText = "Lvl " + currentLvl;
 
+            const xpFloor = (currentLvl - 1) * 100;
+            const xpCeil = currentLvl * 100;
+            const xpInCurrentLvl = currentXp - xpFloor;
+            const progressPercent = Math.min(100, Math.max(0, (xpInCurrentLvl / 100) * 100));
+
+            document.getElementById('dashLvlHeader').innerText = `LEVEL ${currentLvl} SCHOLAR`;
+            document.getElementById('dashXpHeader').innerText = `${currentXp} / ${xpCeil} XP`;
+            document.getElementById('dashXpProgressBar').style.width = progressPercent + "%";
+            document.getElementById('dashXpRemainingText').innerText = `পরবর্তী লেভেলে পৌঁছাতে আরও ${xpCeil - currentXp} XP প্রয়োজন 🔥`;
+
+            // Daily Target Calculation (Goal: 180 Mins)
+            const goalTargetSec = 180 * 60;
+            const goalAchievedSec = totalSec % goalTargetSec;
+            const goalPercent = Math.min(100, Math.round((goalAchievedSec / goalTargetSec) * 100));
+            document.getElementById('goalProgressBar').style.width = goalPercent + "%";
+            document.getElementById('goalPercentText').innerText = goalPercent + "% সম্পন্ন";
+            const minLeft = Math.max(0, 180 - Math.floor(goalAchievedSec / 60));
+            document.getElementById('goalRemainingText').innerText = minLeft > 0 ? `আর ${minLeft} মিনিট পড়লে আজকের লক্ষ্য পূরণ হবে` : "🎉 আজকের লক্ষ্য সম্পূর্ণ হয়েছে!";
+
+            // Squad Preview
+            const userSquad = userData.squad || "None";
+            document.getElementById('userSquadName').innerText = userSquad;
+            document.getElementById('dashSquadPreview').innerText = userSquad !== "None" ? userSquad : "None";
+            if (userSquad !== "None") {
+                document.getElementById('dashSquadStateText').innerHTML = `আপনি বর্তমানে <strong>${userSquad}</strong> স্কোয়াডের গর্বিত সদস্য!`;
+            } else {
+                document.getElementById('dashSquadStateText').innerText = "আপনি এখনো কোনো স্টাডি স্কোয়াডে যুক্ত হননি।";
+            }
+
+            // Streak & Inactivity Penalty Check
+            if (userData.lastActiveSession) {
+                const diffHours = (Date.now() - userData.lastActiveSession) / (1000 * 60 * 60);
+                if (diffHours >= 15) {
+                    document.getElementById('penaltySection').style.display = "flex";
+                    document.getElementById('dashStreakStatus').innerText = "Locked";
+                    document.getElementById('dashStreakStatus').style.color = "var(--neon-red)";
+                } else {
+                    document.getElementById('penaltySection').style.display = "none";
+                    document.getElementById('dashStreakStatus').innerText = "Active";
+                    document.getElementById('dashStreakStatus').style.color = "var(--neon-green)";
+                }
+            }
+
+            // Social Connected Status
             if (userData.googleConnected) {
                 const gBtn = document.getElementById('btnGoogleLink');
                 gBtn.classList.add('connected');
@@ -660,21 +1043,28 @@
                 fbBtn.classList.add('connected');
                 fbBtn.innerText = "✅ Facebook Connected";
             }
-
-            if (userData.lastActiveSession) {
-                const diffHours = (Date.now() - userData.lastActiveSession) / (1000 * 60 * 60);
-                if (diffHours >= 15) {
-                    document.getElementById('penaltySection').style.display = "flex";
-                } else {
-                    document.getElementById('penaltySection').style.display = "none";
-                }
-            }
         });
 
-        // Direct Navigation to Settings / Profile Tab
+        // Tab Navigation Helpers
+        function switchTab(tabId, element) {
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+            if (element) {
+                element.classList.add('active');
+            }
+        }
+
+        function switchToTabDirect(tabId, buttonId) {
+            const btn = document.getElementById(buttonId);
+            switchTab(tabId, btn);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
         function navigateToProfileTab() {
             const profileBtn = document.getElementById('profileTabBtn');
             switchTab('profileTab', profileBtn);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         // Profile Picture Upload Handler
@@ -697,7 +1087,7 @@
             reader.readAsDataURL(file);
         }
 
-        // Subject and Paper Dropdowns
+        // Subject & Paper Selection Dropdowns
         function updateStudyPaperOptions() {
             const sub = document.getElementById('studySubjectSelect').value;
             const paperSelect = document.getElementById('studyPaperSelect');
@@ -718,7 +1108,7 @@
             }
         }
 
-        // Timer Logic
+        // Study Timer Core Logic
         let timerActive = false;
         let timerInterval = null;
         let elapsedSeconds = 0;
@@ -760,6 +1150,7 @@
             const earnedXp = Math.floor(elapsedSeconds / 60);
             const currentTotalSec = (userData.totalSeconds || 0) + elapsedSeconds;
             const currentTotalXp = (userData.xp || 50) + earnedXp;
+            const subject = document.getElementById('studySubjectSelect').value;
 
             db.ref('users/' + currentUser).update({
                 totalSeconds: currentTotalSec,
@@ -767,6 +1158,19 @@
                 lastActiveSession: Date.now(),
                 penaltyActive: false
             }).then(() => {
+                // Add to dynamic activity timeline
+                const actList = document.getElementById('recentActivityList');
+                const row = document.createElement('div');
+                row.className = "activity-row boost";
+                row.innerHTML = `
+                    <div>
+                        <span class="activity-desc">🔥 ${subject} এ ${Math.floor(elapsedSeconds/60)} মিনিট স্টাডি সেশন সম্পন্ন</span>
+                        <div style="font-size: 11px; color: var(--neon-gold); margin-top: 2px;">+${earnedXp} XP Boost Earned</div>
+                    </div>
+                    <span class="activity-time">Just Now</span>
+                `;
+                actList.insertBefore(row, actList.firstChild);
+
                 openModal("🔥", "BOOST ACHIEVED", `চমৎকার! আপনি ${Math.floor(elapsedSeconds/60)} মিনিট পড়েছেন এবং +${earnedXp} XP অর্জন করেছেন!`);
             });
         }
@@ -799,6 +1203,7 @@
             });
         }
 
+        // Notes Realtime Loader
         db.ref('hsc_notes/' + currentUser).on('value', (snap) => {
             const list = document.getElementById('notesContainer');
             list.innerHTML = "";
@@ -822,7 +1227,7 @@
             });
         });
 
-        // Link Accounts
+        // Social Accounts Linking
         function linkGoogleAccount() {
             const provider = new firebase.auth.GoogleAuthProvider();
             auth.signInWithPopup(provider).then((result) => {
@@ -866,6 +1271,7 @@
             });
         }
 
+        // Leaderboard Realtime Loader
         db.ref('users').orderByChild('xp').limitToLast(10).on('value', (snap) => {
             const board = document.getElementById('leaderboardList');
             board.innerHTML = "";
@@ -885,16 +1291,6 @@
             });
         });
 
-        // Tab Switcher
-        function switchTab(tabId, element) {
-            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-            document.getElementById(tabId).classList.add('active');
-            if (element) {
-                element.classList.add('active');
-            }
-        }
-
         // Modal Helpers
         function openModal(emoji, title, msg) {
             document.getElementById('modalEmoji').innerText = emoji;
@@ -906,7 +1302,7 @@
             document.getElementById('sysModal').style.display = "none";
         }
 
-        // 🚪 Cyber Door Exit Logout Sequence
+        // Cyber Door Exit Logout Sequence
         function startDoorLogout() {
             const overlay = document.getElementById('logoutOverlay');
             const doorStage = document.getElementById('doorStage');
