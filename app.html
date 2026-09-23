@@ -40,14 +40,56 @@
             backdrop-filter: blur(8px);
         }
         .brand { font-size: 19px; font-weight: 900; color: var(--neon-blue); letter-spacing: 1.5px; }
-        .user-chip { display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 700; color: var(--neon-green); }
-        .nav-avatar-img { width: 34px; height: 34px; border-radius: 50%; border: 2px solid var(--neon-blue); object-fit: cover; background: #000; }
+        .user-nav-group { display: flex; align-items: center; gap: 8px; }
+        
+        .user-chip { 
+            display: flex; 
+            align-items: center; 
+            gap: 8px; 
+            font-size: 13px; 
+            font-weight: 700; 
+            color: var(--neon-green);
+            background: rgba(0, 240, 255, 0.06);
+            border: 1px solid rgba(0, 240, 255, 0.2);
+            padding: 4px 10px 4px 5px;
+            border-radius: 20px;
+        }
+        
+        .nav-avatar-img { 
+            width: 32px; 
+            height: 32px; 
+            border-radius: 50%; 
+            border: 2px solid var(--neon-blue); 
+            object-fit: cover; 
+            background: #050b14; 
+        }
+
+        .settings-nav-btn {
+            background: rgba(0, 240, 255, 0.1);
+            border: 1px solid var(--neon-blue);
+            color: var(--neon-blue);
+            width: 34px;
+            height: 34px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.2s ease;
+        }
+        .settings-nav-btn:hover {
+            background: var(--neon-blue);
+            color: #050b14;
+            box-shadow: 0 0 10px var(--neon-blue);
+        }
+
         .logout-btn { 
             background: rgba(255, 51, 102, 0.15); 
             border: 1px solid var(--neon-red); 
             color: var(--neon-red); 
-            padding: 6px 14px; 
-            border-radius: 6px; 
+            padding: 6px 12px; 
+            border-radius: 8px; 
             cursor: pointer; 
             font-size: 11px; 
             font-weight: bold; 
@@ -79,7 +121,6 @@
             margin-bottom: 20px;
         }
 
-        /* Door Frame */
         .door-frame {
             width: 100%;
             height: 100%;
@@ -92,7 +133,6 @@
             overflow: hidden;
         }
 
-        /* Door Leaf opening in 3D */
         .door-leaf {
             position: absolute;
             top: 0; left: 0;
@@ -119,7 +159,6 @@
             transform: rotateY(-80deg);
         }
 
-        /* Walking Person SVG */
         .walking-man {
             position: absolute;
             bottom: 4px;
@@ -231,7 +270,6 @@
         .btn-action.stop { background: var(--neon-red); color: #fff; }
         .btn-action:hover { opacity: 0.9; transform: scale(1.02); }
 
-        /* Dropdowns & Inputs */
         select, input[type="text"], textarea {
             width: 100%;
             background: #050b14;
@@ -245,7 +283,6 @@
         }
         select:focus, input[type="text"]:focus, textarea:focus { border-color: var(--neon-blue); }
 
-        /* Notes List */
         .note-item {
             background: rgba(5, 11, 20, 0.8);
             border: 1px solid rgba(255,255,255,0.06);
@@ -257,7 +294,6 @@
         .note-header { display: flex; justify-content: space-between; font-size: 12px; color: var(--neon-gold); font-weight: bold; margin-bottom: 5px; }
         .note-body { font-size: 13px; color: #ddd; word-break: break-word; }
 
-        /* Connect Social Btns */
         .connect-box { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 10px; }
         .btn-connect {
             flex: 1;
@@ -278,7 +314,6 @@
         }
         .btn-connect.connected { border-color: var(--neon-green); color: var(--neon-green); pointer-events: none; }
 
-        /* Modal */
         .modal {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.85); display: none; justify-content: center; align-items: center; z-index: 999;
@@ -293,20 +328,15 @@
     <div class="logout-overlay" id="logoutOverlay">
         <div class="door-portal-stage" id="doorStage">
             <div class="door-frame">
-                <!-- Human walking silhouette SVG -->
                 <svg class="walking-man" viewBox="0 0 24 36" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <circle cx="12" cy="5" r="4" fill="#00ff88"/>
-                    <!-- Torso -->
                     <path d="M12 9 L12 21" stroke="#00ff88" stroke-width="3" stroke-linecap="round"/>
-                    <!-- Legs in walking pose -->
                     <path d="M12 21 L8 34" stroke="#00ff88" stroke-width="2.5" stroke-linecap="round"/>
                     <path d="M12 21 L16 34" stroke="#00ff88" stroke-width="2.5" stroke-linecap="round"/>
-                    <!-- Arms swinging -->
                     <path d="M12 12 L7 20" stroke="#00ff88" stroke-width="2" stroke-linecap="round"/>
                     <path d="M12 12 L17 19" stroke="#00ff88" stroke-width="2" stroke-linecap="round"/>
                 </svg>
 
-                <!-- 3D Door Leaf -->
                 <div class="door-leaf">
                     <div class="door-handle"></div>
                 </div>
@@ -315,12 +345,22 @@
         <div class="logout-text">🚪 ডিসকানেক্টিং কোর...</div>
     </div>
 
-    <!-- Top Bar Navigation -->
+    <!-- Top Bar Navigation with Settings & Profile -->
     <div class="top-nav">
         <div class="brand">⚡ AURA READERS</div>
-        <div class="user-chip">
-            <img id="navAvatar" src="" class="nav-avatar-img">
-            <span id="navUserName">Scholar</span>
+        
+        <div class="user-nav-group">
+            <div class="user-chip" onclick="navigateToProfileTab()" style="cursor: pointer;" title="View Profile">
+                <img id="navAvatar" src="gojo-vibe.jpg" class="nav-avatar-img" onerror="this.src='gojo-vibe.jpg'">
+                <span id="navUserName">Scholar</span>
+            </div>
+
+            <!-- Settings Icon Button -->
+            <button class="settings-nav-btn" onclick="navigateToProfileTab()" title="Settings & Social Links">
+                ⚙️
+            </button>
+
+            <!-- Logout Button -->
             <button class="logout-btn" onclick="startDoorLogout()">
                 🚪 LOGOUT
             </button>
@@ -334,7 +374,7 @@
             <button class="tab-btn active" onclick="switchTab('studyTab', this)">⏱️ Study Tracker</button>
             <button class="tab-btn" onclick="switchTab('notesTab', this)">📚 HSC Notes Vault</button>
             <button class="tab-btn" onclick="switchTab('squadTab', this)">🛡️ Squad & Leaderboard</button>
-            <button class="tab-btn" onclick="switchTab('profileTab', this)">⚙️ Profile & Settings</button>
+            <button class="tab-btn" id="profileTabBtn" onclick="switchTab('profileTab', this)">⚙️ Profile & Settings</button>
         </div>
 
         <!-- 1. STUDY TRACKER TAB -->
@@ -465,9 +505,9 @@
         <!-- 4. PROFILE & SETTINGS TAB -->
         <div id="profileTab" class="tab-content">
             <div class="cyber-card" style="text-align: center;">
-                <img id="profAvatarBig" src="" style="width: 80px; height: 80px; border-radius: 50%; border: 3px solid var(--neon-blue); object-fit: cover; margin-bottom: 10px; background: #000;">
+                <img id="profAvatarBig" src="gojo-vibe.jpg" style="width: 85px; height: 85px; border-radius: 50%; border: 3px solid var(--neon-blue); object-fit: cover; margin-bottom: 10px; background: #050b14; box-shadow: 0 0 15px rgba(0, 240, 255, 0.4);" onerror="this.src='gojo-vibe.jpg'">
                 <br>
-                <label for="avatarUploadInput" class="btn-action" style="font-size: 11px; padding: 6px 14px; cursor: pointer; display: inline-block;">📸 ছবি আপলোড করুন</label>
+                <label for="avatarUploadInput" class="btn-action" style="font-size: 11px; padding: 6px 14px; cursor: pointer; display: inline-block;">📸 ছবি পরিবর্তন করুন</label>
                 <input type="file" id="avatarUploadInput" accept="image/*" style="display: none;" onchange="handleAvatarUpload(event)">
                 
                 <div style="text-align: left; margin-top: 18px;">
@@ -524,7 +564,7 @@
         document.getElementById('navUserName').innerText = "@" + currentUser;
         document.getElementById('profUser').innerText = currentUser;
 
-        // User Data Realtime Listener
+        // User Data Realtime Listener with Stylish Gojo Default Avatar
         let userData = {};
         db.ref('users/' + currentUser).on('value', (snap) => {
             userData = snap.val() || {};
@@ -533,8 +573,11 @@
             document.getElementById('profTarget').innerText = userData.target || "HSC Science";
             document.getElementById('userSquadName').innerText = userData.squad || "None";
 
-            const defaultAv = `https://api.dicebear.com/7.x/bottts/svg?seed=${currentUser}`;
-            const avatarUrl = userData.avatar || defaultAv;
+            // Default Avatar is Gojo Satoru, otherwise user's custom uploaded picture
+            const defaultAv = 'gojo-vibe.jpg';
+            const userAvatar = userData.avatar;
+            const avatarUrl = (userAvatar && !userAvatar.includes('dicebear')) ? userAvatar : defaultAv;
+            
             document.getElementById('navAvatar').src = avatarUrl;
             document.getElementById('profAvatarBig').src = avatarUrl;
 
@@ -566,6 +609,12 @@
                 }
             }
         });
+
+        // Direct Navigation to Settings / Profile Tab
+        function navigateToProfileTab() {
+            const profileBtn = document.getElementById('profileTabBtn');
+            switchTab('profileTab', profileBtn);
+        }
 
         // Profile Picture Upload Handler
         function handleAvatarUpload(event) {
@@ -802,12 +851,10 @@
             
             overlay.style.display = 'flex';
             
-            // ১. গেট খুলবে এবং মানুষটি হেঁটে পার হবে
             setTimeout(() => {
                 doorStage.classList.add('door-open');
             }, 100);
 
-            // ২. অ্যানিমেশন সম্পূর্ণ হওয়ার পর সেশন ক্লিয়ার হয়ে রিডাইরেক্ট হবে
             setTimeout(() => {
                 localStorage.removeItem('auraCurrentUser');
                 localStorage.removeItem('auraIsAdmin');
