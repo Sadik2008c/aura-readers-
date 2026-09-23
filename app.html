@@ -402,7 +402,7 @@
         .activity-desc { color: #cbd5e1; font-weight: 600; }
         .activity-time { font-size: 11px; color: var(--text-muted); }
 
-        /* Profile Details Box */
+        /* Profile Details Box & Form */
         .profile-info-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -422,6 +422,38 @@
         .info-cell label { font-size: 11px; color: var(--text-muted); text-transform: uppercase; display: block; }
         .info-cell span { font-weight: 700; color: #fff; }
 
+        /* Map Auto-Suggest styling */
+        .map-search-box {
+            position: relative;
+            margin-top: 5px;
+        }
+        .map-suggest-list {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            background: #081124;
+            border: 1px solid var(--neon-blue);
+            border-radius: 8px;
+            max-height: 200px;
+            overflow-y: auto;
+            z-index: 1000;
+            display: none;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.8);
+        }
+        .map-suggest-item {
+            padding: 10px 12px;
+            font-size: 12px;
+            color: #cbd5e1;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+            cursor: pointer;
+            text-align: left;
+        }
+        .map-suggest-item:hover {
+            background: rgba(0, 240, 255, 0.15);
+            color: var(--neon-blue);
+        }
+
         /* Timer Core */
         .timer-display { font-size: 48px; font-weight: 900; color: var(--neon-blue); letter-spacing: 2px; text-shadow: 0 0 15px rgba(0,240,255,0.4); text-align: center; margin: 15px 0; }
         .timer-ctrls { display: flex; justify-content: center; gap: 10px; margin-bottom: 15px; }
@@ -438,7 +470,7 @@
         .btn-action.stop { background: var(--neon-red); color: #fff; }
         .btn-action:hover { opacity: 0.9; transform: scale(1.02); }
 
-        select, input[type="text"], textarea {
+        select, input[type="text"], input[type="number"], textarea {
             width: 100%;
             background: #050b14;
             border: 1px solid #1e293b;
@@ -449,7 +481,7 @@
             outline: none;
             margin-bottom: 10px;
         }
-        select:focus, input[type="text"]:focus, textarea:focus { border-color: var(--neon-blue); }
+        select:focus, input[type="text"]:focus, input[type="number"]:focus, textarea:focus { border-color: var(--neon-blue); }
 
         .note-item {
             background: rgba(5, 11, 20, 0.8);
@@ -523,7 +555,7 @@
                 <span id="navUserName">Scholar</span>
             </div>
 
-            <button class="settings-nav-btn" onclick="navigateToProfileTab()" title="Settings & Social Links">
+            <button class="settings-nav-btn" onclick="navigateToProfileTab()" title="Settings & Edit Profile">
                 ⚙️
             </button>
 
@@ -667,10 +699,10 @@
                     <div class="activity-timeline" id="announcementsList">
                         <div class="activity-row boost">
                             <div>
-                                <div class="activity-desc">⚡ Aura Readers Phase 1 লাইভ হয়েছে</div>
-                                <div style="font-size: 11.5px; color: var(--text-muted); margin-top: 2px;">প্রফেশনাল স্টুডেন্ট ড্যাশবোর্ড সক্রিয়। মন দিয়ে পড়াশোনা করুন!</div>
+                                <div class="activity-desc">⚡ দৈনিক লগইনে +২০ XP বোনাস চালু হয়েছে</div>
+                                <div style="font-size: 11.5px; color: var(--text-muted); margin-top: 2px;">প্রতিদিন প্ল্যাটফর্মে এসে পড়াশোনা অব্যাহত রাখুন।</div>
                             </div>
-                            <span class="activity-time">Admin</span>
+                            <span class="activity-time">Daily</span>
                         </div>
                         <div class="activity-row">
                             <div>
@@ -701,7 +733,7 @@
         </div>
 
         <!-- ==============================================
-             1. STUDY TRACKER TAB (Preserved Existing System)
+             1. STUDY TRACKER TAB
         ============================================== -->
         <div id="studyTab" class="tab-content">
             <div class="stat-grid">
@@ -755,7 +787,7 @@
         </div>
 
         <!-- ==============================================
-             2. HSC NOTES VAULT TAB (Preserved Existing System)
+             2. HSC NOTES VAULT TAB
         ============================================== -->
         <div id="notesTab" class="tab-content">
             <div class="cyber-card">
@@ -812,7 +844,7 @@
         </div>
 
         <!-- ==============================================
-             3. SQUAD TAB (Preserved Existing System)
+             3. SQUAD TAB
         ============================================== -->
         <div id="squadTab" class="tab-content">
             <div class="cyber-card">
@@ -832,7 +864,7 @@
         </div>
 
         <!-- ==============================================
-             4. PROFILE & SETTINGS TAB (Preserved Existing System)
+             4. PROFILE & SETTINGS TAB
         ============================================== -->
         <div id="profileTab" class="tab-content">
             <div class="cyber-card" style="text-align: center;">
@@ -869,8 +901,39 @@
                 </div>
             </div>
 
+            <!-- Edit Academic Profile & Map Verified Institution Card -->
             <div class="cyber-card">
-                <div class="card-title">⚙️ CONNECT SOCIAL ACCOUNTS</div>
+                <div class="card-title">⚙️ EDIT ACADEMIC PROFILE & MAP VERIFY</div>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                    <div>
+                        <label style="font-size: 11px; color: var(--neon-blue);">বয়স (Age)</label>
+                        <input type="number" id="editAgeInput" min="10" max="60" placeholder="e.g. 18">
+                    </div>
+                    <div>
+                        <label style="font-size: 11px; color: var(--neon-blue);">ক্যাটাগরি</label>
+                        <select id="editInstTypeSelect">
+                            <option value="College">College (কলেজ)</option>
+                            <option value="School">School (স্কুল)</option>
+                            <option value="University">University (ভার্সিটি)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Verified Maps Auto-Search Box -->
+                <div class="map-search-box">
+                    <label style="font-size: 11px; color: var(--neon-blue);">প্রতিষ্ঠানের নাম (Search on Live Map 🗺️)</label>
+                    <input type="text" id="mapSearchInstInput" placeholder="টাইপ করুন (যেমন: Dhaka College বা Rajshahi College)..." oninput="searchInstitutionOnMap(this.value)">
+                    <div class="map-suggest-list" id="mapSuggestions"></div>
+                </div>
+
+                <button class="btn-action" style="width: 100%; margin-top: 8px; font-size: 13px;" onclick="saveAcademicProfile()">
+                    💾 SAVE PROFILE CHANGES
+                </button>
+            </div>
+
+            <div class="cyber-card">
+                <div class="card-title">🔗 CONNECT SOCIAL ACCOUNTS</div>
                 <div class="connect-box">
                     <button class="btn-connect" id="btnGoogleLink" onclick="linkGoogleAccount()">
                         🌐 Connect Google
@@ -918,7 +981,6 @@
         document.getElementById('navUserName').innerText = "@" + currentUser;
         document.getElementById('profUser').innerText = currentUser;
 
-        // Dynamic Time Greeting Generator
         function getTimeGreeting() {
             const hr = new Date().getHours();
             if (hr >= 5 && hr < 12) return "শুভ সকাল";
@@ -927,8 +989,10 @@
             return "স্বাগতম";
         }
 
-        // 3. User Data Realtime Listener & Dashboard Engine
+        // 3. User Data Realtime Listener & Daily 20 XP Engine
         let userData = {};
+        let dailyBonusChecked = false;
+
         db.ref('users/' + currentUser).on('value', (snap) => {
             userData = snap.val() || {};
             
@@ -950,6 +1014,17 @@
             const instType = userData.institutionType ? ` (${userData.institutionType})` : "";
             document.getElementById('dashInstBadge').innerText = "🏛️ " + instName;
             document.getElementById('profInst').innerText = instName + instType;
+
+            // Pre-fill inputs in edit form if not already modified
+            if (!document.getElementById('editAgeInput').value && userData.age) {
+                document.getElementById('editAgeInput').value = userData.age;
+            }
+            if (userData.institutionType) {
+                document.getElementById('editInstTypeSelect').value = userData.institutionType;
+            }
+            if (!document.getElementById('mapSearchInstInput').value && userData.institutionName) {
+                document.getElementById('mapSearchInstInput').value = userData.institutionName;
+            }
 
             // Verification Check
             const isVerified = (userData.emailVerified === true) || (auth.currentUser && auth.currentUser.emailVerified);
@@ -975,7 +1050,6 @@
             document.getElementById('totalHoursDisplay').innerText = hours + "h";
             document.getElementById('dashTotalTime').innerText = hours + "h";
 
-            // Estimated Today's Study Calculation
             const todayMin = Math.floor((totalSec % 3600) / 60);
             const todayHr = Math.floor((totalSec % 86400) / 3600);
             document.getElementById('dashTodayTime').innerText = `${todayHr}h ${todayMin}m`;
@@ -984,7 +1058,7 @@
             document.getElementById('xpDisplay').innerText = currentXp;
             document.getElementById('dashTotalXp').innerText = currentXp;
 
-            // Reusable Level Engine (100 XP per Level)
+            // Level Engine
             const currentLvl = Math.floor(currentXp / 100) + 1;
             document.getElementById('levelDisplay').innerText = "Lvl " + currentLvl;
             document.getElementById('dashCurrentLvl').innerText = "Lvl " + currentLvl;
@@ -999,7 +1073,7 @@
             document.getElementById('dashXpProgressBar').style.width = progressPercent + "%";
             document.getElementById('dashXpRemainingText').innerText = `পরবর্তী লেভেলে পৌঁছাতে আরও ${xpCeil - currentXp} XP প্রয়োজন 🔥`;
 
-            // Daily Target Calculation (Goal: 180 Mins)
+            // Daily Target Calculation
             const goalTargetSec = 180 * 60;
             const goalAchievedSec = totalSec % goalTargetSec;
             const goalPercent = Math.min(100, Math.round((goalAchievedSec / goalTargetSec) * 100));
@@ -1018,7 +1092,7 @@
                 document.getElementById('dashSquadStateText').innerText = "আপনি এখনো কোনো স্টাডি স্কোয়াডে যুক্ত হননি।";
             }
 
-            // Streak & Inactivity Penalty Check
+            // Streak Verification
             if (userData.lastActiveSession) {
                 const diffHours = (Date.now() - userData.lastActiveSession) / (1000 * 60 * 60);
                 if (diffHours >= 15) {
@@ -1043,7 +1117,103 @@
                 fbBtn.classList.add('connected');
                 fbBtn.innerText = "✅ Facebook Connected";
             }
+
+            // 🎁 Daily 20 XP Login Reward Awarder
+            if (!dailyBonusChecked && userData.createdAt) {
+                dailyBonusChecked = true;
+                checkAndAwardDailyLoginBonus();
+            }
         });
+
+        // Daily Login 20 XP Logic
+        function checkAndAwardDailyLoginBonus() {
+            const todayStr = new Date().toISOString().split('T')[0];
+            const lastRewardDate = userData.lastDailyBonusDate;
+
+            if (lastRewardDate !== todayStr) {
+                const newXp = (userData.xp || 50) + 20;
+                db.ref('users/' + currentUser).update({
+                    xp: newXp,
+                    lastDailyBonusDate: todayStr
+                }).then(() => {
+                    openModal("🎁", "DAILY LOGIN BONUS", "প্রতিদিনের ধারাবাহিকতার জন্য আপনি +২০ XP বোনাস পেয়েছেন!");
+                });
+            }
+        }
+
+        // 4. OpenStreetMap / Nominatim Live Suggestion Engine
+        let mapSearchDebounce = null;
+        function searchInstitutionOnMap(query) {
+            clearTimeout(mapSearchDebounce);
+            const box = document.getElementById('mapSuggestions');
+            
+            if (!query || query.trim().length < 3) {
+                box.style.display = 'none';
+                box.innerHTML = '';
+                return;
+            }
+
+            mapSearchDebounce = setTimeout(() => {
+                const url = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(query + ' Bangladesh')}&countrycodes=bd&format=jsonv2&limit=5`;
+                
+                fetch(url)
+                    .then(res => res.json())
+                    .then(data => {
+                        box.innerHTML = '';
+                        if (data && data.length > 0) {
+                            data.forEach(item => {
+                                const div = document.createElement('div');
+                                div.className = 'map-suggest-item';
+                                div.innerHTML = `📍 <strong>${item.name || item.display_name.split(',')[0]}</strong><br><small style="color: #8892b0;">${item.display_name}</small>`;
+                                div.onclick = function() {
+                                    document.getElementById('mapSearchInstInput').value = item.name || item.display_name.split(',')[0];
+                                    box.style.display = 'none';
+                                };
+                                box.appendChild(div);
+                            });
+                            box.style.display = 'block';
+                        } else {
+                            box.style.display = 'none';
+                        }
+                    }).catch(() => {
+                        box.style.display = 'none';
+                    });
+            }, 350);
+        }
+
+        // Close map suggestion on outside click
+        document.addEventListener('click', function(e) {
+            const box = document.getElementById('mapSuggestions');
+            const input = document.getElementById('mapSearchInstInput');
+            if (e.target !== box && e.target !== input) {
+                box.style.display = 'none';
+            }
+        });
+
+        // 5. Save Academic Profile & Verified Map Institution
+        function saveAcademicProfile() {
+            const age = document.getElementById('editAgeInput').value.trim();
+            const instType = document.getElementById('editInstTypeSelect').value;
+            const instName = document.getElementById('mapSearchInstInput').value.trim();
+
+            if (!age || age < 10) {
+                openModal("⚠️", "সঠিক বয়স দিন", "অনুগ্রহ করে ১০ থেকে ৬০ এর মধ্যে আপনার বয়স লিখুন।");
+                return;
+            }
+
+            if (!instName) {
+                openModal("⚠️", "প্রতিষ্ঠান প্রয়োজন", "আপনার স্কুল, কলেজ বা বিশ্ববিদ্যালয়ের নাম লিখুন।");
+                return;
+            }
+
+            db.ref('users/' + currentUser).update({
+                age: age,
+                institutionType: instType,
+                institutionName: instName
+            }).then(() => {
+                openModal("✅", "প্রোফাইল সংরক্ষিত", "আপনার শিক্ষা প্রতিষ্ঠান ও বয়স সফলভাবে আপডেট করা হয়েছে!");
+            });
+        }
 
         // Tab Navigation Helpers
         function switchTab(tabId, element) {
@@ -1158,7 +1328,6 @@
                 lastActiveSession: Date.now(),
                 penaltyActive: false
             }).then(() => {
-                // Add to dynamic activity timeline
                 const actList = document.getElementById('recentActivityList');
                 const row = document.createElement('div');
                 row.className = "activity-row boost";
