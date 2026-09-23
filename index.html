@@ -19,6 +19,7 @@
             --neon-gold: #ffcc00;
             --neon-green: #00ff88;
             --text-muted: #8892b0;
+            --infinite-void: #7928ca;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -31,45 +32,107 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            padding: 20px;
+            padding: 25px 15px;
+            background-image: 
+                radial-gradient(circle at 50% 15%, rgba(0, 240, 255, 0.12) 0%, transparent 50%),
+                radial-gradient(circle at 80% 85%, rgba(121, 40, 202, 0.1) 0%, transparent 45%);
         }
 
         .auth-card {
-            background: linear-gradient(145deg, var(--bg-card), #070d1a);
+            background: linear-gradient(150deg, var(--bg-card), #060e1d);
             border: 1px solid rgba(0, 240, 255, 0.35);
-            border-radius: 18px;
-            padding: 30px 24px;
+            border-radius: 20px;
+            padding: 24px 22px;
             width: 100%;
-            max-width: 380px;
-            box-shadow: 0 0 25px rgba(0, 240, 255, 0.15);
+            max-width: 390px;
+            box-shadow: 0 0 35px rgba(0, 240, 255, 0.15), 0 0 50px rgba(121, 40, 202, 0.1);
             text-align: center;
             position: relative;
         }
 
+        /* Gojo Satoru Interactive Avatar Header */
+        .gojo-stage {
+            width: 105px;
+            height: 105px;
+            margin: 0 auto 12px auto;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .gojo-glow-ring {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 2px dashed var(--neon-blue);
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.4), inset 0 0 15px rgba(121, 40, 202, 0.3);
+            animation: rotateAura 12s linear infinite;
+        }
+
+        @keyframes rotateAura {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .gojo-svg {
+            width: 88px;
+            height: 88px;
+            z-index: 2;
+            transition: transform 0.3s ease;
+        }
+
+        /* Eyes & Blindfold Animation States */
+        .six-eyes {
+            fill: #00f0ff;
+            filter: drop-shadow(0 0 5px #00f0ff);
+            transition: all 0.3s ease;
+        }
+
+        .blindfold {
+            fill: #090e18;
+            stroke: #00f0ff;
+            stroke-width: 1.5;
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-origin: center;
+        }
+
+        /* State Classes */
+        .gojo-stage.eyes-covered .blindfold {
+            transform: translateY(0px) scaleY(1);
+            opacity: 1;
+        }
+
+        .gojo-stage.eyes-peek .blindfold {
+            transform: translateY(-8px) scaleY(0.5);
+            opacity: 0.85;
+        }
+
         .brand-logo {
             color: var(--neon-blue);
-            font-size: 26px;
+            font-size: 24px;
             font-weight: 900;
             letter-spacing: 2px;
-            margin-bottom: 4px;
+            margin-bottom: 2px;
             text-shadow: 0 0 12px rgba(0, 240, 255, 0.5);
         }
 
         .subtitle {
             color: var(--text-muted);
-            font-size: 12px;
-            margin-bottom: 20px;
+            font-size: 11px;
+            margin-bottom: 16px;
             text-transform: uppercase;
-            letter-spacing: 1.5px;
+            letter-spacing: 1.8px;
         }
 
-        .input-group { text-align: left; margin-bottom: 12px; }
+        .input-group { text-align: left; margin-bottom: 11px; }
 
         .input-group label {
             display: block;
             font-size: 11px;
             color: var(--neon-blue);
-            margin-bottom: 5px;
+            margin-bottom: 4px;
             text-transform: uppercase;
             font-weight: 600;
         }
@@ -79,9 +142,9 @@
             background: #050b14;
             border: 1px solid #1e293b;
             color: #fff;
-            padding: 12px 14px;
+            padding: 11px 14px;
             border-radius: 8px;
-            font-size: 14px;
+            font-size: 13.5px;
             outline: none;
             transition: all 0.3s ease;
         }
@@ -105,27 +168,27 @@
             background: none;
             border: none;
             cursor: pointer;
-            font-size: 22px;
+            font-size: 20px;
             user-select: none;
         }
 
         #strengthSection {
             display: none;
             text-align: left;
-            margin-top: -4px;
-            margin-bottom: 12px;
+            margin-top: -2px;
+            margin-bottom: 10px;
             background: rgba(0, 0, 0, 0.3);
-            padding: 10px;
+            padding: 9px;
             border-radius: 8px;
         }
 
         .meter-container {
             width: 100%;
-            height: 6px;
+            height: 5px;
             background: #112240;
             border-radius: 4px;
             overflow: hidden;
-            margin-bottom: 6px;
+            margin-bottom: 5px;
         }
 
         .meter-fill {
@@ -136,7 +199,7 @@
         }
 
         .strength-status {
-            font-size: 11px;
+            font-size: 10.5px;
             font-weight: 700;
             display: flex;
             justify-content: space-between;
@@ -144,8 +207,8 @@
 
         .rules-checklist {
             list-style: none;
-            margin-top: 6px;
-            font-size: 11px;
+            margin-top: 5px;
+            font-size: 10.5px;
             color: var(--text-muted);
         }
 
@@ -158,7 +221,7 @@
             justify-content: space-between;
             font-size: 12px;
             color: var(--text-muted);
-            margin-bottom: 16px;
+            margin-bottom: 14px;
         }
 
         .checkbox-container {
@@ -174,7 +237,7 @@
             background: var(--neon-blue);
             color: #050b14;
             border: none;
-            padding: 13px;
+            padding: 12px;
             border-radius: 8px;
             font-weight: 900;
             cursor: pointer;
@@ -183,6 +246,7 @@
             letter-spacing: 1.2px;
             transition: 0.3s ease;
             box-shadow: 0 0 15px rgba(0, 240, 255, 0.3);
+            font-size: 13px;
         }
 
         .auth-btn:hover {
@@ -190,12 +254,11 @@
             box-shadow: 0 0 20px var(--neon-blue);
         }
 
-        /* Social Auth Buttons */
         .divider {
             display: flex;
             align-items: center;
             text-align: center;
-            margin: 18px 0;
+            margin: 15px 0;
             color: var(--text-muted);
             font-size: 11px;
             text-transform: uppercase;
@@ -206,20 +269,20 @@
             flex: 1;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
-        .divider span { padding: 0 10px; }
+        .divider span { padding: 0 8px; }
 
         .social-btns {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            margin-bottom: 15px;
+            gap: 8px;
+            margin-bottom: 12px;
         }
 
         .btn-social {
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(255, 255, 255, 0.15);
             color: #fff;
-            padding: 10px;
+            padding: 9px;
             border-radius: 8px;
             cursor: pointer;
             font-size: 12px;
@@ -227,7 +290,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
+            gap: 6px;
             transition: 0.3s;
         }
 
@@ -238,8 +301,8 @@
 
         .switch-mode-text {
             color: var(--text-muted);
-            font-size: 13px;
-            margin-top: 15px;
+            font-size: 12.5px;
+            margin-top: 12px;
             cursor: pointer;
         }
 
@@ -269,25 +332,25 @@
         }
 
         @keyframes popIn {
-            from { transform: scale(0.8); opacity: 0; }
+            from { transform: scale(0.85); opacity: 0; }
             to { transform: scale(1); opacity: 1; }
         }
 
-        .popup-emoji { font-size: 45px; margin-bottom: 8px; }
-        .popup-title { font-size: 18px; font-weight: bold; margin-bottom: 8px; }
-        .popup-msg { font-size: 13px; color: var(--text-muted); margin-bottom: 18px; line-height: 1.4; }
+        .popup-emoji { font-size: 42px; margin-bottom: 8px; }
+        .popup-title { font-size: 17px; font-weight: bold; margin-bottom: 6px; }
+        .popup-msg { font-size: 13px; color: var(--text-muted); margin-bottom: 16px; line-height: 1.45; }
         .popup-close-btn {
             background: var(--neon-blue);
             color: #000;
             border: none;
-            padding: 10px 20px;
+            padding: 10px 18px;
             border-radius: 6px;
             font-weight: bold;
             cursor: pointer;
             width: 100%;
         }
 
-        /* Aura Readers Official User Agreement & Privacy Policy Modal */
+        /* Official User Agreement Protocol Modal */
         .policy-card {
             background: linear-gradient(165deg, #0b1528, #050b16);
             border: 2px solid var(--neon-blue);
@@ -304,7 +367,7 @@
         }
 
         .policy-header {
-            font-size: 18px;
+            font-size: 17px;
             font-weight: 800;
             color: var(--neon-blue);
             margin-bottom: 12px;
@@ -359,17 +422,14 @@
             line-height: 1.6;
         }
 
-        .policy-btn-row {
-            display: flex;
-            gap: 10px;
-        }
+        .policy-btn-row { display: flex; gap: 10px; }
 
         .policy-agree-btn {
             background: var(--neon-green);
             color: #030712;
             border: none;
-            padding: 13px;
-            border-radius: 10px;
+            padding: 12px;
+            border-radius: 9px;
             font-weight: 900;
             cursor: pointer;
             flex: 2;
@@ -378,17 +438,14 @@
             box-shadow: 0 0 15px rgba(0, 255, 136, 0.3);
         }
 
-        .policy-agree-btn:hover {
-            opacity: 0.92;
-            transform: translateY(-1px);
-        }
+        .policy-agree-btn:hover { opacity: 0.92; transform: translateY(-1px); }
 
         .policy-decline-btn {
             background: rgba(255, 51, 102, 0.1);
             border: 1px solid var(--neon-red);
             color: var(--neon-red);
-            padding: 13px;
-            border-radius: 10px;
+            padding: 12px;
+            border-radius: 9px;
             font-weight: 700;
             cursor: pointer;
             flex: 1;
@@ -399,6 +456,35 @@
 <body>
 
     <div class="auth-card">
+        
+        <!-- Gojo Satoru Character Element -->
+        <div class="gojo-stage eyes-peek" id="gojoStage">
+            <div class="gojo-glow-ring"></div>
+            
+            <svg class="gojo-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- Spiky Snow White Hair -->
+                <path d="M50 12 L44 26 L36 16 L35 30 L25 22 L28 38 L18 34 L25 48 L15 50 L26 62 L22 75 L35 70 L38 85 L50 82 L62 85 L65 70 L78 75 L74 62 L85 50 L75 48 L82 34 L72 38 L75 22 L65 30 L64 16 L56 26 Z" fill="#E2E8F0" filter="drop-shadow(0 0 4px rgba(255,255,255,0.7))"/>
+                
+                <!-- Face -->
+                <path d="M30 46 C30 68 38 78 50 78 C62 78 70 68 70 46 Z" fill="#FFE5D9"/>
+                
+                <!-- Six Eyes Glow -->
+                <circle cx="42" cy="54" r="3.5" class="six-eyes"/>
+                <circle cx="42" cy="54" r="1.5" fill="#fff"/>
+                <circle cx="58" cy="54" r="3.5" class="six-eyes"/>
+                <circle cx="58" cy="54" r="1.5" fill="#fff"/>
+                
+                <!-- Confident Smirk -->
+                <path d="M46 68 Q50 71 55 67" stroke="#1E293B" stroke-width="1.6" stroke-linecap="round"/>
+                
+                <!-- High Collar Dark Coat -->
+                <path d="M26 80 L36 74 L50 78 L64 74 L74 80 L78 100 L22 100 Z" fill="#0B132B"/>
+                
+                <!-- Interactive Blindfold -->
+                <rect x="28" y="47" width="44" height="15" rx="3" class="blindfold" id="gojoBlindfold"/>
+            </svg>
+        </div>
+
         <div class="brand-logo">AURA READERS</div>
         <div class="subtitle" id="formHeader">PORTAL LOGIN</div>
 
@@ -423,13 +509,13 @@
 
             <div class="input-group">
                 <label>ইউজারনেম (Username)</label>
-                <input type="text" id="userName" placeholder="ইউজারনেম (স্পেস ছাড়া)" required>
+                <input type="text" id="userName" placeholder="ইউজারনেম (স্পেস ছাড়া)" required onfocus="setGojoState('peek')" onblur="setGojoState('peek')">
             </div>
 
             <div class="input-group">
                 <label>পাসওয়ার্ড (Password)</label>
                 <div class="password-wrapper">
-                    <input type="password" id="userPass" placeholder="পাসওয়ার্ড লিখুন" required>
+                    <input type="password" id="userPass" placeholder="পাসওয়ার্ড লিখুন" required onfocus="setGojoState('covered')" onblur="setGojoState('peek')">
                     <button type="button" class="monkey-btn" id="monkeyIcon" onclick="togglePasswordVisibility()">🙈</button>
                 </div>
             </div>
@@ -477,7 +563,7 @@
         </div>
     </div>
 
-    <!-- Notification Popup Modal -->
+    <!-- Notification Modal -->
     <div class="modal-overlay" id="customModal">
         <div class="popup-card" id="popupCard">
             <div class="popup-emoji" id="popupEmoji">⚡</div>
@@ -561,6 +647,18 @@
         let popupCallback = null;
         let pendingUserPayload = null;
 
+        // Gojo Interactive State Changer
+        function setGojoState(state) {
+            const stage = document.getElementById('gojoStage');
+            if (state === 'covered') {
+                stage.classList.remove('eyes-peek');
+                stage.classList.add('eyes-covered');
+            } else {
+                stage.classList.remove('eyes-covered');
+                stage.classList.add('eyes-peek');
+            }
+        }
+
         function showPopup(emoji, title, msg, themeColor = "#00f0ff", callback = null) {
             document.getElementById('popupEmoji').innerText = emoji;
             document.getElementById('popupTitle').innerText = title;
@@ -596,9 +694,11 @@
             if (passInput.type === "password") {
                 passInput.type = "text";
                 monkey.innerText = "🐵";
+                setGojoState('peek');
             } else {
                 passInput.type = "password";
                 monkey.innerText = "🙈";
+                setGojoState('covered');
             }
         }
 
@@ -616,6 +716,7 @@
 
             passInput.type = "password";
             document.getElementById('monkeyIcon').innerText = "🙈";
+            setGojoState('peek');
             evaluatePasswordStrength();
         }
 
