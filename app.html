@@ -155,9 +155,7 @@
             box-shadow: 0 0 8px var(--neon-gold);
         }
 
-        .door-portal-stage.door-open .door-leaf {
-            transform: rotateY(-80deg);
-        }
+        .door-portal-stage.door-open .door-leaf { transform: rotateY(-80deg); }
 
         .walking-man {
             position: absolute;
@@ -186,10 +184,7 @@
             animation: pulseText 1s infinite alternate;
         }
 
-        @keyframes pulseText {
-            from { opacity: 0.7; }
-            to { opacity: 1; }
-        }
+        @keyframes pulseText { from { opacity: 0.7; } to { opacity: 1; } }
 
         /* Container & Tabs */
         .container { max-width: 950px; margin: 0 auto; padding: 16px; }
@@ -235,25 +230,16 @@
         }
         .card-title { font-size: 15.5px; font-weight: 800; color: var(--neon-blue); margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between; gap: 8px; }
 
-        /* Dashboard Hero Section */
+        /* Hero Welcome Card */
         .hero-welcome-card {
             background: linear-gradient(135deg, rgba(0,240,255,0.1), rgba(121,40,202,0.15)), #081124;
             border: 1px solid rgba(0,240,255,0.35);
             border-radius: 18px;
             padding: 22px;
             margin-bottom: 18px;
-            position: relative;
-            overflow: hidden;
             box-shadow: 0 0 25px rgba(0, 240, 255, 0.12);
         }
-
-        .hero-top-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            gap: 15px;
-        }
-
+        .hero-top-row { display: flex; justify-content: space-between; align-items: flex-start; gap: 15px; }
         .hero-greeting { font-size: 20px; font-weight: 900; color: #fff; margin-bottom: 4px; }
         .hero-greeting span { color: var(--neon-blue); }
         .hero-subtext { font-size: 13px; color: var(--text-muted); }
@@ -276,45 +262,14 @@
             padding: 14px;
             border-radius: 12px;
         }
-
-        .xp-header {
-            display: flex;
-            justify-content: space-between;
-            font-size: 12px;
-            font-weight: 800;
-            margin-bottom: 6px;
-        }
+        .xp-header { display: flex; justify-content: space-between; font-size: 12px; font-weight: 800; margin-bottom: 6px; }
         .xp-header .lvl-name { color: var(--neon-gold); }
         .xp-header .xp-pts { color: var(--neon-blue); }
-
-        .progress-bar-bg {
-            width: 100%;
-            height: 10px;
-            background: #0f1c33;
-            border-radius: 6px;
-            overflow: hidden;
-            border: 1px solid rgba(255,255,255,0.08);
-            position: relative;
-        }
-
-        .progress-bar-fill {
-            height: 100%;
-            width: 0%;
-            background: linear-gradient(90deg, var(--neon-blue), var(--neon-green));
-            border-radius: 6px;
-            transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 0 10px rgba(0,240,255,0.5);
-        }
-
-        .xp-footer-note { font-size: 11px; color: var(--text-muted); margin-top: 6px; text-align: right; }
+        .progress-bar-bg { width: 100%; height: 10px; background: #0f1c33; border-radius: 6px; overflow: hidden; border: 1px solid rgba(255,255,255,0.08); }
+        .progress-bar-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--neon-blue), var(--neon-green)); border-radius: 6px; transition: width 0.6s ease; }
 
         /* Quick Action Station Grid */
-        .quick-actions-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-            gap: 10px;
-            margin-bottom: 18px;
-        }
+        .quick-actions-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; margin-bottom: 18px; }
         .action-card {
             background: rgba(10, 19, 37, 0.9);
             border: 1px solid rgba(255,255,255,0.08);
@@ -323,51 +278,25 @@
             text-align: center;
             cursor: pointer;
             transition: all 0.25s ease;
-            user-select: none;
         }
-        .action-card:hover {
-            border-color: var(--neon-blue);
-            transform: translateY(-2px);
-            box-shadow: 0 0 15px rgba(0,240,255,0.25);
-            background: rgba(0,240,255,0.05);
-        }
+        .action-card:hover { border-color: var(--neon-blue); transform: translateY(-2px); background: rgba(0,240,255,0.05); }
         .action-icon { font-size: 24px; margin-bottom: 6px; display: block; }
         .action-name { font-size: 12px; font-weight: 800; color: #fff; }
 
-        /* Stats Grid Component */
+        /* Stats Grid */
         .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(135px, 1fr)); gap: 12px; margin-bottom: 18px; }
-        .stat-box { background: rgba(5, 11, 20, 0.7); border: 1px solid rgba(255,255,255,0.08); padding: 14px 12px; border-radius: 12px; text-align: center; position: relative; }
+        .stat-box { background: rgba(5, 11, 20, 0.7); border: 1px solid rgba(255,255,255,0.08); padding: 14px 12px; border-radius: 12px; text-align: center; }
         .stat-val { font-size: 22px; font-weight: 900; color: var(--neon-gold); }
         .stat-lbl { font-size: 11px; color: var(--text-muted); text-transform: uppercase; margin-top: 4px; }
         .stat-sub { font-size: 10.5px; color: var(--neon-green); margin-top: 3px; font-weight: 600; }
 
         /* Daily Goal Card */
-        .daily-goal-box {
-            background: rgba(5, 11, 20, 0.6);
-            border: 1px solid rgba(255,204,0,0.25);
-            border-radius: 12px;
-            padding: 14px;
-            margin-bottom: 15px;
-        }
+        .daily-goal-box { background: rgba(5, 11, 20, 0.6); border: 1px solid rgba(255,204,0,0.25); border-radius: 12px; padding: 14px; margin-bottom: 15px; }
 
         /* Hub Split Grid */
-        .hub-split-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin-bottom: 18px;
-        }
-        @media (max-width: 650px) {
-            .hub-split-grid { grid-template-columns: 1fr; }
-        }
-
-        .hub-empty-state {
-            padding: 20px 15px;
-            text-align: center;
-            color: var(--text-muted);
-            font-size: 13px;
-        }
-        .hub-empty-state .empty-icon { font-size: 32px; margin-bottom: 8px; opacity: 0.8; }
+        .hub-split-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 18px; }
+        @media (max-width: 650px) { .hub-split-grid { grid-template-columns: 1fr; } }
+        .hub-empty-state { padding: 20px 15px; text-align: center; color: var(--text-muted); font-size: 13px; }
         .btn-hub-cta {
             background: rgba(0, 240, 255, 0.1);
             border: 1px solid var(--neon-blue);
@@ -378,11 +307,6 @@
             border-radius: 8px;
             cursor: pointer;
             margin-top: 10px;
-            transition: all 0.2s;
-        }
-        .btn-hub-cta:hover {
-            background: var(--neon-blue);
-            color: #050b14;
         }
 
         /* Battle Room Challenge Card */
@@ -397,74 +321,6 @@
             justify-content: space-between;
             align-items: center;
             gap: 10px;
-            animation: fadeIn 0.3s ease;
-        }
-        .battle-room-card:hover {
-            box-shadow: 0 0 15px rgba(255, 51, 102, 0.25);
-            border-color: var(--neon-red);
-        }
-
-        /* Squad Tier Badges */
-        .tier-badge {
-            font-size: 11px;
-            padding: 3px 8px;
-            border-radius: 4px;
-            font-weight: bold;
-            display: inline-block;
-        }
-        .tier-rookie { background: rgba(136, 146, 176, 0.2); border: 1px solid var(--text-muted); color: #cbd5e1; }
-        .tier-elite { background: rgba(0, 240, 255, 0.15); border: 1px solid var(--neon-blue); color: var(--neon-blue); }
-        .tier-limitless { background: rgba(255, 204, 0, 0.15); border: 1px solid var(--neon-gold); color: var(--neon-gold); }
-
-        /* Auto Rank Badge */
-        .role-badge {
-            font-size: 10px;
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-weight: 800;
-            text-transform: uppercase;
-        }
-        .role-commander { background: rgba(255, 204, 0, 0.2); border: 1px solid var(--neon-gold); color: var(--neon-gold); }
-        .role-captain { background: rgba(0, 240, 255, 0.2); border: 1px solid var(--neon-blue); color: var(--neon-blue); }
-        .role-vice { background: rgba(188, 19, 254, 0.2); border: 1px solid var(--neon-purple); color: var(--neon-purple); }
-        .role-vanguard { background: rgba(0, 255, 136, 0.2); border: 1px solid var(--neon-green); color: var(--neon-green); }
-        .role-cadet { background: rgba(255, 255, 255, 0.1); color: var(--text-muted); }
-
-        /* Squad Forms & Management Layout */
-        .squad-management-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin-top: 15px;
-        }
-        @media (max-width: 600px) {
-            .squad-management-grid { grid-template-columns: 1fr; }
-        }
-
-        .squad-panel {
-            background: rgba(5, 11, 20, 0.7);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 12px;
-            padding: 15px;
-        }
-        .squad-panel-title {
-            font-size: 13px;
-            font-weight: 800;
-            color: var(--neon-blue);
-            margin-bottom: 10px;
-            text-transform: uppercase;
-        }
-
-        .invite-box {
-            background: rgba(0, 240, 255, 0.08);
-            border: 1px dashed var(--neon-blue);
-            padding: 10px;
-            border-radius: 8px;
-            margin-top: 10px;
-            font-size: 12px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
         }
 
         /* MCQ Battle Arena Styles */
@@ -475,12 +331,7 @@
             padding: 20px;
             margin-bottom: 18px;
         }
-        .battle-timer {
-            font-size: 32px;
-            font-weight: 900;
-            color: var(--neon-gold);
-            text-shadow: 0 0 10px var(--neon-gold);
-        }
+        .battle-timer { font-size: 32px; font-weight: 900; color: var(--neon-gold); text-shadow: 0 0 10px var(--neon-gold); }
         .battle-option-btn {
             background: rgba(5, 11, 20, 0.8);
             border: 1px solid rgba(255,255,255,0.15);
@@ -490,151 +341,80 @@
             cursor: pointer;
             font-size: 13px;
             text-align: left;
-            transition: all 0.2s;
             width: 100%;
             margin-bottom: 8px;
+            transition: all 0.2s;
         }
-        .battle-option-btn:hover {
-            border-color: var(--neon-blue);
-            background: rgba(0,240,255,0.1);
+        .battle-option-btn:hover { border-color: var(--neon-blue); background: rgba(0,240,255,0.1); }
+
+        .bot-explanation-box {
+            background: rgba(0, 240, 255, 0.08);
+            border: 1px solid var(--neon-blue);
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: 12px;
+            font-size: 12.5px;
+            color: #cbd5e1;
         }
 
-        /* Activity Timeline */
+        /* Squad Badges & Layout */
+        .tier-badge { font-size: 11px; padding: 3px 8px; border-radius: 4px; font-weight: bold; display: inline-block; }
+        .tier-rookie { background: rgba(136, 146, 176, 0.2); border: 1px solid var(--text-muted); color: #cbd5e1; }
+        .tier-elite { background: rgba(0, 240, 255, 0.15); border: 1px solid var(--neon-blue); color: var(--neon-blue); }
+        .tier-limitless { background: rgba(255, 204, 0, 0.15); border: 1px solid var(--neon-gold); color: var(--neon-gold); }
+
+        .role-badge { font-size: 10px; padding: 2px 6px; border-radius: 4px; font-weight: 800; text-transform: uppercase; }
+        .role-commander { background: rgba(255, 204, 0, 0.2); border: 1px solid var(--neon-gold); color: var(--neon-gold); }
+        .role-captain { background: rgba(0, 240, 255, 0.2); border: 1px solid var(--neon-blue); color: var(--neon-blue); }
+        .role-vice { background: rgba(188, 19, 254, 0.2); border: 1px solid var(--neon-purple); color: var(--neon-purple); }
+        .role-vanguard { background: rgba(0, 255, 136, 0.2); border: 1px solid var(--neon-green); color: var(--neon-green); }
+        .role-cadet { background: rgba(255, 255, 255, 0.1); color: var(--text-muted); }
+
+        .squad-management-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 15px; }
+        @media (max-width: 600px) { .squad-management-grid { grid-template-columns: 1fr; } }
+        .squad-panel { background: rgba(5, 11, 20, 0.7); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 12px; padding: 15px; }
+        .squad-panel-title { font-size: 13px; font-weight: 800; color: var(--neon-blue); margin-bottom: 10px; text-transform: uppercase; }
+
+        .invite-box { background: rgba(0, 240, 255, 0.08); border: 1px dashed var(--neon-blue); padding: 10px; border-radius: 8px; margin-top: 10px; font-size: 12px; display: flex; justify-content: space-between; align-items: center; }
+
         .activity-timeline { display: flex; flex-direction: column; gap: 8px; }
-        .activity-row {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 10px 12px;
-            background: rgba(5, 11, 20, 0.6);
-            border: 1px solid rgba(255,255,255,0.06);
-            border-left: 3px solid var(--neon-blue);
-            border-radius: 8px;
-            font-size: 12.5px;
-        }
+        .activity-row { display: flex; align-items: center; justify-content: space-between; padding: 10px 12px; background: rgba(5, 11, 20, 0.6); border: 1px solid rgba(255,255,255,0.06); border-left: 3px solid var(--neon-blue); border-radius: 8px; font-size: 12.5px; }
         .activity-row.boost { border-left-color: var(--neon-gold); }
         .activity-desc { color: #cbd5e1; font-weight: 600; }
         .activity-time { font-size: 11px; color: var(--text-muted); }
 
-        /* Profile Details Box & Form */
-        .profile-info-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            text-align: left;
-            margin-top: 15px;
-            background: rgba(5, 11, 20, 0.6);
-            padding: 14px;
-            border-radius: 10px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-        @media (max-width: 500px) {
-            .profile-info-grid { grid-template-columns: 1fr; }
-        }
-
+        .profile-info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; text-align: left; margin-top: 15px; background: rgba(5, 11, 20, 0.6); padding: 14px; border-radius: 10px; }
+        @media (max-width: 500px) { .profile-info-grid { grid-template-columns: 1fr; } }
         .info-cell { font-size: 13px; line-height: 1.5; }
         .info-cell label { font-size: 11px; color: var(--text-muted); text-transform: uppercase; display: block; }
         .info-cell span { font-weight: 700; color: #fff; }
 
-        /* Hybrid Live Map & Custom Search List */
-        .map-search-box {
-            position: relative;
-            margin-top: 5px;
-        }
-        .map-suggest-list {
-            position: absolute;
-            top: 100%;
-            left: 0;
-            width: 100%;
-            background: #081124;
-            border: 1px solid var(--neon-blue);
-            border-radius: 8px;
-            max-height: 220px;
-            overflow-y: auto;
-            z-index: 1000;
-            display: none;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.85);
-        }
-        .map-suggest-item {
-            padding: 10px 12px;
-            font-size: 12px;
-            color: #cbd5e1;
-            border-bottom: 1px solid rgba(255,255,255,0.06);
-            cursor: pointer;
-            text-align: left;
-            transition: background 0.2s;
-        }
-        .map-suggest-item:hover {
-            background: rgba(0, 240, 255, 0.15);
-            color: var(--neon-blue);
-        }
+        .map-search-box { position: relative; margin-top: 5px; }
+        .map-suggest-list { position: absolute; top: 100%; left: 0; width: 100%; background: #081124; border: 1px solid var(--neon-blue); border-radius: 8px; max-height: 220px; overflow-y: auto; z-index: 1000; display: none; }
+        .map-suggest-item { padding: 10px 12px; font-size: 12px; color: #cbd5e1; border-bottom: 1px solid rgba(255,255,255,0.06); cursor: pointer; text-align: left; }
+        .map-suggest-item:hover { background: rgba(0, 240, 255, 0.15); color: var(--neon-blue); }
 
-        /* Timer Core */
         .timer-display { font-size: 48px; font-weight: 900; color: var(--neon-blue); letter-spacing: 2px; text-shadow: 0 0 15px rgba(0,240,255,0.4); text-align: center; margin: 15px 0; }
         .timer-ctrls { display: flex; justify-content: center; gap: 10px; margin-bottom: 15px; }
-        .btn-action {
-            background: var(--neon-blue);
-            color: #000;
-            border: none;
-            padding: 12px 24px;
-            border-radius: 8px;
-            font-weight: 900;
-            cursor: pointer;
-            transition: 0.2s;
-        }
+        .btn-action { background: var(--neon-blue); color: #000; border: none; padding: 12px 24px; border-radius: 8px; font-weight: 900; cursor: pointer; transition: 0.2s; }
         .btn-action.stop { background: var(--neon-red); color: #fff; }
         .btn-action.gold { background: var(--neon-gold); color: #000; }
         .btn-action:hover { opacity: 0.9; transform: scale(1.02); }
 
         select, input[type="text"], input[type="number"], input[type="password"], textarea {
-            width: 100%;
-            background: #050b14;
-            border: 1px solid #1e293b;
-            color: #fff;
-            padding: 10px 14px;
-            border-radius: 8px;
-            font-size: 13px;
-            outline: none;
-            margin-bottom: 10px;
+            width: 100%; background: #050b14; border: 1px solid #1e293b; color: #fff; padding: 10px 14px; border-radius: 8px; font-size: 13px; outline: none; margin-bottom: 10px;
         }
-        select:focus, input[type="text"]:focus, input[type="number"]:focus, input[type="password"]:focus, textarea:focus { border-color: var(--neon-blue); }
+        select:focus, input[type="text"]:focus, input[type="number"]:focus, textarea:focus { border-color: var(--neon-blue); }
 
-        .note-item {
-            background: rgba(5, 11, 20, 0.8);
-            border: 1px solid rgba(255,255,255,0.06);
-            border-left: 3px solid var(--neon-purple);
-            padding: 12px;
-            border-radius: 6px;
-            margin-bottom: 8px;
-        }
+        .note-item { background: rgba(5, 11, 20, 0.8); border: 1px solid rgba(255,255,255,0.06); border-left: 3px solid var(--neon-purple); padding: 12px; border-radius: 6px; margin-bottom: 8px; }
         .note-header { display: flex; justify-content: space-between; font-size: 12px; color: var(--neon-gold); font-weight: bold; margin-bottom: 5px; }
         .note-body { font-size: 13px; color: #ddd; word-break: break-word; }
 
         .connect-box { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 10px; }
-        .btn-connect {
-            flex: 1;
-            min-width: 140px;
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.15);
-            color: #fff;
-            padding: 12px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 13px;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            transition: 0.2s;
-        }
+        .btn-connect { flex: 1; min-width: 140px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.15); color: #fff; padding: 12px; border-radius: 8px; cursor: pointer; font-size: 13px; font-weight: bold; display: flex; align-items: center; justify-content: center; gap: 8px; }
         .btn-connect.connected { border-color: var(--neon-green); color: var(--neon-green); pointer-events: none; }
 
-        .modal {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.85); display: none; justify-content: center; align-items: center; z-index: 999;
-            backdrop-filter: blur(4px);
-        }
+        .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); display: none; justify-content: center; align-items: center; z-index: 999; backdrop-filter: blur(4px); }
         .modal-box { background: #0a1325; border: 2px solid var(--neon-blue); border-radius: 14px; padding: 22px; width: 90%; max-width: 320px; text-align: center; }
     </style>
 </head>
@@ -661,29 +441,21 @@
         <div class="logout-text">🚪 ডিসকানেক্টিং কোর...</div>
     </div>
 
-    <!-- Top Bar Navigation with Settings & Profile -->
+    <!-- Top Bar Navigation -->
     <div class="top-nav">
         <div class="brand">⚡ AURA READERS</div>
-        
         <div class="user-nav-group">
             <div class="user-chip" onclick="navigateToProfileTab()" style="cursor: pointer;" title="View Profile">
                 <img id="navAvatar" src="gojo-vibe.jpg" class="nav-avatar-img" onerror="this.src='gojo-vibe.jpg'">
                 <span id="navUserName">Scholar</span>
             </div>
-
-            <button class="settings-nav-btn" onclick="navigateToProfileTab()" title="Settings & Edit Profile">
-                ⚙️
-            </button>
-
-            <button class="logout-btn" onclick="startDoorLogout()">
-                🚪 LOGOUT
-            </button>
+            <button class="settings-nav-btn" onclick="navigateToProfileTab()" title="Settings & Edit Profile">⚙️</button>
+            <button class="logout-btn" onclick="startDoorLogout()">🚪 LOGOUT</button>
         </div>
     </div>
 
     <div class="container">
-        
-        <!-- Tab Controls with Dashboard as Landing Tab -->
+        <!-- Tab Controls -->
         <div class="tab-bar">
             <button class="tab-btn active" id="dashboardTabBtn" onclick="switchTab('dashboardTab', this)">📊 Dashboard</button>
             <button class="tab-btn" id="studyTabBtn" onclick="switchTab('studyTab', this)">⏱️ Study Tracker</button>
@@ -693,12 +465,8 @@
             <button class="tab-btn" id="profileTabBtn" onclick="switchTab('profileTab', this)">⚙️ Profile & Settings</button>
         </div>
 
-        <!-- ==============================================
-             0. PROFESSIONAL STUDENT DASHBOARD (PHASE 1)
-        ============================================== -->
+        <!-- 0. DASHBOARD TAB -->
         <div id="dashboardTab" class="tab-content active">
-            
-            <!-- Hero Welcome Card -->
             <div class="hero-welcome-card">
                 <div class="hero-top-row">
                     <div>
@@ -712,7 +480,6 @@
                     </div>
                 </div>
 
-                <!-- Dynamic Level & XP Progress Bar -->
                 <div class="xp-level-container">
                     <div class="xp-header">
                         <span class="lvl-name" id="dashLvlHeader">LEVEL 1 SCHOLAR</span>
@@ -725,7 +492,6 @@
                 </div>
             </div>
 
-            <!-- Quick Action Station -->
             <div class="quick-actions-grid">
                 <div class="action-card" onclick="switchToTabDirect('studyTab', 'studyTabBtn')">
                     <span class="action-icon">▶️</span>
@@ -745,7 +511,6 @@
                 </div>
             </div>
 
-            <!-- Quick Stats Grid -->
             <div class="stat-grid">
                 <div class="stat-box">
                     <div class="stat-val" id="dashTodayTime">0h 0m</div>
@@ -779,7 +544,6 @@
                 </div>
             </div>
 
-            <!-- Interactive Daily Study Target Controller -->
             <div class="cyber-card">
                 <div class="card-title">
                     <span>🎯 TODAY'S STUDY GOAL</span>
@@ -800,10 +564,7 @@
                 </div>
             </div>
 
-            <!-- Hub Split Grid -->
             <div class="hub-split-grid">
-                
-                <!-- My Groups Preview -->
                 <div class="cyber-card" style="margin-bottom: 0;">
                     <div class="card-title">👥 MY STUDY SQUAD</div>
                     <div class="hub-empty-state" id="dashSquadHubContainer">
@@ -813,27 +574,24 @@
                     </div>
                 </div>
 
-                <!-- Live Announcements & Squad Notice Board -->
                 <div class="cyber-card" style="margin-bottom: 0;">
                     <div class="card-title">
                         <span>📢 NOTICE BOARD</span>
-                        <span style="font-size: 11px; color: var(--neon-gold);">Squad Codes & Challenges</span>
+                        <span style="font-size: 11px; color: var(--neon-gold);">Squads & Arena</span>
                     </div>
                     <div class="activity-timeline" id="announcementsList">
                         <div class="activity-row boost">
                             <div>
                                 <div class="activity-desc">⚡ লাইভ MCQ ব্যাটল ও ওপেন রুমস সক্রিয়</div>
-                                <div style="font-size: 11.5px; color: var(--text-muted); margin-top: 2px;">Battle Arena ট্যাবে গিয়ে যেকোনো বিষয় ও চ্যাপ্টারে চ্যালেন্জ গ্রহণ করুন!</div>
+                                <div style="font-size: 11.5px; color: var(--text-muted); margin-top: 2px;">Battle Arena ট্যাবে গিয়ে যেকোনো বিষয় ও অধ্যায়ে চ্যালেন্জ গ্রহণ করুন!</div>
                             </div>
                             <span class="activity-time">Official</span>
                         </div>
                         <div id="publicSquadNotices"></div>
                     </div>
                 </div>
-
             </div>
 
-            <!-- Recent Activity Timeline Feed -->
             <div class="cyber-card" style="margin-top: 18px;">
                 <div class="card-title">⚡ RECENT STUDY ACTIVITIES</div>
                 <div class="activity-timeline" id="recentActivityList">
@@ -846,12 +604,9 @@
                     </div>
                 </div>
             </div>
-
         </div>
 
-        <!-- ==============================================
-             1. STUDY TRACKER TAB
-        ============================================== -->
+        <!-- 1. STUDY TRACKER TAB -->
         <div id="studyTab" class="tab-content">
             <div class="stat-grid">
                 <div class="stat-box">
@@ -892,7 +647,7 @@
                     <option value="2nd Paper">২য় পত্র (2nd Paper)</option>
                 </select>
 
-                <input type="text" id="studyTaskTopic" placeholder="টপিক বা অধ্যায়ের নাম (যেমন: ভেক্টর গাণিতিক সমস্যা)">
+                <input type="text" id="studyTaskTopic" placeholder="টপিক বা অধ্যায়ের নাম (যেমন: অধ্যায় ২: ভেক্টর)">
 
                 <div class="timer-display" id="studyClock">00:00:00</div>
 
@@ -903,9 +658,7 @@
             </div>
         </div>
 
-        <!-- ==============================================
-             2. HSC NOTES VAULT TAB
-        ============================================== -->
+        <!-- 2. HSC NOTES VAULT TAB -->
         <div id="notesTab" class="tab-content">
             <div class="cyber-card">
                 <div class="card-title">📚 STRUCTURED HSC NOTES VAULT</div>
@@ -935,7 +688,7 @@
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
                     <div>
                         <label style="font-size: 10px; color: var(--neon-blue);">৩. অধ্যায়</label>
-                        <input type="text" id="noteChapter" placeholder="যেমন: Chapter 2">
+                        <input type="text" id="noteChapter" placeholder="যেমন: অধ্যায় ২">
                     </div>
                     <div>
                         <label style="font-size: 10px; color: var(--neon-blue);">৪. ক্যাটাগরি</label>
@@ -960,15 +713,13 @@
             </div>
         </div>
 
-        <!-- ==============================================
-             3. ⚔️ LIVE MCQ BATTLE ARENA (Full Subject & Realtime Notice)
-        ============================================== -->
+        <!-- 3. ⚔️ LIVE MCQ BATTLE ARENA -->
         <div id="battleTab" class="tab-content">
             <div class="battle-arena-box">
                 <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,51,102,0.3); padding-bottom: 10px; margin-bottom: 15px;">
                     <div>
                         <div style="font-size: 18px; font-weight: 900; color: var(--neon-red);">⚔️ CYBER MCQ BATTLE ARENA</div>
-                        <div style="font-size: 11.5px; color: var(--text-muted);">Select Subject, Chapter, Stake XP & Challenge all Scholars!</div>
+                        <div style="font-size: 11.5px; color: var(--text-muted);">বিষয়, পত্র, অধ্যায় ও কঠিনতার স্তর নির্বাচন করে লাইভ লড়াই করুন!</div>
                     </div>
                     <div class="battle-timer" id="battleCountdown">15s</div>
                 </div>
@@ -977,44 +728,72 @@
                 <div id="battleSetupSection">
                     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px;">
                         <div>
-                            <label style="font-size: 11px; color: var(--neon-blue);">লড়াইয়ের বিষয় (Subject)</label>
-                            <select id="battleSubjectSelect" onchange="updateBattleChapterOptions()">
+                            <label style="font-size: 11px; color: var(--neon-blue);">১. বিষয় (Subject)</label>
+                            <select id="battleSubjectSelect" onchange="onBattleSubjectChange()">
                                 <option value="Physics">পদার্থবিজ্ঞান (Physics)</option>
                                 <option value="Chemistry">রসায়ন (Chemistry)</option>
                                 <option value="HigherMath">উচ্চতর গণিত (Higher Math)</option>
                                 <option value="Biology">জীববিজ্ঞান (Biology)</option>
+                                <option value="Bangla">বাংলা (Bangla)</option>
+                                <option value="English">English</option>
                                 <option value="ICT">ICT</option>
                             </select>
                         </div>
                         <div>
-                            <label style="font-size: 11px; color: var(--neon-blue);">অধ্যায় / টপিক (Chapter)</label>
-                            <select id="battleChapterSelect">
-                                <!-- Dynamically loaded chapters -->
+                            <label style="font-size: 11px; color: var(--neon-blue);">২. পত্র (Paper)</label>
+                            <select id="battlePaperSelect" onchange="updateBattleChapterOptions()">
+                                <option value="1st Paper">১ম পত্র (1st Paper)</option>
+                                <option value="2nd Paper">২য় পত্র (2nd Paper)</option>
                             </select>
                         </div>
                     </div>
 
                     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px;">
                         <div>
-                            <label style="font-size: 11px; color: var(--neon-blue);">লড়াইয়ের ধরণ (Battle Format)</label>
-                            <select id="battleModeSelect">
-                                <option value="1v1">1 vs 1 (Solo Scholar Duel)</option>
-                                <option value="nvn_squad">Squad vs Squad (NvN Guild War) 🛡️</option>
+                            <label style="font-size: 11px; color: var(--neon-blue);">৩. অধ্যায় নং ও টপিক (Chapter)</label>
+                            <select id="battleChapterSelect">
+                                <!-- Dynamically loaded chapters with chapter numbers -->
                             </select>
                         </div>
                         <div>
-                            <label style="font-size: 11px; color: var(--neon-gold);">XP বাজি (Stake Points)</label>
+                            <label style="font-size: 11px; color: var(--neon-gold);">৪. প্রশ্নের কঠিনতা (Difficulty)</label>
+                            <select id="battleDifficultySelect">
+                                <option value="Easy">Easy (এইচএসসি বোর্ড স্ট্যান্ডার্ড)</option>
+                                <option value="Medium">Medium (এডমিশন স্ট্যান্ডার্ড)</option>
+                                <option value="Hard">Hard (বুয়েট / মেডিকেল স্ট্যান্ডার্ড) 🔥</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 10px;">
+                        <div>
+                            <label style="font-size: 11px; color: var(--neon-blue);">৫. ফরম্যাট</label>
+                            <select id="battleModeSelect">
+                                <option value="1v1">1 vs 1 (Solo Duel)</option>
+                                <option value="nvn_squad">Squad vs Squad (NvN War) 🛡️</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label style="font-size: 11px; color: var(--neon-gold);">৬. প্রশ্নের সংখ্যা</label>
+                            <select id="battleQuestionCountSelect">
+                                <option value="1">১টি প্রশ্ন (Instant Duel)</option>
+                                <option value="3">৩টি প্রশ্ন (Quick Set)</option>
+                                <option value="5">৫টি প্রশ্ন (Standard Match)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label style="font-size: 11px; color: var(--neon-gold);">৭. XP বাজি</label>
                             <select id="battleStakeSelect">
-                                <option value="20">20 XP Baji</option>
-                                <option value="50">50 XP Baji</option>
-                                <option value="100">100 XP High Stake 🔥</option>
-                                <option value="250">250 XP Limitless Stake 👑</option>
+                                <option value="20">20 XP</option>
+                                <option value="50">50 XP</option>
+                                <option value="100">100 XP 🔥</option>
+                                <option value="250">250 XP 👑</option>
                             </select>
                         </div>
                     </div>
 
                     <div style="margin-bottom: 14px;">
-                        <label style="font-size: 11px; color: var(--neon-blue);">প্রতি প্রশ্নের সময় (Fair Timer Guard: কমপক্ষে ১০ সেকেন্ড)</label>
+                        <label style="font-size: 11px; color: var(--neon-blue);">প্রতি প্রশ্নের সময় (Fair Timer: কমপক্ষে ১০ সেকেন্ড)</label>
                         <input type="number" id="battleTimeInput" min="10" max="60" value="15" placeholder="ন্যূনতম 10 সেকেন্ড">
                     </div>
 
@@ -1022,8 +801,8 @@
                         <button class="btn-action" style="background: var(--neon-red); color: #fff; flex: 2; font-size: 13.5px;" onclick="broadcastBattleRoom()">
                             📢 HOST & BROADCAST CHALLENGE
                         </button>
-                        <button class="btn-action gold" style="flex: 1; font-size: 13.5px;" onclick="startInstantBotFight()">
-                            ⚡ PRACTICE BOT
+                        <button class="btn-action gold" style="flex: 1; font-size: 13.5px;" onclick="startSmartBotFight()">
+                            🤖 SMART BOT FIGHT
                         </button>
                     </div>
                 </div>
@@ -1043,20 +822,18 @@
                 <div id="battleActiveStage" style="display: none; margin-top: 15px;">
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
                         <span style="font-size: 12px; color: var(--neon-green); font-weight: bold;" id="battleSubjectHeader">PHYSICS MCQ</span>
-                        <span style="font-size: 12px; color: var(--neon-gold); font-weight: bold;" id="battleScoreLive">Duel Mode</span>
+                        <span style="font-size: 12px; color: var(--neon-gold); font-weight: bold;" id="battleScoreLive">Question 1 of 1</span>
                     </div>
                     <div style="font-size: 15px; font-weight: 700; color: #fff; margin-bottom: 15px; line-height: 1.45;" id="battleQuestionText">প্রশ্ন লোড হচ্ছে...</div>
 
                     <div id="battleOptionsGrid"></div>
+                    <div id="botExplanationContainer"></div>
                 </div>
             </div>
         </div>
 
-        <!-- ==============================================
-             4. SQUAD / GUILD TAB (Meritocratic Tier & Auto-Rank)
-        ============================================== -->
+        <!-- 4. SQUAD / GUILD TAB -->
         <div id="squadTab" class="tab-content">
-            
             <div class="cyber-card">
                 <div class="card-title">
                     <span>🛡️ MY GUILD / SQUAD CORE</span>
@@ -1064,10 +841,8 @@
                 </div>
                 
                 <div id="currentSquadCard" style="background: rgba(5, 11, 20, 0.7); border: 1px solid rgba(0, 240, 255, 0.2); padding: 16px; border-radius: 12px;">
-                    
                     <div style="display: flex; gap: 15px; align-items: flex-start;">
-                        <img id="squadAvatarImg" src="gojo-vibe.jpg" style="width: 70px; height: 70px; border-radius: 12px; border: 2px solid var(--neon-blue); object-fit: cover; background: #000; box-shadow: 0 0 10px rgba(0,240,255,0.3);">
-                        
+                        <img id="squadAvatarImg" src="gojo-vibe.jpg" style="width: 70px; height: 70px; border-radius: 12px; border: 2px solid var(--neon-blue); object-fit: cover; background: #000;">
                         <div style="flex: 1;">
                             <div style="display: flex; align-items: center; justify-content: space-between;">
                                 <div style="display: flex; align-items: center; gap: 8px;">
@@ -1076,9 +851,8 @@
                                 </div>
                                 <button id="leaveSquadBtn" onclick="leaveCurrentSquad()" style="display: none; background: rgba(255,51,102,0.15); border: 1px solid var(--neon-red); color: var(--neon-red); padding: 5px 12px; border-radius: 6px; cursor: pointer; font-size: 11px; font-weight: bold;">Leave</button>
                             </div>
-
                             <div style="font-size: 12.5px; color: var(--neon-gold); font-style: italic; margin-top: 2px;" id="squadSloganText">"Knowledge is Power"</div>
-                            <div style="font-size: 12px; color: var(--text-muted); margin-top: 4px;" id="activeSquadDesc">আপনি কোনো স্কোয়াডে যুক্ত নেই। নিচে থেকে শর্তপূরণ করে জয়েন করুন।</div>
+                            <div style="font-size: 12px; color: var(--text-muted); margin-top: 4px;" id="activeSquadDesc">আপনি কোনো স্কোয়াডে যুক্ত নেই।</div>
                             <div style="font-size: 11.5px; color: var(--neon-blue); margin-top: 6px;" id="squadGloryStats"></div>
                         </div>
                     </div>
@@ -1091,27 +865,21 @@
                         <button onclick="copySquadInvite()" style="background: var(--neon-blue); color: #000; border: none; padding: 4px 8px; border-radius: 4px; font-size: 11px; font-weight: bold; cursor: pointer;">📋 Copy Invite</button>
                     </div>
 
-                    <!-- Commander Guild Customization Panel (Direct File Upload) -->
                     <div id="squadLeaderCustomPanel" style="display: none; margin-top: 14px; background: rgba(0,240,255,0.05); padding: 14px; border-radius: 10px; border: 1px dashed var(--neon-blue);">
                         <div style="font-size: 12px; font-weight: bold; color: var(--neon-gold); margin-bottom: 8px;">👑 GUILD COMMANDER SETTINGS</div>
-                        
                         <label style="font-size: 11px; color: var(--neon-blue);">Guild Slogan</label>
-                        <input type="text" id="editSquadSlogan" placeholder="স্কোয়াড স্লোগান লিখুন (e.g. Limitless Domain)">
-                        
+                        <input type="text" id="editSquadSlogan" placeholder="স্কোয়াড স্লোগান লিখুন...">
                         <label style="font-size: 11px; color: var(--neon-blue);">Welcome Message</label>
                         <input type="text" id="editSquadWelcomeMsg" placeholder="মেম্বারদের জন্য ওয়েলকাম মেসেজ...">
-
                         <div style="margin: 10px 0;">
-                            <label style="font-size: 11px; color: var(--neon-blue); display: block; margin-bottom: 4px;">Guild Logo / Avatar Upload (গ্যালারি থেকে ছবি বেছে নিন)</label>
+                            <label style="font-size: 11px; color: var(--neon-blue); display: block; margin-bottom: 4px;">Guild Logo / Avatar Upload</label>
                             <label for="guildAvatarFileInput" class="btn-action" style="font-size: 11px; padding: 7px 14px; cursor: pointer; display: inline-block;">📸 Choose Guild Logo</label>
                             <input type="file" id="guildAvatarFileInput" accept="image/*" style="display: none;" onchange="handleGuildAvatarUpload(event)">
                             <span id="guildUploadStatus" style="font-size: 11px; color: var(--neon-green); margin-left: 8px;"></span>
                         </div>
-
                         <button class="btn-action" style="padding: 8px 14px; font-size: 12px; width: 100%; margin-top: 6px;" onclick="saveSquadCustomization()">SAVE GUILD PROFILE</button>
                     </div>
 
-                    <!-- Auto-Rank Member Roster (Infinity Support) -->
                     <div id="squadMembersRoster" style="margin-top: 15px; display: none;">
                         <div style="font-size: 12px; font-weight: 800; color: var(--neon-blue); margin-bottom: 8px; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 10px;">
                             👥 GUILD MERIT HIERARCHY (Auto Assigned by XP & Level)
@@ -1120,33 +888,23 @@
                     </div>
                 </div>
 
-                <!-- Squad Creation and Joining Panel -->
                 <div class="squad-management-grid">
-                    
-                    <!-- 1. Join Existing Verified Squad via Code & PIN -->
                     <div class="squad-panel">
                         <div class="squad-panel-title">🔑 Join Squad (Merit Checked)</div>
-                        <p style="font-size: 11px; color: var(--text-muted); margin-bottom: 10px;">স্কোয়াড কোড ও পিন দিন (পড়ার সময়, XP ও লেভেল স্বয়ংক্রিয়ভাবে যাচাই করা হবে):</p>
-                        
                         <input type="text" id="joinSquadCodeInput" placeholder="Squad Code (e.g. SQ-1234)">
                         <input type="password" id="joinSquadPinInput" placeholder="৪-সংখ্যার সিকিউরিটি পিন" maxlength="4">
                         <button class="btn-action" style="width: 100%; font-size: 12.5px; padding: 10px;" onclick="joinVerifiedSquadByCode()">VERIFY ELIGIBILITY & JOIN</button>
                     </div>
 
-                    <!-- 2. Create Brand New Squad with Tier & Custom Logo -->
                     <div class="squad-panel">
                         <div class="squad-panel-title">⚡ Create Tier-Based Squad</div>
-                        <p style="font-size: 11px; color: var(--text-muted); margin-bottom: 10px;">টার্গেট পড়ার যোগ্যতা নির্ধারণ করে স্কোয়াড তৈরি করুন:</p>
-                        
                         <input type="text" id="createSquadNameInput" placeholder="ইউনিক স্কোয়াড নেম">
-                        <input type="text" id="createSquadSloganInput" placeholder="স্কোয়াড স্লোগান (e.g. Infinite Void)">
-                        
+                        <input type="text" id="createSquadSloganInput" placeholder="স্কোয়াড স্লোগান">
                         <select id="createSquadTierSelect">
                             <option value="rookie">🥉 Rookie Squad (কমপক্ষে দৈনিক শর্ত নেই)</option>
                             <option value="elite">🥈 Elite Squad (দৈনিক ৩+ ঘণ্টা পড়া & ৩০০+ XP)</option>
                             <option value="limitless">👑 Limitless Domain (দৈনিক ৬+ ঘণ্টা পড়া & ১০০০+ XP)</option>
                         </select>
-
                         <select id="createSquadSubjectSelect">
                             <option value="Physics Focus">Physics Focus</option>
                             <option value="Chemistry Focus">Chemistry Focus</option>
@@ -1154,10 +912,9 @@
                             <option value="Biology Focus">Biology Focus</option>
                             <option value="All Rounder (HSC)">All Rounder (HSC Science)</option>
                         </select>
-                        <input type="password" id="createSquadPinInput" placeholder="সদস্যদের জন্য ৪-সংখ্যার পিন দিন" maxlength="4">
+                        <input type="password" id="createSquadPinInput" placeholder="৪-সংখ্যার পিন দিন" maxlength="4">
                         <button class="btn-action" style="width: 100%; font-size: 12.5px; padding: 10px; background: var(--neon-green);" onclick="createNewVerifiedSquad()">GENERATE SQUAD</button>
                     </div>
-
                 </div>
             </div>
 
@@ -1167,9 +924,7 @@
             </div>
         </div>
 
-        <!-- ==============================================
-             5. PROFILE & SETTINGS TAB
-        ============================================== -->
+        <!-- 5. PROFILE & SETTINGS TAB -->
         <div id="profileTab" class="tab-content">
             <div class="cyber-card" style="text-align: center;">
                 <img id="profAvatarBig" src="gojo-vibe.jpg" style="width: 85px; height: 85px; border-radius: 50%; border: 3px solid var(--neon-blue); object-fit: cover; margin-bottom: 10px; background: #050b14; box-shadow: 0 0 15px rgba(0, 240, 255, 0.4);" onerror="this.src='gojo-vibe.jpg'">
@@ -1178,36 +933,17 @@
                 <input type="file" id="avatarUploadInput" accept="image/*" style="display: none;" onchange="handleAvatarUpload(event)">
                 
                 <div class="profile-info-grid">
-                    <div class="info-cell">
-                        <label>Username</label>
-                        <span id="profUser" style="color: var(--neon-blue);"></span>
-                    </div>
-                    <div class="info-cell">
-                        <label>Display Name</label>
-                        <span id="profName"></span>
-                    </div>
-                    <div class="info-cell">
-                        <label>Age & Level</label>
-                        <span id="profAge"></span>
-                    </div>
-                    <div class="info-cell">
-                        <label>Institution</label>
-                        <span id="profInst" style="color: var(--neon-blue);"></span>
-                    </div>
-                    <div class="info-cell">
-                        <label>Target Dream</label>
-                        <span id="profTarget" style="color: var(--neon-gold);"></span>
-                    </div>
-                    <div class="info-cell">
-                        <label>Verification Status</label>
-                        <span id="profVerificationBadge"></span>
-                    </div>
+                    <div class="info-cell"><label>Username</label><span id="profUser" style="color: var(--neon-blue);"></span></div>
+                    <div class="info-cell"><label>Display Name</label><span id="profName"></span></div>
+                    <div class="info-cell"><label>Age & Level</label><span id="profAge"></span></div>
+                    <div class="info-cell"><label>Institution</label><span id="profInst" style="color: var(--neon-blue);"></span></div>
+                    <div class="info-cell"><label>Target Dream</label><span id="profTarget" style="color: var(--neon-gold);"></span></div>
+                    <div class="info-cell"><label>Verification Status</label><span id="profVerificationBadge"></span></div>
                 </div>
             </div>
 
             <div class="cyber-card">
                 <div class="card-title">⚙️ EDIT ACADEMIC PROFILE & MAP VERIFY</div>
-                
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
                     <div>
                         <label style="font-size: 11px; color: var(--neon-blue);">বয়স (Age)</label>
@@ -1222,31 +958,22 @@
                         </select>
                     </div>
                 </div>
-
                 <div class="map-search-box">
-                    <label style="font-size: 11px; color: var(--neon-blue);">প্রতিষ্ঠানের নাম (Search or Type Directly 🗺️)</label>
-                    <input type="text" id="mapSearchInstInput" placeholder="টাইপ করুন (যেমন: Gaibandha Govt College)..." oninput="searchInstitutionOnMap(this.value)">
+                    <label style="font-size: 11px; color: var(--neon-blue);">প্রতিষ্ঠানের নাম (Search on Live Map 🗺️)</label>
+                    <input type="text" id="mapSearchInstInput" placeholder="টাইপ করুন..." oninput="searchInstitutionOnMap(this.value)">
                     <div class="map-suggest-list" id="mapSuggestions"></div>
                 </div>
-
-                <button class="btn-action" style="width: 100%; margin-top: 8px; font-size: 13px;" onclick="saveAcademicProfile()">
-                    💾 SAVE PROFILE CHANGES
-                </button>
+                <button class="btn-action" style="width: 100%; margin-top: 8px; font-size: 13px;" onclick="saveAcademicProfile()">💾 SAVE PROFILE CHANGES</button>
             </div>
 
             <div class="cyber-card">
                 <div class="card-title">🔗 CONNECT SOCIAL ACCOUNTS</div>
                 <div class="connect-box">
-                    <button class="btn-connect" id="btnGoogleLink" onclick="linkGoogleAccount()">
-                        🌐 Connect Google
-                    </button>
-                    <button class="btn-connect" id="btnFacebookLink" onclick="linkFacebookAccount()">
-                        📘 Connect Facebook
-                    </button>
+                    <button class="btn-connect" id="btnGoogleLink" onclick="linkGoogleAccount()">🌐 Connect Google</button>
+                    <button class="btn-connect" id="btnFacebookLink" onclick="linkFacebookAccount()">📘 Connect Facebook</button>
                 </div>
             </div>
         </div>
-
     </div>
 
     <!-- Custom Modal -->
@@ -1260,7 +987,6 @@
     </div>
 
     <script>
-        // 1. Firebase Initialization
         const firebaseConfig = {
             apiKey: "AIzaSyAG0Py4X5uCXy_qlswCe0hE8ci_iOzGc2M",
             authDomain: "aura-readers.firebaseapp.com",
@@ -1274,30 +1000,18 @@
         const db = firebase.database();
         const auth = firebase.auth();
 
-        // 2. Authentication Check
         const currentUser = localStorage.getItem('auraCurrentUser');
-        if (!currentUser) {
-            window.location.href = "index.html";
-        }
+        if (!currentUser) window.location.href = "index.html";
 
         document.getElementById('navUserName').innerText = "@" + currentUser;
         document.getElementById('profUser').innerText = currentUser;
 
-        // 🟢 Realtime Online/Offline Presence Engine
+        // Presence System
         const myStatusRef = db.ref('users/' + currentUser + '/onlineStatus');
-        const connectedRef = db.ref('.info/connected');
-
-        connectedRef.on('value', (snap) => {
+        db.ref('.info/connected').on('value', (snap) => {
             if (snap.val() === true) {
-                myStatusRef.onDisconnect().set({
-                    isOnline: false,
-                    lastSeen: firebase.database.ServerValue.TIMESTAMP
-                });
-
-                myStatusRef.set({
-                    isOnline: true,
-                    lastSeen: firebase.database.ServerValue.TIMESTAMP
-                });
+                myStatusRef.onDisconnect().set({ isOnline: false, lastSeen: firebase.database.ServerValue.TIMESTAMP });
+                myStatusRef.set({ isOnline: true, lastSeen: firebase.database.ServerValue.TIMESTAMP });
             }
         });
 
@@ -1309,17 +1023,14 @@
             return "স্বাগতম";
         }
 
-        // 3. User Data Realtime Listener & Daily 20 XP Engine
         let userData = {};
         let dailyBonusChecked = false;
         let uploadedGuildAvatarBase64 = null;
 
         db.ref('users/' + currentUser).on('value', (snap) => {
             userData = snap.val() || {};
-            
             const displayName = userData.name || "Scholar";
-            const greeting = getTimeGreeting();
-            document.getElementById('dashGreeting').innerHTML = `${greeting}, <span>${displayName}</span> 👋`;
+            document.getElementById('dashGreeting').innerHTML = `${getTimeGreeting()}, <span>${displayName}</span> 👋`;
             document.getElementById('profName').innerText = displayName;
 
             const targetGoal = userData.target || "HSC Science";
@@ -1340,12 +1051,9 @@
             if (userData.institutionName) document.getElementById('mapSearchInstInput').value = userData.institutionName;
 
             const isVerified = (userData.emailVerified === true) || (auth.currentUser && auth.currentUser.emailVerified);
-            if (isVerified) {
-                document.getElementById('profVerificationBadge').innerHTML = '<span style="color: var(--neon-green); font-weight: bold;">✅ Verified Scholar</span>';
-                if (!userData.emailVerified) db.ref('users/' + currentUser).update({ emailVerified: true });
-            } else {
-                document.getElementById('profVerificationBadge').innerHTML = '<span style="color: var(--neon-gold); font-weight: bold;">⚠️ Pending (Check Gmail)</span>';
-            }
+            document.getElementById('profVerificationBadge').innerHTML = isVerified ? 
+                '<span style="color: var(--neon-green); font-weight: bold;">✅ Verified Scholar</span>' : 
+                '<span style="color: var(--neon-gold); font-weight: bold;">⚠️ Pending (Check Gmail)</span>';
 
             const defaultAv = 'gojo-vibe.jpg';
             const userAvatar = userData.avatar;
@@ -1372,8 +1080,7 @@
 
             const xpFloor = (currentLvl - 1) * 100;
             const xpCeil = currentLvl * 100;
-            const xpInCurrentLvl = currentXp - xpFloor;
-            const progressPercent = Math.min(100, Math.max(0, (xpInCurrentLvl / 100) * 100));
+            const progressPercent = Math.min(100, Math.max(0, ((currentXp - xpFloor) / 100) * 100));
 
             document.getElementById('dashLvlHeader').innerText = `LEVEL ${currentLvl} SCHOLAR`;
             document.getElementById('dashXpHeader').innerText = `${currentXp} / ${xpCeil} XP`;
@@ -1384,7 +1091,6 @@
             const goalTargetSec = userTargetMins * 60;
             const goalAchievedSec = totalSec % goalTargetSec;
             const goalPercent = Math.min(100, Math.round((goalAchievedSec / goalTargetSec) * 100));
-            
             document.getElementById('goalTargetText').innerText = `${(userTargetMins/60).toFixed(1)} ঘণ্টা (${userTargetMins} মিনিট)`;
             document.getElementById('goalProgressBar').style.width = goalPercent + "%";
             document.getElementById('goalPercentText').innerText = goalPercent + "% সম্পন্ন";
@@ -1399,13 +1105,11 @@
                 document.getElementById('activeSquadTitle').innerText = userSquad;
                 document.getElementById('leaveSquadBtn').style.display = "block";
                 document.getElementById('dashSquadStateText').innerHTML = `আপনি বর্তমানে <strong>${userSquad}</strong> স্কোয়াডের সদস্য!`;
-                
-                const squadKey = userData.squadKey;
-                if (squadKey) loadSquadLiveDetails(squadKey);
+                if (userData.squadKey) loadSquadLiveDetails(userData.squadKey);
             } else {
                 document.getElementById('dashSquadSub').innerText = "No Squad";
                 document.getElementById('activeSquadTitle').innerText = "No Squad";
-                document.getElementById('activeSquadDesc').innerText = "আপনি কোনো স্কোয়াডে যুক্ত নেই। নিচে থেকে শর্তপূরণ করে জয়েন করুন।";
+                document.getElementById('activeSquadDesc').innerText = "আপনি কোনো স্কোয়াডে যুক্ত নেই।";
                 document.getElementById('leaveSquadBtn').style.display = "none";
                 document.getElementById('squadInviteBox').style.display = "none";
                 document.getElementById('squadMembersRoster').style.display = "none";
@@ -1413,58 +1117,32 @@
                 document.getElementById('activeSquadTierBadge').innerHTML = "";
                 document.getElementById('myAutoRankBadge').innerHTML = "";
                 document.getElementById('squadGloryStats').innerText = "";
-                document.getElementById('dashSquadStateText').innerText = "আপনি এখনো কোনো স্টাডি স্কোয়াডে যুক্ত হননি।";
-            }
-
-            if (userData.lastActiveSession) {
-                const diffHours = (Date.now() - userData.lastActiveSession) / (1000 * 60 * 60);
-                if (diffHours >= 15) {
-                    document.getElementById('penaltySection').style.display = "flex";
-                    document.getElementById('dashStreakStatus').innerText = "Locked";
-                    document.getElementById('dashStreakStatus').style.color = "var(--neon-red)";
-                } else {
-                    document.getElementById('penaltySection').style.display = "none";
-                    document.getElementById('dashStreakStatus').innerText = "Active";
-                    document.getElementById('dashStreakStatus').style.color = "var(--neon-green)";
-                }
-            }
-
-            if (userData.googleConnected) {
-                const gBtn = document.getElementById('btnGoogleLink');
-                gBtn.classList.add('connected');
-                gBtn.innerText = "✅ Google Connected";
-            }
-            if (userData.facebookConnected) {
-                const fbBtn = document.getElementById('btnFacebookLink');
-                fbBtn.classList.add('connected');
-                fbBtn.innerText = "✅ Facebook Connected";
             }
 
             if (!dailyBonusChecked && userData.createdAt) {
                 dailyBonusChecked = true;
-                checkAndAwardDailyLoginBonus();
+                const todayStr = new Date().toISOString().split('T')[0];
+                if (userData.lastDailyBonusDate !== todayStr) {
+                    db.ref('users/' + currentUser).update({ xp: (userData.xp || 50) + 20, lastDailyBonusDate: todayStr }).then(() => {
+                        openModal("🎁", "DAILY LOGIN BONUS", "প্রতিদিনের ধারাবাহিকতার জন্য আপনি +২০ XP বোনাস পেয়েছেন!");
+                    });
+                }
             }
         });
 
-        // 🛡️ Load Squad Realtime Hierarchy (Auto Rank: XP + Level)
+        // 🛡️ Load Squad Hierarchy with XP + Level Composite
         function loadSquadLiveDetails(squadKey) {
             db.ref('squads/' + squadKey).on('value', snap => {
                 if (!snap.exists()) return;
                 const sq = snap.val();
-
                 const tier = sq.tier || 'rookie';
-                let tierHtml = '';
-                if (tier === 'limitless') tierHtml = '<span class="tier-badge tier-limitless">👑 LIMITLESS SQUAD</span>';
-                else if (tier === 'elite') tierHtml = '<span class="tier-badge tier-elite">🥈 ELITE SQUAD</span>';
-                else tierHtml = '<span class="tier-badge tier-rookie">🥉 ROOKIE SQUAD</span>';
-                document.getElementById('activeSquadTierBadge').innerHTML = tierHtml;
+                document.getElementById('activeSquadTierBadge').innerHTML = tier === 'limitless' ? 
+                    '<span class="tier-badge tier-limitless">👑 LIMITLESS</span>' : 
+                    (tier === 'elite' ? '<span class="tier-badge tier-elite">🥈 ELITE</span>' : '<span class="tier-badge tier-rookie">🥉 ROOKIE</span>');
 
-                if (sq.avatarUrl) {
-                    document.getElementById('squadAvatarImg').src = sq.avatarUrl;
-                }
+                if (sq.avatarUrl) document.getElementById('squadAvatarImg').src = sq.avatarUrl;
                 document.getElementById('squadSloganText').innerText = sq.slogan ? `"${sq.slogan}"` : '"Knowledge is Power"';
-                document.getElementById('activeSquadDesc').innerText = sq.welcomeMsg || `Focus: ${sq.subject || 'All Rounder'} | Infinity Cap`;
-
+                document.getElementById('activeSquadDesc').innerText = sq.welcomeMsg || `Focus: ${sq.subject || 'All Rounder'}`;
                 document.getElementById('squadInviteBox').style.display = "flex";
                 document.getElementById('displaySquadCode').innerText = sq.code || squadKey.toUpperCase();
                 document.getElementById('displaySquadPin').innerText = sq.pin || "0000";
@@ -1483,15 +1161,12 @@
                             const uLvl = Math.floor(uXp / 100) + 1;
                             totalSquadSec += uSec;
                             totalSquadXp += uXp;
-                            
-                            const meritScore = uXp + (uLvl * 150);
-
                             memberList.push({
                                 user: uSnap.key,
                                 name: val.name || uSnap.key,
                                 xp: uXp,
                                 lvl: uLvl,
-                                meritScore: meritScore,
+                                meritScore: uXp + (uLvl * 150),
                                 totalHours: (uSec / 3600).toFixed(1),
                                 isOnline: val.onlineStatus && val.onlineStatus.isOnline
                             });
@@ -1499,21 +1174,16 @@
                     });
 
                     memberList.sort((a, b) => b.meritScore - a.meritScore);
+                    document.getElementById('squadGloryStats').innerHTML = `🔥 <strong>Glory Level: ${Math.floor(totalSquadXp / 500) + 1}</strong> | Total Team XP: ${totalSquadXp} | Study: ${(totalSquadSec/3600).toFixed(1)}h`;
 
-                    const squadLvl = Math.floor(totalSquadXp / 500) + 1;
-                    document.getElementById('squadGloryStats').innerHTML = `🔥 <strong>Glory Lvl: ${squadLvl}</strong> | Total Team XP: ${totalSquadXp} | Team Study: ${(totalSquadSec/3600).toFixed(1)} hrs`;
-
-                    const rosterBox = document.getElementById('squadMembersRoster');
                     const listContainer = document.getElementById('membersHierarchyList');
                     listContainer.innerHTML = "";
-                    rosterBox.style.display = "block";
+                    document.getElementById('squadMembersRoster').style.display = "block";
 
                     let isUserCommander = false;
-
                     memberList.forEach((m, index) => {
                         let roleTitle = "Cadet";
                         let roleClass = "role-cadet";
-
                         if (index === 0) { roleTitle = "👑 Team Commander"; roleClass = "role-commander"; }
                         else if (index === 1) { roleTitle = "🎖️ Captain"; roleClass = "role-captain"; }
                         else if (index === 2) { roleTitle = "⭐ Vice-Captain"; roleClass = "role-vice"; }
@@ -1525,7 +1195,6 @@
                         }
 
                         const statusDot = m.isOnline ? '<span style="color:var(--neon-green);">🟢</span>' : '<span style="color:var(--text-muted);">⚪</span>';
-                        
                         const row = document.createElement('div');
                         row.className = "activity-row";
                         row.style.padding = "7px 10px";
@@ -1549,121 +1218,174 @@
             });
         }
 
-        // Direct File Upload for Guild Avatar
-        function handleGuildAvatarUpload(event) {
-            const file = event.target.files[0];
-            if (!file) return;
-
-            if (file.size > 1024 * 1024 * 1.5) {
-                openModal("⚠️", "ফাইল অনেক বড়", "দয়া করে ১.৫ MB এর চেয়ে ছোট ছবি আপলোড করুন!");
-                return;
+        // 📚 Complete Structured Syllabus (All Subjects, Paper 1/2, Chapter No & Topic)
+        const structuredSyllabus = {
+            "Physics": {
+                "1st Paper": [
+                    "অধ্যায় ১: ভৌতজগত ও পরিমাপ",
+                    "অধ্যায় ২: ভেক্টর (Vector)",
+                    "অধ্যায় ৩: গতিবিদ্যা (Dynamics)",
+                    "অধ্যায় ৪: নিউটনিয়ান বলবিদ্যা",
+                    "অধ্যায় ৫: কাজ, শক্তি ও ক্ষমতা",
+                    "অধ্যায় ৬: মহাকর্ষ ও অভিকর্ষ",
+                    "অধ্যায় ৭: পদার্থের গাঠনিক ধর্ম",
+                    "অধ্যায় ৮: পর্যাবৃত্ত গতি",
+                    "অধ্যায় ৯: তরঙ্গ (Waves)",
+                    "অধ্যায় ১০: আদর্শ গ্যাস ও গ্যাসের গতিতত্ত্ব"
+                ],
+                "2nd Paper": [
+                    "অধ্যায় ১: তাপগতিবিদ্যা (Thermodynamics)",
+                    "অধ্যায় ২: স্থির তড়িৎ (Electrostatics)",
+                    "অধ্যায় ৩: চল তড়িৎ (Current Electricity)",
+                    "অধ্যায় ৪: তড়িৎ প্রবাহের চৌম্বক ক্রিয়া",
+                    "অধ্যায় ৫: তাড়িতচৌম্বক আবেশ ও পরিবর্তী প্রবাহ",
+                    "অধ্যায় ৬: জ্যামিতিক আলোকবিজ্ঞান",
+                    "অধ্যায় ৭: ভৌত আলোকবিজ্ঞান",
+                    "অধ্যায় ৮: আধুনিক পদার্থবিজ্ঞানের সূচনা",
+                    "অধ্যায় ৯: পরমাণুর মডেল ও নিউক্লিয়ার পদার্থবিজ্ঞান",
+                    "অধ্যায় ১০: সেমিকন্ডাক্টর ও ইলেকট্রনিক্স"
+                ]
+            },
+            "Chemistry": {
+                "1st Paper": [
+                    "অধ্যায় ১: ল্যাবরেটরির নিরাপদ ব্যবহার",
+                    "অধ্যায় ২: গুণগত রসায়ন (Qualitative)",
+                    "অধ্যায় ৩: মৌলের পর্যায়বৃত্ত ধর্ম ও রাসায়নিক বন্ধন",
+                    "অধ্যায় ৪: রাসায়নিক পরিবর্তন",
+                    "অধ্যায় ৫: কর্মমুখী রসায়ন"
+                ],
+                "2nd Paper": [
+                    "অধ্যায় ১: পরিবেশ রসায়ন (Environmental)",
+                    "অধ্যায় ২: জৈব রসায়ন (Organic Chemistry)",
+                    "অধ্যায় ৩: পরিমাণগত রসায়ন",
+                    "অধ্যায় ৪: তড়িৎ রসায়ন (Electrochemistry)",
+                    "অধ্যায় ৫: অর্থনৈতিক রসায়ন"
+                ]
+            },
+            "HigherMath": {
+                "1st Paper": [
+                    "অধ্যায় ১: ম্যাট্রিক্স ও নির্ণায়ক",
+                    "অধ্যায় ২: ভেক্টর",
+                    "অধ্যায় ৩: সরলরেখা (Straight Lines)",
+                    "অধ্যায় ৪: বৃত্ত (Circle)",
+                    "অধ্যায় ৫: বিন্যাস ও সমাবেশ",
+                    "অধ্যায় ৬: ত্রিকোণমিতিক অনুপাত",
+                    "অধ্যায় ৭: সংযুক্ত কোণের ত্রিকোণমিতি",
+                    "অধ্যায় ৮: ফাংশন ও লেখচিত্র",
+                    "অধ্যায় ৯: অন্তরীকরণ (Calculus - Differentiation)",
+                    "অধ্যায় ১০: যোগজীকরণ (Calculus - Integration)"
+                ],
+                "2nd Paper": [
+                    "অধ্যায় ১: বাস্তব সংখ্যা ও অসমতা",
+                    "অধ্যায় ২: যোগাশ্রয়ী প্রোগ্রাম",
+                    "অধ্যায় ৩: জটিল সংখ্যা (Complex Numbers)",
+                    "অধ্যায় ৪: বহুপদী ও বহুপদী সমীকরণ",
+                    "অধ্যায় ৫: দ্বিপদী বিস্তার",
+                    "অধ্যায় ৬: কনিক্স (Conics)",
+                    "অধ্যায় ৭: বিপরীত ত্রিকোণমিতিক ফাংশন",
+                    "অধ্যায় ৮: স্থিতিবিদ্যা (Statics)",
+                    "অধ্যায় ৯: গতিবিদ্যা (Dynamics)",
+                    "অধ্যায় ১০: বিস্তার পরিমাপ ও সম্ভাবনা"
+                ]
+            },
+            "Biology": {
+                "1st Paper": [
+                    "অধ্যায় ১: কোষ ও এর গঠন (Cell Biology)",
+                    "অধ্যায় ২: কোষ বিভাজন (Cell Division)",
+                    "অধ্যায় ৩: কোষ রসায়ন",
+                    "অধ্যায় ৪: অণুজীব (Microorganisms)",
+                    "অধ্যায় ৫: শৈবাল ও ছত্রাক",
+                    "অধ্যায় ৬: ব্রায়োফাইটা ও টেরিডোফাইটা",
+                    "অধ্যায় ৭: নগ্নবীজী ও আবৃতবীজী",
+                    "অধ্যায় ৮: টিস্যু ও টিস্যুতন্ত্র",
+                    "অধ্যায় ৯: উদ্ভিদ শারীরতত্ত্ব",
+                    "অধ্যায় ১০: উদ্ভিদ প্রজনন",
+                    "অধ্যায় ১১: জীবপ্রযুক্তি (Biotechnology)",
+                    "অধ্যায় ১২: জীবের পরিবেশ ও বিস্তার"
+                ],
+                "2nd Paper": [
+                    "অধ্যায় ১: প্রাণীর বিভিন্নতা ও শ্রেণিবিন্যাস",
+                    "অধ্যায় ২: প্রাণীর পরিচিতি (হাইড্রা, ঘাসফড়িং, রুই মাছ)",
+                    "অধ্যায় ৩: মানব শারীরতত্ত্ব: পরিপাক ও শোষণ",
+                    "অধ্যায় ৪: মানব শারীরতত্ত্ব: রক্ত ও সংবহন",
+                    "অধ্যায় ৫: মানব শারীরতত্ত্ব: শ্বাসক্রিয়া ও শ্বসন",
+                    "অধ্যায় ৬: মানব শারীরতত্ত্ব: বর্জ্য ও নিষ্কাশন",
+                    "অধ্যায় ৭: চলন ও অঙ্গচালনা",
+                    "অধ্যায় ৮: সমন্বয় ও নিয়ন্ত্রণ",
+                    "অধ্যায় ৯: মানব জীবনের ধারাবাহিকতা",
+                    "অধ্যায় ১০: মানবদেহের প্রতিরক্ষা (ইমিউনিটি)",
+                    "অধ্যায় ১১: জিনতত্ত্ব ও বিবর্তন"
+                ]
+            },
+            "Bangla": {
+                "1st Paper": [
+                    "গদ্য: অপরিচিতা - রবীন্দ্রনাথ ঠাকুর",
+                    "গদ্য: বিলাসী - শরৎচন্দ্র চট্টোপাধ্যায়",
+                    "গদ্য: আমার পথ - কাজী নজরুল ইসলাম",
+                    "গদ্য: বায়ান্নর দিনগুলো - শেখ মুজিবুর রহমান",
+                    "পদ্য: সোনার তরী - রবীন্দ্রনাথ ঠাকুর",
+                    "পদ্য: বিদ্রোহী - কাজী নজরুল ইসলাম",
+                    "পদ্য: প্রতিদান - জসীমউদ্দীন",
+                    "উপন্যাস: লালসালু - সৈয়দ ওয়ালীউল্লাহ্",
+                    "নাটক: সিরাজউদ্দৌলা - সিকান্দার আবু জাফর"
+                ],
+                "2nd Paper": [
+                    "বাংলা উচ্চারণের নিয়ম",
+                    "বাংলা বানানের নিয়ম",
+                    "শব্দের ব্যাকরণিক শ্রেণি",
+                    "বাক্যতত্ত্ব ও বাক্য রূপান্তর",
+                    "প্রতিবেদন ও পত্রলিখন",
+                    "ভাবসম্প্রসারণ ও সারাংশ",
+                    "প্রবন্ধ রচনা"
+                ]
+            },
+            "English": {
+                "1st Paper": [
+                    "Unit 1: People or Personalities",
+                    "Unit 2: Dreams and Aspirations",
+                    "Unit 3: Lifestyle and Health",
+                    "Unit 4: Environment and Nature",
+                    "Seen Comprehension & Cloze Test",
+                    "Theme & Summary Writing"
+                ],
+                "2nd Paper": [
+                    "Grammar: Gap Filling with Prepositions",
+                    "Grammar: Right Form of Verbs",
+                    "Grammar: Narrative Style (Narration)",
+                    "Grammar: Modifiers & Sentence Connectors",
+                    "Formal Letter & Paragraph Writing"
+                ]
+            },
+            "ICT": {
+                "1st Paper": [
+                    "অধ্যায় ১: তথ্য ও যোগাযোগ প্রযুক্তি বিশ্ব ও বাংলাদেশ",
+                    "অধ্যায় ২: কমিউনিকেশন সিস্টেমস ও নেটওয়ার্কিং",
+                    "অধ্যায় ৩: সংখ্যা পদ্ধতি ও ডিজিটাল ডিভাইস",
+                    "অধ্যায় ৪: এইচটিএমএল (HTML Web Design)",
+                    "অধ্যায় ৫: সি প্রোগ্রামিং (C Programming)",
+                    "অধ্যায় ৬: ডেটাবেজ ম্যানেজমেন্ট সিস্টেম (DBMS)"
+                ]
             }
-
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                uploadedGuildAvatarBase64 = e.target.result;
-                document.getElementById('guildUploadStatus').innerText = "✅ Image Selected!";
-            };
-            reader.readAsDataURL(file);
-        }
-
-        function saveSquadCustomization() {
-            const squadKey = userData.squadKey;
-            if (!squadKey) return;
-
-            const slogan = document.getElementById('editSquadSlogan').value.trim();
-            const welcome = document.getElementById('editSquadWelcomeMsg').value.trim();
-
-            let updatePayload = {};
-            if (slogan) updatePayload.slogan = slogan;
-            if (welcome) updatePayload.welcomeMsg = welcome;
-            if (uploadedGuildAvatarBase64) updatePayload.avatarUrl = uploadedGuildAvatarBase64;
-
-            db.ref('squads/' + squadKey).update(updatePayload).then(() => {
-                uploadedGuildAvatarBase64 = null;
-                document.getElementById('guildUploadStatus').innerText = "";
-                openModal("👑", "Guild Updated", "স্কোয়াডের লোগো, স্লোগান ও মেসেজ সফলভাবে সংরক্ষিত হয়েছে!");
-            });
-        }
-
-        // ⚔️ ============================================
-        // DYNAMIC SUBJECT & CHAPTER MCQ BANK
-        // ============================================
-        const hscSubjectChapters = {
-            "Physics": [
-                "ভেক্টর (Vector)",
-                "গতিবিদ্যা (Dynamics)",
-                "কাজ, শক্তি ও ক্ষমতা",
-                "পদার্থের গাঠনিক ধর্ম",
-                "তাপগতিবিদ্যা (Thermodynamics)",
-                "স্থির তড়িৎ ও চল তড়িৎ"
-            ],
-            "Chemistry": [
-                "গুণগত রসায়ন (Qualitative Chemistry)",
-                "পর্যায় সারণী ও বন্ধন",
-                "মৌলের পর্যায়বৃত্ত ধর্ম",
-                "জৈব যৌগ (Organic Chemistry)",
-                "পরিবেশ রসায়ন",
-                "তড়িৎ রসায়ন"
-            ],
-            "HigherMath": [
-                "ম্যাট্রিক্স ও নির্ণায়ক",
-                "সরলরেখা ও বৃত্ত",
-                "ত্রিকোণমিতি (Trigonometry)",
-                "অন্তরীকরণ (Differentiation)",
-                "যোগজীকরণ (Integration)",
-                "কনিক্স ও জটিল সংখ্যা"
-            ],
-            "Biology": [
-                "কোষ ও এর গঠন (Cell Structure)",
-                "কোষ বিভাজন (Cell Division)",
-                "অণুজীব (Microorganisms)",
-                "উদ্ভিদ শারীরতত্ত্ব",
-                "মানব শারীরতত্ত্ব (রক্ত ও সংবহন)",
-                "জিনতত্ত্ব ও বিবর্তন"
-            ],
-            "ICT": [
-                "তথ্য ও যোগাযোগ প্রযুক্তি বিশ্ব ও বাংলাদেশ",
-                "কমিউনিকেশন সিস্টেমস ও নেটওয়ার্কিং",
-                "সংখ্যা পদ্ধতি ও ডিজিটাল ডিভাইস",
-                "এইচটিএমএল (HTML Web Design)",
-                "সি প্রোগ্রামিং (C Programming)"
-            ]
         };
 
-        const battleQuestionsDatabase = {
-            "Physics": [
-                { q: "কোনো ভেক্টর A = 3i + 4j হলে, এর মান (Magnitude) কত?", options: ["5", "7", "1", "25"], correct: 0 },
-                { q: "নিউটনের ৩য় সূত্র অনুযায়ী ক্রিয়া ও প্রতিক্রিয়ার মধ্যবর্তী কোণ কত?", options: ["0°", "90°", "180°", "360°"], correct: 2 },
-                { q: "কাজের একক কোনটি?", options: ["ওয়াট", "জুল", "নিউটন", "প্যাসকেল"], correct: 1 }
-            ],
-            "Chemistry": [
-                { q: "পর্যায় সারণীর কোন গ্রুপের মৌলগুলোকে হ্যালোজেন বলা হয়?", options: ["Group 1", "Group 2", "Group 17", "Group 18"], correct: 2 },
-                { q: "সবচেয়ে সক্রিয় ক্ষার ধাতু কোনটি?", options: ["Li", "Na", "K", "Cs"], correct: 3 },
-                { q: "ইথেন অণুতে কার্বন-কার্বন বন্ধন দূরত্ব কত?", options: ["0.154 nm", "0.134 nm", "0.120 nm", "0.109 nm"], correct: 0 }
-            ],
-            "HigherMath": [
-                { q: "d/dx(sin 2x) এর অন্তরক সহগ কোনটি?", options: ["cos 2x", "2 cos 2x", "-2 cos 2x", "cos^2 x"], correct: 1 },
-                { q: "∫ e^(3x) dx এর মান কোনটি?", options: ["3e^(3x)", "(1/3)e^(3x)", "e^(3x)", "e^(x)"], correct: 1 },
-                { q: "বৃত্তের সমীকরণ x^2 + y^2 = 16 হলে ব্যাসার্ধ কত?", options: ["2", "4", "8", "16"], correct: 1 }
-            ],
-            "Biology": [
-                { q: "কোষের প্রোটিন ফ্যাক্টরি বলা হয় কোন অঙ্গাণুকে?", options: ["মাইটোকন্ড্রিয়া", "লাইসোজোম", "রাইবোসোম", "গলগি বডি"], correct: 2 },
-                { q: "রক্তের সার্বজনীন দাতা গ্রুপ কোনটি?", options: ["A", "B", "AB", "O negative"], correct: 3 },
-                { q: "ডিএনএ (DNA) এর হেলিক্স মডেল কে আবিষ্কার করেন?", options: ["ওয়াটসন ও ক্রিক", "রবার্ট হুক", "মেন্ডেল", "ডারউইন"], correct: 0 }
-            ],
-            "ICT": [
-                { q: "বাইনারি সংখ্যা (1011)২ এর ডেসিমাল মান কত?", options: ["9", "11", "13", "15"], correct: 1 },
-                { q: "HTML এ হাইপারলিংক তৈরির ট্যাগ কোনটি?", options: ["<link>", "<a>", "<href>", "<nav>"], correct: 1 },
-                { q: "C প্রোগ্রামিং ভাষায় পূর্ণসংখ্যার ডেটা টাইপ কোনটি?", options: ["float", "char", "int", "double"], correct: 2 }
-            ]
-        };
+        function onBattleSubjectChange() {
+            const sub = document.getElementById('battleSubjectSelect').value;
+            const paperSelect = document.getElementById('battlePaperSelect');
+            if (sub === "ICT") {
+                paperSelect.innerHTML = '<option value="1st Paper">একক পত্র (Standard)</option>';
+            } else {
+                paperSelect.innerHTML = '<option value="1st Paper">১ম পত্র (1st Paper)</option><option value="2nd Paper">২য় পত্র (2nd Paper)</option>';
+            }
+            updateBattleChapterOptions();
+        }
 
         function updateBattleChapterOptions() {
             const sub = document.getElementById('battleSubjectSelect').value;
+            const paper = document.getElementById('battlePaperSelect').value;
             const chapSelect = document.getElementById('battleChapterSelect');
             chapSelect.innerHTML = "";
-            const chapters = hscSubjectChapters[sub] || ["General Syllabus"];
+
+            const chapters = (structuredSyllabus[sub] && structuredSyllabus[sub][paper]) || ["সার্বজনীন প্রশ্নাবলি"];
             chapters.forEach(chap => {
                 const opt = document.createElement('option');
                 opt.value = chap;
@@ -1672,19 +1394,49 @@
             });
         }
 
-        // Initialize Chapter select on page load
-        updateBattleChapterOptions();
+        // Question Bank with Detailed Explanations
+        const intelligentQuestionBank = {
+            "Physics": [
+                { q: "ভেক্টর A = 3i + 4j হলে, এর মান (Magnitude) কত?", options: ["5", "7", "1", "25"], correct: 0, explain: "|A| = √(3² + 4²) = √(9 + 16) = √25 = 5 একক।" },
+                { q: "নিউটনের ৩য় সূত্র অনুযায়ী ক্রিয়া ও প্রতিক্রিয়ার মধ্যবর্তী কোণ কত?", options: ["0°", "90°", "180°", "360°"], correct: 2, explain: "ক্রিয়া এবং প্রতিক্রিয়া বল সর্বদা সমান ও বিপরীতমুখী, তাই এদের মধ্যকার কোণ ১৮০ ডিগ্রি।" }
+            ],
+            "Chemistry": [
+                { q: "পর্যায় সারণীর কোন গ্রুপের মৌলগুলোকে হ্যালোজেন বলা হয়?", options: ["Group 1", "Group 2", "Group 17", "Group 18"], correct: 2, explain: "গ্রুপ ১৭ এর F, Cl, Br, I, At মৌলগুলোকে লবণ উৎপাদনকারী বা হ্যালোজেন বলে।" },
+                { q: "ইথেন অণুতে কার্বন-কার্বন (C-C) বন্ধন দৈর্ঘ্য কত?", options: ["0.154 nm", "0.134 nm", "0.120 nm", "0.109 nm"], correct: 0, explain: "কার্বন-কার্বন একক বন্ধন (sp3) এর দৈর্ঘ্য 0.154 nm।" }
+            ],
+            "HigherMath": [
+                { q: "d/dx(sin 2x) এর অন্তরক সহগ কোনটি?", options: ["cos 2x", "2 cos 2x", "-2 cos 2x", "cos^2 x"], correct: 1, explain: "চেইন রুল অনুযায়ী: d/dx(sin 2x) = cos 2x * d/dx(2x) = 2 cos 2x।" },
+                { q: "বৃত্তের সমীকরণ x² + y² = 16 হলে ব্যাসার্ধ কত?", options: ["2", "4", "8", "16"], correct: 1, explain: "বৃত্তের আদর্শ সমীকরণ x² + y² = r² এর সাথে তুলনা করলে r² = 16 বা r = 4।" }
+            ],
+            "Biology": [
+                { q: "কোষের প্রোটিন ফ্যাক্টরি বলা হয় কোন অঙ্গাণুকে?", options: ["মাইটোকন্ড্রিয়া", "লাইসোজোম", "রাইবোসোম", "গলগি বডি"], correct: 2, explain: "রাইবোসোম কোষে প্রোটিন সংশ্লেষণের প্রধান স্থান, তাই একে প্রোটিন ফ্যাক্টরি বলা হয়।" },
+                { q: "রক্তের সার্বজনীন দাতা (Universal Donor) গ্রুপ কোনটি?", options: ["A+", "B+", "AB+", "O-"], correct: 3, explain: "O নেগেটিভ রক্তে কোনো প্রকার A, B বা Rh অ্যান্টিজেন থাকে না, তাই এটি সার্বজনীন দাতা।" }
+            ],
+            "Bangla": [
+                { q: "'অপরিচিতা' গল্পে কল্যাণীর বাবার নাম কী ছিল?", options: ["অনুপম", "শম্ভুনাথ সেন", "হরিদাস", "হরিশ"], correct: 1, explain: "রবীন্দ্রনাথ ঠাকুরের 'অপরিচিতা' গল্পে কল্যাণীর পিতা ছিলেন শম্ভুনাথ সেন।" },
+                { q: "'বিদ্রোহী' কবিতাটি কাজী নজরুল ইসলামের কোন কাব্যগ্রন্থের অন্তর্গত?", options: ["অগ্নিবীণা", "বিষের বাঁশী", "সাম্যবাদী", "সর্বহারা"], correct: 0, explain: "১৯২২ সালে প্রকাশিত নজরুলের প্রথম কাব্যগ্রন্থ 'অগ্নিবীণা' এর দ্বিতীয় কবিতা হলো 'বিদ্রোহী'।" }
+            ],
+            "English": [
+                { q: "Which preposition is correct: 'He is proficient ___ English'?", options: ["at", "in", "with", "for"], correct: 1, explain: "দক্ষতা প্রকাশের ক্ষেত্রে 'proficient in' এপ্রোপ্রিয়েট প্রিপজিশন হিসেবে ব্যবহৃত হয়।" }
+            ],
+            "ICT": [
+                { q: "বাইনারি সংখ্যা (1011)₂ এর ডেসিমাল মান কত?", options: ["9", "11", "13", "15"], correct: 1, explain: "1*8 + 0*4 + 1*2 + 1*1 = 8 + 0 + 2 + 1 = 11।" }
+            ]
+        };
 
         let battleTimerInterval = null;
         let currentBattleQuestion = null;
         let currentBattleStake = 20;
         let activeRoomKey = null;
 
-        // 📢 Host & Broadcast Battle Challenge to Everyone
+        // 📢 Broadcast Battle Room Live
         function broadcastBattleRoom() {
             const sub = document.getElementById('battleSubjectSelect').value;
+            const paper = document.getElementById('battlePaperSelect').value;
             const chap = document.getElementById('battleChapterSelect').value;
+            const diff = document.getElementById('battleDifficultySelect').value;
             const mode = document.getElementById('battleModeSelect').value;
+            const qCount = document.getElementById('battleQuestionCountSelect').value;
             const stake = parseInt(document.getElementById('battleStakeSelect').value);
             const timeLimit = parseInt(document.getElementById('battleTimeInput').value);
 
@@ -1709,18 +1461,21 @@
                 host: currentUser,
                 hostSquad: userData.squad || "Independent",
                 subject: sub,
+                paper: paper,
                 chapter: chap,
+                difficulty: diff,
                 mode: mode,
+                questionCount: qCount,
                 stake: stake,
                 timeLimit: timeLimit,
                 status: "waiting",
                 createdAt: Date.now()
             }).then(() => {
-                openModal("📡", "চ্যালেঞ্জ ব্রডকাস্ট সফল", `আপনার ${sub} [${chap}] চ্যালেঞ্জটি সকল শিক্ষার্থীর নোটিস বোর্ডে ব্রডকাস্ট হয়েছে! কেউ এক্সেপ্ট করলেই লড়াই শুরু হবে।`);
+                openModal("📡", "চ্যালেঞ্জ ব্রডকাস্ট সফল", `আপনার ${sub} (${paper}) [${chap}] চ্যালেঞ্জটি সকল শিক্ষার্থীর নোটিস বোর্ডে ব্রডকাস্ট হয়েছে!`);
             });
         }
 
-        // 📡 Realtime Battle Rooms Listener for Notice Board & Arena
+        // 📡 Realtime Live Rooms Listener
         db.ref('battle_rooms').orderByChild('status').equalTo('waiting').limitToLast(5).on('value', snap => {
             const container = document.getElementById('liveRoomsList');
             const counter = document.getElementById('liveRoomCount');
@@ -1745,10 +1500,10 @@
                 card.innerHTML = `
                     <div>
                         <div style="font-size: 13px; font-weight: 800; color: #fff;">
-                            ${room.subject} ➡️ <span style="color: var(--neon-blue);">${room.chapter}</span>
+                            ${room.subject} (${room.paper || '১ম পত্র'}) ➡️ <span style="color: var(--neon-blue);">${room.chapter}</span>
                         </div>
                         <div style="font-size: 11px; color: var(--text-muted); margin-top: 3px;">
-                            Host: <strong style="color: var(--neon-green);">@${room.host}</strong> (${room.hostSquad}) | Mode: <strong>${room.mode.toUpperCase()}</strong> | Time: <strong>${room.timeLimit}s</strong>
+                            Host: <strong style="color: var(--neon-green);">@${room.host}</strong> (${room.hostSquad}) | লেভেল: <strong style="color:var(--neon-gold);">${room.difficulty || 'Easy'}</strong> | Time: <strong>${room.timeLimit}s</strong>
                         </div>
                     </div>
                     <div style="text-align: right;">
@@ -1765,57 +1520,56 @@
 
         function cancelMyBattleRoom(rKey) {
             db.ref('battle_rooms/' + rKey).remove().then(() => {
-                openModal("🚪", "Room Cancelled", "আপনার চ্যালেঞ্জ রুমটি সফলভাবে বাতিল করা হয়েছে।");
+                openModal("🚪", "Room Cancelled", "আপনার চ্যালেঞ্জ রুমটি বাতিল করা হয়েছে।");
             });
         }
 
         function acceptLiveBattleRoom(rKey) {
             db.ref('battle_rooms/' + rKey).once('value').then(snap => {
                 if (!snap.exists() || snap.val().status !== 'waiting') {
-                    openModal("⚠️", "ম্যাচ পাওয়া যায়নি", "এই চ্যালেঞ্জটি ইতোমধ্যে অন্য কেউ গ্রহণ করেছে বা বাতিল হয়েছে!");
+                    openModal("⚠️", "ম্যাচ পাওয়া যায়নি", "এই চ্যালেঞ্জটি ইতোমধ্যে অন্য কেউ গ্রহণ করেছে!");
                     return;
                 }
                 const room = snap.val();
-                const userXp = userData.xp || 50;
-                if (userXp < room.stake) {
-                    openModal("🚫", "পর্যাপ্ত XP নেই", `এই চ্যালেঞ্জ গ্রহণ করতে কমপক্ষে ${room.stake} XP ব্যালেন্স প্রয়োজন!`);
+                if ((userData.xp || 50) < room.stake) {
+                    openModal("🚫", "পর্যাপ্ত XP নেই", `চ্যালেঞ্জ গ্রহণ করতে কমপক্ষে ${room.stake} XP প্রয়োজন!`);
                     return;
                 }
 
-                // Lock the room
                 db.ref('battle_rooms/' + rKey).update({
                     status: 'active',
                     challenger: currentUser,
                     challengerSquad: userData.squad || "Independent"
                 }).then(() => {
                     activeRoomKey = rKey;
-                    startActiveBattleGame(room.subject, room.chapter, room.stake, room.timeLimit, room.mode);
+                    startActiveBattleGame(room.subject, room.paper, room.chapter, room.stake, room.timeLimit, room.mode, false);
                 });
             });
         }
 
-        function startInstantBotFight() {
+        // 🤖 Smart AI Bot Practice with Correction Feedback
+        function startSmartBotFight() {
             const sub = document.getElementById('battleSubjectSelect').value;
+            const paper = document.getElementById('battlePaperSelect').value;
             const chap = document.getElementById('battleChapterSelect').value;
+            const diff = document.getElementById('battleDifficultySelect').value;
             const stake = parseInt(document.getElementById('battleStakeSelect').value);
             const timeLimit = Math.max(10, parseInt(document.getElementById('battleTimeInput').value));
-            startActiveBattleGame(sub, chap, stake, timeLimit, "bot_practice");
+            startActiveBattleGame(sub, paper, chap, stake, timeLimit, "bot_practice", true);
         }
 
-        function startActiveBattleGame(subject, chapter, stake, timeLimit, mode) {
+        function startActiveBattleGame(subject, paper, chapter, stake, timeLimit, mode, isBot) {
             currentBattleStake = stake;
-
-            // Pick Question from bank based on subject
-            const qList = battleQuestionsDatabase[subject] || battleQuestionsDatabase["Physics"];
-            const randomIdx = Math.floor(Math.random() * qList.length);
-            currentBattleQuestion = qList[randomIdx];
+            const qList = intelligentQuestionBank[subject] || intelligentQuestionBank["Physics"];
+            currentBattleQuestion = qList[Math.floor(Math.random() * qList.length)];
 
             document.getElementById('battleSetupSection').style.display = "none";
             document.getElementById('liveChallengesBoard').style.display = "none";
             document.getElementById('battleActiveStage').style.display = "block";
+            document.getElementById('botExplanationContainer').innerHTML = "";
 
-            document.getElementById('battleSubjectHeader').innerText = `${subject} [${chapter}] | Mode: ${mode.toUpperCase()}`;
-            document.getElementById('battleScoreLive').innerText = `Stake: ${stake} XP`;
+            document.getElementById('battleSubjectHeader').innerText = `${subject} (${paper}) ➡️ ${chapter}`;
+            document.getElementById('battleScoreLive').innerText = isBot ? "🤖 Smart AI Bot Match (No XP Risk)" : `Stake: ${stake} XP`;
             document.getElementById('battleQuestionText').innerText = currentBattleQuestion.q;
 
             const optContainer = document.getElementById('battleOptionsGrid');
@@ -1825,7 +1579,7 @@
                 const btn = document.createElement('button');
                 btn.className = "battle-option-btn";
                 btn.innerText = `${i + 1}. ${optText}`;
-                btn.onclick = () => handleBattleAnswer(i);
+                btn.onclick = () => handleBattleAnswer(i, isBot);
                 optContainer.appendChild(btn);
             });
 
@@ -1838,74 +1592,114 @@
                 document.getElementById('battleCountdown').innerText = remainingSec + "s";
                 if (remainingSec <= 0) {
                     clearInterval(battleTimerInterval);
-                    finishBattleSession(false, true);
+                    finishBattleSession(false, true, isBot);
                 }
             }, 1000);
         }
 
-        function handleBattleAnswer(selectedIndex) {
+        function handleBattleAnswer(selectedIndex, isBot) {
             clearInterval(battleTimerInterval);
             const isCorrect = (selectedIndex === currentBattleQuestion.correct);
-            finishBattleSession(isCorrect, false);
+            finishBattleSession(isCorrect, false, isBot);
         }
 
-        function finishBattleSession(isWinner, isTimeout) {
-            document.getElementById('battleSetupSection').style.display = "block";
-            document.getElementById('liveChallengesBoard').style.display = "block";
-            document.getElementById('battleActiveStage').style.display = "none";
-            document.getElementById('battleCountdown').innerText = "15s";
-
+        function finishBattleSession(isWinner, isTimeout, isBot) {
             if (activeRoomKey) {
                 db.ref('battle_rooms/' + activeRoomKey).remove();
                 activeRoomKey = null;
             }
 
-            const userXp = userData.xp || 50;
+            const explainHtml = `
+                <div class="bot-explanation-box">
+                    <strong>💡 সঠিক উত্তর ও ব্যাখ্যা:</strong><br>
+                    সঠিক উত্তর: <strong style="color:var(--neon-green);">${currentBattleQuestion.options[currentBattleQuestion.correct]}</strong><br>
+                    ${currentBattleQuestion.explain || "পাঠ্যবইয়ের সংশ্লিষ্ট অধ্যায়ের নিয়ম অনুযায়ী সঠিক উত্তর নির্ধারিত হয়েছে।"}
+                </div>
+                <button class="btn-action" style="width:100%; margin-top:10px;" onclick="exitBattleToSetup()">লবিতে ফিরে যান</button>
+            `;
+            document.getElementById('botExplanationContainer').innerHTML = explainHtml;
 
+            if (isBot) {
+                if (isWinner) {
+                    openModal("🤖", "স্মার্ট বট পরাজিত!", "অভিনন্দন! আপনি সঠিক উত্তর দিয়েছেন। নিচে ব্যাখ্যা দেখে নিন।");
+                } else {
+                    openModal("❌", "ভুল উত্তর হয়েছে", "স্মার্ট বটের বিপক্ষে আপনার উত্তরটি ভুল হয়েছে। নিচে বিস্তারিত সমাধান দেওয়া হলো।");
+                }
+                return;
+            }
+
+            const userXp = userData.xp || 50;
             if (isTimeout) {
-                const newXp = Math.max(0, userXp - currentBattleStake);
-                db.ref('users/' + currentUser).update({ xp: newXp }).then(() => {
-                    openModal("⌛", "TIME EXPIRED", `নির্দিষ্ট সময়ের মধ্যে উত্তর দিতে পারেননি! আপনি ${currentBattleStake} XP হারিয়েছেন।`);
-                });
+                db.ref('users/' + currentUser).update({ xp: Math.max(0, userXp - currentBattleStake) });
+                openModal("⌛", "TIME EXPIRED", `সময় শেষ! আপনি ${currentBattleStake} XP হারিয়েছেন।`);
             } else if (isWinner) {
-                const newXp = userXp + currentBattleStake;
-                db.ref('users/' + currentUser).update({ xp: newXp }).then(() => {
-                    if (userData.squadKey) {
-                        db.ref(`squads/${userData.squadKey}/gloryScore`).transaction(cur => (cur || 0) + currentBattleStake);
-                    }
-                    openModal("🏆", "VICTORY ACHIEVED", `চমৎকার! আপনি সঠিক উত্তর দিয়ে প্রতিপক্ষকে হারিয়ে +${currentBattleStake} XP জিতে নিয়েছেন!`);
-                });
+                db.ref('users/' + currentUser).update({ xp: userXp + currentBattleStake });
+                if (userData.squadKey) {
+                    db.ref(`squads/${userData.squadKey}/gloryScore`).transaction(cur => (cur || 0) + currentBattleStake);
+                }
+                openModal("🏆", "VICTORY!", `চমৎকার! আপনি +${currentBattleStake} XP জিতে নিয়েছেন!`);
             } else {
-                const newXp = Math.max(0, userXp - currentBattleStake);
-                db.ref('users/' + currentUser).update({ xp: newXp }).then(() => {
-                    openModal("💀", "DEFEAT", `ভুল উত্তর হয়েছে! আপনি ${currentBattleStake} XP হারিয়েছেন। সঠিক উত্তর ছিল: ${currentBattleQuestion.options[currentBattleQuestion.correct]}`);
-                });
+                db.ref('users/' + currentUser).update({ xp: Math.max(0, userXp - currentBattleStake) });
+                openModal("💀", "DEFEAT", `ভুল উত্তর হয়েছে! আপনি ${currentBattleStake} XP হারিয়েছেন।`);
             }
         }
 
-        // 📢 Live Squad Notice Board Loader with Tiers
+        function exitBattleToSetup() {
+            document.getElementById('battleSetupSection').style.display = "block";
+            document.getElementById('liveChallengesBoard').style.display = "block";
+            document.getElementById('battleActiveStage').style.display = "none";
+            document.getElementById('battleCountdown').innerText = "15s";
+        }
+
+        // Initial trigger for subject change
+        onBattleSubjectChange();
+
+        function handleGuildAvatarUpload(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            if (file.size > 1024 * 1024 * 1.5) {
+                openModal("⚠️", "ফাইল অনেক বড়", "১.৫ MB এর চেয়ে ছোট ছবি দিন!");
+                return;
+            }
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                uploadedGuildAvatarBase64 = e.target.result;
+                document.getElementById('guildUploadStatus').innerText = "✅ Logo Selected!";
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function saveSquadCustomization() {
+            const squadKey = userData.squadKey;
+            if (!squadKey) return;
+            const slogan = document.getElementById('editSquadSlogan').value.trim();
+            const welcome = document.getElementById('editSquadWelcomeMsg').value.trim();
+            let updatePayload = {};
+            if (slogan) updatePayload.slogan = slogan;
+            if (welcome) updatePayload.welcomeMsg = welcome;
+            if (uploadedGuildAvatarBase64) updatePayload.avatarUrl = uploadedGuildAvatarBase64;
+
+            db.ref('squads/' + squadKey).update(updatePayload).then(() => {
+                uploadedGuildAvatarBase64 = null;
+                document.getElementById('guildUploadStatus').innerText = "";
+                openModal("👑", "Guild Updated", "স্কোয়াড প্রোফাইল আপডেট হয়েছে!");
+            });
+        }
+
+        // Leaderboard & Notice Board
         db.ref('squads').limitToLast(6).on('value', (snap) => {
             const list = document.getElementById('publicSquadNotices');
             list.innerHTML = "";
             const data = snap.val();
             if (!data) return;
-
             Object.keys(data).reverse().forEach(key => {
                 const sq = data[key];
-                const tier = sq.tier || 'rookie';
-                let tierTag = '<span class="tier-badge tier-rookie">Rookie</span>';
-                if (tier === 'elite') tierTag = '<span class="tier-badge tier-elite">Elite (3h+ Req)</span>';
-                if (tier === 'limitless') tierTag = '<span class="tier-badge tier-limitless">Limitless (6h+ Req)</span>';
-
                 const row = document.createElement('div');
                 row.className = "activity-row";
-                row.style.borderLeftColor = tier === 'limitless' ? 'var(--neon-gold)' : (tier === 'elite' ? 'var(--neon-blue)' : 'var(--text-muted)');
                 row.innerHTML = `
                     <div>
-                        <div class="activity-desc">🛡️ <strong>${sq.name}</strong> ${tierTag}</div>
-                        <div style="font-size: 11px; color: var(--neon-blue); margin-top: 2px;">
-                            Code: <strong style="color:#fff;">${sq.code || key.toUpperCase()}</strong> | Slogan: "${sq.slogan || 'Onwards'}"
-                        </div>
+                        <div class="activity-desc">🛡️ <strong>${sq.name}</strong> (${sq.tier || 'Rookie'})</div>
+                        <div style="font-size: 11px; color: var(--neon-blue); margin-top: 2px;">Code: <strong style="color:#fff;">${sq.code || key.toUpperCase()}</strong></div>
                     </div>
                     <span class="activity-time" style="color:var(--neon-gold);">PIN: ${sq.pin}</span>
                 `;
@@ -1916,43 +1710,18 @@
         function copySquadInvite() {
             const code = document.getElementById('displaySquadCode').innerText;
             const pin = document.getElementById('displaySquadPin').innerText;
-            const text = `Join my Squad on Aura Readers!\nSquad: ${userData.squad}\nCode: ${code}\nPIN: ${pin}`;
-            navigator.clipboard.writeText(text).then(() => {
-                openModal("📋", "Copied", "স্কোয়াড ইনভাইট কোড ও পিন কপি করা হয়েছে! বন্ধুদের সাথে শেয়ার করুন।");
+            navigator.clipboard.writeText(`Squad: ${userData.squad}\nCode: ${code}\nPIN: ${pin}`).then(() => {
+                openModal("📋", "Copied", "ইনভাইট কোড কপি হয়েছে!");
             });
         }
 
-        function checkAndAwardDailyLoginBonus() {
-            const todayStr = new Date().toISOString().split('T')[0];
-            const lastRewardDate = userData.lastDailyBonusDate;
-
-            if (lastRewardDate !== todayStr) {
-                const newXp = (userData.xp || 50) + 20;
-                db.ref('users/' + currentUser).update({
-                    xp: newXp,
-                    lastDailyBonusDate: todayStr
-                }).then(() => {
-                    openModal("🎁", "DAILY LOGIN BONUS", "প্রতিদিনের ধারাবাহিকতার জন্য আপনি +২০ XP বোনাস পেয়েছেন!");
-                });
-            }
-        }
-
         function setCustomDailyGoal() {
-            const currentGoal = userData.dailyGoalMins ? (userData.dailyGoalMins / 60) : 3;
-            const newHrs = prompt("আজকে কত ঘণ্টা পড়ার লক্ষ্য নির্ধারণ করতে চান? (যেমন: 2, 4, 6):", currentGoal);
-            if (newHrs !== null) {
-                const parsed = parseFloat(newHrs);
-                if (!isNaN(parsed) && parsed > 0 && parsed <= 16) {
-                    db.ref('users/' + currentUser).update({ dailyGoalMins: Math.round(parsed * 60) }).then(() => {
-                        openModal("🎯", "লক্ষ্যমাত্রা নির্ধারিত", `আজকের পড়ার টার্গেট ${parsed} ঘণ্টায় সেট করা হয়েছে!`);
-                    });
-                } else {
-                    openModal("⚠️", "ভুল ইনপুট", "দয়া করে ১ থেকে ১৬ ঘণ্টার মধ্যে একটি বাস্তবসম্মত সময় দিন!");
-                }
+            const newHrs = prompt("আজকের পড়ার লক্ষ্য কত ঘণ্টা?:", 3);
+            if (newHrs && !isNaN(newHrs)) {
+                db.ref('users/' + currentUser).update({ dailyGoalMins: Math.round(newHrs * 60) });
             }
         }
 
-        // 🛡️ Create New Squad with Tier
         function createNewVerifiedSquad() {
             const nameInput = document.getElementById('createSquadNameInput').value.trim();
             const slogan = document.getElementById('createSquadSloganInput').value.trim();
@@ -1960,123 +1729,45 @@
             const subject = document.getElementById('createSquadSubjectSelect').value;
             const pin = document.getElementById('createSquadPinInput').value.trim();
 
-            if (!nameInput || nameInput.length < 3) {
-                openModal("⚠️", "নাম অসম্পূর্ণ", "স্কোয়াডের নাম কমপক্ষে ৩ অক্ষরের হতে হবে!");
-                return;
-            }
-
-            if (!pin || pin.length !== 4 || isNaN(pin)) {
-                openModal("⚠️", "৪-ডিজিট পিন আবশ্যক", "সদস্যদের যুক্ত করার জন্য একটি ৪-সংখ্যার পিন কোড দিন (যেমন: 1234)!");
-                return;
-            }
-
-            const userTotalHours = (userData.totalSeconds || 0) / 3600;
-            const userXp = userData.xp || 50;
-
-            if (tier === 'limitless' && (userTotalHours < 6 || userXp < 500)) {
-                openModal("🚫", "অযোগ্যতা শনাক্ত", "Limitless Domain স্কোয়াড তৈরি করতে আপনার প্রোফাইলে ন্যূনতম ৬ ঘণ্টা পড়ার রেকর্ড এবং ৫০০+ XP থাকতে হবে!");
-                return;
-            }
-
-            if (tier === 'elite' && (userTotalHours < 2 || userXp < 200)) {
-                openModal("🚫", "অযোগ্যতা শনাক্ত", "Elite Squad তৈরি করতে আপনার প্রোফাইলে ন্যূনতম ২ ঘণ্টা পড়ার রেকর্ড এবং ২০০+ XP থাকতে হবে!");
+            if (!nameInput || pin.length !== 4) {
+                openModal("⚠️", "ভুল তথ্য", "সঠিক নাম এবং ৪-ডিজিট পিন দিন!");
                 return;
             }
 
             const autoCode = "SQ-" + Math.floor(1000 + Math.random() * 9000);
             const squadKey = autoCode.toLowerCase();
-
             db.ref('squads/' + squadKey).set({
-                name: nameInput,
-                code: autoCode,
-                slogan: slogan || "Knowledge is Power",
-                tier: tier,
-                subject: subject,
-                pin: pin,
-                creator: currentUser,
-                createdAt: Date.now(),
-                members: { [currentUser]: true }
+                name: nameInput, code: autoCode, slogan: slogan, tier: tier, subject: subject, pin: pin, creator: currentUser, members: { [currentUser]: true }
             }).then(() => {
-                db.ref('users/' + currentUser).update({ 
-                    squad: nameInput,
-                    squadKey: squadKey 
-                });
-                document.getElementById('createSquadNameInput').value = "";
-                document.getElementById('createSquadPinInput').value = "";
-                document.getElementById('createSquadSloganInput').value = "";
-                openModal("🎉", "স্কোয়াড তৈরি সফল", `স্কোয়াড তৈরি হয়েছে।\nTier: ${tier.toUpperCase()}\nCode: ${autoCode}\nPIN: ${pin}`);
+                db.ref('users/' + currentUser).update({ squad: nameInput, squadKey: squadKey });
+                openModal("🎉", "স্কোয়াড তৈরি সফল", `Code: ${autoCode} | PIN: ${pin}`);
             });
         }
 
-        // 🛡️ Join Squad with Automatic Merit & Rule Verification
         function joinVerifiedSquadByCode() {
-            const codeInput = document.getElementById('joinSquadCodeInput').value.trim().toUpperCase();
+            const codeInput = document.getElementById('joinSquadCodeInput').value.trim().toLowerCase();
             const pinInput = document.getElementById('joinSquadPinInput').value.trim();
-
-            if (!codeInput) {
-                openModal("⚠️", "Squad Code দিন", "নোটিস বোর্ড বা লিডারের কাছ থেকে পাওয়া Squad Code দিন!");
-                return;
-            }
-
-            if (!pinInput) {
-                openModal("🔑", "সিকিউরিটি পিন দিন", "এই স্কোয়াডে জয়েন করার ৪-সংখ্যার পিন প্রদান করুন!");
-                return;
-            }
-
-            const squadKey = codeInput.toLowerCase();
-
-            db.ref('squads/' + squadKey).once('value').then((snap) => {
+            db.ref('squads/' + codeInput).once('value').then((snap) => {
                 if (!snap.exists()) {
-                    openModal("❌", "কোড খুঁজে পাওয়া যায়নি", `'${codeInput}' কোডের কোনো স্কোয়াড পাওয়া যায়নি! নোটিস বোর্ড চেক করুন।`);
-                } else {
-                    const squadData = snap.val();
-                    if (squadData.pin !== pinInput) {
-                        openModal("🔒", "ভুল পিন কোড", "প্রদত্ত পিন কোডটি সঠিক নয়! সঠিক পিন প্রদান করুন।");
-                        return;
-                    }
-
-                    const userTotalHours = (userData.totalSeconds || 0) / 3600;
-                    const userXp = userData.xp || 50;
-                    const tier = squadData.tier || 'rookie';
-
-                    if (tier === 'limitless' && (userTotalHours < 6 || userXp < 1000)) {
-                        openModal("🛡️", "প্রবেশাধিকার সংরক্ষিত", `এই স্কোয়াডটি 'Limitless Domain' স্তরের! এখানে জয়েন করতে দৈনিক ন্যূনতম ৬ ঘণ্টা পড়ার অভিজ্ঞতা এবং ১০০০+ XP অর্জন করতে হবে।`);
-                        return;
-                    }
-
-                    if (tier === 'elite' && (userTotalHours < 3 || userXp < 300)) {
-                        openModal("🛡️", "যোগ্যতা অপূর্ণ", `এই 'Elite Squad'-এ যুক্ত হতে ন্যূনতম ৩ ঘণ্টা পড়ার রেকর্ড ও ৩০০+ XP আবশ্যক।`);
-                        return;
-                    }
-
-                    db.ref(`squads/${squadKey}/members/${currentUser}`).set(true);
-                    db.ref('users/' + currentUser).update({ 
-                        squad: squadData.name,
-                        squadKey: squadKey 
-                    }).then(() => {
-                        document.getElementById('joinSquadCodeInput').value = "";
-                        document.getElementById('joinSquadPinInput').value = "";
-                        openModal("🔥", "MERIT VERIFIED", `অভিনন্দন! আপনি সব শর্ত পূরণ করে '${squadData.name}' স্কোয়াডে যুক্ত হয়েছেন!`);
-                    });
+                    openModal("❌", "কোড ভুল", "স্কোয়াড পাওয়া যায়নি!");
+                    return;
                 }
+                const sq = snap.val();
+                if (sq.pin !== pinInput) {
+                    openModal("🔒", "ভুল পিন", "সঠিক পিন প্রদান করুন!");
+                    return;
+                }
+                db.ref(`squads/${codeInput}/members/${currentUser}`).set(true);
+                db.ref('users/' + currentUser).update({ squad: sq.name, squadKey: codeInput }).then(() => {
+                    openModal("🔥", "সফল", `'${sq.name}' স্কোয়াডে যুক্ত হয়েছেন!`);
+                });
             });
         }
 
         function leaveCurrentSquad() {
-            const currentSquad = userData.squad;
-            const squadKey = userData.squadKey;
-            if (!currentSquad || currentSquad === "None") return;
-
-            if (confirm(`আপনি কি সত্যিই '${currentSquad}' স্কোয়াড ত্যাগ করতে চান? এতে স্কোয়াডের আপনার অর্জিত গ্লোরি ও পদ স্থগিত হবে।`)) {
-                if (squadKey) {
-                    db.ref(`squads/${squadKey}/members/${currentUser}`).remove();
-                }
-                db.ref('users/' + currentUser).update({ 
-                    squad: "None",
-                    squadKey: null 
-                }).then(() => {
-                    openModal("🚪", "স্কোয়াড ত্যাগ", "আপনি সফলভাবে স্কোয়াড থেকে বের হয়ে এসেছেন।");
-                });
+            if (confirm("স্কোয়াড ত্যাগ করতে চান?")) {
+                if (userData.squadKey) db.ref(`squads/${userData.squadKey}/members/${currentUser}`).remove();
+                db.ref('users/' + currentUser).update({ squad: "None", squadKey: null });
             }
         }
 
@@ -2085,149 +1776,67 @@
             clearTimeout(mapSearchDebounce);
             const box = document.getElementById('mapSuggestions');
             const trimmed = query ? query.trim() : '';
-            
-            if (!trimmed || trimmed.length < 2) {
-                box.style.display = 'none';
-                box.innerHTML = '';
-                return;
-            }
+            if (!trimmed || trimmed.length < 2) { box.style.display = 'none'; return; }
 
             mapSearchDebounce = setTimeout(() => {
-                const url = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(trimmed)}&countrycodes=bd&format=jsonv2&limit=8`;
-                
-                fetch(url)
-                    .then(res => res.json())
-                    .then(data => {
-                        box.innerHTML = '';
-
-                        const customOption = document.createElement('div');
-                        customOption.className = 'map-suggest-item';
-                        customOption.style.background = 'rgba(0, 240, 255, 0.08)';
-                        customOption.innerHTML = `✏️ <strong>Use Custom: "${trimmed}"</strong><br><small style="color: var(--neon-gold);">সরাসরি এই নামটি সেট করতে ট্যাপ করুন</small>`;
-                        customOption.onclick = function() {
-                            document.getElementById('mapSearchInstInput').value = trimmed;
-                            box.style.display = 'none';
-                        };
-                        box.appendChild(customOption);
-
+                fetch(`https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(trimmed)}&countrycodes=bd&format=jsonv2&limit=8`)
+                    .then(res => res.json()).then(data => {
+                        box.innerHTML = `<div class="map-suggest-item" onclick="document.getElementById('mapSearchInstInput').value='${trimmed}'; box.style.display='none';">✏️ <strong>Use Custom: "${trimmed}"</strong></div>`;
                         if (data && data.length > 0) {
                             data.forEach(item => {
                                 const div = document.createElement('div');
                                 div.className = 'map-suggest-item';
-                                const primaryName = item.name || item.display_name.split(',')[0];
-                                div.innerHTML = `📍 <strong>${primaryName}</strong><br><small style="color: #8892b0;">${item.display_name}</small>`;
-                                div.onclick = function() {
-                                    document.getElementById('mapSearchInstInput').value = primaryName;
-                                    box.style.display = 'none';
-                                };
+                                const primary = item.name || item.display_name.split(',')[0];
+                                div.innerHTML = `📍 <strong>${primary}</strong>`;
+                                div.onclick = () => { document.getElementById('mapSearchInstInput').value = primary; box.style.display = 'none'; };
                                 box.appendChild(div);
                             });
                         }
-                        box.style.display = 'block';
-                    }).catch(() => {
-                        box.innerHTML = `
-                            <div class="map-suggest-item" onclick="document.getElementById('mapSearchInstInput').value = '${trimmed}'; document.getElementById('mapSuggestions').style.display='none';">
-                                ✏️ <strong>Use Name: "${trimmed}"</strong>
-                            </div>`;
                         box.style.display = 'block';
                     });
             }, 250);
         }
 
-        document.addEventListener('click', function(e) {
-            const box = document.getElementById('mapSuggestions');
-            const input = document.getElementById('mapSearchInstInput');
-            if (e.target !== box && e.target !== input) {
-                box.style.display = 'none';
-            }
-        });
-
         function saveAcademicProfile() {
             const age = document.getElementById('editAgeInput').value.trim();
             const instType = document.getElementById('editInstTypeSelect').value;
             const instName = document.getElementById('mapSearchInstInput').value.trim();
-
-            if (!age || age < 10) {
-                openModal("⚠️", "সঠিক বয়স দিন", "অনুগ্রহ করে ১০ থেকে ৬০ এর মধ্যে আপনার বয়স লিখুন।");
-                return;
-            }
-
-            if (!instName) {
-                openModal("⚠️", "প্রতিষ্ঠান প্রয়োজন", "আপনার স্কুল, কলেজ বা বিশ্ববিদ্যালয়ের নাম লিখুন।");
-                return;
-            }
-
-            db.ref('users/' + currentUser).update({
-                age: age,
-                institutionType: instType,
-                institutionName: instName
-            }).then(() => {
-                document.getElementById('dashInstBadge').innerText = "🏛️ " + instName;
-                document.getElementById('dashAgeBadge').innerText = "👤 " + age + " yrs";
-                document.getElementById('profInst').innerText = instName + ` (${instType})`;
-                document.getElementById('profAge').innerText = age + " yrs";
-                openModal("✅", "প্রোফাইল সংরক্ষিত", "আপনার শিক্ষা প্রতিষ্ঠান ও বয়স সফলভাবে আপডেট করা হয়েছে!");
-            }).catch(err => {
-                openModal("❌", "ত্রুটি", err.message);
+            if (!age || !instName) { openModal("⚠️", "অসম্পূর্ণ", "বয়স ও প্রতিষ্ঠান পূরণ করুন!"); return; }
+            db.ref('users/' + currentUser).update({ age: age, institutionType: instType, institutionName: instName }).then(() => {
+                openModal("✅", "সংরক্ষিত", "প্রোফাইল আপডেট হয়েছে!");
             });
         }
 
-        function switchTab(tabId, element) {
+        function switchTab(tabId, el) {
             document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
             document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
             document.getElementById(tabId).classList.add('active');
-            if (element) element.classList.add('active');
+            if (el) el.classList.add('active');
         }
 
-        function switchToTabDirect(tabId, buttonId) {
-            const btn = document.getElementById(buttonId);
-            switchTab(tabId, btn);
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
+        function switchToTabDirect(tId, bId) { switchTab(tId, document.getElementById(bId)); window.scrollTo({ top: 0, behavior: 'smooth' }); }
+        function navigateToProfileTab() { switchTab('profileTab', document.getElementById('profileTabBtn')); }
 
-        function navigateToProfileTab() {
-            const profileBtn = document.getElementById('profileTabBtn');
-            switchTab('profileTab', profileBtn);
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        function handleAvatarUpload(event) {
-            const file = event.target.files[0];
+        function handleAvatarUpload(e) {
+            const file = e.target.files[0];
             if (!file) return;
-
-            if (file.size > 1024 * 1024 * 1.5) {
-                openModal("⚠️", "ফাইল অনেক বড়", "দয়া করে ১.৫ MB এর চেয়ে ছোট ছবি আপলোড করুন!");
-                return;
-            }
-
             const reader = new FileReader();
-            reader.onload = function(e) {
-                const base64Img = e.target.result;
-                db.ref('users/' + currentUser).update({ avatar: base64Img }).then(() => {
-                    openModal("📸", "ছবি সংরক্ষিত", "আপনার প্রোফাইল ছবি সফলভাবে আপডেট হয়েছে!");
-                });
-            };
+            reader.onload = (ev) => db.ref('users/' + currentUser).update({ avatar: ev.target.result });
             reader.readAsDataURL(file);
         }
 
         function updateStudyPaperOptions() {
             const sub = document.getElementById('studySubjectSelect').value;
-            const paperSelect = document.getElementById('studyPaperSelect');
-            if (sub === "ICT") {
-                paperSelect.innerHTML = '<option value="Single Paper">একক পত্র (Single Paper)</option>';
-            } else {
-                paperSelect.innerHTML = '<option value="1st Paper">১ম পত্র (1st Paper)</option><option value="2nd Paper">২য় পত্র (2nd Paper)</option>';
-            }
+            document.getElementById('studyPaperSelect').innerHTML = sub === "ICT" ? 
+                '<option value="Single Paper">একক পত্র</option>' : 
+                '<option value="1st Paper">১ম পত্র</option><option value="2nd Paper">২য় পত্র</option>';
         }
 
         function onNoteSubChange() {
             const sub = document.getElementById('noteSub').value;
-            const paper = document.getElementById('notePaper');
-            if (sub === "ICT") {
-                paper.innerHTML = '<option value="Single Paper">একক পত্র (Single)</option>';
-            } else {
-                paper.innerHTML = '<option value="1st Paper">১ম পত্র</option><option value="2nd Paper">২য় পত্র</option>';
-            }
+            document.getElementById('notePaper').innerHTML = sub === "ICT" ? 
+                '<option value="Single Paper">একক পত্র</option>' : 
+                '<option value="1st Paper">১ম পত্র</option><option value="2nd Paper">২য় পত্র</option>';
         }
 
         let timerActive = false;
@@ -2240,16 +1849,21 @@
                 timerActive = true;
                 btn.innerText = "FINISH & SAVE SESSION";
                 btn.classList.add('stop');
-                timerInterval = setInterval(() => {
-                    elapsedSeconds++;
-                    renderTimer(elapsedSeconds);
-                }, 1000);
+                timerInterval = setInterval(() => { elapsedSeconds++; renderTimer(elapsedSeconds); }, 1000);
             } else {
                 clearInterval(timerInterval);
                 timerActive = false;
                 btn.innerText = "START STUDYING";
                 btn.classList.remove('stop');
-                saveStudySession();
+                if (elapsedSeconds >= 60) {
+                    const earned = Math.floor(elapsedSeconds / 60);
+                    db.ref('users/' + currentUser).update({
+                        totalSeconds: (userData.totalSeconds || 0) + elapsedSeconds,
+                        xp: (userData.xp || 50) + earned,
+                        lastActiveSession: Date.now()
+                    });
+                    openModal("🔥", "BOOST", `+${earned} XP যোগ হয়েছে!`);
+                }
                 elapsedSeconds = 0;
                 renderTimer(0);
             }
@@ -2262,146 +1876,49 @@
             document.getElementById('studyClock').innerText = `${h}:${m}:${s}`;
         }
 
-        function saveStudySession() {
-            if (elapsedSeconds < 60) {
-                openModal("⏱️", "Session Too Short", "এক্সপি পেতে হলে কমপক্ষে ১ মিনিট পড়াশোনা করতে হবে!");
-                return;
-            }
-
-            const earnedXp = Math.floor(elapsedSeconds / 60);
-            const currentTotalSec = (userData.totalSeconds || 0) + elapsedSeconds;
-            const currentTotalXp = (userData.xp || 50) + earnedXp;
-            const subject = document.getElementById('studySubjectSelect').value;
-
-            db.ref('users/' + currentUser).update({
-                totalSeconds: currentTotalSec,
-                xp: currentTotalXp,
-                lastActiveSession: Date.now(),
-                penaltyActive: false
-            }).then(() => {
-                const actList = document.getElementById('recentActivityList');
-                const row = document.createElement('div');
-                row.className = "activity-row boost";
-                row.innerHTML = `
-                    <div>
-                        <span class="activity-desc">🔥 ${subject} এ ${Math.floor(elapsedSeconds/60)} মিনিট স্টাডি সেশন সম্পন্ন</span>
-                        <div style="font-size: 11px; color: var(--neon-gold); margin-top: 2px;">+${earnedXp} XP Boost Earned</div>
-                    </div>
-                    <span class="activity-time">Just Now</span>
-                `;
-                actList.insertBefore(row, actList.firstChild);
-
-                openModal("🔥", "BOOST ACHIEVED", `চমৎকার! আপনি ${Math.floor(elapsedSeconds/60)} মিনিট পড়েছেন এবং +${earnedXp} XP অর্জন করেছেন!`);
-            });
-        }
-
         function saveHscNote() {
             const sub = document.getElementById('noteSub').value;
             const paper = document.getElementById('notePaper').value;
             const chap = document.getElementById('noteChapter').value.trim();
             const type = document.getElementById('noteType').value;
             const content = document.getElementById('noteContent').value.trim();
-
-            if (!chap || !content) {
-                openModal("⚠️", "নোট অসম্পূর্ণ", "অধ্যায়ের নাম এবং নোটের বিবরণ পূরণ করুন!");
-                return;
-            }
-
-            const noteId = Date.now().toString();
-            db.ref('hsc_notes/' + currentUser + '/' + noteId).set({
-                subject: sub,
-                paper: paper,
-                chapter: chap,
-                type: type,
-                content: content,
-                date: new Date().toLocaleDateString()
-            }).then(() => {
-                document.getElementById('noteChapter').value = "";
-                document.getElementById('noteContent').value = "";
-                openModal("✅", "নোট সংরক্ষিত", "নোটটি আপনার পার্সোনাল ভল্টে সংরক্ষিত হয়েছে!");
-            });
+            if (!chap || !content) return;
+            db.ref(`hsc_notes/${currentUser}/${Date.now()}`).set({ subject: sub, paper: paper, chapter: chap, type: type, content: content });
+            document.getElementById('noteChapter').value = "";
+            document.getElementById('noteContent').value = "";
         }
 
-        db.ref('hsc_notes/' + currentUser).on('value', (snap) => {
+        db.ref('hsc_notes/' + currentUser).on('value', snap => {
             const list = document.getElementById('notesContainer');
             list.innerHTML = "";
             const data = snap.val();
-            if (!data) {
-                list.innerHTML = '<p style="font-size: 12px; color: var(--text-muted); text-align: center;">এখনো কোনো নোট সেভ করা হয়নি।</p>';
-                return;
-            }
-            Object.keys(data).reverse().forEach(key => {
-                const n = data[key];
-                const card = document.createElement('div');
-                card.className = "note-item";
-                card.innerHTML = `
-                    <div class="note-header">
-                        <span>${n.subject} ➡️ ${n.paper} ➡️ ${n.chapter}</span>
-                        <span style="color: var(--neon-blue);">${n.type}</span>
-                    </div>
-                    <div class="note-body">${n.content}</div>
-                `;
-                list.appendChild(card);
+            if (!data) { list.innerHTML = '<p style="font-size:12px; text-align:center; color:var(--text-muted);">নোট নেই।</p>'; return; }
+            Object.keys(data).reverse().forEach(k => {
+                const n = data[k];
+                list.innerHTML += `<div class="note-item"><div class="note-header">${n.subject} (${n.paper}) - ${n.chapter}</div><div class="note-body">${n.content}</div></div>`;
             });
         });
 
         function linkGoogleAccount() {
-            const provider = new firebase.auth.GoogleAuthProvider();
-            auth.signInWithPopup(provider).then((result) => {
-                db.ref('users/' + currentUser).update({
-                    googleConnected: true,
-                    googleEmail: result.user.email,
-                    googleUid: result.user.uid,
-                    emailVerified: true
-                }).then(() => {
-                    openModal("🌐", "Google Connected", "গুগল অ্যাকাউন্ট সফলভাবে যুক্ত ও ভেরিফাই হয়েছে!");
-                });
-            }).catch(err => {
-                openModal("❌", "Google Auth Error", err.message);
+            auth.signInWithPopup(new firebase.auth.GoogleAuthProvider()).then(r => {
+                db.ref('users/' + currentUser).update({ googleConnected: true, googleEmail: r.user.email, emailVerified: true });
             });
         }
 
         function linkFacebookAccount() {
-            const provider = new firebase.auth.FacebookAuthProvider();
-            provider.addScope('email');
-            provider.addScope('public_profile');
-            auth.signInWithPopup(provider).then((result) => {
-                db.ref('users/' + currentUser).update({
-                    facebookConnected: true,
-                    facebookName: result.user.displayName,
-                    facebookUid: result.user.uid
-                }).then(() => {
-                    openModal("📘", "Facebook Connected", "ফেসবুক অ্যাকাউন্ট সফলভাবে যুক্ত হয়েছে!");
-                });
-            }).catch(err => {
-                openModal("❌", "Facebook Auth Error", err.message);
+            auth.signInWithPopup(new firebase.auth.FacebookAuthProvider()).then(r => {
+                db.ref('users/' + currentUser).update({ facebookConnected: true, facebookName: r.user.displayName });
             });
         }
 
-        db.ref('users').orderByChild('xp').limitToLast(10).on('value', (snap) => {
+        db.ref('users').orderByChild('xp').limitToLast(10).on('value', snap => {
             const board = document.getElementById('leaderboardList');
             board.innerHTML = "";
             let arr = [];
-            snap.forEach(child => {
-                arr.push({ user: child.key, ...child.val() });
-            });
-            arr.reverse();
-            arr.forEach((item, index) => {
-                const isOnline = item.onlineStatus && item.onlineStatus.isOnline;
-                const statusBadge = isOnline 
-                    ? '<span style="color: var(--neon-green); font-size: 11px; font-weight: bold;">🟢 Online</span>' 
-                    : '<span style="color: var(--text-muted); font-size: 11px;">⚪ Offline</span>';
-
-                const row = document.createElement('div');
-                row.style.cssText = "display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.05);";
-                row.innerHTML = `
-                    <div>
-                        <span><strong>#${index + 1}</strong> @${item.user} (${item.squad || 'No Squad'})</span>
-                        <div style="margin-top: 3px;">${statusBadge}</div>
-                    </div>
-                    <span style="color: var(--neon-gold); font-weight: bold;">${item.xp || 50} XP</span>
-                `;
-                board.appendChild(row);
+            snap.forEach(c => arr.push({ user: c.key, ...c.val() }));
+            arr.reverse().forEach((it, idx) => {
+                const dot = it.onlineStatus && it.onlineStatus.isOnline ? '🟢' : '⚪';
+                board.innerHTML += `<div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(255,255,255,0.05);"><span>${dot} <strong>#${idx+1}</strong> @${it.user}</span><span style="color:var(--neon-gold);">${it.xp||50} XP</span></div>`;
             });
         });
 
@@ -2411,25 +1928,12 @@
             document.getElementById('modalMsg').innerText = msg;
             document.getElementById('sysModal').style.display = "flex";
         }
-        function closeModal() {
-            document.getElementById('sysModal').style.display = "none";
-        }
+        function closeModal() { document.getElementById('sysModal').style.display = "none"; }
 
         function startDoorLogout() {
-            const overlay = document.getElementById('logoutOverlay');
-            const doorStage = document.getElementById('doorStage');
-            
-            db.ref('users/' + currentUser + '/onlineStatus').set({
-                isOnline: false,
-                lastSeen: Date.now()
-            });
-
-            overlay.style.display = 'flex';
-            
-            setTimeout(() => {
-                doorStage.classList.add('door-open');
-            }, 100);
-
+            db.ref('users/' + currentUser + '/onlineStatus').set({ isOnline: false, lastSeen: Date.now() });
+            document.getElementById('logoutOverlay').style.display = 'flex';
+            setTimeout(() => document.getElementById('doorStage').classList.add('door-open'), 100);
             setTimeout(() => {
                 localStorage.removeItem('auraCurrentUser');
                 localStorage.removeItem('auraIsAdmin');
