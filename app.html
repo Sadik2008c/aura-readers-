@@ -77,11 +77,7 @@
             font-size: 16px;
             transition: all 0.2s ease;
         }
-        .settings-nav-btn:hover {
-            background: var(--neon-blue);
-            color: #050b14;
-            box-shadow: 0 0 10px var(--neon-blue);
-        }
+        .settings-nav-btn:hover { background: var(--neon-blue); color: #050b14; box-shadow: 0 0 10px var(--neon-blue); }
 
         .logout-btn { 
             background: rgba(255, 51, 102, 0.15); 
@@ -195,7 +191,6 @@
             animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
         @keyframes popIn { 0% { transform: scale(0.8); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
-        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
 
         /* লিডারবোর্ড ট্যাব */
         .rank-tier-tabs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin-bottom: 12px; }
@@ -233,6 +228,7 @@
         .role-vice { background: rgba(188, 19, 254, 0.2); border: 1px solid var(--neon-purple); color: var(--neon-purple); }
         .role-vanguard { background: rgba(0, 255, 136, 0.2); border: 1px solid var(--neon-green); color: var(--neon-green); }
         .role-cadet { background: rgba(255, 255, 255, 0.1); color: var(--text-muted); }
+        
         .squad-management-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 15px; }
         @media (max-width: 600px) { .squad-management-grid { grid-template-columns: 1fr; } }
         .squad-panel { background: rgba(5, 11, 20, 0.7); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 12px; padding: 15px; }
@@ -259,14 +255,8 @@
         .timer-display { font-size: 48px; font-weight: 900; color: var(--neon-blue); letter-spacing: 2px; text-shadow: 0 0 15px rgba(0,240,255,0.4); text-align: center; margin: 15px 0; }
         .timer-ctrls { display: flex; justify-content: center; gap: 10px; margin-bottom: 15px; }
 
-        select, input[type="text"], input[type="number"], input[type="password"], textarea {
-            width: 100%; background: #050b14; border: 1px solid #1e293b; color: #fff; padding: 10px 14px; border-radius: 8px; font-size: 13px; outline: none; margin-bottom: 10px;
-        }
+        select, input[type="text"], input[type="number"], input[type="password"], textarea { width: 100%; background: #050b14; border: 1px solid #1e293b; color: #fff; padding: 10px 14px; border-radius: 8px; font-size: 13px; outline: none; margin-bottom: 10px; }
         select:focus, input[type="text"]:focus, input[type="number"]:focus, textarea:focus { border-color: var(--neon-blue); }
-
-        .note-item { background: rgba(5, 11, 20, 0.8); border: 1px solid rgba(255,255,255,0.06); border-left: 3px solid var(--neon-purple); padding: 12px; border-radius: 6px; margin-bottom: 8px; }
-        .note-header { display: flex; justify-content: space-between; font-size: 12px; color: var(--neon-gold); font-weight: bold; margin-bottom: 5px; }
-        .note-body { font-size: 13px; color: #ddd; word-break: break-word; }
 
         .connect-box { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 10px; }
         .btn-connect { flex: 1; min-width: 140px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.15); color: #fff; padding: 12px; border-radius: 8px; cursor: pointer; font-size: 13px; font-weight: bold; display: flex; align-items: center; justify-content: center; gap: 8px; }
@@ -611,7 +601,8 @@
                     <span id="activeSquadTierBadge"></span>
                 </div>
                 
-                <div id="currentSquadCard" style="background: rgba(5, 11, 20, 0.7); border: 1px solid rgba(0, 240, 255, 0.2); padding: 16px; border-radius: 12px;">
+                <!-- Squad details will be hidden if user is not in a squad -->
+                <div id="currentSquadCard" style="background: rgba(5, 11, 20, 0.7); border: 1px solid rgba(0, 240, 255, 0.2); padding: 16px; border-radius: 12px; display: none;">
                     <div style="display: flex; gap: 15px; align-items: flex-start;">
                         <img id="squadAvatarImg" src="gojo-vibe.jpg" style="width: 70px; height: 70px; border-radius: 12px; border: 2px solid var(--neon-blue); object-fit: cover; background: #000;">
                         <div style="flex: 1;">
@@ -620,7 +611,7 @@
                                     <div style="font-size: 20px; font-weight: 900; color: var(--neon-green);" id="activeSquadTitle">No Squad</div>
                                     <span id="myAutoRankBadge"></span>
                                 </div>
-                                <button id="leaveSquadBtn" onclick="leaveCurrentSquad()" class="btn-dual-action red" style="padding: 4px 8px; display: none;">
+                                <button id="leaveSquadBtn" onclick="leaveCurrentSquad()" class="btn-dual-action red" style="padding: 4px 8px;">
                                     <span class="act-en">Leave</span>
                                     <span class="act-bn">ত্যাগ</span>
                                 </button>
@@ -631,7 +622,7 @@
                         </div>
                     </div>
                     
-                    <div class="invite-box" id="squadInviteBox" style="display: none;">
+                    <div class="invite-box" id="squadInviteBox">
                         <div>
                             <span>Squad Code: <strong style="color: var(--neon-blue);" id="displaySquadCode">SQ-0000</strong></span> | 
                             <span>PIN: <strong style="color: var(--neon-gold);" id="displaySquadPin">****</strong></span>
@@ -663,7 +654,7 @@
                         </button>
                     </div>
 
-                    <div id="squadMembersRoster" style="margin-top: 15px; display: none;">
+                    <div id="squadMembersRoster" style="margin-top: 15px;">
                         <div style="font-size: 12px; font-weight: 800; color: var(--neon-blue); margin-bottom: 8px; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 10px;">
                             👥 SQUAD MERIT HIERARCHY (অটো সিলেক্টেড মেম্বার পদবী)
                         </div>
@@ -671,7 +662,8 @@
                     </div>
                 </div>
 
-                <div class="squad-management-grid">
+                <!-- Squad Creation and Joining Panel (Hidden if already in a squad) -->
+                <div class="squad-management-grid" id="squadManagementGrid">
                     <div class="squad-panel">
                         <div class="squad-panel-title">🔑 Join Squad (কোড দিয়ে যুক্ত হোন)</div>
                         <input type="text" id="joinSquadCodeInput" placeholder="স্কোয়াড কোড (যেমন: SQ-1234)">
@@ -774,6 +766,7 @@
                 </div>
             </div>
 
+            <!-- Profile Info Edit -->
             <div class="cyber-card">
                 <div class="card-title">⚙️ একাডেমিক ও ভৌগোলিক তথ্য পরিবর্তন</div>
                 
@@ -830,7 +823,7 @@
 
                 <div class="map-search-box">
                     <label style="font-size: 11px; color: var(--neon-blue);">শিক্ষা প্রতিষ্ঠান (শুধু স্কুল, কলেজ ও বিশ্ববিদ্যালয় 🎓)</label>
-                    <input type="text" id="mapSearchInstInput" placeholder="টাইপ করুন..." oninput="searchInstitutionOnMap(this.value)">
+                    <input type="text" id="mapSearchInstInput" placeholder="প্রতিষ্ঠানের নাম টাইপ করুন..." oninput="searchInstitutionOnMap(this.value)">
                     <div class="map-suggest-list" id="mapSuggestions"></div>
                 </div>
                 <button class="btn-dual-action blue" style="width: 100%; margin-top: 8px;" onclick="saveAcademicProfile()">
@@ -990,6 +983,7 @@
         let cachedAllUsers = [];
         let currentHierarchyTier = "all_bd";
 
+        // Accurate XP and Level Persistence
         db.ref('users/' + currentUser).on('value', (snap) => {
             const data = snap.val();
             if (!data) return;
@@ -1082,18 +1076,119 @@
             document.getElementById('dashSquadPreview').innerText = userSquad !== "None" ? userSquad : "None";
             
             if (userSquad !== "None") {
+                document.getElementById('squadManagementGrid').style.display = "none";
+                document.getElementById('currentSquadCard').style.display = "block";
                 document.getElementById('activeSquadTitle').innerText = userSquad;
+                document.getElementById('dashSquadSub').innerText = "Verified Squad 🛡️";
                 document.getElementById('leaveSquadBtn').style.display = "block";
-                document.getElementById('squadInviteBox').style.display = "flex";
+                document.getElementById('dashSquadStateText').innerHTML = `আপনি বর্তমানে <strong>${userSquad}</strong> স্কোয়াডের সদস্য!`;
                 if (userData.squadKey) loadSquadLiveDetails(userData.squadKey);
             } else {
-                document.getElementById('activeSquadTitle').innerText = "No Squad";
-                document.getElementById('leaveSquadBtn').style.display = "none";
-                document.getElementById('squadInviteBox').style.display = "none";
-                document.getElementById('squadMembersRoster').style.display = "none";
-                document.getElementById('squadLeaderCustomPanel').style.display = "none";
+                document.getElementById('squadManagementGrid').style.display = "grid";
+                document.getElementById('currentSquadCard').style.display = "none";
+                document.getElementById('dashSquadSub').innerText = "No Squad";
+                document.getElementById('dashSquadStateText').innerText = "আপনি এখনো কোনো স্টাডি স্কোয়াডে যুক্ত হননি।";
+                document.getElementById('activeSquadTierBadge').innerHTML = "";
+            }
+
+            if (!dailyBonusChecked && userData.createdAt) {
+                dailyBonusChecked = true;
+                const todayStr = new Date().toISOString().split('T')[0];
+                if (userData.lastDailyBonusDate !== todayStr) {
+                    db.ref('users/' + currentUser).update({ xp: (userData.xp || 50) + 20, lastDailyBonusDate: todayStr }).then(() => {
+                        openModal("🎁", "দৈনিক লগইন বোনাস", "প্রতিদিনের ধারাবাহিকতার জন্য আপনি +২০ XP বোনাস পেয়েছেন!");
+                    });
+                }
             }
         });
+
+        // 🛡️ Load Squad Hierarchy with XP + Level Composite
+        function loadSquadLiveDetails(squadKey) {
+            db.ref('squads/' + squadKey).on('value', snap => {
+                if (!snap.exists()) return;
+                const sq = snap.val();
+                const tier = sq.tier || 'rookie';
+                document.getElementById('activeSquadTierBadge').innerHTML = tier === 'limitless' ? 
+                    '<span class="tier-badge tier-limitless">👑 LIMITLESS</span>' : 
+                    (tier === 'elite' ? '<span class="tier-badge tier-elite">🥈 ELITE</span>' : '<span class="tier-badge tier-rookie">🥉 ROOKIE</span>');
+
+                if (sq.avatarUrl) document.getElementById('squadAvatarImg').src = sq.avatarUrl;
+                document.getElementById('squadSloganText').innerText = sq.slogan ? `"${sq.slogan}"` : '"Knowledge is Power"';
+                document.getElementById('activeSquadDesc').innerText = sq.welcomeMsg || `Focus: ${sq.subject || 'All Rounder'}`;
+                document.getElementById('squadInviteBox').style.display = "flex";
+                document.getElementById('displaySquadCode').innerText = sq.code || squadKey.toUpperCase();
+                document.getElementById('displaySquadPin').innerText = sq.pin || "0000";
+
+                const memberUsernames = Object.keys(sq.members || {});
+                Promise.all(memberUsernames.map(u => db.ref('users/' + u).once('value'))).then(userSnaps => {
+                    let memberList = [];
+                    let totalSquadSec = 0;
+                    let totalSquadXp = 0;
+
+                    userSnaps.forEach(uSnap => {
+                        if (uSnap.exists()) {
+                            const val = uSnap.val();
+                            const uSec = val.totalSeconds || 0;
+                            const uXp = val.xp || 50;
+                            const uLvl = Math.floor(uXp / 100) + 1;
+                            totalSquadSec += uSec;
+                            totalSquadXp += uXp;
+                            memberList.push({
+                                user: uSnap.key,
+                                name: val.name || uSnap.key,
+                                xp: uXp,
+                                lvl: uLvl,
+                                meritScore: uXp + (uLvl * 150),
+                                totalHours: (uSec / 3600).toFixed(1),
+                                isOnline: val.onlineStatus && val.onlineStatus.isOnline
+                            });
+                        }
+                    });
+
+                    memberList.sort((a, b) => b.meritScore - a.meritScore);
+                    document.getElementById('squadGloryStats').innerHTML = `🔥 <strong>Glory Level: ${Math.floor(totalSquadXp / 500) + 1}</strong> | Total Team XP: ${totalSquadXp} | Study: ${(totalSquadSec/3600).toFixed(1)}h`;
+
+                    const listContainer = document.getElementById('membersHierarchyList');
+                    listContainer.innerHTML = "";
+                    document.getElementById('squadMembersRoster').style.display = "block";
+
+                    let isUserCommander = false;
+                    memberList.forEach((m, index) => {
+                        let roleTitle = "Cadet";
+                        let roleClass = "role-cadet";
+                        if (index === 0) { roleTitle = "👑 টিম কমান্ডার"; roleClass = "role-commander"; }
+                        else if (index === 1) { roleTitle = "🎖️ ক্যাপ্টেন"; roleClass = "role-captain"; }
+                        else if (index === 2) { roleTitle = "⭐ ভাইস-ক্যাপ্টেন"; roleClass = "role-vice"; }
+                        else if (index <= 4) { roleTitle = "🛡️ ভ্যানগার্ড"; roleClass = "role-vanguard"; }
+
+                        if (m.user === currentUser) {
+                            document.getElementById('myAutoRankBadge').innerHTML = `<span class="role-badge ${roleClass}">${roleTitle}</span>`;
+                            if (index === 0) isUserCommander = true;
+                        }
+
+                        const statusDot = m.isOnline ? '<span style="color:var(--neon-green);">🟢</span>' : '<span style="color:var(--text-muted);">⚪</span>';
+                        const row = document.createElement('div');
+                        row.className = "activity-row";
+                        row.style.padding = "7px 10px";
+                        row.innerHTML = `
+                            <div>
+                                ${statusDot} <strong>@${m.user}</strong> (${m.name}) 
+                                <span class="role-badge ${roleClass}" style="margin-left: 5px;">${roleTitle}</span>
+                                <div style="font-size: 10.5px; color: var(--text-muted); margin-top: 2px;">Study: ${m.totalHours}h | XP: ${m.xp} (Lvl ${m.lvl})</div>
+                            </div>
+                            <span style="color: var(--neon-gold); font-size: 12px; font-weight: bold;">#${index + 1}</span>
+                        `;
+                        listContainer.appendChild(row);
+                    });
+
+                    document.getElementById('squadLeaderCustomPanel').style.display = isUserCommander ? "block" : "none";
+                    if (isUserCommander) {
+                        if (sq.slogan) document.getElementById('editSquadSlogan').value = sq.slogan;
+                        if (sq.welcomeMsg) document.getElementById('editSquadWelcomeMsg').value = sq.welcomeMsg;
+                    }
+                });
+            });
+        }
 
         // ফিক্সড সিলেবাস (খাঁটি বাংলা)
         const structuredSyllabus = {
@@ -1151,7 +1246,9 @@
         const intelligentQuestionBank = {
             "Bangla": [
                 { chap: "গদ্য: অপরিচিতা - রবীন্দ্রনাথ", q: "'অপরিচিতা' গল্পে কল্যাণীর বাবার নাম কী ছিল?", options: ["অনুপম", "শম্ভুনাথ সেন", "হরিদাস", "হরিশ"], correct: 1, source: "এনসিটিবি বোর্ড বই", explain: "রবীন্দ্রনাথ ঠাকুরের 'অপরিচিতা' গল্পে কল্যাণীর পিতা ছিলেন শম্ভুনাথ সেন।" },
-                { chap: "পদ্য: বিদ্রোহী", q: "'বিদ্রোহী' কবিতাটি নজরুলের কোন কাব্যগ্রন্থের অন্তর্গত?", options: ["অগ্নিবীণা", "বিষের বাঁশী", "সাম্যবাদী", "সর্বহারা"], correct: 0, source: "অগ্নিবীণা কাব্যগ্রন্থ", explain: "১৯২২ সালে প্রকাশিত 'অগ্নিবীণা' কাব্যগ্রন্থের দ্বিতীয় কবিতা হলো 'বিদ্রোহী'।" }
+                { chap: "গদ্য: অপরিচিতা - রবীন্দ্রনাথ", q: "কল্যাণীর বিয়ে কোথায় ঠিক হয়েছিল?", options: ["কলকাতায়", "কানপুরে", "ঢাকায়", "কাশীতে"], correct: 1, source: "টেস্ট পেপার", explain: "গল্পে উল্লিখিত আছে, কল্যাণীর বিয়ে কানপুরে ঠিক হয়েছিল।" },
+                { chap: "পদ্য: বিদ্রোহী", q: "'বিদ্রোহী' কবিতাটি নজরুলের কোন কাব্যগ্রন্থের অন্তর্গত?", options: ["অগ্নিবীণা", "বিষের বাঁশী", "সাম্যবাদী", "সর্বহারা"], correct: 0, source: "অগ্নিবীণা কাব্যগ্রন্থ", explain: "১৯২২ সালে প্রকাশিত 'অগ্নিবীণা' কাব্যগ্রন্থের দ্বিতীয় কবিতা হলো 'বিদ্রোহী'।" },
+                { chap: "পদ্য: বিদ্রোহী", q: "'আমি পরশুরামের কঠোর কুঠার' - এখানে পরশুরাম কে?", options: ["একজন রাজা", "একজন ঋষি", "বিষ্ণুর ষষ্ঠ অবতার", "একজন যোদ্ধা"], correct: 2, source: "বোর্ড প্রশ্ন", explain: "হিন্দু ধর্মমতে পরশুরাম হলেন বিষ্ণুর ষষ্ঠ অবতার।" }
             ],
             "Physics": [
                 { chap: "অধ্যায় ২: ভেক্টর (Vector)", q: "ভেক্টর A = 3i + 4j হলে, এর মান কত?", options: ["5", "7", "1", "25"], correct: 0, source: "ইসহাক স্যার পাঠ্যবই", explain: "|A| = √(3² + 4²) = √25 = 5 একক।" },
@@ -1161,7 +1258,8 @@
             ],
             "Chemistry": [
                 { chap: "অধ্যায় ৩: মৌলের পর্যায়বৃত্ত ধর্ম ও বন্ধন", q: "পর্যায় সারণীর কোন গ্রুপের মৌলগুলোকে হ্যালোজেন বলা হয়?", options: ["Group 1", "Group 2", "Group 17", "Group 18"], correct: 2, source: "হাজারী ও নাগ স্যার বই", explain: "গ্রুপ ১৭ এর মৌলগুলোকে হ্যালোজেন বা লবণ উৎপাদক বলে।" },
-                { chap: "অধ্যায় ২: জৈব রসায়ন (Organic Chemistry)", q: "ইথেন অণুতে কার্বন-কার্বন একক বন্ধন দৈর্ঘ্য কত?", options: ["0.154 nm", "0.134 nm", "0.120 nm", "0.109 nm"], correct: 0, source: "মেডিকেল প্রশ্নব্যাংক", explain: "কার্বন-কার্বন একক বন্ধন (sp3) এর আদর্শ দৈর্ঘ্য 0.154 nm।" }
+                { chap: "অধ্যায় ২: জৈব রসায়ন (Organic Chemistry)", q: "ইথেন অণুতে কার্বন-কার্বন একক বন্ধন দৈর্ঘ্য কত?", options: ["0.154 nm", "0.134 nm", "0.120 nm", "0.109 nm"], correct: 0, source: "মেডিকেল প্রশ্নব্যাংক", explain: "কার্বন-কার্বন একক বন্ধন (sp3) এর আদর্শ দৈর্ঘ্য 0.154 nm।" },
+                { chap: "অধ্যায় ৪: রাসায়নিক পরিবর্তন", q: "কোনটি লুইস এসিড?", options: ["NH3", "H2O", "BF3", "OH-"], correct: 2, source: "পাঞ্জেরী টেস্ট পেপার স্পেশাল", explain: "BF3 এর অষ্টক অপূর্ণ থাকায় এটি ইলেকট্রন জোড় গ্রহণ করে, তাই লুইস এসিড।" }
             ],
             "HigherMath": [
                 { chap: "অধ্যায় ৯: অন্তরীকরণ", q: "d/dx(sin 2x) এর অন্তরক সহগ কোনটি?", options: ["cos 2x", "2 cos 2x", "-2 cos 2x", "cos^2 x"], correct: 1, source: "কেতাব স্যার পাঠ্যবই", explain: "d/dx(sin 2x) = cos 2x * d/dx(2x) = 2 cos 2x।" },
@@ -1194,8 +1292,9 @@
             botTimeLimit = Math.max(10, parseInt(document.getElementById('battleTimeInput').value) || 15);
 
             const qList = intelligentQuestionBank[sub] || [];
-            // STRICT CHAPTER FILTERING
-            const filteredList = qList.filter(q => q.chap === chap);
+            
+            // STRICT CHAPTER FILTERING ONLY (NO FALLBACK)
+            let filteredList = qList.filter(q => q.chap === chap);
 
             if (filteredList.length === 0) {
                 openModal("⚠️", "প্রশ্ন পাওয়া যায়নি", `দুঃখিত! "${chap}" অধ্যায়ের কোনো প্রশ্ন এখনো ডাটাবেসে যুক্ত হয়নি। দয়া করে অন্য অধ্যায় নির্বাচন করুন।`);
@@ -1224,7 +1323,7 @@
             currentBattleQuestion = currentQuestionSet[currentQIndex];
             document.getElementById('botExplanationContainer').innerHTML = "";
 
-            document.getElementById('battleSubjectHeader').innerText = `${currentBattleQuestion.chap} [প্রশ্ন ${currentQIndex + 1}/${currentQuestionSet.length}]`;
+            document.getElementById('battleSubjectHeader').innerText = `${currentBattleQuestion.chap || "প্রশ্নাবলি"} [প্রশ্ন ${currentQIndex + 1}/${currentQuestionSet.length}]`;
             document.getElementById('questionSourceBadge').innerText = currentBattleQuestion.source || "বোর্ড বই ও টেস্ট পেপার সংকলন";
             document.getElementById('battleQuestionText').innerText = currentBattleQuestion.q;
 
@@ -1277,26 +1376,24 @@
 
             const explainHtml = `
                 <div class="bot-explanation-box">
-                    <strong style="font-size: 16px;">${statusTitle}</strong><br><br>
+                    <strong style="font-size: 15px;">${statusTitle}</strong><br><br>
                     <strong style="color:var(--neon-green);">💡 সঠিক উত্তর: ${currentBattleQuestion.options[currentBattleQuestion.correct]}</strong><br>
-                    <strong>উৎস:</strong> ${currentBattleQuestion.source}<br>
-                    <strong>ব্যাখ্যা:</strong> ${currentBattleQuestion.explain}
+                    <strong>উৎস:</strong> ${currentBattleQuestion.source || "বোর্ড বই"}<br>
+                    <strong>ব্যাখ্যা:</strong> ${currentBattleQuestion.explain || "সঠিক উত্তরটি পাঠ্যবই অনুযায়ী নির্ধারিত।"}
                 </div>
-                ${currentQIndex + 1 < currentQuestionSet.length ?
-                    `<button class="btn-dual-action blue" style="width:100%; margin-top:10px;" onclick="loadNextBotQuestionHandler()">
-                        <span class="act-en">Next Question</span><span class="act-bn">পরবর্তী প্রশ্ন ➡️</span>
-                    </button>` :
-                    `<button class="btn-dual-action gold" style="width:100%; margin-top:10px;" onclick="finishBotExamSet()">
-                        <span class="act-en">View Results</span><span class="act-bn">ফলাফল দেখুন 🏆</span>
-                    </button>`
-                }
             `;
             document.getElementById('botExplanationContainer').innerHTML = explainHtml;
-        }
+            document.getElementById('battleActiveStage').scrollIntoView({behavior: "smooth"});
 
-        function loadNextBotQuestionHandler() {
-            currentQIndex++;
-            loadNextBotQuestion();
+            // Auto load next question after 3.5s
+            setTimeout(() => {
+                currentQIndex++;
+                if (currentQIndex < currentQuestionSet.length) {
+                    loadNextBotQuestion();
+                } else {
+                    finishBotExamSet();
+                }
+            }, 3500);
         }
 
         function finishBotExamSet() {
@@ -1308,11 +1405,10 @@
                     আপনার সর্বমোট সঠিক উত্তর: <strong style="color:var(--neon-gold); font-size:20px;">${userCorrectCount} / ${total}</strong>
                 </div>
                 <button class="btn-dual-action blue" style="width:100%; margin-top:10px;" onclick="exitBattleToSetup()">
-                    <span class="act-en">Back To Arena</span><span class="act-bn">লবিতে ফিরে যান</span>
+                    <span class="act-en">Back To Arena</span><span class="act-bn">অ্যারেনা লবিতে ফিরে যান</span>
                 </button>
             `;
             document.getElementById('botExplanationContainer').innerHTML = explainHtml;
-            document.getElementById('battleActiveStage').scrollIntoView({behavior: "smooth"});
         }
 
         function exitBattleToSetup() {
@@ -1335,7 +1431,7 @@
 
             const roomId = "WAR_" + Date.now();
             db.ref('battle_rooms/' + roomId).set({ host: currentUser, hostSquad: userData.squad || "Independent", subject: sub, paper: paper, chapter: chap, difficulty: diff, mode: mode, stake: stake, timeLimit: timeLimit, status: "waiting", createdAt: Date.now() }).then(() => {
-                openModal("📡", "চ্যালেঞ্জ ব্রডকাস্ট সফল", `আপনার ${sub} (${paper}) [${chap}] চ্যালেঞ্জটি ব্রডকাস্ট হয়েছে!`);
+                openModal("📡", "চ্যালেঞ্জ ব্রডকাস্ট সফল", `আপনার ${sub} (${paper}) [${chap}] চ্যালেঞ্জটি ওপেন রুমে যুক্ত হয়েছে!`);
             });
         }
 
@@ -1368,47 +1464,6 @@
 
         function cancelMyBattleRoom(rKey) { db.ref('battle_rooms/' + rKey).remove().then(() => { openModal("🚪", "চ্যালেঞ্জ বাতিল", "আপনার চ্যালেঞ্জ রুমটি সফলভাবে প্রত্যাহার করা হয়েছে।"); }); }
         function acceptLiveBattleRoom(rKey) { openModal("⚔️", "ম্যাচ শুরু হচ্ছে", "চ্যালেঞ্জ গ্রহণ করা হয়েছে! ব্যাটল বোর্ডে প্রবেশ করুন।"); }
-
-        function loadSquadLiveDetails(squadKey) {
-            db.ref('squads/' + squadKey).on('value', snap => {
-                if (!snap.exists()) return;
-                const sq = snap.val();
-                document.getElementById('activeSquadTierBadge').innerHTML = sq.tier === 'limitless' ? '<span class="tier-badge tier-limitless">👑 LIMITLESS</span>' : (sq.tier === 'elite' ? '<span class="tier-badge tier-elite">🥈 ELITE</span>' : '<span class="tier-badge tier-rookie">🥉 ROOKIE</span>');
-                if (sq.avatarUrl) document.getElementById('squadAvatarImg').src = sq.avatarUrl;
-                document.getElementById('squadSloganText').innerText = sq.slogan ? `"${sq.slogan}"` : '"Knowledge is Power"';
-                document.getElementById('activeSquadDesc').innerText = sq.welcomeMsg || `Focus: ${sq.subject || 'All Rounder'}`;
-                document.getElementById('squadInviteBox').style.display = "flex";
-                document.getElementById('displaySquadCode').innerText = sq.code || squadKey.toUpperCase();
-                document.getElementById('displaySquadPin').innerText = sq.pin || "0000";
-
-                const memberUsernames = Object.keys(sq.members || {});
-                Promise.all(memberUsernames.map(u => db.ref('users/' + u).once('value'))).then(userSnaps => {
-                    let memberList = []; let totalSquadSec = 0; let totalSquadXp = 0;
-                    userSnaps.forEach(uSnap => {
-                        if (uSnap.exists()) {
-                            const val = uSnap.val(); const uSec = val.totalSeconds || 0; const uXp = val.xp || 50; const uLvl = Math.floor(uXp / 100) + 1;
-                            totalSquadSec += uSec; totalSquadXp += uXp;
-                            memberList.push({ user: uSnap.key, name: val.name || uSnap.key, xp: uXp, lvl: uLvl, meritScore: uXp + (uLvl * 150), totalHours: (uSec / 3600).toFixed(1), isOnline: val.onlineStatus && val.onlineStatus.isOnline });
-                        }
-                    });
-                    memberList.sort((a, b) => b.meritScore - a.meritScore);
-                    document.getElementById('squadGloryStats').innerHTML = `🔥 <strong>Glory Level: ${Math.floor(totalSquadXp / 500) + 1}</strong> | Total Team XP: ${totalSquadXp} | Study: ${(totalSquadSec/3600).toFixed(1)}h`;
-                    const listContainer = document.getElementById('membersHierarchyList'); listContainer.innerHTML = ""; document.getElementById('squadMembersRoster').style.display = "block";
-                    let isUserCommander = false;
-                    memberList.forEach((m, index) => {
-                        let roleTitle = "Cadet"; let roleClass = "role-cadet";
-                        if (index === 0) { roleTitle = "👑 টিম কমান্ডার"; roleClass = "role-commander"; } else if (index === 1) { roleTitle = "🎖️ ক্যাপ্টেন"; roleClass = "role-captain"; } else if (index === 2) { roleTitle = "⭐ ভাইস-ক্যাপ্টেন"; roleClass = "role-vice"; } else if (index <= 4) { roleTitle = "🛡️ ভ্যানগার্ড"; roleClass = "role-vanguard"; }
-                        if (m.user === currentUser) { document.getElementById('myAutoRankBadge').innerHTML = `<span class="role-badge ${roleClass}">${roleTitle}</span>`; if (index === 0) isUserCommander = true; }
-                        const statusDot = m.isOnline ? '<span style="color:var(--neon-green);">🟢</span>' : '<span style="color:var(--text-muted);">⚪</span>';
-                        const row = document.createElement('div'); row.className = "activity-row"; row.style.padding = "7px 10px";
-                        row.innerHTML = `<div>${statusDot} <strong>@${m.user}</strong> (${m.name}) <span class="role-badge ${roleClass}" style="margin-left: 5px;">${roleTitle}</span><div style="font-size: 10.5px; color: var(--text-muted); margin-top: 2px;">Study: ${m.totalHours}h | XP: ${m.xp} (Lvl ${m.lvl})</div></div><span style="color: var(--neon-gold); font-size: 12px; font-weight: bold;">#${index + 1}</span>`;
-                        listContainer.appendChild(row);
-                    });
-                    document.getElementById('squadLeaderCustomPanel').style.display = isUserCommander ? "block" : "none";
-                    if (isUserCommander) { if (sq.slogan) document.getElementById('editSquadSlogan').value = sq.slogan; if (sq.welcomeMsg) document.getElementById('editSquadWelcomeMsg').value = sq.welcomeMsg; }
-                });
-            });
-        }
 
         db.ref('users').on('value', snap => {
             cachedAllUsers = []; const data = snap.val() || {};
