@@ -100,7 +100,7 @@
         }
         .logout-btn:hover { background: var(--neon-red); color: #fff; box-shadow: 0 0 10px rgba(255,51,102,0.4); }
 
-        /* Logout Door Exit Animation Overlay */
+        /* Logout Door Animation */
         .logout-overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -238,7 +238,6 @@
         }
         .card-title { font-size: 15.5px; font-weight: 800; color: var(--neon-blue); margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between; gap: 8px; }
 
-        /* Dual Action Buttons */
         .btn-dual-action {
             border: none;
             padding: 10px 18px;
@@ -261,7 +260,6 @@
         .btn-dual-action.green { background: var(--neon-green); color: #000; }
         .btn-dual-action:hover { opacity: 0.9; transform: scale(1.02); }
 
-        /* Hero Welcome Card */
         .hero-welcome-card {
             background: linear-gradient(135deg, rgba(0,240,255,0.1), rgba(121,40,202,0.15)), #081124;
             border: 1px solid rgba(0,240,255,0.35);
@@ -285,7 +283,6 @@
             font-weight: 600;
         }
 
-        /* XP Progress Bar */
         .xp-level-container { margin-top: 18px; background: rgba(5, 11, 20, 0.6); border: 1px solid rgba(0,240,255,0.2); padding: 14px; border-radius: 12px; }
         .xp-header { display: flex; justify-content: space-between; font-size: 12px; font-weight: 800; margin-bottom: 6px; }
         .xp-header .lvl-name { color: var(--neon-gold); }
@@ -293,7 +290,6 @@
         .progress-bar-bg { width: 100%; height: 10px; background: #0f1c33; border-radius: 6px; overflow: hidden; border: 1px solid rgba(255,255,255,0.08); }
         .progress-bar-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--neon-blue), var(--neon-green)); border-radius: 6px; transition: width 0.6s ease; }
 
-        /* Stats Grid */
         .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(135px, 1fr)); gap: 12px; margin-bottom: 18px; }
         .stat-box { background: rgba(5, 11, 20, 0.7); border: 1px solid rgba(255,255,255,0.08); padding: 14px 12px; border-radius: 12px; text-align: center; }
         .stat-val { font-size: 22px; font-weight: 900; color: var(--neon-gold); }
@@ -302,7 +298,7 @@
 
         .daily-goal-box { background: rgba(5, 11, 20, 0.6); border: 1px solid rgba(255,204,0,0.25); border-radius: 12px; padding: 14px; margin-bottom: 15px; }
 
-        /* 4-Tier Leaderboard Filter Tabs */
+        /* Standalone 4-Tier Leaderboard Filters */
         .rank-tier-tabs {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -362,7 +358,7 @@
         .leaderboard-row.top-2 { border-left: 4px solid #cbd5e1; background: rgba(255, 255, 255, 0.04); }
         .leaderboard-row.top-3 { border-left: 4px solid #cd7f32; background: rgba(205, 127, 50, 0.06); }
 
-        /* MCQ Battle Arena */
+        /* MCQ Battle Arena Styles */
         .battle-arena-box {
             background: linear-gradient(135deg, rgba(255,51,102,0.1), rgba(121,40,202,0.15)), #081124;
             border: 2px solid var(--neon-red);
@@ -732,7 +728,7 @@
                         </div>
                     </div>
 
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px;">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 10px;">
                         <div>
                             <label style="font-size: 11px; color: var(--neon-blue);">৫. ফরম্যাট</label>
                             <select id="battleModeSelect">
@@ -749,11 +745,10 @@
                                 <option value="250">250 XP 👑</option>
                             </select>
                         </div>
-                    </div>
-
-                    <div style="margin-bottom: 14px;">
-                        <label style="font-size: 11px; color: var(--neon-blue);">প্রতি প্রশ্নের সময় (Fair Timer: কমপক্ষে ১০ সেকেন্ড)</label>
-                        <input type="number" id="battleTimeInput" min="10" max="60" value="15" placeholder="ন্যূনতম ১০ সে.">
+                        <div>
+                            <label style="font-size: 11px; color: var(--neon-blue);">৭. সময়সীমা</label>
+                            <input type="number" id="battleTimeInput" min="10" max="60" value="15" placeholder="ন্যূনতম ১০ সে.">
+                        </div>
                     </div>
 
                     <div style="display: flex; gap: 10px;">
@@ -878,7 +873,7 @@
                         <input type="text" id="createSquadSloganInput" placeholder="স্কোয়াড স্লোগান">
                         <select id="createSquadTierSelect">
                             <option value="rookie">🥉 Rookie Squad (দৈনিক শর্তহীন)</option>
-                            <option value="elite">🥈 Elite Squad (দৈনিক ৩+ ঘণ্টা পড়া & ৩০০+ XP)</option>
+                            <option value="elite">🥈 Elite Squad (দৈনিক ৩+ ঘণ্টা পড়া ও ৩০০+ XP)</option>
                             <option value="limitless">👑 Limitless Domain (দৈনিক ৬+ ঘণ্টা পড়া & ১০০০+ XP)</option>
                         </select>
                         <select id="createSquadSubjectSelect">
@@ -964,7 +959,7 @@
                 </div>
             </div>
 
-            <!-- Profile Info Edit (Username, Display Name, Geo-Location) -->
+            <!-- Profile Info Edit -->
             <div class="cyber-card">
                 <div class="card-title">⚙️ EDIT ACADEMIC & GEOGRAPHIC LOCATION</div>
                 
@@ -1169,7 +1164,7 @@
             });
         }
 
-        // Initialize cascade
+        // Auto initialize dropdown immediately
         onDivisionChangeCascade();
 
         // 🎓 STRICT INSTITUTION FILTER (OpenStreetMap: Schools, Colleges, Universities only)
@@ -1193,7 +1188,6 @@
                             const displayName = item.display_name.toLowerCase();
                             const isEducation = educationalKeywords.some(kw => displayName.includes(kw));
 
-                            // Only show if it matches an educational institution
                             if (isEducation) {
                                 const primary = item.name || item.display_name.split(',')[0];
                                 const div = document.createElement('div');
@@ -1240,15 +1234,17 @@
                 return;
             }
 
+            const currentActualXp = (typeof userData.xp === 'number') ? userData.xp : 50;
+
             // Check duplicate username if changed
             if (newUsername !== currentUser) {
                 db.ref('users/' + newUsername).once('value').then(snap => {
                     if (snap.exists()) {
                         openModal("🚫", "ইউজারনেম বিদ্যমান", `"${newUsername}" ইউজারনেমটি অন্য কেউ ইতোমধ্যে ব্যবহার করছে! অন্য একটি ইউনিক নাম দিন।`);
                     } else {
-                        // Migrate to new username node
-                        const updatedData = {
+                        const migratedData = {
                             ...userData,
+                            xp: currentActualXp,
                             name: newDisplayName || userData.name || "Scholar",
                             age: age,
                             institutionType: instType,
@@ -1258,7 +1254,7 @@
                             upazila: upazila
                         };
 
-                        db.ref('users/' + newUsername).set(updatedData).then(() => {
+                        db.ref('users/' + newUsername).set(migratedData).then(() => {
                             db.ref('users/' + currentUser).remove();
                             localStorage.setItem('auraCurrentUser', newUsername);
                             currentUser = newUsername;
@@ -1281,6 +1277,258 @@
                     openModal("✅", "প্রোফাইল সংরক্ষিত", "আপনার সমস্ত তথ্য সফলভাবে সংরক্ষিত হয়েছে!");
                 });
             }
+        }
+
+        let userData = {};
+        let dailyBonusClaimedSession = false;
+        let uploadedGuildAvatarBase64 = null;
+        let cachedAllUsers = [];
+        let currentHierarchyTier = "all_bd";
+
+        // 3. User Data Listener (Zero Risk of XP Reset)
+        db.ref('users/' + currentUser).on('value', (snap) => {
+            const data = snap.val();
+            if (!data) return;
+            userData = data;
+
+            const displayName = userData.name || "Scholar";
+            document.getElementById('dashGreeting').innerHTML = `${getTimeGreeting()}, <span>${displayName}</span> 👋`;
+            document.getElementById('profName').innerText = displayName;
+            document.getElementById('editDisplayNameInput').value = displayName;
+
+            const targetGoal = userData.target || "HSC Science";
+            document.getElementById('dashTargetBadge').innerText = "🎯 " + targetGoal;
+            document.getElementById('profTarget').innerText = targetGoal;
+
+            const ageVal = userData.age ? (userData.age + " yrs") : "18 yrs";
+            document.getElementById('dashAgeBadge').innerText = "👤 " + ageVal;
+            document.getElementById('profAge').innerText = ageVal;
+
+            const instName = userData.institutionName || "General College";
+            const instType = userData.institutionType ? ` (${userData.institutionType})` : "";
+            document.getElementById('dashInstBadge').innerText = "🏛️ " + instName;
+            document.getElementById('profInst').innerText = instName + instType;
+
+            const locText = `${userData.upazila || 'Bonarpara / Saghata'}, ${userData.district || 'Gaibandha'}, ${userData.division || 'Rangpur'}`;
+            document.getElementById('profLocationText').innerText = locText;
+
+            if (userData.age) document.getElementById('editAgeInput').value = userData.age;
+            if (userData.institutionType) document.getElementById('editInstTypeSelect').value = userData.institutionType;
+            if (userData.institutionName) document.getElementById('mapSearchInstInput').value = userData.institutionName;
+            
+            // Set cascade selects
+            if (userData.division && bdGeoHierarchy[userData.division]) {
+                document.getElementById('editDivisionSelect').value = userData.division;
+                onDivisionChangeCascade();
+            }
+            if (userData.district) {
+                document.getElementById('editDistrictSelect').value = userData.district;
+                onDistrictChangeCascade();
+            }
+            if (userData.upazila) {
+                document.getElementById('editUpazilaSelect').value = userData.upazila;
+            }
+
+            const isVerified = (userData.emailVerified === true) || (auth.currentUser && auth.currentUser.emailVerified);
+            document.getElementById('profVerificationBadge').innerHTML = isVerified ? 
+                '<span style="color: var(--neon-green); font-weight: bold;">✅ Verified Scholar</span>' : 
+                '<span style="color: var(--neon-gold); font-weight: bold;">⚠️ Pending (Check Gmail)</span>';
+
+            const defaultAv = 'gojo-vibe.jpg';
+            const userAvatar = userData.avatar;
+            const avatarUrl = (userAvatar && !userAvatar.includes('dicebear')) ? userAvatar : defaultAv;
+            document.getElementById('navAvatar').src = avatarUrl;
+            document.getElementById('profAvatarBig').src = avatarUrl;
+
+            const totalSec = userData.totalSeconds || 0;
+            const hours = (totalSec / 3600).toFixed(1);
+            document.getElementById('totalHoursDisplay').innerText = hours + "h";
+            document.getElementById('dashTotalTime').innerText = hours + "h";
+
+            const todayMin = Math.floor((totalSec % 3600) / 60);
+            const todayHr = Math.floor((totalSec % 86400) / 3600);
+            document.getElementById('dashTodayTime').innerText = `${todayHr}h ${todayMin}m`;
+
+            // Strict XP fallback: Kokhono existing XP-ke overwrite korbe na
+            const currentXp = (typeof userData.xp === 'number') ? userData.xp : 50;
+            document.getElementById('xpDisplay').innerText = currentXp;
+            document.getElementById('dashTotalXp').innerText = currentXp;
+
+            const currentLvl = Math.floor(currentXp / 100) + 1;
+            document.getElementById('levelDisplay').innerText = "Lvl " + currentLvl;
+            document.getElementById('dashCurrentLvl').innerText = "Lvl " + currentLvl;
+
+            const xpFloor = (currentLvl - 1) * 100;
+            const xpCeil = currentLvl * 100;
+            const progressPercent = Math.min(100, Math.max(0, ((currentXp - xpFloor) / 100) * 100));
+
+            document.getElementById('dashLvlHeader').innerText = `LEVEL ${currentLvl} SCHOLAR`;
+            document.getElementById('dashXpHeader').innerText = `${currentXp} / ${xpCeil} XP`;
+            document.getElementById('dashXpProgressBar').style.width = progressPercent + "%";
+            document.getElementById('dashXpRemainingText').innerText = `পরবর্তী লেভেলে পৌঁছাতে আরও ${xpCeil - currentXp} XP প্রয়োজন 🔥`;
+
+            const userTargetMins = userData.dailyGoalMins || 180;
+            const goalTargetSec = userTargetMins * 60;
+            const goalAchievedSec = totalSec % goalTargetSec;
+            const goalPercent = Math.min(100, Math.round((goalAchievedSec / goalTargetSec) * 100));
+            document.getElementById('goalTargetText').innerText = `${(userTargetMins/60).toFixed(1)} ঘণ্টা (${userTargetMins} মিনিট)`;
+            document.getElementById('goalProgressBar').style.width = goalPercent + "%";
+            document.getElementById('goalPercentText').innerText = goalPercent + "% সম্পন্ন";
+            const minLeft = Math.max(0, userTargetMins - Math.floor(goalAchievedSec / 60));
+            document.getElementById('goalRemainingText').innerText = minLeft > 0 ? `আর ${minLeft} মিনিট পড়লে আজকের লক্ষ্য পূরণ হবে` : "🎉 আজকের লক্ষ্য সম্পূর্ণ হয়েছে!";
+
+            const userSquad = userData.squad || "None";
+            document.getElementById('dashSquadPreview').innerText = userSquad !== "None" ? userSquad : "None";
+            
+            if (userSquad !== "None") {
+                document.getElementById('dashSquadSub').innerText = "Verified Squad 🛡️";
+                document.getElementById('activeSquadTitle').innerText = userSquad;
+                document.getElementById('leaveSquadBtn').style.display = "block";
+                document.getElementById('dashSquadStateText').innerHTML = `আপনি বর্তমানে <strong>${userSquad}</strong> স্কোয়াডের সদস্য!`;
+                if (userData.squadKey) loadSquadLiveDetails(userData.squadKey);
+            } else {
+                document.getElementById('dashSquadSub').innerText = "No Squad";
+                document.getElementById('activeSquadTitle').innerText = "No Squad";
+                document.getElementById('activeSquadDesc').innerText = "আপনি কোনো স্কোয়াডে যুক্ত নেই।";
+                document.getElementById('leaveSquadBtn').style.display = "none";
+                document.getElementById('squadInviteBox').style.display = "none";
+                document.getElementById('squadMembersRoster').style.display = "none";
+                document.getElementById('squadLeaderCustomPanel').style.display = "none";
+                document.getElementById('activeSquadTierBadge').innerHTML = "";
+                document.getElementById('myAutoRankBadge').innerHTML = "";
+                document.getElementById('squadGloryStats').innerText = "";
+            }
+
+            if (userData.lastActiveSession) {
+                const diffHours = (Date.now() - userData.lastActiveSession) / (1000 * 60 * 60);
+                if (diffHours >= 15) {
+                    document.getElementById('penaltySection').style.display = "flex";
+                    document.getElementById('dashStreakStatus').innerText = "Locked";
+                    document.getElementById('dashStreakStatus').style.color = "var(--neon-red)";
+                } else {
+                    document.getElementById('penaltySection').style.display = "none";
+                    document.getElementById('dashStreakStatus').innerText = "Active";
+                    document.getElementById('dashStreakStatus').style.color = "var(--neon-green)";
+                }
+            }
+        });
+
+        // 🎁 Safe One-Time Atomic Daily Login Bonus (No Loop, No Overwrite)
+        function executeSafeDailyLoginBonus() {
+            if (dailyBonusClaimedSession) return;
+            dailyBonusClaimedSession = true;
+
+            const todayStr = new Date().toISOString().split('T')[0];
+            const userRef = db.ref('users/' + currentUser);
+
+            userRef.once('value').then((snap) => {
+                const u = snap.val();
+                if (!u) return;
+
+                if (u.lastDailyBonusDate !== todayStr) {
+                    userRef.transaction((current) => {
+                        if (!current) return current;
+                        if (current.lastDailyBonusDate === todayStr) return; // Prevent double reward
+
+                        current.xp = (typeof current.xp === 'number') ? (current.xp + 20) : 70;
+                        current.lastDailyBonusDate = todayStr;
+                        return current;
+                    }, (error, committed) => {
+                        if (committed) {
+                            openModal("🎁", "দৈনিক লগইন বোনাস", "ধারাবাহিকতার জন্য আপনি +২০ XP বোনাস পেয়েছেন!");
+                        }
+                    });
+                }
+            });
+        }
+        setTimeout(executeSafeDailyLoginBonus, 1200);
+
+        // 🛡️ Load Squad Hierarchy with XP + Level Composite
+        function loadSquadLiveDetails(squadKey) {
+            db.ref('squads/' + squadKey).on('value', snap => {
+                if (!snap.exists()) return;
+                const sq = snap.val();
+                const tier = sq.tier || 'rookie';
+                document.getElementById('activeSquadTierBadge').innerHTML = tier === 'limitless' ? 
+                    '<span class="tier-badge tier-limitless">👑 LIMITLESS</span>' : 
+                    (tier === 'elite' ? '<span class="tier-badge tier-elite">🥈 ELITE</span>' : '<span class="tier-badge tier-rookie">🥉 ROOKIE</span>');
+
+                if (sq.avatarUrl) document.getElementById('squadAvatarImg').src = sq.avatarUrl;
+                document.getElementById('squadSloganText').innerText = sq.slogan ? `"${sq.slogan}"` : '"Knowledge is Power"';
+                document.getElementById('activeSquadDesc').innerText = sq.welcomeMsg || `Focus: ${sq.subject || 'All Rounder'}`;
+                document.getElementById('squadInviteBox').style.display = "flex";
+                document.getElementById('displaySquadCode').innerText = sq.code || squadKey.toUpperCase();
+                document.getElementById('displaySquadPin').innerText = sq.pin || "0000";
+
+                const memberUsernames = Object.keys(sq.members || {});
+                Promise.all(memberUsernames.map(u => db.ref('users/' + u).once('value'))).then(userSnaps => {
+                    let memberList = [];
+                    let totalSquadSec = 0;
+                    let totalSquadXp = 0;
+
+                    userSnaps.forEach(uSnap => {
+                        if (uSnap.exists()) {
+                            const val = uSnap.val();
+                            const uSec = val.totalSeconds || 0;
+                            const uXp = val.xp || 50;
+                            const uLvl = Math.floor(uXp / 100) + 1;
+                            totalSquadSec += uSec;
+                            totalSquadXp += uXp;
+                            memberList.push({
+                                user: uSnap.key,
+                                name: val.name || uSnap.key,
+                                xp: uXp,
+                                lvl: uLvl,
+                                meritScore: uXp + (uLvl * 150),
+                                totalHours: (uSec / 3600).toFixed(1),
+                                isOnline: val.onlineStatus && val.onlineStatus.isOnline
+                            });
+                        }
+                    });
+
+                    memberList.sort((a, b) => b.meritScore - a.meritScore);
+                    document.getElementById('squadGloryStats').innerHTML = `🔥 <strong>Glory Level: ${Math.floor(totalSquadXp / 500) + 1}</strong> | Total Team XP: ${totalSquadXp} | Study: ${(totalSquadSec/3600).toFixed(1)}h`;
+
+                    const listContainer = document.getElementById('membersHierarchyList');
+                    listContainer.innerHTML = "";
+                    document.getElementById('squadMembersRoster').style.display = "block";
+
+                    let isUserCommander = false;
+                    memberList.forEach((m, index) => {
+                        let roleTitle = "Cadet";
+                        let roleClass = "role-cadet";
+                        if (index === 0) { roleTitle = "👑 টিম কমান্ডার"; roleClass = "role-commander"; }
+                        else if (index === 1) { roleTitle = "🎖️ ক্যাপ্টেন"; roleClass = "role-captain"; }
+                        else if (index === 2) { roleTitle = "⭐ ভাইস-ক্যাপ্টেন"; roleClass = "role-vice"; }
+                        else if (index <= 4) { roleTitle = "🛡️ ভ্যানগার্ড"; roleClass = "role-vanguard"; }
+
+                        if (m.user === currentUser) {
+                            document.getElementById('myAutoRankBadge').innerHTML = `<span class="role-badge ${roleClass}">${roleTitle}</span>`;
+                            if (index === 0) isUserCommander = true;
+                        }
+
+                        const statusDot = m.isOnline ? '<span style="color:var(--neon-green);">🟢</span>' : '<span style="color:var(--text-muted);">⚪</span>';
+                        const row = document.createElement('div');
+                        row.className = "activity-row";
+                        row.style.padding = "7px 10px";
+                        row.innerHTML = `
+                            <div>
+                                ${statusDot} <strong>@${m.user}</strong> (${m.name}) 
+                                <span class="role-badge ${roleClass}" style="margin-left: 5px;">${roleTitle}</span>
+                                <div style="font-size: 10.5px; color: var(--text-muted); margin-top: 2px;">Study: ${m.totalHours}h | XP: ${m.xp} (Lvl ${m.lvl})</div>
+                            </div>
+                            <span style="color: var(--neon-gold); font-size: 12px; font-weight: bold;">#${index + 1}</span>
+                        `;
+                        listContainer.appendChild(row);
+                    });
+
+                    document.getElementById('squadLeaderCustomPanel').style.display = isUserCommander ? "block" : "none";
+                    if (isUserCommander) {
+                        if (sq.slogan) document.getElementById('editSquadSlogan').value = sq.slogan;
+                        if (sq.welcomeMsg) document.getElementById('editSquadWelcomeMsg').value = sq.welcomeMsg;
+                    }
+                });
+            });
         }
 
         // Leaderboard filter change
