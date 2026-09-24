@@ -574,6 +574,29 @@
                 </div>
             </div>
 
+            <div class="quick-actions-grid">
+                <div class="action-card" onclick="switchToTabDirect('studyTab', 'studyTabBtn')">
+                    <span class="action-icon">▶️</span>
+                    <span class="action-name">Study Tracker</span>
+                    <small style="color:var(--text-muted); font-size:10px;">পড়াশোনা শুরু</small>
+                </div>
+                <div class="action-card" onclick="switchToTabDirect('battleTab', 'battleTabBtn')">
+                    <span class="action-icon">⚔️</span>
+                    <span class="action-name">MCQ Battle</span>
+                    <small style="color:var(--text-muted); font-size:10px;">MCQ লড়াই</small>
+                </div>
+                <div class="action-card" onclick="switchToTabDirect('squadTab', 'squadTabBtn')">
+                    <span class="action-icon">🛡️</span>
+                    <span class="action-name">My Squad</span>
+                    <small style="color:var(--text-muted); font-size:10px;">আমার স্কোয়াড</small>
+                </div>
+                <div class="action-card" onclick="switchToTabDirect('leaderboardTab', 'leaderboardTabBtn')">
+                    <span class="action-icon">🏆</span>
+                    <span class="action-name">Leaderboard</span>
+                    <small style="color:var(--text-muted); font-size:10px;">র‍্যাংকিং তালিকা</small>
+                </div>
+            </div>
+
             <div class="stat-grid">
                 <div class="stat-box"><div class="stat-val" id="dashTodayTime">0h 0m</div><div class="stat-lbl">Today's Study</div><div class="stat-sub">আজকের পড়া 🔥</div></div>
                 <div class="stat-box"><div class="stat-val" id="dashTotalTime">0.0h</div><div class="stat-lbl">Total Time</div><div class="stat-sub">সর্বমোট সময়</div></div>
@@ -608,29 +631,10 @@
                     </div>
                 </div>
             </div>
-
-            <div class="cyber-card" style="margin-top: 18px;">
-                <div class="card-title">⚡ RECENT STUDY ACTIVITIES (সাম্প্রতিক কার্যক্রম)</div>
-                <div class="activity-timeline" id="recentActivityList">
-                    <div class="activity-row">
-                        <div>
-                            <span class="activity-desc">🎉 Aura Core-এ রেজিস্ট্রেশন সফল হয়েছে</span>
-                            <div style="font-size: 11px; color: var(--neon-green); margin-top: 2px;">+৫০ XP ওয়েলকাম বোনাস ক্রেডিট হয়েছে</div>
-                        </div>
-                        <span class="activity-time">যোগদান</span>
-                    </div>
-                </div>
-            </div>
         </div>
 
         <!-- 1. STUDY TRACKER TAB -->
         <div id="studyTab" class="tab-content">
-            <div class="stat-grid">
-                <div class="stat-box"><div class="stat-val" id="totalHoursDisplay">0.0h</div><div class="stat-lbl">Study Time (পড়ার সময়)</div></div>
-                <div class="stat-box"><div class="stat-val" id="xpDisplay">50</div><div class="stat-lbl">Total XP (মোট পয়েন্ট)</div></div>
-                <div class="stat-box"><div class="stat-val" id="levelDisplay">Lvl 1</div><div class="stat-lbl">Level Rank (লেভেল)</div></div>
-            </div>
-
             <div class="cyber-card">
                 <div class="card-title">🎯 FOCUS CORE (উচ্চমাধ্যমিক বিজ্ঞান প্রস্তুতি)</div>
                 <label style="font-size: 11px; color: var(--neon-blue); text-transform: uppercase;">১. বিষয় নির্বাচন করুন</label>
@@ -751,7 +755,7 @@
                         </div>
                     </div>
 
-                    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 10px;">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px;">
                         <div>
                             <label style="font-size: 11px; color: var(--neon-blue);">৫. ফরম্যাট</label>
                             <select id="battleModeSelect">
@@ -768,10 +772,11 @@
                                 <option value="250">250 XP 👑</option>
                             </select>
                         </div>
-                        <div>
-                            <label style="font-size: 11px; color: var(--neon-blue);">৭. সময়সীমা</label>
-                            <input type="number" id="battleTimeInput" min="10" max="60" value="15" placeholder="ন্যূনতম ১০ সে.">
-                        </div>
+                    </div>
+
+                    <div style="margin-bottom: 14px;">
+                        <label style="font-size: 11px; color: var(--neon-blue);">প্রতি প্রশ্নের সময় (Fair Timer: কমপক্ষে ১০ সেকেন্ড)</label>
+                        <input type="number" id="battleTimeInput" min="10" max="60" value="15" placeholder="ন্যূনতম ১০ সে.">
                     </div>
 
                     <div style="display: flex; gap: 10px;">
@@ -946,7 +951,7 @@
                     </button>
                 </div>
 
-                <!-- Dynamic Dropdown Selector for Area Selection -->
+                <!-- Dynamic Area Selector Dropdown -->
                 <div id="subTierSelectorBox" style="display: none; margin-bottom: 12px;">
                     <div class="sub-selector-row">
                         <div>
@@ -986,8 +991,21 @@
                 </div>
             </div>
 
+            <!-- Profile Info Edit (Username, Display Name, Geo-Location) -->
             <div class="cyber-card">
                 <div class="card-title">⚙️ EDIT ACADEMIC & GEOGRAPHIC LOCATION</div>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px;">
+                    <div>
+                        <label style="font-size: 11px; color: var(--neon-blue);">Username (ইউজারনেম - ইউনিক হতে হবে)</label>
+                        <input type="text" id="editUsernameInput" placeholder="@username">
+                    </div>
+                    <div>
+                        <label style="font-size: 11px; color: var(--neon-blue);">Display Name (আপনার নাম)</label>
+                        <input type="text" id="editDisplayNameInput" placeholder="আপনার পূর্ণ নাম">
+                    </div>
+                </div>
+
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
                     <div>
                         <label style="font-size: 11px; color: var(--neon-blue);">Age (বয়স)</label>
@@ -1076,14 +1094,15 @@
         const db = firebase.database();
         const auth = firebase.auth();
 
-        const currentUser = localStorage.getItem('auraCurrentUser');
+        let currentUser = localStorage.getItem('auraCurrentUser');
         if (!currentUser) window.location.href = "index.html";
 
         document.getElementById('navUserName').innerText = "@" + currentUser;
         document.getElementById('profUser').innerText = currentUser;
+        document.getElementById('editUsernameInput').value = currentUser;
 
         // Presence System
-        const myStatusRef = db.ref('users/' + currentUser + '/onlineStatus');
+        let myStatusRef = db.ref('users/' + currentUser + '/onlineStatus');
         db.ref('.info/connected').on('value', (snap) => {
             if (snap.val() === true) {
                 myStatusRef.onDisconnect().set({ isOnline: false, lastSeen: firebase.database.ServerValue.TIMESTAMP });
@@ -1102,7 +1121,7 @@
         // 🗺️ Standard Bangladesh Geographic Database (Cascade Dropdown)
         const bdGeoHierarchy = {
             "Rangpur": {
-                "Gaibandha": ["Sadar", "Gobindaganj", "Bonarpara / Saghata", "Palashbari", "Sundarganj", "Sadullapur", "Phulchhari"],
+                "Gaibandha": ["Bonarpara / Saghata", "Gobindaganj", "Sadar", "Palashbari", "Sundarganj", "Sadullapur", "Phulchhari"],
                 "Rangpur": ["Sadar", "Pirganj", "Badarganj", "Mithapukur", "Gangachara", "Kaunia", "Taraganj", "Pirgachha"],
                 "Bogura": ["Sadar", "Sherpur", "Shibganj", "Gabtali", "Dhunat", "Kahaloo", "Nandigram", "Sariakandi"],
                 "Dinajpur": ["Sadar", "Birganj", "Parbatipur", "Birol", "Phulbari", "Nawabganj", "Hakimpur"],
@@ -1174,6 +1193,9 @@
             });
         }
 
+        // Auto trigger initial populate
+        onDivisionChangeCascade();
+
         let userData = {};
         let dailyBonusChecked = false;
         let uploadedGuildAvatarBase64 = null;
@@ -1185,6 +1207,7 @@
             const displayName = userData.name || "Scholar";
             document.getElementById('dashGreeting').innerHTML = `${getTimeGreeting()}, <span>${displayName}</span> 👋`;
             document.getElementById('profName').innerText = displayName;
+            document.getElementById('editDisplayNameInput').value = displayName;
 
             const targetGoal = userData.target || "HSC Science";
             document.getElementById('dashTargetBadge').innerText = "🎯 " + targetGoal;
@@ -1199,7 +1222,7 @@
             document.getElementById('dashInstBadge').innerText = "🏛️ " + instName;
             document.getElementById('profInst').innerText = instName + instType;
 
-            const locText = `${userData.upazila || 'Sadar'}, ${userData.district || 'Gaibandha'}, ${userData.division || 'Rangpur'}`;
+            const locText = `${userData.upazila || 'Bonarpara / Saghata'}, ${userData.district || 'Gaibandha'}, ${userData.division || 'Rangpur'}`;
             document.getElementById('profLocationText').innerText = locText;
 
             if (userData.age) document.getElementById('editAgeInput').value = userData.age;
@@ -1450,10 +1473,9 @@
                 subLabel.innerText = "উপজেলা নির্বাচন করুন";
                 document.getElementById('rankTierHeading').innerText = "Top 10 Upazila (উপজেলা শীর্ষ ১০)";
 
-                // Show upazilas under user's district or default to Gaibandha
                 const activeDiv = userData.division || "Rangpur";
                 const activeDist = userData.district || "Gaibandha";
-                const upazilas = (bdGeoHierarchy[activeDiv] && bdGeoHierarchy[activeDiv][activeDist]) ? bdGeoHierarchy[activeDiv][activeDist] : ["Sadar", "Gobindaganj", "Bonarpara / Saghata"];
+                const upazilas = (bdGeoHierarchy[activeDiv] && bdGeoHierarchy[activeDiv][activeDist]) ? bdGeoHierarchy[activeDiv][activeDist] : ["Bonarpara / Saghata", "Gobindaganj", "Sadar"];
 
                 upazilas.forEach(upz => {
                     const opt = document.createElement('option');
@@ -1975,7 +1997,10 @@
             }, 250);
         }
 
+        // Save Academic Profile (With Unique Username Validation)
         function saveAcademicProfile() {
+            const newUsername = document.getElementById('editUsernameInput').value.trim().toLowerCase().replace(/[^a-z0-9_]/g, '');
+            const newDisplayName = document.getElementById('editDisplayNameInput').value.trim();
             const age = document.getElementById('editAgeInput').value.trim();
             const instType = document.getElementById('editInstTypeSelect').value;
             const instName = document.getElementById('mapSearchInstInput').value.trim();
@@ -1983,18 +2008,58 @@
             const district = document.getElementById('editDistrictSelect').value;
             const upazila = document.getElementById('editUpazilaSelect').value;
 
-            if (!age || !instName) { openModal("⚠️", "অসম্পূর্ণ", "বয়স ও প্রতিষ্ঠানের নাম লিখুন!"); return; }
+            if (!newUsername || newUsername.length < 3) {
+                openModal("⚠️", "ভুল ইউজারনেম", "ইউজারনেম কমপক্ষে ৩ অক্ষরের হতে হবে (শুধুমাত্র ছোট হাতের ইংরেজি ও সংখ্যা)!");
+                return;
+            }
 
-            db.ref('users/' + currentUser).update({
-                age: age,
-                institutionType: instType,
-                institutionName: instName,
-                division: division,
-                district: district,
-                upazila: upazila
-            }).then(() => {
-                openModal("✅", "সংরক্ষিত", "একাডেমিক ও ভৌগোলিক তথ্য সফলভাবে সংরক্ষিত হয়েছে!");
-            });
+            if (!age || !instName) {
+                openModal("⚠️", "অসম্পূর্ণ তথ্য", "বয়স ও প্রতিষ্ঠানের নাম পূরণ করুন!");
+                return;
+            }
+
+            // Check if Username is already taken by someone else
+            if (newUsername !== currentUser) {
+                db.ref('users/' + newUsername).once('value').then(snap => {
+                    if (snap.exists()) {
+                        openModal("🚫", "ইউজারনেম বিদ্যমান", `"${newUsername}" ইউজারনেমটি অন্য কেউ ইতোমধ্যে ব্যবহার করছে! দয়া করে অন্য একটি ইউনিক নাম দিন।`);
+                    } else {
+                        // Migrate user data to new username node
+                        const updatedData = {
+                            ...userData,
+                            name: newDisplayName || userData.name || "Scholar",
+                            age: age,
+                            institutionType: instType,
+                            institutionName: instName,
+                            division: division,
+                            district: district,
+                            upazila: upazila
+                        };
+
+                        db.ref('users/' + newUsername).set(updatedData).then(() => {
+                            db.ref('users/' + currentUser).remove();
+                            localStorage.setItem('auraCurrentUser', newUsername);
+                            currentUser = newUsername;
+                            document.getElementById('navUserName').innerText = "@" + newUsername;
+                            document.getElementById('profUser').innerText = newUsername;
+                            openModal("✅", "প্রোফাইল সংরক্ষিত", "আপনার ইউজারনেম ও সমস্ত তথ্য সফলভাবে আপডেট হয়েছে!");
+                        });
+                    }
+                });
+            } else {
+                // Update existing user node
+                db.ref('users/' + currentUser).update({
+                    name: newDisplayName || userData.name || "Scholar",
+                    age: age,
+                    institutionType: instType,
+                    institutionName: instName,
+                    division: division,
+                    district: district,
+                    upazila: upazila
+                }).then(() => {
+                    openModal("✅", "প্রোফাইল সংরক্ষিত", "আপনার সমস্ত তথ্য সফলভাবে আপডেট হয়েছে!");
+                });
+            }
         }
 
         function switchTab(tabId, el) {
