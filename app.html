@@ -211,7 +211,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            min-width: 110px;
+            min-width: 105px;
         }
         .tab-btn .btn-en { font-size: 12px; font-weight: 800; text-transform: uppercase; color: #fff; }
         .tab-btn .btn-bn { font-size: 10px; color: var(--text-muted); margin-top: 1px; }
@@ -239,7 +239,7 @@
         }
         .card-title { font-size: 15.5px; font-weight: 800; color: var(--neon-blue); margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between; gap: 8px; }
 
-        /* Dual Language Action Buttons */
+        /* Dual Action Buttons */
         .btn-dual-action {
             border: none;
             padding: 10px 18px;
@@ -301,36 +301,52 @@
         .stat-lbl { font-size: 11px; color: var(--text-muted); text-transform: uppercase; margin-top: 4px; }
         .stat-sub { font-size: 10.5px; color: var(--neon-green); margin-top: 3px; font-weight: 600; }
 
-        /* Daily Goal Card */
         .daily-goal-box { background: rgba(5, 11, 20, 0.6); border: 1px solid rgba(255,204,0,0.25); border-radius: 12px; padding: 14px; margin-bottom: 15px; }
 
-        /* Leaderboard Controls & Hierarchy List */
-        .rank-filter-bar {
-            display: flex;
-            gap: 8px;
-            margin-bottom: 15px;
-            overflow-x: auto;
-            padding-bottom: 4px;
+        /* Standalone 4-Tier Leaderboard Filters */
+        .rank-tier-tabs {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 6px;
+            margin-bottom: 12px;
         }
-        .rank-filter-btn {
+        @media (max-width: 600px) {
+            .rank-tier-tabs { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        .tier-filter-btn {
             background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.12);
             color: #cbd5e1;
-            padding: 8px 14px;
+            padding: 8px 6px;
             border-radius: 8px;
             cursor: pointer;
-            font-size: 12px;
-            font-weight: bold;
+            text-align: center;
             transition: all 0.2s;
             display: flex;
             flex-direction: column;
             align-items: center;
         }
-        .rank-filter-btn.active {
+        .tier-filter-btn .t-en { font-size: 12px; font-weight: 800; color: #fff; }
+        .tier-filter-btn .t-bn { font-size: 10px; color: var(--text-muted); margin-top: 2px; }
+
+        .tier-filter-btn.active {
             background: rgba(0, 240, 255, 0.15);
             border-color: var(--neon-blue);
-            color: var(--neon-blue);
             box-shadow: 0 0 10px rgba(0, 240, 255, 0.3);
+        }
+        .tier-filter-btn.active .t-en { color: var(--neon-blue); }
+        .tier-filter-btn.active .t-bn { color: var(--neon-green); font-weight: bold; }
+
+        .sub-selector-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 15px;
+            background: rgba(5, 11, 20, 0.6);
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid rgba(255,255,255,0.06);
         }
 
         .leaderboard-row {
@@ -342,7 +358,6 @@
             border: 1px solid rgba(255, 255, 255, 0.06);
             border-radius: 10px;
             margin-bottom: 8px;
-            transition: transform 0.2s;
         }
         .leaderboard-row.top-1 { border-left: 4px solid var(--neon-gold); background: rgba(255, 204, 0, 0.06); }
         .leaderboard-row.top-2 { border-left: 4px solid #cbd5e1; background: rgba(255, 255, 255, 0.04); }
@@ -429,7 +444,7 @@
 
         .invite-box { background: rgba(0, 240, 255, 0.08); border: 1px dashed var(--neon-blue); padding: 10px; border-radius: 8px; margin-top: 10px; font-size: 12px; display: flex; justify-content: space-between; align-items: center; }
 
-        .activity-timeline { display: flex; direction: column; gap: 8px; }
+        .activity-timeline { display: flex; flex-direction: column; gap: 8px; }
         .activity-row { display: flex; align-items: center; justify-content: space-between; padding: 10px 12px; background: rgba(5, 11, 20, 0.6); border: 1px solid rgba(255,255,255,0.06); border-left: 3px solid var(--neon-blue); border-radius: 8px; font-size: 12.5px; }
         .activity-row.boost { border-left-color: var(--neon-gold); }
         .activity-desc { color: #cbd5e1; font-weight: 600; }
@@ -560,29 +575,6 @@
                 </div>
             </div>
 
-            <div class="quick-actions-grid">
-                <div class="action-card" onclick="switchToTabDirect('studyTab', 'studyTabBtn')">
-                    <span class="action-icon">▶️</span>
-                    <span class="action-name">Study Tracker</span>
-                    <small style="color:var(--text-muted); font-size:10px;">পড়াশোনা শুরু</small>
-                </div>
-                <div class="action-card" onclick="switchToTabDirect('battleTab', 'battleTabBtn')">
-                    <span class="action-icon">⚔️</span>
-                    <span class="action-name">MCQ Battle</span>
-                    <small style="color:var(--text-muted); font-size:10px;">MCQ লড়াই</small>
-                </div>
-                <div class="action-card" onclick="switchToTabDirect('squadTab', 'squadTabBtn')">
-                    <span class="action-icon">🛡️</span>
-                    <span class="action-name">My Squad</span>
-                    <small style="color:var(--text-muted); font-size:10px;">আমার স্কোয়াড</small>
-                </div>
-                <div class="action-card" onclick="switchToTabDirect('leaderboardTab', 'leaderboardTabBtn')">
-                    <span class="action-icon">🏆</span>
-                    <span class="action-name">Leaderboard</span>
-                    <small style="color:var(--text-muted); font-size:10px;">র‍্যাংকিং তালিকা</small>
-                </div>
-            </div>
-
             <div class="stat-grid">
                 <div class="stat-box"><div class="stat-val" id="dashTodayTime">0h 0m</div><div class="stat-lbl">Today's Study</div><div class="stat-sub">আজকের পড়া 🔥</div></div>
                 <div class="stat-box"><div class="stat-val" id="dashTotalTime">0.0h</div><div class="stat-lbl">Total Time</div><div class="stat-sub">সর্বমোট সময়</div></div>
@@ -617,33 +609,13 @@
                     </div>
                 </div>
             </div>
-
-            <div class="cyber-card" style="margin-top: 18px;">
-                <div class="card-title">⚡ RECENT STUDY ACTIVITIES (সাম্প্রতিক কার্যক্রম)</div>
-                <div class="activity-timeline" id="recentActivityList">
-                    <div class="activity-row">
-                        <div>
-                            <span class="activity-desc">🎉 Aura Core-এ রেজিস্ট্রেশন সফল হয়েছে</span>
-                            <div style="font-size: 11px; color: var(--neon-green); margin-top: 2px;">+৫০ XP ওয়েলকাম বোনাস ক্রেডিট হয়েছে</div>
-                        </div>
-                        <span class="activity-time">যোগদান</span>
-                    </div>
-                </div>
-            </div>
         </div>
 
         <!-- 1. STUDY TRACKER TAB -->
         <div id="studyTab" class="tab-content">
-            <div class="stat-grid">
-                <div class="stat-box"><div class="stat-val" id="totalHoursDisplay">0.0h</div><div class="stat-lbl">Study Time (পড়ার সময়)</div></div>
-                <div class="stat-box"><div class="stat-val" id="xpDisplay">50</div><div class="stat-lbl">Total XP (মোট পয়েন্ট)</div></div>
-                <div class="stat-box"><div class="stat-val" id="levelDisplay">Lvl 1</div><div class="stat-lbl">Level Rank (লেভেল)</div></div>
-            </div>
-
             <div class="cyber-card">
                 <div class="card-title">🎯 FOCUS CORE (উচ্চমাধ্যমিক বিজ্ঞান প্রস্তুতি)</div>
-                
-                <label style="font-size: 11px; color: var(--neon-blue); text-transform: uppercase;">১. বিষয় নির্বাচন করুন (Select Subject)</label>
+                <label style="font-size: 11px; color: var(--neon-blue); text-transform: uppercase;">১. বিষয় নির্বাচন করুন</label>
                 <select id="studySubjectSelect" onchange="updateStudyPaperOptions()">
                     <option value="Physics">পদার্থবিজ্ঞান (Physics)</option>
                     <option value="Chemistry">রসায়ন (Chemistry)</option>
@@ -654,7 +626,7 @@
                     <option value="ICT">তথ্য ও যোগাযোগ প্রযুক্তি (ICT)</option>
                 </select>
 
-                <label style="font-size: 11px; color: var(--neon-blue); text-transform: uppercase;">২. পত্র নির্বাচন করুন (Select Paper)</label>
+                <label style="font-size: 11px; color: var(--neon-blue); text-transform: uppercase;">২. পত্র নির্বাচন করুন</label>
                 <select id="studyPaperSelect">
                     <option value="1st Paper">১ম পত্র (1st Paper)</option>
                     <option value="2nd Paper">২য় পত্র (2nd Paper)</option>
@@ -669,7 +641,6 @@
                         <span class="act-bn">পড়াশোনা শুরু করুন</span>
                     </button>
                 </div>
-                <p style="font-size: 11px; color: var(--text-muted); text-align: center;">প্রতি ১ মিনিট পড়াশোনায় ১ XP যোগ হবে।</p>
             </div>
         </div>
 
@@ -677,7 +648,6 @@
         <div id="notesTab" class="tab-content">
             <div class="cyber-card">
                 <div class="card-title">📚 STRUCTURED NOTES VAULT (নোটস ভল্ট)</div>
-                
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
                     <div>
                         <label style="font-size: 10px; color: var(--neon-blue);">১. বিষয়</label>
@@ -700,23 +670,8 @@
                     </div>
                 </div>
 
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
-                    <div>
-                        <label style="font-size: 10px; color: var(--neon-blue);">৩. অধ্যায়</label>
-                        <input type="text" id="noteChapter" placeholder="যেমন: অধ্যায় ২: ভেক্টর">
-                    </div>
-                    <div>
-                        <label style="font-size: 10px; color: var(--neon-blue);">৪. ক্যাটাগরি</label>
-                        <select id="noteType">
-                            <option value="CQ Notes">CQ Notes (সৃজনশীল নোটস)</option>
-                            <option value="MCQ Sheet">MCQ Sheet (জ্ঞান ও অনুধাবন)</option>
-                            <option value="Formula / Short Sheet">Formula & Short Sheet</option>
-                            <option value="Practice PDF Link">Practice PDF / Drive Link</option>
-                        </select>
-                    </div>
-                </div>
-
-                <textarea id="noteContent" rows="3" placeholder="নোটের বিবরণ, জরুরি সূত্র অথবা Google Drive লিংক পেস্ট করুন..."></textarea>
+                <input type="text" id="noteChapter" placeholder="যেমন: অধ্যায় ২: ভেক্টর" style="margin-top: 8px;">
+                <textarea id="noteContent" rows="3" placeholder="নোটের বিবরণ বা Google Drive লিংক পেস্ট করুন..."></textarea>
                 <button class="btn-dual-action blue" onclick="saveHscNote()" style="width: 100%;">
                     <span class="act-en">Save Note To Vault</span>
                     <span class="act-bn">ভল্টে নোট সেভ করুন</span>
@@ -735,7 +690,7 @@
                 <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,51,102,0.3); padding-bottom: 10px; margin-bottom: 15px;">
                     <div>
                         <div style="font-size: 18px; font-weight: 900; color: var(--neon-red);">⚔️ CYBER MCQ BATTLE ARENA</div>
-                        <div style="font-size: 11.5px; color: var(--text-muted);">বোর্ড বই, পাঞ্জেরী টেস্ট পেপার, রয়েল গাইড ও ভর্তি পরীক্ষার হাজারো প্রশ্নের লাইভ ভাণ্ডার!</div>
+                        <div style="font-size: 11.5px; color: var(--text-muted);">বোর্ড বই, পাঞ্জেরী টেস্ট পেপার ও ভর্তি পরীক্ষার প্রশ্নব্যাংক!</div>
                     </div>
                     <div class="battle-timer" id="battleCountdown">15s</div>
                 </div>
@@ -778,7 +733,7 @@
                         </div>
                     </div>
 
-                    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 10px;">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px;">
                         <div>
                             <label style="font-size: 11px; color: var(--neon-blue);">৫. ফরম্যাট</label>
                             <select id="battleModeSelect">
@@ -787,15 +742,7 @@
                             </select>
                         </div>
                         <div>
-                            <label style="font-size: 11px; color: var(--neon-gold);">৬. প্রশ্নের সংখ্যা</label>
-                            <select id="battleQuestionCountSelect">
-                                <option value="1">১টি প্রশ্ন (Instant)</option>
-                                <option value="3">৩টি প্রশ্ন (Set)</option>
-                                <option value="5">৫টি প্রশ্ন (Full)</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label style="font-size: 11px; color: var(--neon-gold);">৭. বাজি XP</label>
+                            <label style="font-size: 11px; color: var(--neon-gold);">৬. বাজি XP</label>
                             <select id="battleStakeSelect">
                                 <option value="20">20 XP</option>
                                 <option value="50">50 XP</option>
@@ -952,28 +899,47 @@
             </div>
         </div>
 
-        <!-- 5. 🏆 DEDICATED LEADERBOARD TAB (Top 10: BD / Division / District & Upazila) -->
+        <!-- ==============================================
+             5. 🏆 DEDICATED LEADERBOARD TAB (Full BD / Division / District / Upazila)
+        ============================================== -->
         <div id="leaderboardTab" class="tab-content">
             <div class="cyber-card">
                 <div class="card-title">
                     <span>🏆 SCHOLAR LEADERBOARD (মেধাতালিকা র‍্যাংকিং)</span>
-                    <span style="font-size: 11px; color: var(--neon-gold);">Top 10 Legends</span>
+                    <span style="font-size: 11px; color: var(--neon-gold);" id="rankTierHeading">Top 10 National</span>
                 </div>
 
-                <!-- Hierarchical Filter Buttons -->
-                <div class="rank-filter-bar">
-                    <button class="rank-filter-btn active" id="filterBdBtn" onclick="switchLeaderboardFilter('all_bd', this)">
-                        <span>Full Bangladesh</span>
-                        <small>জাতীয় র‍্যাংক</small>
+                <!-- 4 Standalone Separate Tier Filter Buttons -->
+                <div class="rank-tier-tabs">
+                    <button class="tier-filter-btn active" id="btnFilterAllBd" onclick="setHierarchyTier('all_bd', this)">
+                        <span class="t-en">Full Bangladesh</span>
+                        <span class="t-bn">জাতীয় শীর্ষ ১০</span>
                     </button>
-                    <button class="rank-filter-btn" id="filterDivBtn" onclick="switchLeaderboardFilter('division', this)">
-                        <span id="labelDivFilter">Division</span>
-                        <small>বিভাগীয় শীর্ষ</small>
+                    <button class="tier-filter-btn" id="btnFilterDivision" onclick="setHierarchyTier('division', this)">
+                        <span class="t-en">Division Top</span>
+                        <span class="t-bn">বিভাগীয় শীর্ষ ১০</span>
                     </button>
-                    <button class="rank-filter-btn" id="filterDistBtn" onclick="switchLeaderboardFilter('district', this)">
-                        <span id="labelDistFilter">District / Upazila</span>
-                        <small>জেলা ও উপজেলা</small>
+                    <button class="tier-filter-btn" id="btnFilterDistrict" onclick="setHierarchyTier('district', this)">
+                        <span class="t-en">District Top</span>
+                        <span class="t-bn">জেলা শীর্ষ ১০</span>
                     </button>
+                    <button class="tier-filter-btn" id="btnFilterUpazila" onclick="setHierarchyTier('upazila', this)">
+                        <span class="t-en">Upazila Top</span>
+                        <span class="t-bn">উপজেলা শীর্ষ ১০</span>
+                    </button>
+                </div>
+
+                <!-- Dynamic Dropdown Selector for Division, District & Upazila -->
+                <div id="subTierSelectorBox" style="display: none; margin-bottom: 12px;">
+                    <div class="sub-selector-row">
+                        <div>
+                            <label style="font-size: 10.5px; color: var(--neon-blue); text-transform: uppercase;" id="subSelectorLabel">নির্বাচন করুন</label>
+                            <select id="subTierSelect" onchange="onSubTierSelectChange()"></select>
+                        </div>
+                        <div style="display: flex; align-items: flex-end;">
+                            <span style="font-size: 11px; color: var(--text-muted);" id="subTierScopeDesc">সংশ্লিষ্ট এলাকার শীর্ষ শিক্ষার্থীদের তালিকা</span>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Top 10 Hierarchy List View -->
@@ -1005,7 +971,7 @@
             </div>
 
             <div class="cyber-card">
-                <div class="card-title">⚙️ EDIT ACADEMIC PROFILE (একাডেমিক প্রোফাইল যাচাই)</div>
+                <div class="card-title">⚙️ EDIT ACADEMIC & GEOGRAPHIC LOCATION</div>
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
                     <div>
                         <label style="font-size: 11px; color: var(--neon-blue);">Age (বয়স)</label>
@@ -1020,6 +986,32 @@
                         </select>
                     </div>
                 </div>
+
+                <!-- Division, District & Upazila Selectors for accurate ranking -->
+                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px;">
+                    <div>
+                        <label style="font-size: 10.5px; color: var(--neon-blue);">Division (বিভাগ)</label>
+                        <select id="editDivisionSelect" onchange="onEditDivisionChange()">
+                            <option value="Dhaka">Dhaka (ঢাকা)</option>
+                            <option value="Rangpur">Rangpur (রংপুর)</option>
+                            <option value="Rajshahi">Rajshahi (রাজশাহী)</option>
+                            <option value="Chattogram">Chattogram (চট্টগ্রাম)</option>
+                            <option value="Khulna">Khulna (খুলনা)</option>
+                            <option value="Barishal">Barishal (বরিশাল)</option>
+                            <option value="Sylhet">Sylhet (সিলেট)</option>
+                            <option value="Mymensingh">Mymensingh (ময়মনসিংহ)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label style="font-size: 10.5px; color: var(--neon-blue);">District (জেলা)</label>
+                        <input type="text" id="editDistrictInput" placeholder="যেমন: Gaibandha / Dhaka">
+                    </div>
+                    <div>
+                        <label style="font-size: 10.5px; color: var(--neon-blue);">Upazila (উপজেলা)</label>
+                        <input type="text" id="editUpazilaInput" placeholder="যেমন: Gobindaganj / Mirpur">
+                    </div>
+                </div>
+
                 <div class="map-search-box">
                     <label style="font-size: 11px; color: var(--neon-blue);">Institution (লাইভ ম্যাপে সার্চ করুন 🗺️)</label>
                     <input type="text" id="mapSearchInstInput" placeholder="টাইপ করুন..." oninput="searchInstitutionOnMap(this.value)">
@@ -1095,7 +1087,7 @@
         let dailyBonusChecked = false;
         let uploadedGuildAvatarBase64 = null;
         let cachedAllUsers = [];
-        let currentRankFilter = "all_bd";
+        let currentHierarchyTier = "all_bd";
 
         db.ref('users/' + currentUser).on('value', (snap) => {
             userData = snap.val() || {};
@@ -1119,6 +1111,9 @@
             if (userData.age) document.getElementById('editAgeInput').value = userData.age;
             if (userData.institutionType) document.getElementById('editInstTypeSelect').value = userData.institutionType;
             if (userData.institutionName) document.getElementById('mapSearchInstInput').value = userData.institutionName;
+            if (userData.division) document.getElementById('editDivisionSelect').value = userData.division;
+            if (userData.district) document.getElementById('editDistrictInput').value = userData.district;
+            if (userData.upazila) document.getElementById('editUpazilaInput').value = userData.upazila;
 
             const isVerified = (userData.emailVerified === true) || (auth.currentUser && auth.currentUser.emailVerified);
             document.getElementById('profVerificationBadge').innerHTML = isVerified ? 
@@ -1288,24 +1283,108 @@
             });
         }
 
-        // 🏆 HIERARCHICAL TOP 10 LEADERBOARD (Full BD / Division / District & Upazila)
+        // ==============================================
+        // 🏆 4-TIER HIERARCHICAL LEADERBOARD ENGINE
+        // (Full BD, Division, District, Upazila Top 10)
+        // ==============================================
         db.ref('users').on('value', snap => {
             cachedAllUsers = [];
             const data = snap.val() || {};
             Object.keys(data).forEach(k => {
                 cachedAllUsers.push({ user: k, ...data[k] });
             });
-            renderHierarchicalLeaderboard();
+            renderHierarchyLeaderboard();
         });
 
-        function switchLeaderboardFilter(filterType, element) {
-            currentRankFilter = filterType;
-            document.querySelectorAll('.rank-filter-btn').forEach(btn => btn.classList.remove('active'));
-            if (element) element.classList.add('active');
-            renderHierarchicalLeaderboard();
+        function setHierarchyTier(tier, btnEl) {
+            currentHierarchyTier = tier;
+            document.querySelectorAll('.tier-filter-btn').forEach(b => b.classList.remove('active'));
+            if (btnEl) btnEl.classList.add('active');
+
+            const subBox = document.getElementById('subTierSelectorBox');
+            const subSelect = document.getElementById('subTierSelect');
+            const subLabel = document.getElementById('subSelectorLabel');
+            subSelect.innerHTML = "";
+
+            if (tier === "all_bd") {
+                subBox.style.display = "none";
+                document.getElementById('rankTierHeading').innerText = "Top 10 National (বাংলাদেশ শীর্ষ ১০)";
+            } else if (tier === "division") {
+                subBox.style.display = "block";
+                subLabel.innerText = "বিভাগ নির্বাচন করুন";
+                document.getElementById('rankTierHeading').innerText = "Top 10 Division (বিভাগীয় শীর্ষ ১০)";
+                
+                const divisions = ["Dhaka", "Rangpur", "Rajshahi", "Chattogram", "Khulna", "Barishal", "Sylhet", "Mymensingh"];
+                divisions.forEach(d => {
+                    const opt = document.createElement('option');
+                    opt.value = d;
+                    opt.innerText = `${d} Division`;
+                    if (userData.division === d) opt.selected = true;
+                    subSelect.appendChild(opt);
+                });
+            } else if (tier === "district") {
+                subBox.style.display = "block";
+                subLabel.innerText = "জেলা নির্বাচন করুন";
+                document.getElementById('rankTierHeading').innerText = "Top 10 District (জেলা শীর্ষ ১০)";
+
+                // Extract all unique districts present in database
+                let districtsSet = new Set();
+                cachedAllUsers.forEach(u => {
+                    if (u.district && u.district.trim().length > 1) districtsSet.add(u.district.trim());
+                    // fallback check from institution
+                    if (u.institutionName) {
+                        const low = u.institutionName.toLowerCase();
+                        if (low.includes("gaibandha")) districtsSet.add("Gaibandha");
+                        if (low.includes("rangpur")) districtsSet.add("Rangpur");
+                        if (low.includes("bogura") || low.includes("bogra")) districtsSet.add("Bogura");
+                        if (low.includes("dhaka")) districtsSet.add("Dhaka");
+                    }
+                });
+
+                if (districtsSet.size === 0) districtsSet.add("Gaibandha").add("Dhaka").add("Rangpur");
+
+                districtsSet.forEach(dist => {
+                    const opt = document.createElement('option');
+                    opt.value = dist;
+                    opt.innerText = `${dist} জেলা`;
+                    if (userData.district && userData.district.toLowerCase() === dist.toLowerCase()) opt.selected = true;
+                    subSelect.appendChild(opt);
+                });
+            } else if (tier === "upazila") {
+                subBox.style.display = "block";
+                subLabel.innerText = "উপজেলা নির্বাচন করুন";
+                document.getElementById('rankTierHeading').innerText = "Top 10 Upazila (উপজেলা শীর্ষ ১০)";
+
+                let upazilaSet = new Set();
+                cachedAllUsers.forEach(u => {
+                    if (u.upazila && u.upazila.trim().length > 1) upazilaSet.add(u.upazila.trim());
+                    if (u.institutionName) {
+                        const low = u.institutionName.toLowerCase();
+                        if (low.includes("bonarpara")) upazilaSet.add("Saghata / Bonarpara");
+                        if (low.includes("gobindaganj")) upazilaSet.add("Gobindaganj");
+                        if (low.includes("sadar")) upazilaSet.add("Sadar");
+                    }
+                });
+
+                if (upazilaSet.size === 0) upazilaSet.add("Saghata / Bonarpara").add("Gobindaganj").add("Sadar");
+
+                upazilaSet.forEach(upz => {
+                    const opt = document.createElement('option');
+                    opt.value = upz;
+                    opt.innerText = `${upz} উপজেলা`;
+                    if (userData.upazila && userData.upazila.toLowerCase() === upz.toLowerCase()) opt.selected = true;
+                    subSelect.appendChild(opt);
+                });
+            }
+
+            renderHierarchyLeaderboard();
         }
 
-        function renderHierarchicalLeaderboard() {
+        function onSubTierSelectChange() {
+            renderHierarchyLeaderboard();
+        }
+
+        function renderHierarchyLeaderboard() {
             const container = document.getElementById('hierarchicalLeaderboardList');
             container.innerHTML = "";
 
@@ -1314,33 +1393,39 @@
                 return;
             }
 
-            let filteredUsers = [...cachedAllUsers];
-            const myInstitution = (userData.institutionName || "").toLowerCase();
+            let filteredList = [...cachedAllUsers];
+            const subSelect = document.getElementById('subTierSelect');
+            const selectedVal = subSelect ? subSelect.value : "";
 
-            if (currentRankFilter === "division") {
-                // Approximate Division Matching from Institution Name (Dhaka, Rajshahi, Rangpur, Chattogram etc.)
-                let divisionName = "ঢাকা বিভাগ (Dhaka)";
-                if (myInstitution.includes("rangpur") || myInstitution.includes("dinajpur") || myInstitution.includes("gaibandha")) divisionName = "রংপুর বিভাগ (Rangpur)";
-                else if (myInstitution.includes("rajshahi")) divisionName = "রাজশাহী বিভাগ (Rajshahi)";
-                else if (myInstitution.includes("chattogram") || myInstitution.includes("chittagong")) divisionName = "চট্টগ্রাম বিভাগ (Chattogram)";
-                
-                document.getElementById('labelDivFilter').innerText = divisionName.split(' ')[0];
-
-                filteredUsers = filteredUsers.filter(u => {
+            if (currentHierarchyTier === "division" && selectedVal) {
+                filteredList = filteredList.filter(u => {
+                    if (u.division && u.division.toLowerCase() === selectedVal.toLowerCase()) return true;
                     const inst = (u.institutionName || "").toLowerCase();
-                    return inst.includes("dhaka") || inst.includes("rangpur") || inst.includes("rajshahi") || inst.includes("chattogram");
+                    return inst.includes(selectedVal.toLowerCase());
                 });
-            } else if (currentRankFilter === "district") {
-                document.getElementById('labelDistFilter').innerText = "জেলা ও উপজেলা";
-                filteredUsers = filteredUsers.filter(u => {
+            } else if (currentHierarchyTier === "district" && selectedVal) {
+                filteredList = filteredList.filter(u => {
+                    if (u.district && u.district.toLowerCase() === selectedVal.toLowerCase()) return true;
                     const inst = (u.institutionName || "").toLowerCase();
-                    return inst.length > 3;
+                    return inst.includes(selectedVal.toLowerCase());
+                });
+            } else if (currentHierarchyTier === "upazila" && selectedVal) {
+                const keyword = selectedVal.split('/')[0].trim().toLowerCase();
+                filteredList = filteredList.filter(u => {
+                    if (u.upazila && u.upazila.toLowerCase().includes(keyword)) return true;
+                    const inst = (u.institutionName || "").toLowerCase();
+                    return inst.includes(keyword);
                 });
             }
 
             // Sort Descending by XP
-            filteredUsers.sort((a, b) => (b.xp || 50) - (a.xp || 50));
-            const top10 = filteredUsers.slice(0, 10);
+            filteredList.sort((a, b) => (b.xp || 50) - (a.xp || 50));
+            const top10 = filteredList.slice(0, 10);
+
+            if (top10.length === 0) {
+                container.innerHTML = '<p style="font-size:12px; text-align:center; color:var(--text-muted);">এই অঞ্চলে এখনও কোনো শিক্ষার্থী নিবন্ধিত হয়নি।</p>';
+                return;
+            }
 
             top10.forEach((item, index) => {
                 const rankNum = index + 1;
@@ -1354,17 +1439,19 @@
                 const isOnline = item.onlineStatus && item.onlineStatus.isOnline;
                 const statusDot = isOnline ? '🟢' : '⚪';
 
+                const locationTag = item.upazila ? `${item.upazila}, ${item.district || ''}` : (item.district || item.division || 'Bangladesh');
+
                 const row = document.createElement('div');
                 row.className = `leaderboard-row ${topRankClass}`;
                 row.innerHTML = `
                     <div style="display:flex; align-items:center; gap:10px;">
-                        <span style="font-size:14px; font-weight:900; color:var(--neon-gold); min-width:40px;">${rankBadgeIcon}</span>
+                        <span style="font-size:13.5px; font-weight:900; color:var(--neon-gold); min-width:35px;">${rankBadgeIcon}</span>
                         <div>
                             <div style="font-size:13.5px; font-weight:800; color:#fff;">
                                 ${statusDot} @${item.user} <span style="font-size:11px; font-weight:normal; color:var(--neon-green);">(${item.name || 'Scholar'})</span>
                             </div>
                             <div style="font-size:11px; color:var(--text-muted); margin-top:2px;">
-                                🏛️ ${item.institutionName || 'General College'} | Squad: <strong>${item.squad || 'None'}</strong>
+                                🏛️ ${item.institutionName || 'General College'} | 📍 ${locationTag}
                             </div>
                         </div>
                     </div>
@@ -1377,7 +1464,7 @@
             });
         }
 
-        // Syllabus & Question Bank with Book, Board & Test Paper Sources
+        // Syllabus & Question Bank
         const structuredSyllabus = {
             "Physics": {
                 "1st Paper": ["অধ্যায় ১: ভৌতজগত ও পরিমাপ", "অধ্যায় ২: ভেক্টর (Vector)", "অধ্যায় ৩: গতিবিদ্যা (Dynamics)", "অধ্যায় ৪: নিউটনিয়ান বলবিদ্যা", "অধ্যায় ৫: কাজ, শক্তি ও ক্ষমতা", "অধ্যায় ৬: মহাকর্ষ ও অভিকর্ষ", "অধ্যায় ৭: পদার্থের গাঠনিক ধর্ম", "অধ্যায় ৮: পর্যাবৃত্ত গতি", "অধ্যায় ৯: তরঙ্গ (Waves)", "অধ্যায় ১০: আদর্শ গ্যাস"],
@@ -1807,9 +1894,21 @@
             const age = document.getElementById('editAgeInput').value.trim();
             const instType = document.getElementById('editInstTypeSelect').value;
             const instName = document.getElementById('mapSearchInstInput').value.trim();
+            const division = document.getElementById('editDivisionSelect').value;
+            const district = document.getElementById('editDistrictInput').value.trim();
+            const upazila = document.getElementById('editUpazilaInput').value.trim();
+
             if (!age || !instName) { openModal("⚠️", "অসম্পূর্ণ", "বয়স ও প্রতিষ্ঠানের নাম লিখুন!"); return; }
-            db.ref('users/' + currentUser).update({ age: age, institutionType: instType, institutionName: instName }).then(() => {
-                openModal("✅", "সংরক্ষিত", "একাডেমিক প্রোফাইল সফলভাবে আপডেট হয়েছে!");
+
+            db.ref('users/' + currentUser).update({
+                age: age,
+                institutionType: instType,
+                institutionName: instName,
+                division: division,
+                district: district,
+                upazila: upazila
+            }).then(() => {
+                openModal("✅", "সংরক্ষিত", "একাডেমিক ও ভৌগোলিক তথ্য সফলভাবে সংরক্ষিত হয়েছে!");
             });
         }
 
@@ -1818,6 +1917,7 @@
             document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
             document.getElementById(tabId).classList.add('active');
             if (el) el.classList.add('active');
+            if (tabId === "leaderboardTab") renderHierarchyLeaderboard();
         }
 
         function switchToTabDirect(tId, bId) { switchTab(tId, document.getElementById(bId)); window.scrollTo({ top: 0, behavior: 'smooth' }); }
