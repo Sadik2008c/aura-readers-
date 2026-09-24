@@ -302,7 +302,7 @@
 
         .daily-goal-box { background: rgba(5, 11, 20, 0.6); border: 1px solid rgba(255,204,0,0.25); border-radius: 12px; padding: 14px; margin-bottom: 15px; }
 
-        /* Standalone 4-Tier Leaderboard Filters */
+        /* 4-Tier Leaderboard Filter Tabs */
         .rank-tier-tabs {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -362,7 +362,7 @@
         .leaderboard-row.top-2 { border-left: 4px solid #cbd5e1; background: rgba(255, 255, 255, 0.04); }
         .leaderboard-row.top-3 { border-left: 4px solid #cd7f32; background: rgba(205, 127, 50, 0.06); }
 
-        /* MCQ Battle Arena Styles */
+        /* MCQ Battle Arena */
         .battle-arena-box {
             background: linear-gradient(135deg, rgba(255,51,102,0.1), rgba(121,40,202,0.15)), #081124;
             border: 2px solid var(--neon-red);
@@ -571,29 +571,6 @@
                         <div class="progress-bar-fill" id="dashXpProgressBar" style="width: 50%;"></div>
                     </div>
                     <div class="xp-footer-note" id="dashXpRemainingText">পরবর্তী লেভেলে পৌঁছাতে আরও ৫০ XP প্রয়োজন 🔥</div>
-                </div>
-            </div>
-
-            <div class="quick-actions-grid">
-                <div class="action-card" onclick="switchToTabDirect('studyTab', 'studyTabBtn')">
-                    <span class="action-icon">▶️</span>
-                    <span class="action-name">Study Tracker</span>
-                    <small style="color:var(--text-muted); font-size:10px;">পড়াশোনা শুরু</small>
-                </div>
-                <div class="action-card" onclick="switchToTabDirect('battleTab', 'battleTabBtn')">
-                    <span class="action-icon">⚔️</span>
-                    <span class="action-name">MCQ Battle</span>
-                    <small style="color:var(--text-muted); font-size:10px;">MCQ লড়াই</small>
-                </div>
-                <div class="action-card" onclick="switchToTabDirect('squadTab', 'squadTabBtn')">
-                    <span class="action-icon">🛡️</span>
-                    <span class="action-name">My Squad</span>
-                    <small style="color:var(--text-muted); font-size:10px;">আমার স্কোয়াড</small>
-                </div>
-                <div class="action-card" onclick="switchToTabDirect('leaderboardTab', 'leaderboardTabBtn')">
-                    <span class="action-icon">🏆</span>
-                    <span class="action-name">Leaderboard</span>
-                    <small style="color:var(--text-muted); font-size:10px;">র‍্যাংকিং তালিকা</small>
                 </div>
             </div>
 
@@ -921,9 +898,7 @@
             </div>
         </div>
 
-        <!-- ==============================================
-             5. 🏆 DEDICATED LEADERBOARD TAB (4 Separate Tiers)
-        ============================================== -->
+        <!-- 5. 🏆 DEDICATED LEADERBOARD TAB -->
         <div id="leaderboardTab" class="tab-content">
             <div class="cyber-card">
                 <div class="card-title">
@@ -931,7 +906,6 @@
                     <span style="font-size: 11px; color: var(--neon-gold);" id="rankTierHeading">Top 10 National</span>
                 </div>
 
-                <!-- 4 Standalone Separate Tier Filter Buttons -->
                 <div class="rank-tier-tabs">
                     <button class="tier-filter-btn active" id="btnFilterAllBd" onclick="setHierarchyTier('all_bd', this)">
                         <span class="t-en">Full Bangladesh</span>
@@ -951,7 +925,6 @@
                     </button>
                 </div>
 
-                <!-- Dynamic Area Selector Dropdown -->
                 <div id="subTierSelectorBox" style="display: none; margin-bottom: 12px;">
                     <div class="sub-selector-row">
                         <div>
@@ -997,7 +970,7 @@
                 
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px;">
                     <div>
-                        <label style="font-size: 11px; color: var(--neon-blue);">Username (ইউজারনেম - ইউনিক হতে হবে)</label>
+                        <label style="font-size: 11px; color: var(--neon-blue);">Username (ইউজারনেম - ইউনিক)</label>
                         <input type="text" id="editUsernameInput" placeholder="@username">
                     </div>
                     <div>
@@ -1046,9 +1019,10 @@
                     </div>
                 </div>
 
+                <!-- School / College / University Live Filter Search -->
                 <div class="map-search-box">
-                    <label style="font-size: 11px; color: var(--neon-blue);">Institution (লাইভ ম্যাপে সার্চ করুন 🗺️)</label>
-                    <input type="text" id="mapSearchInstInput" placeholder="টাইপ করুন..." oninput="searchInstitutionOnMap(this.value)">
+                    <label style="font-size: 11px; color: var(--neon-blue);">Institution (শুধু স্কুল, কলেজ ও ভার্সিটি ফিল্টার 🎓)</label>
+                    <input type="text" id="mapSearchInstInput" placeholder="প্রতিষ্ঠানের নাম টাইপ করুন (যেমন: Bonarpara বা Dhaka)..." oninput="searchInstitutionOnMap(this.value)">
                     <div class="map-suggest-list" id="mapSuggestions"></div>
                 </div>
                 <button class="btn-dual-action blue" style="width: 100%; margin-top: 8px;" onclick="saveAcademicProfile()">
@@ -1101,7 +1075,6 @@
         document.getElementById('profUser').innerText = currentUser;
         document.getElementById('editUsernameInput').value = currentUser;
 
-        // Presence System
         let myStatusRef = db.ref('users/' + currentUser + '/onlineStatus');
         db.ref('.info/connected').on('value', (snap) => {
             if (snap.val() === true) {
@@ -1118,47 +1091,50 @@
             return "স্বাগতম";
         }
 
-        // 🗺️ Standard Bangladesh Geographic Database (Cascade Dropdown)
+        // 🗺️ All 8 Districts and Upazilas of Rangpur Division + Standard BD Structure
         const bdGeoHierarchy = {
             "Rangpur": {
-                "Gaibandha": ["Bonarpara / Saghata", "Gobindaganj", "Sadar", "Palashbari", "Sundarganj", "Sadullapur", "Phulchhari"],
-                "Rangpur": ["Sadar", "Pirganj", "Badarganj", "Mithapukur", "Gangachara", "Kaunia", "Taraganj", "Pirgachha"],
-                "Bogura": ["Sadar", "Sherpur", "Shibganj", "Gabtali", "Dhunat", "Kahaloo", "Nandigram", "Sariakandi"],
-                "Dinajpur": ["Sadar", "Birganj", "Parbatipur", "Birol", "Phulbari", "Nawabganj", "Hakimpur"],
-                "Kurigram": ["Sadar", "Nageshwari", "Bhurungamari", "Ulipur", "Chilmari", "Rowmari"],
-                "Nilphamari": ["Sadar", "Saidpur", "Domar", "Dimla", "Jaldhaka", "Kishoreganj"]
+                "Gaibandha": ["Bonarpara / Saghata", "Gobindaganj", "Gaibandha Sadar", "Palashbari", "Sundarganj", "Sadullapur", "Phulchhari"],
+                "Rangpur": ["Rangpur Sadar", "Pirganj", "Badarganj", "Mithapukur", "Gangachara", "Kaunia", "Taraganj", "Pirgachha"],
+                "Dinajpur": ["Dinajpur Sadar", "Birganj", "Parbatipur", "Birol", "Phulbari", "Nawabganj", "Hakimpur", "Bochaganj", "Chirirbandar", "Ghoraghat", "Kaharole", "Khansama"],
+                "Nilphamari": ["Nilphamari Sadar", "Saidpur", "Domar", "Dimla", "Jaldhaka", "Kishoreganj"],
+                "Kurigram": ["Kurigram Sadar", "Nageshwari", "Bhurungamari", "Ulipur", "Chilmari", "Rowmari", "Rajarhat", "Char Rajibpur", "Phulbari"],
+                "Lalmonirhat": ["Lalmonirhat Sadar", "Hatibandha", "Patgram", "Aditmari", "Kaliganj"],
+                "Panchagarh": ["Panchagarh Sadar", "Tetulia", "Boda", "Debiganj", "Atwari"],
+                "Thakurgaon": ["Thakurgaon Sadar", "Pirganj", "Ranisankail", "Haripur", "Baliadangi"]
             },
             "Dhaka": {
-                "Dhaka": ["Dhanmondi", "Mirpur", "Gulshan / Banani", "Uttara", "Mohammadpur", "Motijheel", "Sadar / Old Dhaka", "Savar"],
-                "Gazipur": ["Sadar", "Tongi", "Kaliakair", "Kapasia", "Sreepur", "Kaliganj"],
-                "Narayanganj": ["Sadar", "Bandar", "Rupganj", "Sonargaon", "Araihazar"]
+                "Dhaka": ["Dhanmondi", "Mirpur", "Gulshan / Banani", "Uttara", "Mohammadpur", "Motijheel", "Old Dhaka", "Savar"],
+                "Gazipur": ["Gazipur Sadar", "Tongi", "Kaliakair", "Kapasia", "Sreepur", "Kaliganj"],
+                "Narayanganj": ["Narayanganj Sadar", "Bandar", "Rupganj", "Sonargaon", "Araihazar"]
             },
             "Rajshahi": {
                 "Rajshahi": ["Boalia", "Motihar", "Rajpara", "Paba", "Godagari", "Tanore", "Bagmara", "Durgapur"],
-                "Pabna": ["Sadar", "Ishwardi", "Santhia", "Chatmohar", "Bera", "Sujanagar"],
-                "Sirajganj": ["Sadar", "Ullapara", "Shahjadpur", "Belkuchi", "Kazipur"]
+                "Bogura": ["Bogura Sadar", "Sherpur", "Shibganj", "Gabtali", "Dhunat", "Kahaloo", "Nandigram", "Sariakandi"],
+                "Pabna": ["Pabna Sadar", "Ishwardi", "Santhia", "Chatmohar", "Bera", "Sujanagar"],
+                "Sirajganj": ["Sirajganj Sadar", "Ullapara", "Shahjadpur", "Belkuchi", "Kazipur"]
             },
             "Chattogram": {
                 "Chattogram": ["Kotwali", "Panchlaish", "Halishahar", "Pahartali", "Hathazari", "Patiya", "Sitakunda"],
-                "Cox's Bazar": ["Sadar", "Ramu", "Chakaria", "Teknaf", "Ukhia", "Maheshkhali"],
+                "Cox's Bazar": ["Cox's Bazar Sadar", "Ramu", "Chakaria", "Teknaf", "Ukhia", "Maheshkhali"],
                 "Cumilla": ["Adarsha Sadar", "Debidwar", "Muradnagar", "Daudkandi", "Chandina", "Laksam"]
             },
             "Khulna": {
                 "Khulna": ["Kotwali", "Sonadanga", "Khalishpur", "Daulatpur", "Dumuria", "Rupsha"],
-                "Jashore": ["Sadar", "Jhikargachha", "Sharsha", "Manirampur", "Keshabpur", "Abhaynagar"],
-                "Kushtia": ["Sadar", "Kumarkhali", "Bheramara", "Mirpur", "Daulatpur"]
+                "Jashore": ["Jashore Sadar", "Jhikargachha", "Sharsha", "Manirampur", "Keshabpur", "Abhaynagar"],
+                "Kushtia": ["Kushtia Sadar", "Kumarkhali", "Bheramara", "Mirpur", "Daulatpur"]
             },
             "Barishal": {
                 "Barishal": ["Kotwali", "Babuganj", "Bakerganj", "Uzirpur", "Gournadi", "Mehendiganj"],
-                "Patuakhali": ["Sadar", "Galachipa", "Bauphal", "Kalapara", "Dashmina"]
+                "Patuakhali": ["Patuakhali Sadar", "Galachipa", "Bauphal", "Kalapara", "Dashmina"]
             },
             "Sylhet": {
                 "Sylhet": ["Kotwali", "Dakshin Surma", "Beanibazar", "Golapganj", "Zakiganj", "Osmani Nagar"],
-                "Moulvibazar": ["Sadar", "Sreemangal", "Kulaura", "Kamalganj", "Barlekha"]
+                "Moulvibazar": ["Moulvibazar Sadar", "Sreemangal", "Kulaura", "Kamalganj", "Barlekha"]
             },
             "Mymensingh": {
                 "Mymensingh": ["Kotwali", "Muktagachha", "Trishal", "Bhaluka", "Fulbaria", "Gafargaon", "Haluaghat"],
-                "Jamalpur": ["Sadar", "Sarishabari", "Melandaha", "Islampur", "Dewanganj"]
+                "Jamalpur": ["Jamalpur Sadar", "Sarishabari", "Melandaha", "Islampur", "Dewanganj"]
             }
         };
 
@@ -1193,236 +1169,121 @@
             });
         }
 
-        // Auto trigger initial populate
+        // Initialize cascade
         onDivisionChangeCascade();
 
-        let userData = {};
-        let dailyBonusChecked = false;
-        let uploadedGuildAvatarBase64 = null;
-        let cachedAllUsers = [];
-        let currentHierarchyTier = "all_bd";
+        // 🎓 STRICT INSTITUTION FILTER (OpenStreetMap: Schools, Colleges, Universities only)
+        let mapSearchDebounce = null;
+        function searchInstitutionOnMap(query) {
+            clearTimeout(mapSearchDebounce);
+            const box = document.getElementById('mapSuggestions');
+            const trimmed = query ? query.trim() : '';
+            if (!trimmed || trimmed.length < 2) { box.style.display = 'none'; return; }
 
-        db.ref('users/' + currentUser).on('value', (snap) => {
-            userData = snap.val() || {};
-            const displayName = userData.name || "Scholar";
-            document.getElementById('dashGreeting').innerHTML = `${getTimeGreeting()}, <span>${displayName}</span> 👋`;
-            document.getElementById('profName').innerText = displayName;
-            document.getElementById('editDisplayNameInput').value = displayName;
+            mapSearchDebounce = setTimeout(() => {
+                const url = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(trimmed)}&countrycodes=bd&format=jsonv2&limit=12`;
+                
+                fetch(url).then(res => res.json()).then(data => {
+                    box.innerHTML = `<div class="map-suggest-item" onclick="document.getElementById('mapSearchInstInput').value='${trimmed}'; box.style.display='none';">🎓 <strong>Use Named Institution: "${trimmed}"</strong></div>`;
+                    
+                    if (data && data.length > 0) {
+                        const educationalKeywords = ["college", "school", "university", "madrasa", "academy", "institute", "vidyalaya", "মহাবিদ্যালয়", "বিদ্যালয়", "কলেজ", "বিশ্ববিদ্যালয়", "মাদ্রাসা", "স্কুল", "ইনস্টিটিউট"];
 
-            const targetGoal = userData.target || "HSC Science";
-            document.getElementById('dashTargetBadge').innerText = "🎯 " + targetGoal;
-            document.getElementById('profTarget').innerText = targetGoal;
+                        data.forEach(item => {
+                            const displayName = item.display_name.toLowerCase();
+                            const isEducation = educationalKeywords.some(kw => displayName.includes(kw));
 
-            const ageVal = userData.age ? (userData.age + " yrs") : "18 yrs";
-            document.getElementById('dashAgeBadge').innerText = "👤 " + ageVal;
-            document.getElementById('profAge').innerText = ageVal;
-
-            const instName = userData.institutionName || "General College";
-            const instType = userData.institutionType ? ` (${userData.institutionType})` : "";
-            document.getElementById('dashInstBadge').innerText = "🏛️ " + instName;
-            document.getElementById('profInst').innerText = instName + instType;
-
-            const locText = `${userData.upazila || 'Bonarpara / Saghata'}, ${userData.district || 'Gaibandha'}, ${userData.division || 'Rangpur'}`;
-            document.getElementById('profLocationText').innerText = locText;
-
-            if (userData.age) document.getElementById('editAgeInput').value = userData.age;
-            if (userData.institutionType) document.getElementById('editInstTypeSelect').value = userData.institutionType;
-            if (userData.institutionName) document.getElementById('mapSearchInstInput').value = userData.institutionName;
-            
-            // Set cascade selects
-            if (userData.division && bdGeoHierarchy[userData.division]) {
-                document.getElementById('editDivisionSelect').value = userData.division;
-            }
-            onDivisionChangeCascade();
-
-            if (userData.district) {
-                document.getElementById('editDistrictSelect').value = userData.district;
-                onDistrictChangeCascade();
-            }
-            if (userData.upazila) {
-                document.getElementById('editUpazilaSelect').value = userData.upazila;
-            }
-
-            const isVerified = (userData.emailVerified === true) || (auth.currentUser && auth.currentUser.emailVerified);
-            document.getElementById('profVerificationBadge').innerHTML = isVerified ? 
-                '<span style="color: var(--neon-green); font-weight: bold;">✅ Verified Scholar</span>' : 
-                '<span style="color: var(--neon-gold); font-weight: bold;">⚠️ Pending (Check Gmail)</span>';
-
-            const defaultAv = 'gojo-vibe.jpg';
-            const userAvatar = userData.avatar;
-            const avatarUrl = (userAvatar && !userAvatar.includes('dicebear')) ? userAvatar : defaultAv;
-            document.getElementById('navAvatar').src = avatarUrl;
-            document.getElementById('profAvatarBig').src = avatarUrl;
-
-            const totalSec = userData.totalSeconds || 0;
-            const hours = (totalSec / 3600).toFixed(1);
-            document.getElementById('totalHoursDisplay').innerText = hours + "h";
-            document.getElementById('dashTotalTime').innerText = hours + "h";
-
-            const todayMin = Math.floor((totalSec % 3600) / 60);
-            const todayHr = Math.floor((totalSec % 86400) / 3600);
-            document.getElementById('dashTodayTime').innerText = `${todayHr}h ${todayMin}m`;
-
-            const currentXp = userData.xp || 50;
-            document.getElementById('xpDisplay').innerText = currentXp;
-            document.getElementById('dashTotalXp').innerText = currentXp;
-
-            const currentLvl = Math.floor(currentXp / 100) + 1;
-            document.getElementById('levelDisplay').innerText = "Lvl " + currentLvl;
-            document.getElementById('dashCurrentLvl').innerText = "Lvl " + currentLvl;
-
-            const xpFloor = (currentLvl - 1) * 100;
-            const xpCeil = currentLvl * 100;
-            const progressPercent = Math.min(100, Math.max(0, ((currentXp - xpFloor) / 100) * 100));
-
-            document.getElementById('dashLvlHeader').innerText = `LEVEL ${currentLvl} SCHOLAR`;
-            document.getElementById('dashXpHeader').innerText = `${currentXp} / ${xpCeil} XP`;
-            document.getElementById('dashXpProgressBar').style.width = progressPercent + "%";
-            document.getElementById('dashXpRemainingText').innerText = `পরবর্তী লেভেলে পৌঁছাতে আরও ${xpCeil - currentXp} XP প্রয়োজন 🔥`;
-
-            const userTargetMins = userData.dailyGoalMins || 180;
-            const goalTargetSec = userTargetMins * 60;
-            const goalAchievedSec = totalSec % goalTargetSec;
-            const goalPercent = Math.min(100, Math.round((goalAchievedSec / goalTargetSec) * 100));
-            document.getElementById('goalTargetText').innerText = `${(userTargetMins/60).toFixed(1)} ঘণ্টা (${userTargetMins} মিনিট)`;
-            document.getElementById('goalProgressBar').style.width = goalPercent + "%";
-            document.getElementById('goalPercentText').innerText = goalPercent + "% সম্পন্ন";
-            const minLeft = Math.max(0, userTargetMins - Math.floor(goalAchievedSec / 60));
-            document.getElementById('goalRemainingText').innerText = minLeft > 0 ? `আর ${minLeft} মিনিট পড়লে আজকের লক্ষ্য পূরণ হবে` : "🎉 আজকের লক্ষ্য সম্পূর্ণ হয়েছে!";
-
-            const userSquad = userData.squad || "None";
-            document.getElementById('dashSquadPreview').innerText = userSquad !== "None" ? userSquad : "None";
-            
-            if (userSquad !== "None") {
-                document.getElementById('dashSquadSub').innerText = "Verified Squad 🛡️";
-                document.getElementById('activeSquadTitle').innerText = userSquad;
-                document.getElementById('leaveSquadBtn').style.display = "block";
-                document.getElementById('dashSquadStateText').innerHTML = `আপনি বর্তমানে <strong>${userSquad}</strong> স্কোয়াডের সদস্য!`;
-                if (userData.squadKey) loadSquadLiveDetails(userData.squadKey);
-            } else {
-                document.getElementById('dashSquadSub').innerText = "No Squad";
-                document.getElementById('activeSquadTitle').innerText = "No Squad";
-                document.getElementById('activeSquadDesc').innerText = "আপনি কোনো স্কোয়াডে যুক্ত নেই।";
-                document.getElementById('leaveSquadBtn').style.display = "none";
-                document.getElementById('squadInviteBox').style.display = "none";
-                document.getElementById('squadMembersRoster').style.display = "none";
-                document.getElementById('squadLeaderCustomPanel').style.display = "none";
-                document.getElementById('activeSquadTierBadge').innerHTML = "";
-                document.getElementById('myAutoRankBadge').innerHTML = "";
-                document.getElementById('squadGloryStats').innerText = "";
-            }
-
-            if (!dailyBonusChecked && userData.createdAt) {
-                dailyBonusChecked = true;
-                const todayStr = new Date().toISOString().split('T')[0];
-                if (userData.lastDailyBonusDate !== todayStr) {
-                    db.ref('users/' + currentUser).update({ xp: (userData.xp || 50) + 20, lastDailyBonusDate: todayStr }).then(() => {
-                        openModal("🎁", "দৈনিক লগইন বোনাস", "প্রতিদিনের ধারাবাহিকতার জন্য আপনি +২০ XP বোনাস পেয়েছেন!");
-                    });
-                }
-            }
-        });
-
-        // 🛡️ Load Squad Hierarchy with XP + Level Composite
-        function loadSquadLiveDetails(squadKey) {
-            db.ref('squads/' + squadKey).on('value', snap => {
-                if (!snap.exists()) return;
-                const sq = snap.val();
-                const tier = sq.tier || 'rookie';
-                document.getElementById('activeSquadTierBadge').innerHTML = tier === 'limitless' ? 
-                    '<span class="tier-badge tier-limitless">👑 LIMITLESS</span>' : 
-                    (tier === 'elite' ? '<span class="tier-badge tier-elite">🥈 ELITE</span>' : '<span class="tier-badge tier-rookie">🥉 ROOKIE</span>');
-
-                if (sq.avatarUrl) document.getElementById('squadAvatarImg').src = sq.avatarUrl;
-                document.getElementById('squadSloganText').innerText = sq.slogan ? `"${sq.slogan}"` : '"Knowledge is Power"';
-                document.getElementById('activeSquadDesc').innerText = sq.welcomeMsg || `Focus: ${sq.subject || 'All Rounder'}`;
-                document.getElementById('squadInviteBox').style.display = "flex";
-                document.getElementById('displaySquadCode').innerText = sq.code || squadKey.toUpperCase();
-                document.getElementById('displaySquadPin').innerText = sq.pin || "0000";
-
-                const memberUsernames = Object.keys(sq.members || {});
-                Promise.all(memberUsernames.map(u => db.ref('users/' + u).once('value'))).then(userSnaps => {
-                    let memberList = [];
-                    let totalSquadSec = 0;
-                    let totalSquadXp = 0;
-
-                    userSnaps.forEach(uSnap => {
-                        if (uSnap.exists()) {
-                            const val = uSnap.val();
-                            const uSec = val.totalSeconds || 0;
-                            const uXp = val.xp || 50;
-                            const uLvl = Math.floor(uXp / 100) + 1;
-                            totalSquadSec += uSec;
-                            totalSquadXp += uXp;
-                            memberList.push({
-                                user: uSnap.key,
-                                name: val.name || uSnap.key,
-                                xp: uXp,
-                                lvl: uLvl,
-                                meritScore: uXp + (uLvl * 150),
-                                totalHours: (uSec / 3600).toFixed(1),
-                                isOnline: val.onlineStatus && val.onlineStatus.isOnline
-                            });
-                        }
-                    });
-
-                    memberList.sort((a, b) => b.meritScore - a.meritScore);
-                    document.getElementById('squadGloryStats').innerHTML = `🔥 <strong>Glory Level: ${Math.floor(totalSquadXp / 500) + 1}</strong> | Total Team XP: ${totalSquadXp} | Study: ${(totalSquadSec/3600).toFixed(1)}h`;
-
-                    const listContainer = document.getElementById('membersHierarchyList');
-                    listContainer.innerHTML = "";
-                    document.getElementById('squadMembersRoster').style.display = "block";
-
-                    let isUserCommander = false;
-                    memberList.forEach((m, index) => {
-                        let roleTitle = "Cadet";
-                        let roleClass = "role-cadet";
-                        if (index === 0) { roleTitle = "👑 টিম কমান্ডার"; roleClass = "role-commander"; }
-                        else if (index === 1) { roleTitle = "🎖️ ক্যাপ্টেন"; roleClass = "role-captain"; }
-                        else if (index === 2) { roleTitle = "⭐ ভাইস-ক্যাপ্টেন"; roleClass = "role-vice"; }
-                        else if (index <= 4) { roleTitle = "🛡️ ভ্যানগার্ড"; roleClass = "role-vanguard"; }
-
-                        if (m.user === currentUser) {
-                            document.getElementById('myAutoRankBadge').innerHTML = `<span class="role-badge ${roleClass}">${roleTitle}</span>`;
-                            if (index === 0) isUserCommander = true;
-                        }
-
-                        const statusDot = m.isOnline ? '<span style="color:var(--neon-green);">🟢</span>' : '<span style="color:var(--text-muted);">⚪</span>';
-                        const row = document.createElement('div');
-                        row.className = "activity-row";
-                        row.style.padding = "7px 10px";
-                        row.innerHTML = `
-                            <div>
-                                ${statusDot} <strong>@${m.user}</strong> (${m.name}) 
-                                <span class="role-badge ${roleClass}" style="margin-left: 5px;">${roleTitle}</span>
-                                <div style="font-size: 10.5px; color: var(--text-muted); margin-top: 2px;">Study: ${m.totalHours}h | XP: ${m.xp} (Lvl ${m.lvl})</div>
-                            </div>
-                            <span style="color: var(--neon-gold); font-size: 12px; font-weight: bold;">#${index + 1}</span>
-                        `;
-                        listContainer.appendChild(row);
-                    });
-
-                    document.getElementById('squadLeaderCustomPanel').style.display = isUserCommander ? "block" : "none";
-                    if (isUserCommander) {
-                        if (sq.slogan) document.getElementById('editSquadSlogan').value = sq.slogan;
-                        if (sq.welcomeMsg) document.getElementById('editSquadWelcomeMsg').value = sq.welcomeMsg;
+                            // Only show if it matches an educational institution
+                            if (isEducation) {
+                                const primary = item.name || item.display_name.split(',')[0];
+                                const div = document.createElement('div');
+                                div.className = 'map-suggest-item';
+                                div.innerHTML = `🎓 <strong>${primary}</strong><br><small style="color:#8892b0;">${item.display_name}</small>`;
+                                div.onclick = () => { document.getElementById('mapSearchInstInput').value = primary; box.style.display = 'none'; };
+                                box.appendChild(div);
+                            }
+                        });
                     }
+                    box.style.display = 'block';
+                }).catch(() => {
+                    box.style.display = 'none';
                 });
-            });
+            }, 250);
         }
 
-        // ==============================================
-        // 🏆 4-TIER HIERARCHICAL LEADERBOARD ENGINE
-        // ==============================================
-        db.ref('users').on('value', snap => {
-            cachedAllUsers = [];
-            const data = snap.val() || {};
-            Object.keys(data).forEach(k => {
-                cachedAllUsers.push({ user: k, ...data[k] });
-            });
-            renderHierarchyLeaderboard();
+        document.addEventListener('click', function(e) {
+            const box = document.getElementById('mapSuggestions');
+            const input = document.getElementById('mapSearchInstInput');
+            if (e.target !== box && e.target !== input) {
+                box.style.display = 'none';
+            }
         });
 
+        // 🛡️ Save Profile Changes with Strict Unique Username Validation
+        function saveAcademicProfile() {
+            const newUsername = document.getElementById('editUsernameInput').value.trim().toLowerCase().replace(/[^a-z0-9_]/g, '');
+            const newDisplayName = document.getElementById('editDisplayNameInput').value.trim();
+            const age = document.getElementById('editAgeInput').value.trim();
+            const instType = document.getElementById('editInstTypeSelect').value;
+            const instName = document.getElementById('mapSearchInstInput').value.trim();
+            const division = document.getElementById('editDivisionSelect').value;
+            const district = document.getElementById('editDistrictSelect').value;
+            const upazila = document.getElementById('editUpazilaSelect').value;
+
+            if (!newUsername || newUsername.length < 3) {
+                openModal("⚠️", "ভুল ইউজারনেম", "ইউজারনেম কমপক্ষে ৩ অক্ষরের হতে হবে (শুধুমাত্র ছোট হাতের ইংরেজি ও সংখ্যা)!");
+                return;
+            }
+
+            if (!age || !instName) {
+                openModal("⚠️", "অসম্পূর্ণ তথ্য", "বয়স ও শিক্ষা প্রতিষ্ঠানের নাম অবশ্যই দিতে হবে!");
+                return;
+            }
+
+            // Check duplicate username if changed
+            if (newUsername !== currentUser) {
+                db.ref('users/' + newUsername).once('value').then(snap => {
+                    if (snap.exists()) {
+                        openModal("🚫", "ইউজারনেম বিদ্যমান", `"${newUsername}" ইউজারনেমটি অন্য কেউ ইতোমধ্যে ব্যবহার করছে! অন্য একটি ইউনিক নাম দিন।`);
+                    } else {
+                        // Migrate to new username node
+                        const updatedData = {
+                            ...userData,
+                            name: newDisplayName || userData.name || "Scholar",
+                            age: age,
+                            institutionType: instType,
+                            institutionName: instName,
+                            division: division,
+                            district: district,
+                            upazila: upazila
+                        };
+
+                        db.ref('users/' + newUsername).set(updatedData).then(() => {
+                            db.ref('users/' + currentUser).remove();
+                            localStorage.setItem('auraCurrentUser', newUsername);
+                            currentUser = newUsername;
+                            document.getElementById('navUserName').innerText = "@" + newUsername;
+                            document.getElementById('profUser').innerText = newUsername;
+                            openModal("✅", "প্রোফাইল সংরক্ষিত", "আপনার ইউজারনেম, জেলা-উপজেলা ও সমস্ত তথ্য সফলভাবে আপডেট হয়েছে!");
+                        });
+                    }
+                });
+            } else {
+                db.ref('users/' + currentUser).update({
+                    name: newDisplayName || userData.name || "Scholar",
+                    age: age,
+                    institutionType: instType,
+                    institutionName: instName,
+                    division: division,
+                    district: district,
+                    upazila: upazila
+                }).then(() => {
+                    openModal("✅", "প্রোফাইল সংরক্ষিত", "আপনার সমস্ত তথ্য সফলভাবে সংরক্ষিত হয়েছে!");
+                });
+            }
+        }
+
+        // Leaderboard filter change
         function setHierarchyTier(tier, btnEl) {
             currentHierarchyTier = tier;
             document.querySelectorAll('.tier-filter-btn').forEach(b => b.classList.remove('active'));
@@ -1441,8 +1302,7 @@
                 subLabel.innerText = "বিভাগ নির্বাচন করুন";
                 document.getElementById('rankTierHeading').innerText = "Top 10 Division (বিভাগীয় শীর্ষ ১০)";
                 
-                const divisions = Object.keys(bdGeoHierarchy);
-                divisions.forEach(d => {
+                Object.keys(bdGeoHierarchy).forEach(d => {
                     const opt = document.createElement('option');
                     opt.value = d;
                     opt.innerText = `${d} Division`;
@@ -1454,14 +1314,10 @@
                 subLabel.innerText = "জেলা নির্বাচন করুন";
                 document.getElementById('rankTierHeading').innerText = "Top 10 District (জেলা শীর্ষ ১০)";
 
-                let districtsList = [];
-                Object.keys(bdGeoHierarchy).forEach(div => {
-                    Object.keys(bdGeoHierarchy[div]).forEach(dist => {
-                        if (!districtsList.includes(dist)) districtsList.push(dist);
-                    });
-                });
+                const activeDiv = userData.division || "Rangpur";
+                const distList = bdGeoHierarchy[activeDiv] ? Object.keys(bdGeoHierarchy[activeDiv]) : ["Gaibandha", "Rangpur", "Dinajpur", "Nilphamari", "Kurigram", "Lalmonirhat", "Panchagarh", "Thakurgaon"];
 
-                districtsList.forEach(dist => {
+                distList.forEach(dist => {
                     const opt = document.createElement('option');
                     opt.value = dist;
                     opt.innerText = `${dist} জেলা`;
@@ -1475,7 +1331,7 @@
 
                 const activeDiv = userData.division || "Rangpur";
                 const activeDist = userData.district || "Gaibandha";
-                const upazilas = (bdGeoHierarchy[activeDiv] && bdGeoHierarchy[activeDiv][activeDist]) ? bdGeoHierarchy[activeDiv][activeDist] : ["Bonarpara / Saghata", "Gobindaganj", "Sadar"];
+                const upazilas = (bdGeoHierarchy[activeDiv] && bdGeoHierarchy[activeDiv][activeDist]) ? bdGeoHierarchy[activeDiv][activeDist] : ["Bonarpara / Saghata", "Gobindaganj", "Gaibandha Sadar"];
 
                 upazilas.forEach(upz => {
                     const opt = document.createElement('option');
@@ -1571,497 +1427,17 @@
             });
         }
 
-        // Syllabus & Question Bank
-        const structuredSyllabus = {
-            "Physics": {
-                "1st Paper": ["অধ্যায় ১: ভৌতজগত ও পরিমাপ", "অধ্যায় ২: ভেক্টর (Vector)", "অধ্যায় ৩: গতিবিদ্যা (Dynamics)", "অধ্যায় ৪: নিউটনিয়ান বলবিদ্যা", "অধ্যায় ৫: কাজ, শক্তি ও ক্ষমতা", "অধ্যায় ৬: মহাকর্ষ ও অভিকর্ষ", "অধ্যায় ৭: পদার্থের গাঠনিক ধর্ম", "অধ্যায় ৮: পর্যাবৃত্ত গতি", "অধ্যায় ৯: তরঙ্গ (Waves)", "অধ্যায় ১০: আদর্শ গ্যাস"],
-                "2nd Paper": ["অধ্যায় ১: তাপগতিবিদ্যা (Thermodynamics)", "অধ্যায় ২: স্থির তড়িৎ (Electrostatics)", "অধ্যায় ৩: চল তড়িৎ (Current Electricity)", "অধ্যায় ৪: তড়িৎ প্রবাহের চৌম্বক ক্রিয়া", "অধ্যায় ৫: তাড়িতচৌম্বক আবেশ", "অধ্যায় ৬: জ্যামিতিক আলোকবিজ্ঞান", "অধ্যায় ৭: ভৌত আলোকবিজ্ঞান", "অধ্যায় ৮: আধুনিক পদার্থবিজ্ঞান", "অধ্যায় ৯: পরমাণু মডেল", "অধ্যায় ১০: সেমিকন্ডাক্টর"]
-            },
-            "Chemistry": {
-                "1st Paper": ["অধ্যায় ১: ল্যাবরেটরি নিরাপদ ব্যবহার", "অধ্যায় ২: গুণগত রসায়ন (Qualitative)", "অধ্যায় ৩: পর্যায়বৃত্ত ধর্ম ও বন্ধন", "অধ্যায় ৪: রাসায়নিক পরিবর্তন", "অধ্যায় ৫: কর্মমুখী রসায়ন"],
-                "2nd Paper": ["অধ্যায় ১: পরিবেশ রসায়ন (Environmental)", "অধ্যায় ২: জৈব রসায়ন (Organic Chemistry)", "অধ্যায় ৩: পরিমাণগত রসায়ন", "অধ্যায় ৪: তড়িৎ রসায়ন (Electrochemistry)", "অধ্যায় ৫: অর্থনৈতিক রসায়ন"]
-            },
-            "HigherMath": {
-                "1st Paper": ["অধ্যায় ১: ম্যাট্রিক্স ও নির্ণায়ক", "অধ্যায় ২: ভেক্টর", "অধ্যায় ৩: সরলরেখা (Straight Lines)", "অধ্যায় ৪: বৃত্ত (Circle)", "অধ্যায় ৫: বিন্যাস ও সমাবেশ", "অধ্যায় ৬: ত্রিকোণমিতি", "অধ্যায় ৯: অন্তরীকরণ (Differentiation)", "অধ্যায় ১০: যোগজীকরণ (Integration)"],
-                "2nd Paper": ["অধ্যায় ৩: জটিল সংখ্যা (Complex Numbers)", "অধ্যায় ৪: বহুপদী সমীকরণ", "অধ্যায় ৬: কনিক্স (Conics)", "অধ্যায় ৭: বিপরীত ত্রিকোণমিতি", "অধ্যায় ৮: স্থিতিবিদ্যা (Statics)", "অধ্যায় ৯: গতিবিদ্যা (Dynamics)"]
-            },
-            "Biology": {
-                "1st Paper": ["অধ্যায় ১: কোষ ও এর গঠন (Cell)", "অধ্যায় ২: কোষ বিভাজন (Cell Division)", "অধ্যায় ৪: অণুজীব (Microorganisms)", "অধ্যায় ৮: টিস্যুতন্ত্র", "অধ্যায় ৯: উদ্ভিদ শারীরতত্ত্ব", "অধ্যায় ১১: জীবপ্রযুক্তি (Biotech)"],
-                "2nd Paper": ["অধ্যায় ১: প্রাণীর বিভিন্নতা", "অধ্যায় ২: হাইড্রা ও ঘাসফড়িং", "অধ্যায় ৩: পরিপাক ও শোষণ", "অধ্যায় ৪: রক্ত ও সংবহন", "অধ্যায় ৫: শ্বাসক্রিয়া ও শ্বসন", "অধ্যায় ১১: জিনতত্ত্ব ও বিবর্তন"]
-            },
-            "Bangla": {
-                "1st Paper": ["গদ্য: অপরিচিতা - রবীন্দ্রনাথ ঠাকুর", "গদ্য: বিলাসী - শরৎচন্দ্র চট্টোপাধ্যায়", "গদ্য: আমার পথ - কাজী নজরুল ইসলাম", "পদ্য: সোনার তরী - রবীন্দ্রনাথ ঠাকুর", "পদ্য: বিদ্রোহী - কাজী নজরুল ইসলাম", "নাটক: সিরাজউদ্দৌলা - সিকান্দার আবু জাফর"],
-                "2nd Paper": ["বাংলা উচ্চারণের নিয়ম", "বাংলা বানানের নিয়ম", "শব্দের ব্যাকরণিক শ্রেণি", "বাক্য রূপান্তর", "প্রতিবেদন ও পত্রলিখন"]
-            },
-            "English": {
-                "1st Paper": ["Unit 1: People & Personalities", "Unit 2: Dreams & Aspirations", "Seen Comprehension & Cloze Test", "Theme & Summary Writing"],
-                "2nd Paper": ["Gap Filling with Prepositions", "Right Form of Verbs", "Narrative Style (Narration)", "Modifiers & Connectors"]
-            },
-            "ICT": {
-                "1st Paper": ["অধ্যায় ১: বিশ্ব ও বাংলাদেশ প্রেক্ষিত", "অধ্যায় ২: কমিউনিকেশন সিস্টেমস ও নেটওয়ার্কিং", "অধ্যায় ৩: সংখ্যা পদ্ধতি ও ডিজিটাল ডিভাইস", "অধ্যায় ৪: এইচটিএমএল (HTML Web Design)", "অধ্যায় ৫: সি প্রোগ্রামিং (C Language)"]
-            }
-        };
-
-        function onBattleSubjectChange() {
-            const sub = document.getElementById('battleSubjectSelect').value;
-            const paperSelect = document.getElementById('battlePaperSelect');
-            paperSelect.innerHTML = sub === "ICT" ? '<option value="1st Paper">একক পত্র (Standard)</option>' : '<option value="1st Paper">১ম পত্র (1st Paper)</option><option value="2nd Paper">২য় পত্র (2nd Paper)</option>';
-            updateBattleChapterOptions();
-        }
-
-        function updateBattleChapterOptions() {
-            const sub = document.getElementById('battleSubjectSelect').value;
-            const paper = document.getElementById('battlePaperSelect').value;
-            const chapSelect = document.getElementById('battleChapterSelect');
-            chapSelect.innerHTML = "";
-            const chapters = (structuredSyllabus[sub] && structuredSyllabus[sub][paper]) || ["সার্বজনীন প্রশ্নাবলি"];
-            chapters.forEach(chap => {
-                const opt = document.createElement('option');
-                opt.value = chap;
-                opt.innerText = chap;
-                chapSelect.appendChild(opt);
+        // Leaderboard listener
+        db.ref('users').on('value', snap => {
+            cachedAllUsers = [];
+            const data = snap.val() || {};
+            Object.keys(data).forEach(k => {
+                cachedAllUsers.push({ user: k, ...data[k] });
             });
-        }
-
-        const intelligentQuestionBank = {
-            "Physics": [
-                { q: "ভেক্টর A = 3i + 4j হলে, এর মান (Magnitude) কত?", options: ["5", "7", "1", "25"], correct: 0, source: "আমীর হোসেন ও ইসহাক স্যার পাঠ্যবই | ঢাকা বোর্ড", explain: "|A| = √(3² + 4²) = √(9 + 16) = √25 = 5 একক।" },
-                { q: "নিউটনের ৩য় সূত্র অনুযায়ী ক্রিয়া ও প্রতিক্রিয়ার মধ্যবর্তী কোণ কত?", options: ["0°", "90°", "180°", "360°"], correct: 2, source: "শাহজাহান তপন স্যার পাঠ্যবই | রাজশাহী বোর্ড", explain: "ক্রিয়া এবং প্রতিক্রিয়া বল সর্বদা সমান ও বিপরীতমুখী, তাই এদের মধ্যকার কোণ ১৮০ ডিগ্রি।" }
-            ],
-            "Chemistry": [
-                { q: "পর্যায় সারণীর কোন গ্রুপের মৌলগুলোকে হ্যালোজেন বলা হয়?", options: ["Group 1", "Group 2", "Group 17", "Group 18"], correct: 2, source: "হাজারী ও নাগ স্যার মূল বই | চট্টগ্রাম বোর্ড", explain: "গ্রুপ ১৭ এর F, Cl, Br, I মৌলগুলোকে সামুদ্রিক লবণ উৎপাদনকারী বা হ্যালোজেন বলে।" },
-                { q: "ইথেন অণুতে কার্বন-কার্বন একক বন্ধন দৈর্ঘ্য কত?", options: ["0.154 nm", "0.134 nm", "0.120 nm", "0.109 nm"], correct: 0, source: "মেডিকেল ভর্তি প্রশ্নব্যাংক | সিসটেক গাইড", explain: "কার্বন-কার্বন একক বন্ধন (sp3) এর আদর্শ দৈর্ঘ্য 0.154 nm।" }
-            ],
-            "HigherMath": [
-                { q: "d/dx(sin 2x) এর অন্তরক সহগ কোনটি?", options: ["cos 2x", "2 cos 2x", "-2 cos 2x", "cos^2 x"], correct: 1, source: "এস ইউ আহাম্মদ ও কেতাব স্যার বই | কুমিল্লা বোর্ড", explain: "d/dx(sin 2x) = cos 2x * d/dx(2x) = 2 cos 2x।" },
-                { q: "বৃত্তের সমীকরণ x² + y² = 16 হলে ব্যাসার্ধ কত?", options: ["2", "4", "8", "16"], correct: 1, source: "অক্ষরপত্র প্রকাশনী | যশোর বোর্ড", explain: "আদর্শ রূপ x² + y² = r² এর সাথে তুলনা করলে r² = 16 বা r = 4।" }
-            ],
-            "Biology": [
-                { q: "কোষের প্রোটিন ফ্যাক্টরি বলা হয় কোন অঙ্গাণুকে?", options: ["মাইটোকন্ড্রিয়া", "লাইসোজোম", "রাইবোসোম", "গলগি বডি"], correct: 2, source: "ড. আবুল হাসান স্যার পাঠ্যবই | ঢাকা বোর্ড", explain: "রাইবোসোম কোষে প্রোটিন সংশ্লেষণের মূল কেন্দ্র।" },
-                { q: "রক্তের সার্বজনীন দাতা গ্রুপ কোনটি?", options: ["A+", "B+", "AB+", "O-"], correct: 3, source: "গাজী আজমল স্যার প্রাণিবিজ্ঞান | ভর্তি প্রশ্নব্যাংক", explain: "O নেগেটিভ রক্তকণিকায় কোনো প্রকার অ্যান্টিজেন থাকে না।" }
-            ],
-            "Bangla": [
-                { q: "'অপরিচিতা' গল্পে কল্যাণীর বাবার নাম কী ছিল?", options: ["অনুপম", "শম্ভুনাথ সেন", "হরিদাস", "হরিশ"], correct: 1, source: "এনসিটিবি মূল সাহিত্যপাঠ | সকল বোর্ড", explain: "রবীন্দ্রনাথ ঠাকুরের 'অপরিচিতা' গল্পে কল্যাণীর পিতা ছিলেন শম্ভুনাথ সেন।" }
-            ],
-            "English": [
-                { q: "Which preposition is correct: 'He is proficient ___ English'?", options: ["at", "in", "with", "for"], correct: 1, source: "পাঞ্জেরী টেস্ট পেপার স্পেশাল | ঢাকা বোর্ড", explain: "ভাষায় দক্ষতা বোঝাতে 'proficient in' এপ্রোপ্রিয়েট প্রিপজিশন বসে।" }
-            ],
-            "ICT": [
-                { q: "বাইনারি সংখ্যা (1011)₂ এর ডেসিমাল মান কত?", options: ["9", "11", "13", "15"], correct: 1, source: "প্রকৌশলী মুজিবুর রহমান পাঠ্যবই | সিলেট বোর্ড", explain: "1×8 + 0×4 + 1×2 + 1×1 = 11।" }
-            ]
-        };
-
-        let battleTimerInterval = null;
-        let currentBattleQuestion = null;
-        let currentBattleStake = 20;
-        let activeRoomKey = null;
-
-        function broadcastBattleRoom() {
-            const sub = document.getElementById('battleSubjectSelect').value;
-            const paper = document.getElementById('battlePaperSelect').value;
-            const chap = document.getElementById('battleChapterSelect').value;
-            const diff = document.getElementById('battleDifficultySelect').value;
-            const mode = document.getElementById('battleModeSelect').value;
-            const stake = parseInt(document.getElementById('battleStakeSelect').value);
-            const timeLimit = parseInt(document.getElementById('battleTimeInput').value);
-
-            if (isNaN(timeLimit) || timeLimit < 10) {
-                openModal("⚠️", "অবৈধ সময়সীমা", "Fair Timer Guard: প্রতি প্রশ্নের সময় কমপক্ষে ১০ সেকেন্ড হতে হবে!");
-                return;
-            }
-
-            const userXp = userData.xp || 50;
-            if (userXp < stake) {
-                openModal("🚫", "পর্যাপ্ত XP নেই", `চ্যালেঞ্জ হোস্ট করতে কমপক্ষে ${stake} XP বাজি ধরতে হবে!`);
-                return;
-            }
-
-            const roomId = "WAR_" + Date.now();
-            db.ref('battle_rooms/' + roomId).set({
-                host: currentUser,
-                hostSquad: userData.squad || "Independent",
-                subject: sub,
-                paper: paper,
-                chapter: chap,
-                difficulty: diff,
-                mode: mode,
-                stake: stake,
-                timeLimit: timeLimit,
-                status: "waiting",
-                createdAt: Date.now()
-            }).then(() => {
-                openModal("📡", "চ্যালেঞ্জ ব্রডকাস্ট সফল", `আপনার ${sub} (${paper}) [${chap}] চ্যালেঞ্জটি ব্রডকাস্ট হয়েছে!`);
-            });
-        }
-
-        db.ref('battle_rooms').orderByChild('status').equalTo('waiting').limitToLast(5).on('value', snap => {
-            const container = document.getElementById('liveRoomsList');
-            const counter = document.getElementById('liveRoomCount');
-            const data = snap.val();
-            
-            if (!data) {
-                container.innerHTML = '<p style="font-size: 12px; color: var(--text-muted); text-align: center;">কোনো সক্রিয় চ্যালেঞ্জ নেই। আপনি নিজেই একটি চ্যালেঞ্জ হোস্ট করুন!</p>';
-                counter.innerText = "0 Available";
-                return;
-            }
-
-            const rooms = Object.keys(data);
-            counter.innerText = `${rooms.length}টি সক্রিয় চ্যালেঞ্জ`;
-            container.innerHTML = "";
-
-            rooms.reverse().forEach(rKey => {
-                const room = data[rKey];
-                const isMyRoom = (room.host === currentUser);
-
-                const card = document.createElement('div');
-                card.className = "battle-room-card";
-                card.innerHTML = `
-                    <div>
-                        <div style="font-size: 13px; font-weight: 800; color: #fff;">
-                            ${room.subject} (${room.paper || '১ম পত্র'}) ➡️ <span style="color: var(--neon-blue);">${room.chapter}</span>
-                        </div>
-                        <div style="font-size: 11px; color: var(--text-muted); margin-top: 3px;">
-                            হোস্ট: <strong style="color: var(--neon-green);">@${room.host}</strong> (${room.hostSquad}) | লেভেল: <strong style="color:var(--neon-gold);">${room.difficulty || 'Easy'}</strong> | সময়: <strong>${room.timeLimit}s</strong>
-                        </div>
-                    </div>
-                    <div style="text-align: right;">
-                        <div style="font-size: 13px; font-weight: 900; color: var(--neon-gold); margin-bottom: 5px;">🔥 ${room.stake} XP বাজি</div>
-                        ${isMyRoom ? 
-                            `<button onclick="cancelMyBattleRoom('${rKey}')" class="btn-dual-action red" style="padding: 4px 8px;"><span class="act-en">Cancel</span><span class="act-bn">বাতিল</span></button>` : 
-                            `<button onclick="acceptLiveBattleRoom('${rKey}')" class="btn-dual-action green" style="padding: 4px 10px;"><span class="act-en">Accept & Fight</span><span class="act-bn">লড়াই গ্রহণ</span></button>`
-                        }
-                    </div>
-                `;
-                container.appendChild(card);
-            });
+            renderHierarchyLeaderboard();
         });
 
-        function cancelMyBattleRoom(rKey) {
-            db.ref('battle_rooms/' + rKey).remove().then(() => {
-                openModal("🚪", "চ্যালেঞ্জ বাতিল", "আপনার চ্যালেঞ্জ রুমটি সফলভাবে প্রত্যাহার করা হয়েছে।");
-            });
-        }
-
-        function acceptLiveBattleRoom(rKey) {
-            db.ref('battle_rooms/' + rKey).once('value').then(snap => {
-                if (!snap.exists() || snap.val().status !== 'waiting') {
-                    openModal("⚠️", "ম্যাচ অনুপলব্ধ", "এই চ্যালেঞ্জটি ইতোমধ্যে অন্য কেউ গ্রহণ করেছে!");
-                    return;
-                }
-                const room = snap.val();
-                if ((userData.xp || 50) < room.stake) {
-                    openModal("🚫", "পর্যাপ্ত XP নেই", `চ্যালেঞ্জ গ্রহণ করতে কমপক্ষে ${room.stake} XP ব্যালেন্স প্রয়োজন!`);
-                    return;
-                }
-
-                db.ref('battle_rooms/' + rKey).update({ status: 'active', challenger: currentUser }).then(() => {
-                    activeRoomKey = rKey;
-                    startActiveBattleGame(room.subject, room.paper, room.chapter, room.stake, room.timeLimit, room.mode, false);
-                });
-            });
-        }
-
-        function startSmartBotFight() {
-            const sub = document.getElementById('battleSubjectSelect').value;
-            const paper = document.getElementById('battlePaperSelect').value;
-            const chap = document.getElementById('battleChapterSelect').value;
-            const stake = parseInt(document.getElementById('battleStakeSelect').value);
-            const timeLimit = Math.max(10, parseInt(document.getElementById('battleTimeInput').value));
-            startActiveBattleGame(sub, paper, chap, stake, timeLimit, "bot_practice", true);
-        }
-
-        function startActiveBattleGame(subject, paper, chapter, stake, timeLimit, mode, isBot) {
-            currentBattleStake = stake;
-            const qList = intelligentQuestionBank[subject] || intelligentQuestionBank["Physics"];
-            currentBattleQuestion = qList[Math.floor(Math.random() * qList.length)];
-
-            document.getElementById('battleSetupSection').style.display = "none";
-            document.getElementById('liveChallengesBoard').style.display = "none";
-            document.getElementById('battleActiveStage').style.display = "block";
-            document.getElementById('botExplanationContainer').innerHTML = "";
-
-            document.getElementById('battleSubjectHeader').innerText = `${subject} (${paper}) ➡️ ${chapter}`;
-            document.getElementById('battleScoreLive').innerText = isBot ? "🤖 স্মার্ট এআই বট ম্যাচ (XP ক্ষতি নেই)" : `বাজি: ${stake} XP`;
-            document.getElementById('questionSourceBadge').innerText = currentBattleQuestion.source || "বোর্ড বই ও টেস্ট পেপার সংকলন";
-            document.getElementById('battleQuestionText').innerText = currentBattleQuestion.q;
-
-            const optContainer = document.getElementById('battleOptionsGrid');
-            optContainer.innerHTML = "";
-
-            currentBattleQuestion.options.forEach((optText, i) => {
-                const btn = document.createElement('button');
-                btn.className = "battle-option-btn";
-                btn.innerText = `${i + 1}. ${optText}`;
-                btn.onclick = () => handleBattleAnswer(i, isBot);
-                optContainer.appendChild(btn);
-            });
-
-            let remainingSec = timeLimit;
-            document.getElementById('battleCountdown').innerText = remainingSec + "s";
-            
-            clearInterval(battleTimerInterval);
-            battleTimerInterval = setInterval(() => {
-                remainingSec--;
-                document.getElementById('battleCountdown').innerText = remainingSec + "s";
-                if (remainingSec <= 0) {
-                    clearInterval(battleTimerInterval);
-                    finishBattleSession(false, true, isBot);
-                }
-            }, 1000);
-        }
-
-        function handleBattleAnswer(selectedIndex, isBot) {
-            clearInterval(battleTimerInterval);
-            const isCorrect = (selectedIndex === currentBattleQuestion.correct);
-            finishBattleSession(isCorrect, false, isBot);
-        }
-
-        function reportQuestionDispute() {
-            if (!currentBattleQuestion) return;
-            const reportId = "REP_" + Date.now();
-            db.ref('reported_mcq/' + reportId).set({
-                user: currentUser,
-                question: currentBattleQuestion.q,
-                source: currentBattleQuestion.source || "N/A",
-                reportedAt: Date.now()
-            }).then(() => {
-                openModal("🚩", "রিপোর্ট জমা হয়েছে", "প্রশ্নে সন্দেহ প্রকাশ করায় ধন্যবাদ। অ্যাডমিন টিম তাৎক্ষণিক প্রশ্ন ও উত্তরটি পুনরায় যাচাই করবে।");
-            });
-        }
-
-        function finishBattleSession(isWinner, isTimeout, isBot) {
-            if (activeRoomKey) {
-                db.ref('battle_rooms/' + activeRoomKey).remove();
-                activeRoomKey = null;
-            }
-
-            const explainHtml = `
-                <div class="bot-explanation-box">
-                    <strong style="color:var(--neon-green);">💡 সঠিক উত্তর ও সমাধান:</strong><br>
-                    সঠিক উত্তর: <strong style="color:var(--neon-gold);">${currentBattleQuestion.options[currentBattleQuestion.correct]}</strong><br>
-                    <strong>উৎস:</strong> ${currentBattleQuestion.source || "পাঠ্যবই ও টেস্ট পেপার"}<br>
-                    <strong>ব্যাখ্যা:</strong> ${currentBattleQuestion.explain || "পাঠ্যবইয়ের সংশ্লিষ্ট অধ্যায়ের নিয়ম অনুযায়ী সঠিক উত্তর নির্ধারিত হয়েছে।"}<br>
-                    <button class="report-btn" onclick="reportQuestionDispute()">🚩 উত্তরে কোনো ভুল আছে মনে হলে রিপোর্ট করুন</button>
-                </div>
-                <button class="btn-dual-action blue" style="width:100%; margin-top:10px;" onclick="exitBattleToSetup()">
-                    <span class="act-en">Back To Arena Lobby</span>
-                    <span class="act-bn">লবিতে ফিরে যান</span>
-                </button>
-            `;
-            document.getElementById('botExplanationContainer').innerHTML = explainHtml;
-
-            if (isBot) {
-                openModal(isWinner ? "🤖" : "❌", isWinner ? "স্মার্ট বট পরাজিত!" : "ভুল উত্তর হয়েছে", isWinner ? "অভিনন্দন! আপনি সঠিক উত্তর দিয়েছেন।" : "স্মার্ট বটের বিপক্ষে আপনার উত্তরটি ভুল হয়েছে। নিচে ব্যাখ্যা দেখে নিন।");
-                return;
-            }
-
-            const userXp = userData.xp || 50;
-            if (isTimeout) {
-                db.ref('users/' + currentUser).update({ xp: Math.max(0, userXp - currentBattleStake) });
-                openModal("⌛", "সময় শেষ!", `নির্দিষ্ট সময়ের মধ্যে উত্তর দিতে পারেননি! আপনি ${currentBattleStake} XP হারিয়েছেন।`);
-            } else if (isWinner) {
-                db.ref('users/' + currentUser).update({ xp: userXp + currentBattleStake });
-                if (userData.squadKey) db.ref(`squads/${userData.squadKey}/gloryScore`).transaction(cur => (cur || 0) + currentBattleStake);
-                openModal("🏆", "বিজয় অর্জিত!", `চমৎকার! আপনি সঠিক উত্তর দিয়ে প্রতিপক্ষকে হারিয়ে +${currentBattleStake} XP জিতে নিয়েছেন!`);
-            } else {
-                db.ref('users/' + currentUser).update({ xp: Math.max(0, userXp - currentBattleStake) });
-                openModal("💀", "পরাজয়!", `ভুল উত্তর হয়েছে! আপনি ${currentBattleStake} XP হারিয়েছেন।`);
-            }
-        }
-
-        function exitBattleToSetup() {
-            document.getElementById('battleSetupSection').style.display = "block";
-            document.getElementById('liveChallengesBoard').style.display = "block";
-            document.getElementById('battleActiveStage').style.display = "none";
-            document.getElementById('battleCountdown').innerText = "15s";
-        }
-
-        onBattleSubjectChange();
-
-        function handleGuildAvatarUpload(event) {
-            const file = event.target.files[0];
-            if (!file) return;
-            if (file.size > 1024 * 1024 * 1.5) { openModal("⚠️", "ফাইল অনেক বড়", "১.৫ MB এর চেয়ে ছোট ছবি দিন!"); return; }
-            const reader = new FileReader();
-            reader.onload = (e) => {
-                uploadedGuildAvatarBase64 = e.target.result;
-                document.getElementById('guildUploadStatus').innerText = "✅ লোগো সিলেক্টেড!";
-            };
-            reader.readAsDataURL(file);
-        }
-
-        function saveSquadCustomization() {
-            const squadKey = userData.squadKey;
-            if (!squadKey) return;
-            const slogan = document.getElementById('editSquadSlogan').value.trim();
-            const welcome = document.getElementById('editSquadWelcomeMsg').value.trim();
-            let updatePayload = {};
-            if (slogan) updatePayload.slogan = slogan;
-            if (welcome) updatePayload.welcomeMsg = welcome;
-            if (uploadedGuildAvatarBase64) updatePayload.avatarUrl = uploadedGuildAvatarBase64;
-
-            db.ref('squads/' + squadKey).update(updatePayload).then(() => {
-                uploadedGuildAvatarBase64 = null;
-                document.getElementById('guildUploadStatus').innerText = "";
-                openModal("👑", "গিল্ড আপডেট হয়েছে", "স্কোয়াড প্রোফাইল সফলভাবে আপডেট করা হয়েছে!");
-            });
-        }
-
-        function copySquadInvite() {
-            const code = document.getElementById('displaySquadCode').innerText;
-            const pin = document.getElementById('displaySquadPin').innerText;
-            navigator.clipboard.writeText(`Squad: ${userData.squad}\nCode: ${code}\nPIN: ${pin}`).then(() => {
-                openModal("📋", "কপি হয়েছে", "ইনভাইট কোড ও পিন ক্লিপবোর্ডে কপি করা হয়েছে!");
-            });
-        }
-
-        function setCustomDailyGoal() {
-            const newHrs = prompt("আজকের পড়ার লক্ষ্য কত ঘণ্টা?:", 3);
-            if (newHrs && !isNaN(newHrs)) {
-                db.ref('users/' + currentUser).update({ dailyGoalMins: Math.round(newHrs * 60) });
-            }
-        }
-
-        function createNewVerifiedSquad() {
-            const nameInput = document.getElementById('createSquadNameInput').value.trim();
-            const slogan = document.getElementById('createSquadSloganInput').value.trim();
-            const tier = document.getElementById('createSquadTierSelect').value;
-            const subject = document.getElementById('createSquadSubjectSelect').value;
-            const pin = document.getElementById('createSquadPinInput').value.trim();
-
-            if (!nameInput || pin.length !== 4) {
-                openModal("⚠️", "ভুল তথ্য", "সঠিক নাম এবং ৪-সংখ্যার পিন প্রদান করুন!");
-                return;
-            }
-
-            const autoCode = "SQ-" + Math.floor(1000 + Math.random() * 9000);
-            const squadKey = autoCode.toLowerCase();
-            db.ref('squads/' + squadKey).set({
-                name: nameInput, code: autoCode, slogan: slogan, tier: tier, subject: subject, pin: pin, creator: currentUser, members: { [currentUser]: true }
-            }).then(() => {
-                db.ref('users/' + currentUser).update({ squad: nameInput, squadKey: squadKey });
-                openModal("🎉", "স্কোয়াড তৈরি সফল", `Code: ${autoCode} | PIN: ${pin}`);
-            });
-        }
-
-        function joinVerifiedSquadByCode() {
-            const codeInput = document.getElementById('joinSquadCodeInput').value.trim().toLowerCase();
-            const pinInput = document.getElementById('joinSquadPinInput').value.trim();
-            db.ref('squads/' + codeInput).once('value').then((snap) => {
-                if (!snap.exists()) {
-                    openModal("❌", "কোড সঠিক নয়", "প্রদত্ত কোডের কোনো স্কোয়াড পাওয়া যায়নি!");
-                    return;
-                }
-                const sq = snap.val();
-                if (sq.pin !== pinInput) {
-                    openModal("🔒", "ভুল পিন", "স্কোয়াডের সঠিক ৪-ডিজিট পিন প্রদান করুন!");
-                    return;
-                }
-                db.ref(`squads/${codeInput}/members/${currentUser}`).set(true);
-                db.ref('users/' + currentUser).update({ squad: sq.name, squadKey: codeInput }).then(() => {
-                    openModal("🔥", "সফলভাবে যুক্ত হয়েছেন", `'${sq.name}' স্কোয়াডে আপনাকে স্বাগতম!`);
-                });
-            });
-        }
-
-        function leaveCurrentSquad() {
-            if (confirm("আপনি কি নিশ্চিতভাবে এই স্কোয়াড ত্যাগ করতে চান?")) {
-                if (userData.squadKey) db.ref(`squads/${userData.squadKey}/members/${currentUser}`).remove();
-                db.ref('users/' + currentUser).update({ squad: "None", squadKey: null });
-            }
-        }
-
-        let mapSearchDebounce = null;
-        function searchInstitutionOnMap(query) {
-            clearTimeout(mapSearchDebounce);
-            const box = document.getElementById('mapSuggestions');
-            const trimmed = query ? query.trim() : '';
-            if (!trimmed || trimmed.length < 2) { box.style.display = 'none'; return; }
-
-            mapSearchDebounce = setTimeout(() => {
-                fetch(`https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(trimmed)}&countrycodes=bd&format=jsonv2&limit=8`)
-                    .then(res => res.json()).then(data => {
-                        box.innerHTML = `<div class="map-suggest-item" onclick="document.getElementById('mapSearchInstInput').value='${trimmed}'; box.style.display='none';">✏️ <strong>Use Custom: "${trimmed}"</strong></div>`;
-                        if (data && data.length > 0) {
-                            data.forEach(item => {
-                                const div = document.createElement('div');
-                                div.className = 'map-suggest-item';
-                                const primary = item.name || item.display_name.split(',')[0];
-                                div.innerHTML = `📍 <strong>${primary}</strong>`;
-                                div.onclick = () => { document.getElementById('mapSearchInstInput').value = primary; box.style.display = 'none'; };
-                                box.appendChild(div);
-                            });
-                        }
-                        box.style.display = 'block';
-                    });
-            }, 250);
-        }
-
-        // Save Academic Profile (With Unique Username Validation)
-        function saveAcademicProfile() {
-            const newUsername = document.getElementById('editUsernameInput').value.trim().toLowerCase().replace(/[^a-z0-9_]/g, '');
-            const newDisplayName = document.getElementById('editDisplayNameInput').value.trim();
-            const age = document.getElementById('editAgeInput').value.trim();
-            const instType = document.getElementById('editInstTypeSelect').value;
-            const instName = document.getElementById('mapSearchInstInput').value.trim();
-            const division = document.getElementById('editDivisionSelect').value;
-            const district = document.getElementById('editDistrictSelect').value;
-            const upazila = document.getElementById('editUpazilaSelect').value;
-
-            if (!newUsername || newUsername.length < 3) {
-                openModal("⚠️", "ভুল ইউজারনেম", "ইউজারনেম কমপক্ষে ৩ অক্ষরের হতে হবে (শুধুমাত্র ছোট হাতের ইংরেজি ও সংখ্যা)!");
-                return;
-            }
-
-            if (!age || !instName) {
-                openModal("⚠️", "অসম্পূর্ণ তথ্য", "বয়স ও প্রতিষ্ঠানের নাম পূরণ করুন!");
-                return;
-            }
-
-            // Check if Username is already taken by someone else
-            if (newUsername !== currentUser) {
-                db.ref('users/' + newUsername).once('value').then(snap => {
-                    if (snap.exists()) {
-                        openModal("🚫", "ইউজারনেম বিদ্যমান", `"${newUsername}" ইউজারনেমটি অন্য কেউ ইতোমধ্যে ব্যবহার করছে! দয়া করে অন্য একটি ইউনিক নাম দিন।`);
-                    } else {
-                        // Migrate user data to new username node
-                        const updatedData = {
-                            ...userData,
-                            name: newDisplayName || userData.name || "Scholar",
-                            age: age,
-                            institutionType: instType,
-                            institutionName: instName,
-                            division: division,
-                            district: district,
-                            upazila: upazila
-                        };
-
-                        db.ref('users/' + newUsername).set(updatedData).then(() => {
-                            db.ref('users/' + currentUser).remove();
-                            localStorage.setItem('auraCurrentUser', newUsername);
-                            currentUser = newUsername;
-                            document.getElementById('navUserName').innerText = "@" + newUsername;
-                            document.getElementById('profUser').innerText = newUsername;
-                            openModal("✅", "প্রোফাইল সংরক্ষিত", "আপনার ইউজারনেম ও সমস্ত তথ্য সফলভাবে আপডেট হয়েছে!");
-                        });
-                    }
-                });
-            } else {
-                // Update existing user node
-                db.ref('users/' + currentUser).update({
-                    name: newDisplayName || userData.name || "Scholar",
-                    age: age,
-                    institutionType: instType,
-                    institutionName: instName,
-                    division: division,
-                    district: district,
-                    upazila: upazila
-                }).then(() => {
-                    openModal("✅", "প্রোফাইল সংরক্ষিত", "আপনার সমস্ত তথ্য সফলভাবে আপডেট হয়েছে!");
-                });
-            }
-        }
-
+        // Tab Helpers
         function switchTab(tabId, el) {
             document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
             document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
@@ -2184,6 +1560,91 @@
                 localStorage.removeItem('auraIsAdmin');
                 window.location.href = "index.html";
             }, 1400);
+        }
+
+        // Leaderboard Notice Board
+        db.ref('squads').limitToLast(6).on('value', (snap) => {
+            const list = document.getElementById('publicSquadNotices');
+            list.innerHTML = "";
+            const data = snap.val();
+            if (!data) return;
+            Object.keys(data).reverse().forEach(key => {
+                const sq = data[key];
+                const row = document.createElement('div');
+                row.className = "activity-row";
+                row.innerHTML = `
+                    <div>
+                        <div class="activity-desc">🛡️ <strong>${sq.name}</strong> (${sq.tier || 'Rookie'})</div>
+                        <div style="font-size: 11px; color: var(--neon-blue); margin-top: 2px;">Code: <strong style="color:#fff;">${sq.code || key.toUpperCase()}</strong></div>
+                    </div>
+                    <span class="activity-time" style="color:var(--neon-gold);">PIN: ${sq.pin}</span>
+                `;
+                list.appendChild(row);
+            });
+        });
+
+        function copySquadInvite() {
+            const code = document.getElementById('displaySquadCode').innerText;
+            const pin = document.getElementById('displaySquadPin').innerText;
+            navigator.clipboard.writeText(`Squad: ${userData.squad}\nCode: ${code}\nPIN: ${pin}`).then(() => {
+                openModal("📋", "কপি হয়েছে", "ইনভাইট কোড ও পিন ক্লিপবোর্ডে কপি করা হয়েছে!");
+            });
+        }
+
+        function setCustomDailyGoal() {
+            const newHrs = prompt("আজকের পড়ার লক্ষ্য কত ঘণ্টা?:", 3);
+            if (newHrs && !isNaN(newHrs)) {
+                db.ref('users/' + currentUser).update({ dailyGoalMins: Math.round(newHrs * 60) });
+            }
+        }
+
+        function createNewVerifiedSquad() {
+            const nameInput = document.getElementById('createSquadNameInput').value.trim();
+            const slogan = document.getElementById('createSquadSloganInput').value.trim();
+            const tier = document.getElementById('createSquadTierSelect').value;
+            const subject = document.getElementById('createSquadSubjectSelect').value;
+            const pin = document.getElementById('createSquadPinInput').value.trim();
+
+            if (!nameInput || pin.length !== 4) {
+                openModal("⚠️", "ভুল তথ্য", "সঠিক নাম এবং ৪-সংখ্যার পিন প্রদান করুন!");
+                return;
+            }
+
+            const autoCode = "SQ-" + Math.floor(1000 + Math.random() * 9000);
+            const squadKey = autoCode.toLowerCase();
+            db.ref('squads/' + squadKey).set({
+                name: nameInput, code: autoCode, slogan: slogan, tier: tier, subject: subject, pin: pin, creator: currentUser, members: { [currentUser]: true }
+            }).then(() => {
+                db.ref('users/' + currentUser).update({ squad: nameInput, squadKey: squadKey });
+                openModal("🎉", "স্কোয়াড তৈরি সফল", `Code: ${autoCode} | PIN: ${pin}`);
+            });
+        }
+
+        function joinVerifiedSquadByCode() {
+            const codeInput = document.getElementById('joinSquadCodeInput').value.trim().toLowerCase();
+            const pinInput = document.getElementById('joinSquadPinInput').value.trim();
+            db.ref('squads/' + codeInput).once('value').then((snap) => {
+                if (!snap.exists()) {
+                    openModal("❌", "কোড সঠিক নয়", "প্রদত্ত কোডের কোনো স্কোয়াড পাওয়া যায়নি!");
+                    return;
+                }
+                const sq = snap.val();
+                if (sq.pin !== pinInput) {
+                    openModal("🔒", "ভুল পিন", "স্কোয়াডের সঠিক ৪-ডিজিট পিন প্রদান করুন!");
+                    return;
+                }
+                db.ref(`squads/${codeInput}/members/${currentUser}`).set(true);
+                db.ref('users/' + currentUser).update({ squad: sq.name, squadKey: codeInput }).then(() => {
+                    openModal("🔥", "সফলভাবে যুক্ত হয়েছেন", `'${sq.name}' স্কোয়াডে আপনাকে স্বাগতম!`);
+                });
+            });
+        }
+
+        function leaveCurrentSquad() {
+            if (confirm("আপনি কি নিশ্চিতভাবে এই স্কোয়াড ত্যাগ করতে চান?")) {
+                if (userData.squadKey) db.ref(`squads/${userData.squadKey}/members/${currentUser}`).remove();
+                db.ref('users/' + currentUser).update({ squad: "None", squadKey: null });
+            }
         }
     </script>
 </body>
