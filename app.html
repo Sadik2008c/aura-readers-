@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AURA READERS - Cyber Study Core</title>
     
-    <!-- ফায়ারবেস এসডিকে -->
+    <!-- Firebase SDKs -->
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
@@ -26,7 +26,6 @@
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
         body { background-color: var(--bg-main); color: #fff; min-height: 100vh; padding-bottom: 75px; }
 
-        /* শীর্ষ নেভিগেশন বার */
         .top-nav {
             background: rgba(10, 19, 37, 0.95);
             border-bottom: 1px solid var(--border-glow);
@@ -76,13 +75,8 @@
             justify-content: center;
             cursor: pointer;
             font-size: 16px;
-            transition: all 0.2s ease;
         }
-        .settings-nav-btn:hover {
-            background: var(--neon-blue);
-            color: #050b14;
-            box-shadow: 0 0 10px var(--neon-blue);
-        }
+        .settings-nav-btn:hover { background: var(--neon-blue); color: #050b14; box-shadow: 0 0 10px var(--neon-blue); }
 
         .logout-btn { 
             background: rgba(255, 51, 102, 0.15); 
@@ -96,11 +90,9 @@
             display: flex; 
             align-items: center; 
             gap: 5px;
-            transition: all 0.2s ease;
         }
         .logout-btn:hover { background: var(--neon-red); color: #fff; box-shadow: 0 0 10px rgba(255,51,102,0.4); }
 
-        /* লগআউট পোর্টাল অ্যানিমেশন */
         .logout-overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -186,7 +178,6 @@
 
         @keyframes pulseText { from { opacity: 0.7; } to { opacity: 1; } }
 
-        /* কন্টেইনার ও ট্যাব */
         .container { max-width: 950px; margin: 0 auto; padding: 16px; }
 
         .tab-bar {
@@ -297,67 +288,32 @@
 
         .daily-goal-box { background: rgba(5, 11, 20, 0.6); border: 1px solid rgba(255,204,0,0.25); border-radius: 12px; padding: 14px; margin-bottom: 15px; }
 
-        /* লিডারবোর্ড ফিল্টার */
-        .rank-tier-tabs {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 6px;
-            margin-bottom: 12px;
-        }
-        @media (max-width: 600px) {
-            .rank-tier-tabs { grid-template-columns: repeat(2, 1fr); }
-        }
-
-        .tier-filter-btn {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            color: #cbd5e1;
-            padding: 8px 6px;
-            border-radius: 8px;
-            cursor: pointer;
+        /* Aura Motivational Quote Box */
+        .aura-rhyme-box {
+            background: linear-gradient(135deg, rgba(188, 19, 254, 0.12), rgba(0, 240, 255, 0.12));
+            border: 1px dashed var(--neon-purple);
+            border-radius: 12px;
+            padding: 12px 16px;
+            margin-bottom: 16px;
             text-align: center;
-            transition: all 0.2s;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
         }
-        .tier-filter-btn .t-en { font-size: 12px; font-weight: 800; color: #fff; }
-        .tier-filter-btn .t-bn { font-size: 10px; color: var(--text-muted); margin-top: 2px; }
+        .aura-rhyme-quote { font-size: 13px; font-weight: 700; color: var(--neon-gold); font-style: italic; }
+        .aura-rhyme-sub { font-size: 11px; color: var(--neon-green); margin-top: 4px; font-weight: 600; }
 
-        .tier-filter-btn.active {
-            background: rgba(0, 240, 255, 0.15);
-            border-color: var(--neon-blue);
-            box-shadow: 0 0 10px rgba(0, 240, 255, 0.3);
-        }
-        .tier-filter-btn.active .t-en { color: var(--neon-blue); }
-        .tier-filter-btn.active .t-bn { color: var(--neon-green); font-weight: bold; }
-
-        .sub-selector-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            margin-bottom: 15px;
-            background: rgba(5, 11, 20, 0.6);
-            padding: 10px;
-            border-radius: 8px;
-            border: 1px solid rgba(255,255,255,0.06);
-        }
-
-        .leaderboard-row {
+        /* Battle Room Card */
+        .battle-room-card {
+            background: rgba(10, 19, 37, 0.85);
+            border: 1px solid rgba(255, 51, 102, 0.35);
+            border-left: 4px solid var(--neon-red);
+            border-radius: 10px;
+            padding: 12px 14px;
+            margin-bottom: 10px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 12px 14px;
-            background: rgba(5, 11, 20, 0.6);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            border-radius: 10px;
-            margin-bottom: 8px;
+            gap: 10px;
         }
-        .leaderboard-row.top-1 { border-left: 4px solid var(--neon-gold); background: rgba(255, 204, 0, 0.06); }
-        .leaderboard-row.top-2 { border-left: 4px solid #cbd5e1; background: rgba(255, 255, 255, 0.04); }
-        .leaderboard-row.top-3 { border-left: 4px solid #cd7f32; background: rgba(205, 127, 50, 0.06); }
 
-        /* ব্যাটল অ্যারেনা */
         .battle-arena-box {
             background: linear-gradient(135deg, rgba(255,51,102,0.1), rgba(121,40,202,0.15)), #081124;
             border: 2px solid var(--neon-red);
@@ -476,7 +432,7 @@
 </head>
 <body>
 
-    <!-- লগআউট ওভারলে -->
+    <!-- Logout Animation Overlay -->
     <div class="logout-overlay" id="logoutOverlay">
         <div class="door-portal-stage" id="doorStage">
             <div class="door-frame">
@@ -491,25 +447,25 @@
                 <div class="door-leaf"><div class="door-handle"></div></div>
             </div>
         </div>
-        <div class="logout-text">🚪 সংযোগ বিচ্ছিন্ন করা হচ্ছে...</div>
+        <div class="logout-text">🚪 ডিসকানেক্টিং কোর...</div>
     </div>
 
-    <!-- টপ নেভিগেশন বার -->
+    <!-- Top Bar Navigation -->
     <div class="top-nav">
         <div class="brand">⚡ AURA READERS</div>
         <div class="user-nav-group">
-            <div class="user-chip" onclick="navigateToProfileTab()" style="cursor: pointer;" title="প্রোফাইল দেখুন">
+            <div class="user-chip" onclick="navigateToProfileTab()" style="cursor: pointer;" title="View Profile">
                 <img id="navAvatar" src="gojo-vibe.jpg" class="nav-avatar-img" onerror="this.src='gojo-vibe.jpg'">
                 <span id="navUserName">Scholar</span>
             </div>
-            <button class="settings-nav-btn" onclick="navigateToProfileTab()" title="সেটিংস">⚙️</button>
-            <button class="logout-btn" onclick="startDoorLogout()">🚪 লগআউট</button>
+            <button class="settings-nav-btn" onclick="navigateToProfileTab()" title="Settings & Edit Profile">⚙️</button>
+            <button class="logout-btn" onclick="startDoorLogout()">🚪 LOGOUT</button>
         </div>
     </div>
 
     <div class="container">
         
-        <!-- মূল ট্যাব বার -->
+        <!-- Tab Controls with Dual Language -->
         <div class="tab-bar">
             <button class="tab-btn active" id="dashboardTabBtn" onclick="switchTab('dashboardTab', this)">
                 <span class="btn-en">Dashboard</span>
@@ -541,7 +497,7 @@
             </button>
         </div>
 
-        <!-- ০. ড্যাশবোর্ড ট্যাব -->
+        <!-- 0. DASHBOARD TAB -->
         <div id="dashboardTab" class="tab-content active">
             <div class="hero-welcome-card">
                 <div class="hero-top-row">
@@ -549,18 +505,17 @@
                         <div class="hero-greeting" id="dashGreeting">স্বাগতম, <span>Scholar</span> 👋</div>
                         <div class="hero-subtext">প্রতিটি মিনিট আপনাকে স্বপ্নের লক্ষ্যের আরও কাছে পৌঁছে দিচ্ছে!</div>
                         <div class="hero-meta-badges">
-                            <span class="meta-pill" id="dashInstBadge">🏛️ কলেজ</span>
-                            <span class="meta-pill" id="dashTargetBadge">🎯 এইচএসসি বিজ্ঞান</span>
-                            <span class="meta-pill" id="dashAgeBadge">👤 ১৮ বছর</span>
+                            <span class="meta-pill" id="dashInstBadge">🏛️ College</span>
+                            <span class="meta-pill" id="dashTargetBadge">🎯 HSC Science</span>
+                            <span class="meta-pill" id="dashAgeBadge">👤 18 yrs</span>
                         </div>
                     </div>
                 </div>
 
-                <!-- ডায়নামিক রিয়েলটাইম লেভেল ও প্রোগ্রেস বার -->
                 <div class="xp-level-container">
                     <div class="xp-header">
-                        <span class="lvl-name" id="dashLvlHeader">লেভেল ১ স্কলার</span>
-                        <span class="xp-pts" id="dashXpHeader">০ / ১০০ XP</span>
+                        <span class="lvl-name" id="dashLvlHeader">LEVEL 1 SCHOLAR</span>
+                        <span class="xp-pts" id="dashXpHeader">0 / 100 XP</span>
                     </div>
                     <div class="progress-bar-bg">
                         <div class="progress-bar-fill" id="dashXpProgressBar" style="width: 0%;"></div>
@@ -569,28 +524,33 @@
                 </div>
             </div>
 
-            <!-- স্ট্যাট বক্স -->
+            <!-- Aura Rhyme Inspiration Card -->
+            <div class="aura-rhyme-box">
+                <div class="aura-rhyme-quote">"কুইজের ময়দানে দেখাও তোমার জোর, অরা জিতে ছাড়িয়ে যাও বাকিদের স্কোর!" ⚡</div>
+                <div class="aura-rhyme-sub">প্রতিদিন পড়ো, প্রতিদিন লড়ো — নিজেই নিজের সীমানা ছাড়িয়ে বড় হও! 🔥</div>
+            </div>
+
             <div class="stat-grid">
-                <div class="stat-box"><div class="stat-val" id="dashTodayTime">0h 0m</div><div class="stat-lbl">আজকের পড়া</div><div class="stat-sub">সক্রিয় স্টাডি 🔥</div></div>
-                <div class="stat-box"><div class="stat-val" id="dashTotalTime">0.0h</div><div class="stat-lbl">সর্বমোট সময়</div><div class="stat-sub">আজীবন স্টাডি</div></div>
-                <div class="stat-box"><div class="stat-val" id="dashTotalXp">০</div><div class="stat-lbl">মোট XP</div><div class="stat-sub">অরা র‍্যাংক পয়েন্ট</div></div>
-                <div class="stat-box"><div class="stat-val" id="dashCurrentLvl">লেভেল ১</div><div class="stat-lbl">র‍্যাংক লেভেল</div><div class="stat-sub">ডোমেন স্ট্যাটাস</div></div>
-                <div class="stat-box"><div class="stat-val" id="dashStreakStatus">Active</div><div class="stat-lbl">দৈনিক স্ট্রিক</div><div class="stat-sub" style="color: var(--neon-gold);">ধারাবাহিকতা</div></div>
-                <div class="stat-box"><div class="stat-val" id="dashSquadPreview">None</div><div class="stat-lbl">স্কোয়াড</div><div class="stat-sub" id="dashSquadSub">No Squad</div></div>
+                <div class="stat-box"><div class="stat-val" id="dashTodayTime">0h 0m</div><div class="stat-lbl">Today's Study</div><div class="stat-sub">আজকের পড়া 🔥</div></div>
+                <div class="stat-box"><div class="stat-val" id="dashTotalTime">0.0h</div><div class="stat-lbl">Total Time</div><div class="stat-sub">সর্বমোট সময়</div></div>
+                <div class="stat-box"><div class="stat-val" id="dashTotalXp">0</div><div class="stat-lbl">Total XP</div><div class="stat-sub">মোট পয়েন্ট</div></div>
+                <div class="stat-box"><div class="stat-val" id="dashCurrentLvl">Lvl 1</div><div class="stat-lbl">Current Level</div><div class="stat-sub">র‍্যাংক লেভেল</div></div>
+                <div class="stat-box"><div class="stat-val" id="dashStreakStatus">Active</div><div class="stat-lbl">Daily Streak</div><div class="stat-sub" style="color: var(--neon-gold);">ধারাবাহিকতা</div></div>
+                <div class="stat-box"><div class="stat-val" id="dashSquadPreview">None</div><div class="stat-lbl">My Squad</div><div class="stat-sub" id="dashSquadSub">No Squad</div></div>
             </div>
 
             <div class="cyber-card">
                 <div class="card-title">
-                    <span>🎯 দৈনিক পড়ার লক্ষ্যমাত্রা</span>
-                    <button onclick="setCustomDailyGoal()" class="btn-dual-action blue" style="padding: 4px 10px;">
+                    <span>🎯 TODAY'S GOAL (দৈনিক পড়ার লক্ষ্যমাত্রা)</span>
+                    <button onclick="openCustomGoalModal()" class="btn-dual-action blue" style="padding: 4px 10px;">
                         <span class="act-en">Change Goal</span>
                         <span class="act-bn">লক্ষ্য বদলান</span>
                     </button>
                 </div>
                 <div class="daily-goal-box">
                     <div style="display: flex; justify-content: space-between; font-size: 13px; font-weight: bold; margin-bottom: 8px;">
-                        <span>টার্গেট: <span style="color: var(--neon-gold);" id="goalTargetText">৩ ঘণ্টা</span></span>
-                        <span style="color: var(--neon-blue);" id="goalPercentText">০% সম্পন্ন</span>
+                        <span>Target: <span style="color: var(--neon-gold);" id="goalTargetText">৩ ঘণ্টা</span></span>
+                        <span style="color: var(--neon-blue);" id="goalPercentText">0% সম্পন্ন</span>
                     </div>
                     <div class="progress-bar-bg" style="height: 8px;">
                         <div class="progress-bar-fill" id="goalProgressBar" style="width: 0%; background: linear-gradient(90deg, var(--neon-gold), var(--neon-green));"></div>
@@ -606,10 +566,10 @@
             </div>
         </div>
 
-        <!-- ১. স্টাডি ট্র্যাকার -->
+        <!-- 1. STUDY TRACKER TAB -->
         <div id="studyTab" class="tab-content">
             <div class="cyber-card">
-                <div class="card-title">🎯 ফোকাস কোর (উচ্চমাধ্যমিক বিজ্ঞান প্রস্তুতি)</div>
+                <div class="card-title">🎯 FOCUS CORE (উচ্চমাধ্যমিক বিজ্ঞান প্রস্তুতি)</div>
                 <label style="font-size: 11px; color: var(--neon-blue); text-transform: uppercase;">১. বিষয় নির্বাচন করুন</label>
                 <select id="studySubjectSelect" onchange="updateStudyPaperOptions()">
                     <option value="Physics">পদার্থবিজ্ঞান (Physics)</option>
@@ -639,10 +599,10 @@
             </div>
         </div>
 
-        <!-- ২. নোটস ভল্ট -->
+        <!-- 2. HSC NOTES VAULT TAB -->
         <div id="notesTab" class="tab-content">
             <div class="cyber-card">
-                <div class="card-title">📚 বিষয়ভিত্তিক নোটস ভল্ট</div>
+                <div class="card-title">📚 STRUCTURED NOTES VAULT (নোটস ভল্ট)</div>
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
                     <div>
                         <label style="font-size: 10px; color: var(--neon-blue);">১. বিষয়</label>
@@ -674,12 +634,12 @@
             </div>
 
             <div class="cyber-card">
-                <div class="card-title">📖 সংরক্ষিত নোটস তালিকা</div>
+                <div class="card-title">📖 SAVED NOTES LIST (সংরক্ষিত নোটস)</div>
                 <div id="notesContainer"><p style="font-size: 12px; color: var(--text-muted); text-align: center;">নোটস লোড হচ্ছে...</p></div>
             </div>
         </div>
 
-        <!-- ৩. ⚔️ সাইবার MCQ ব্যাটল অ্যারেনা (১৫ সেকেন্ড বাগ মুক্ত ও সক্রিয় বট) -->
+        <!-- 3. ⚔️ BATTLE ARENA TAB (With Full Bangla Syllabus & Anti-Repeat Bot) -->
         <div id="battleTab" class="tab-content">
             <div class="battle-arena-box">
                 <div style="border-bottom: 1px solid rgba(255,51,102,0.3); padding-bottom: 10px; margin-bottom: 15px;">
@@ -725,7 +685,7 @@
                         </div>
                     </div>
 
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px;">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 10px;">
                         <div>
                             <label style="font-size: 11px; color: var(--neon-blue);">৫. ফরম্যাট</label>
                             <select id="battleModeSelect">
@@ -734,7 +694,16 @@
                             </select>
                         </div>
                         <div>
-                            <label style="font-size: 11px; color: var(--neon-gold);">৬. বাজি XP</label>
+                            <label style="font-size: 11px; color: var(--neon-gold);">৬. প্রশ্নের সংখ্যা (Count)</label>
+                            <select id="battleQuestionCountSelect">
+                                <option value="1">১টি প্রশ্ন (Instant Duel)</option>
+                                <option value="5">৫টি প্রশ্ন (Quick Set)</option>
+                                <option value="10">১০টি প্রশ্ন (Standard Set)</option>
+                                <option value="15">১৫টি প্রশ্ন (Mega Exam)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label style="font-size: 11px; color: var(--neon-gold);">৭. বাজি XP</label>
                             <select id="battleStakeSelect">
                                 <option value="20">20 XP</option>
                                 <option value="50">50 XP</option>
@@ -745,7 +714,7 @@
                     </div>
 
                     <div style="margin-bottom: 14px;">
-                        <label style="font-size: 11px; color: var(--neon-blue);">প্রতি প্রশ্নের সময় (ফেয়ার টাইমার: কমপক্ষে ১০ সেকেন্ড)</label>
+                        <label style="font-size: 11px; color: var(--neon-blue);">প্রতি প্রশ্নের সময় (Fair Timer: কমপক্ষে ১০ সেকেন্ড)</label>
                         <input type="number" id="battleTimeInput" min="10" max="60" value="15" placeholder="ন্যূনতম ১০ সে.">
                     </div>
 
@@ -761,7 +730,18 @@
                     </div>
                 </div>
 
-                <!-- লাইভ ব্যাটল স্টেজ (কাউন্টডাউন টাইমার সহ) -->
+                <!-- Live Open Rooms List -->
+                <div id="liveChallengesBoard" style="margin-top: 22px; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 14px;">
+                    <div style="font-size: 13px; font-weight: 800; color: var(--neon-gold); margin-bottom: 10px; display: flex; justify-content: space-between;">
+                        <span>📡 LIVE CHALLENGES (সক্রিয় ওপেন রুমস)</span>
+                        <span style="font-size: 11px; color: var(--neon-green);" id="liveRoomCount">0 Available</span>
+                    </div>
+                    <div id="liveRoomsList">
+                        <p style="font-size: 12px; color: var(--text-muted); text-align: center;">কোনো সক্রিয় চ্যালেঞ্জ নেই। আপনি নিজেই একটি চ্যালেঞ্জ হোস্ট করুন!</p>
+                    </div>
+                </div>
+
+                <!-- Battle Match Interactive Screen -->
                 <div id="battleActiveStage" style="display: none; margin-top: 15px;">
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
                         <span style="font-size: 12px; color: var(--neon-green); font-weight: bold;" id="battleSubjectHeader">PHYSICS MCQ</span>
@@ -777,11 +757,11 @@
             </div>
         </div>
 
-        <!-- ৪. স্কোয়াড ও গিল্ড -->
+        <!-- 4. SQUAD / GUILD TAB (Full Restored) -->
         <div id="squadTab" class="tab-content">
             <div class="cyber-card">
                 <div class="card-title">
-                    <span>🛡️ আমার স্কোয়াড কোর</span>
+                    <span>🛡️ MY GUILD / SQUAD CORE (আমার স্কোয়াড)</span>
                     <span id="activeSquadTierBadge"></span>
                 </div>
                 
@@ -804,16 +784,91 @@
                             <div style="font-size: 11.5px; color: var(--neon-blue); margin-top: 6px;" id="squadGloryStats"></div>
                         </div>
                     </div>
+                    
+                    <div class="invite-box" id="squadInviteBox" style="display: none;">
+                        <div>
+                            <span>Squad Code: <strong style="color: var(--neon-blue);" id="displaySquadCode">SQ-0000</strong></span> | 
+                            <span>PIN: <strong style="color: var(--neon-gold);" id="displaySquadPin">****</strong></span>
+                        </div>
+                        <button onclick="copySquadInvite()" class="btn-dual-action blue" style="padding: 4px 8px;">
+                            <span class="act-en">Copy Invite</span>
+                            <span class="act-bn">ইনভাইট কপি</span>
+                        </button>
+                    </div>
+
+                    <div id="squadLeaderCustomPanel" style="display: none; margin-top: 14px; background: rgba(0,240,255,0.05); padding: 14px; border-radius: 10px; border: 1px dashed var(--neon-blue);">
+                        <div style="font-size: 12px; font-weight: bold; color: var(--neon-gold); margin-bottom: 8px;">👑 GUILD COMMANDER SETTINGS</div>
+                        <label style="font-size: 11px; color: var(--neon-blue);">Guild Slogan</label>
+                        <input type="text" id="editSquadSlogan" placeholder="স্কোয়াড স্লোগান লিখুন...">
+                        <label style="font-size: 11px; color: var(--neon-blue);">Welcome Message</label>
+                        <input type="text" id="editSquadWelcomeMsg" placeholder="মেম্বারদের জন্য বার্তা...">
+                        <div style="margin: 10px 0;">
+                            <label style="font-size: 11px; color: var(--neon-blue); display: block; margin-bottom: 4px;">Guild Logo / Avatar Upload</label>
+                            <label for="guildAvatarFileInput" class="btn-dual-action blue" style="cursor: pointer; display: inline-flex;">
+                                <span class="act-en">Choose Guild Logo</span>
+                                <span class="act-bn">লোগো ছবি নির্বাচন করুন</span>
+                            </label>
+                            <input type="file" id="guildAvatarFileInput" accept="image/*" style="display: none;" onchange="handleGuildAvatarUpload(event)">
+                            <span id="guildUploadStatus" style="font-size: 11px; color: var(--neon-green); margin-left: 8px;"></span>
+                        </div>
+                        <button class="btn-dual-action blue" style="width: 100%; margin-top: 6px;" onclick="saveSquadCustomization()">
+                            <span class="act-en">Save Guild Profile</span>
+                            <span class="act-bn">গিল্ড প্রোফাইল সেভ করুন</span>
+                        </button>
+                    </div>
+
+                    <div id="squadMembersRoster" style="margin-top: 15px; display: none;">
+                        <div style="font-size: 12px; font-weight: 800; color: var(--neon-blue); margin-bottom: 8px; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 10px;">
+                            👥 SQUAD MERIT HIERARCHY (অটো সিলেক্টেড মেম্বার পদবী)
+                        </div>
+                        <div id="membersHierarchyList" style="display: flex; flex-direction: column; gap: 6px;"></div>
+                    </div>
+                </div>
+
+                <!-- Squad Create & Join Forms (Restored) -->
+                <div class="squad-management-grid">
+                    <div class="squad-panel">
+                        <div class="squad-panel-title">🔑 Join Squad (কোড দিয়ে যুক্ত হোন)</div>
+                        <input type="text" id="joinSquadCodeInput" placeholder="স্কোয়াড কোড (যেমন: SQ-1234)">
+                        <input type="password" id="joinSquadPinInput" placeholder="৪-সংখ্যার পিন দিন" maxlength="4">
+                        <button class="btn-dual-action blue" style="width: 100%;" onclick="joinVerifiedSquadByCode()">
+                            <span class="act-en">Verify & Join</span>
+                            <span class="act-bn">যাচাই করে যুক্ত হোন</span>
+                        </button>
+                    </div>
+
+                    <div class="squad-panel">
+                        <div class="squad-panel-title">⚡ Create Squad (নতুন স্কোয়াড তৈরি)</div>
+                        <input type="text" id="createSquadNameInput" placeholder="স্কোয়াডের নাম">
+                        <input type="text" id="createSquadSloganInput" placeholder="স্কোয়াড স্লোগান">
+                        <select id="createSquadTierSelect">
+                            <option value="rookie">🥉 Rookie Squad (দৈনিক শর্তহীন)</option>
+                            <option value="elite">🥈 Elite Squad (দৈনিক ৩+ ঘণ্টা পড়া & ৩০০+ XP)</option>
+                            <option value="limitless">👑 Limitless Domain (দৈনিক ৬+ ঘণ্টা পড়া & ১০০০+ XP)</option>
+                        </select>
+                        <select id="createSquadSubjectSelect">
+                            <option value="Physics Focus">পদার্থবিজ্ঞান ফোকাস</option>
+                            <option value="Chemistry Focus">রসায়ন ফোকাস</option>
+                            <option value="Higher Math Focus">উচ্চতর গণিত ফোকাস</option>
+                            <option value="Biology Focus">জীববিজ্ঞান ফোকাস</option>
+                            <option value="All Rounder (HSC)">অল রাউন্ডার (বিজ্ঞান বিভাগ)</option>
+                        </select>
+                        <input type="password" id="createSquadPinInput" placeholder="৪-সংখ্যার পিন দিন" maxlength="4">
+                        <button class="btn-dual-action green" style="width: 100%;" onclick="createNewVerifiedSquad()">
+                            <span class="act-en">Generate Squad</span>
+                            <span class="act-bn">স্কোয়াড তৈরি করুন</span>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- ৫. 🏆 লিডারবোর্ড (জাতীয়, বিভাগীয়, জেলা ও উপজেলা র‍্যাংকিং) -->
+        <!-- 5. 🏆 DEDICATED LEADERBOARD TAB -->
         <div id="leaderboardTab" class="tab-content">
             <div class="cyber-card">
                 <div class="card-title">
-                    <span>🏆 স্কলার লিডারবোর্ড (মেধাতালিকা র‍্যাংকিং)</span>
-                    <span style="font-size: 11px; color: var(--neon-gold);" id="rankTierHeading">জাতীয় শীর্ষ ১০</span>
+                    <span>🏆 SCHOLAR LEADERBOARD (মেধাতালিকা র‍্যাংকিং)</span>
+                    <span style="font-size: 11px; color: var(--neon-gold);" id="rankTierHeading">Top 10 National</span>
                 </div>
 
                 <div class="rank-tier-tabs">
@@ -853,7 +908,7 @@
             </div>
         </div>
 
-        <!-- ৬. প্রোফাইল ও সেটিংস -->
+        <!-- 6. PROFILE & SETTINGS TAB -->
         <div id="profileTab" class="tab-content">
             <div class="cyber-card" style="text-align: center;">
                 <img id="profAvatarBig" src="gojo-vibe.jpg" style="width: 85px; height: 85px; border-radius: 50%; border: 3px solid var(--neon-blue); object-fit: cover; margin-bottom: 10px; background: #050b14; box-shadow: 0 0 15px rgba(0, 240, 255, 0.4);" onerror="this.src='gojo-vibe.jpg'">
@@ -865,36 +920,37 @@
                 <input type="file" id="avatarUploadInput" accept="image/*" style="display: none;" onchange="handleAvatarUpload(event)">
                 
                 <div class="profile-info-grid">
-                    <div class="info-cell"><label>ইউজারনেম</label><span id="profUser" style="color: var(--neon-blue);"></span></div>
-                    <div class="info-cell"><label>নাম</label><span id="profName"></span></div>
-                    <div class="info-cell"><label>বয়স ও লেভেল</label><span id="profAge"></span></div>
-                    <div class="info-cell"><label>শিক্ষা প্রতিষ্ঠান</label><span id="profInst" style="color: var(--neon-blue);"></span></div>
-                    <div class="info-cell"><label>ঠিকানা</label><span id="profLocationText" style="color: var(--neon-green);"></span></div>
-                    <div class="info-cell"><label>ভেরিফিকেশন</label><span id="profVerificationBadge"></span></div>
+                    <div class="info-cell"><label>Username (ইউজারনেম)</label><span id="profUser" style="color: var(--neon-blue);"></span></div>
+                    <div class="info-cell"><label>Display Name (নাম)</label><span id="profName"></span></div>
+                    <div class="info-cell"><label>Age & Level (বয়স ও লেভেল)</label><span id="profAge"></span></div>
+                    <div class="info-cell"><label>Institution (প্রতিষ্ঠান)</label><span id="profInst" style="color: var(--neon-blue);"></span></div>
+                    <div class="info-cell"><label>Location (ঠিকানা)</label><span id="profLocationText" style="color: var(--neon-green);"></span></div>
+                    <div class="info-cell"><label>Verification (ভেরিফিকেশন)</label><span id="profVerificationBadge"></span></div>
                 </div>
             </div>
 
+            <!-- Profile Info Edit -->
             <div class="cyber-card">
-                <div class="card-title">⚙️ একাডেমিক ও ভৌগোলিক তথ্য পরিবর্তন</div>
+                <div class="card-title">⚙️ EDIT ACADEMIC & GEOGRAPHIC LOCATION</div>
                 
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px;">
                     <div>
-                        <label style="font-size: 11px; color: var(--neon-blue);">ইউজারনেম (ইউনিক হতে হবে)</label>
+                        <label style="font-size: 11px; color: var(--neon-blue);">Username (ইউজারনেম - ইউনিক)</label>
                         <input type="text" id="editUsernameInput" placeholder="@username">
                     </div>
                     <div>
-                        <label style="font-size: 11px; color: var(--neon-blue);">নাম</label>
+                        <label style="font-size: 11px; color: var(--neon-blue);">Display Name (আপনার নাম)</label>
                         <input type="text" id="editDisplayNameInput" placeholder="আপনার পূর্ণ নাম">
                     </div>
                 </div>
 
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
                     <div>
-                        <label style="font-size: 11px; color: var(--neon-blue);">বয়স</label>
-                        <input type="number" id="editAgeInput" min="10" max="60" placeholder="যেমন: ১৮">
+                        <label style="font-size: 11px; color: var(--neon-blue);">Age (বয়স)</label>
+                        <input type="number" id="editAgeInput" min="10" max="60" placeholder="যেমন: 18">
                     </div>
                     <div>
-                        <label style="font-size: 11px; color: var(--neon-blue);">ক্যাটাগরি</label>
+                        <label style="font-size: 11px; color: var(--neon-blue);">Category (ক্যাটাগরি)</label>
                         <select id="editInstTypeSelect">
                             <option value="College">College (কলেজ)</option>
                             <option value="School">School (স্কুল)</option>
@@ -903,10 +959,10 @@
                     </div>
                 </div>
 
-                <!-- ১০০% অটো ড্রপডাউন: বিভাগ -> জেলা -> উপজেলা -->
+                <!-- 100% Cascade Auto-Dropdown: Division -> District -> Upazila -->
                 <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px;">
                     <div>
-                        <label style="font-size: 10.5px; color: var(--neon-blue);">বিভাগ</label>
+                        <label style="font-size: 10.5px; color: var(--neon-blue);">Division (বিভাগ)</label>
                         <select id="editDivisionSelect" onchange="onDivisionChangeCascade()">
                             <option value="Rangpur">Rangpur (রংপুর)</option>
                             <option value="Dhaka">Dhaka (ঢাকা)</option>
@@ -919,29 +975,49 @@
                         </select>
                     </div>
                     <div>
-                        <label style="font-size: 10.5px; color: var(--neon-blue);">জেলা (অটো)</label>
+                        <label style="font-size: 10.5px; color: var(--neon-blue);">District (জেলা - Auto)</label>
                         <select id="editDistrictSelect" onchange="onDistrictChangeCascade()"></select>
                     </div>
                     <div>
-                        <label style="font-size: 10.5px; color: var(--neon-blue);">উপজেলা (অটো)</label>
+                        <label style="font-size: 10.5px; color: var(--neon-blue);">Upazila (উপজেলা - Auto)</label>
                         <select id="editUpazilaSelect"></select>
                     </div>
                 </div>
 
                 <div class="map-search-box">
-                    <label style="font-size: 11px; color: var(--neon-blue);">শিক্ষা প্রতিষ্ঠান (শুধু স্কুল, কলেজ ও বিশ্ববিদ্যালয় 🎓)</label>
-                    <input type="text" id="mapSearchInstInput" placeholder="টাইপ করুন..." oninput="searchInstitutionOnMap(this.value)">
+                    <label style="font-size: 11px; color: var(--neon-blue);">Institution (শুধু স্কুল, কলেজ ও ভার্সিটি ফিল্টার 🎓)</label>
+                    <input type="text" id="mapSearchInstInput" placeholder="প্রতিষ্ঠানের নাম টাইপ করুন..." oninput="searchInstitutionOnMap(this.value)">
                     <div class="map-suggest-list" id="mapSuggestions"></div>
                 </div>
                 <button class="btn-dual-action blue" style="width: 100%; margin-top: 8px;" onclick="saveAcademicProfile()">
-                    <span class="act-en">Save Changes</span>
+                    <span class="act-en">Save Profile Changes</span>
                     <span class="act-bn">পরিবর্তন সেভ করুন</span>
                 </button>
             </div>
         </div>
     </div>
 
-    <!-- কাস্টম মোডাল -->
+    <!-- Interactive Custom Goal Setter Modal (Prompt Replacement) -->
+    <div class="modal" id="goalModal">
+        <div class="modal-box">
+            <div style="font-size: 38px; margin-bottom: 8px;">🎯</div>
+            <div style="font-size: 16px; font-weight: bold; color: var(--neon-blue); margin-bottom: 6px;">দৈনিক পড়ার লক্ষ্যমাত্রা সেট করুন</div>
+            <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 12px;">আজকে কত ঘণ্টা পড়াশোনা করার টার্গেট নিতে চান?</p>
+            <input type="number" id="customGoalHoursInput" min="1" max="18" placeholder="ঘণ্টা (যেমন: 2, 4, 6)" style="text-align: center; font-size: 16px; font-weight: bold; color: var(--neon-gold);">
+            <div style="display: flex; gap: 8px; margin-top: 10px;">
+                <button class="btn-dual-action blue" onclick="confirmSaveCustomGoal()" style="flex: 1;">
+                    <span class="act-en">Save Target</span>
+                    <span class="act-bn">টার্গেট সেট করুন</span>
+                </button>
+                <button class="btn-dual-action red" onclick="closeGoalModal()" style="flex: 1;">
+                    <span class="act-en">Cancel</span>
+                    <span class="act-bn">বাতিল</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- General Alert Modal -->
     <div class="modal" id="sysModal">
         <div class="modal-box">
             <div id="modalEmoji" style="font-size: 38px; margin-bottom: 8px;">⚡</div>
@@ -991,7 +1067,7 @@
             return "স্বাগতম";
         }
 
-        // বাংলাদেশের পূর্ণাঙ্গ ভৌগোলিক ডাটাবেস
+        // Standard Geographic Database (Bangladesh)
         const bdGeoHierarchy = {
             "Rangpur": {
                 "Gaibandha": ["Bonarpara / Saghata", "Gobindaganj", "Gaibandha Sadar", "Palashbari", "Sundarganj", "Sadullapur", "Phulchhari"],
@@ -1073,7 +1149,7 @@
         let cachedAllUsers = [];
         let currentHierarchyTier = "all_bd";
 
-        // ড্যাশবোর্ড ও প্রোফাইল ডাটা রিডার (XP ও লেভেল বাগ সম্পূর্ণ ফিক্স)
+        // Accurate User Data & Goal Calculator
         db.ref('users/' + currentUser).on('value', (snap) => {
             const data = snap.val();
             if (!data) return;
@@ -1084,14 +1160,14 @@
             document.getElementById('profName').innerText = displayName;
             document.getElementById('editDisplayNameInput').value = displayName;
 
-            // ডাটাবেস থেকে প্রাপ্ত আসল XP
+            // Direct Realtime Synced XP
             const currentXp = (typeof userData.xp === 'number') ? userData.xp : 0;
             document.getElementById('dashTotalXp').innerText = currentXp;
 
-            // লেভেল হিসাব: প্রতি ১০০ XP তে ১ লেভেল বৃদ্ধি
+            // Accurate Level
             const currentLvl = Math.floor(currentXp / 100) + 1;
-            document.getElementById('dashCurrentLvl').innerText = "লেভেল " + currentLvl;
-            document.getElementById('dashLvlHeader').innerText = `লেভেল ${currentLvl} স্কলার`;
+            document.getElementById('dashCurrentLvl').innerText = "Lvl " + currentLvl;
+            document.getElementById('dashLvlHeader').innerText = `LEVEL ${currentLvl} SCHOLAR`;
 
             const xpFloor = (currentLvl - 1) * 100;
             const xpCeil = currentLvl * 100;
@@ -1102,7 +1178,7 @@
             document.getElementById('dashXpProgressBar').style.width = progressPercent + "%";
             document.getElementById('dashXpRemainingText').innerText = `পরবর্তী লেভেলে পৌঁছাতে আরও ${xpCeil - currentXp} XP প্রয়োজন 🔥`;
 
-            // মোট সময়
+            // Study Time
             const totalSec = userData.totalSeconds || 0;
             const hours = (totalSec / 3600).toFixed(1);
             document.getElementById('dashTotalTime').innerText = hours + "h";
@@ -1111,43 +1187,7 @@
             const todayHr = Math.floor((totalSec % 86400) / 3600);
             document.getElementById('dashTodayTime').innerText = `${todayHr}h ${todayMin}m`;
 
-            // টার্গেট ও শিক্ষা প্রতিষ্ঠান
-            document.getElementById('profTarget').innerText = userData.target || "HSC Science";
-            document.getElementById('profAge').innerText = (userData.age || "18") + " বছর";
-            document.getElementById('profInst').innerText = (userData.institutionName || "General College") + (userData.institutionType ? ` (${userData.institutionType})` : "");
-
-            const locText = `${userData.upazila || 'Bonarpara / Saghata'}, ${userData.district || 'Gaibandha'}, ${userData.division || 'Rangpur'}`;
-            document.getElementById('profLocationText').innerText = locText;
-
-            // ফর্মের ড্রপডাউন সেট করা
-            if (userData.age) document.getElementById('editAgeInput').value = userData.age;
-            if (userData.institutionType) document.getElementById('editInstTypeSelect').value = userData.institutionType;
-            if (userData.institutionName) document.getElementById('mapSearchInstInput').value = userData.institutionName;
-
-            if (userData.division && bdGeoHierarchy[userData.division]) {
-                document.getElementById('editDivisionSelect').value = userData.division;
-                onDivisionChangeCascade();
-            }
-            if (userData.district) {
-                document.getElementById('editDistrictSelect').value = userData.district;
-                onDistrictChangeCascade();
-            }
-            if (userData.upazila) {
-                document.getElementById('editUpazilaSelect').value = userData.upazila;
-            }
-
-            const isVerified = (userData.emailVerified === true) || (auth.currentUser && auth.currentUser.emailVerified);
-            document.getElementById('profVerificationBadge').innerHTML = isVerified ? 
-                '<span style="color: var(--neon-green); font-weight: bold;">✅ ভেরিফাইড স্কলার</span>' : 
-                '<span style="color: var(--neon-gold); font-weight: bold;">⚠️ পেন্ডিং</span>';
-
-            const defaultAv = 'gojo-vibe.jpg';
-            const userAvatar = userData.avatar;
-            const avatarUrl = (userAvatar && !userAvatar.includes('dicebear')) ? userAvatar : defaultAv;
-            document.getElementById('navAvatar').src = avatarUrl;
-            document.getElementById('profAvatarBig').src = avatarUrl;
-
-            // গোল প্রোগ্রেস
+            // Goal Progress Calculator
             const userTargetMins = userData.dailyGoalMins || 180;
             const goalTargetSec = userTargetMins * 60;
             const goalAchievedSec = totalSec % goalTargetSec;
@@ -1157,12 +1197,77 @@
             document.getElementById('goalPercentText').innerText = goalPercent + "% সম্পন্ন";
             const minLeft = Math.max(0, userTargetMins - Math.floor(goalAchievedSec / 60));
             document.getElementById('goalRemainingText').innerText = minLeft > 0 ? `আর ${minLeft} মিনিট পড়লে আজকের লক্ষ্য পূরণ হবে` : "🎉 আজকের লক্ষ্য সম্পূর্ণ হয়েছে!";
+
+            // Squad Preview
+            const userSquad = userData.squad || "None";
+            document.getElementById('dashSquadPreview').innerText = userSquad !== "None" ? userSquad : "None";
+            if (userSquad !== "None") {
+                document.getElementById('activeSquadTitle').innerText = userSquad;
+                document.getElementById('leaveSquadBtn').style.display = "block";
+                document.getElementById('squadInviteBox').style.display = "flex";
+                if (userData.squadKey) loadSquadLiveDetails(userData.squadKey);
+            } else {
+                document.getElementById('activeSquadTitle').innerText = "No Squad";
+                document.getElementById('leaveSquadBtn').style.display = "none";
+                document.getElementById('squadInviteBox').style.display = "none";
+                document.getElementById('squadMembersRoster').style.display = "none";
+            }
         });
 
-        // পাঠ্যসূচির অধ্যায় তালিকা
+        // 🎯 Custom Goal Modal Controls
+        function openCustomGoalModal() {
+            const currentGoal = userData.dailyGoalMins ? (userData.dailyGoalMins / 60) : 3;
+            document.getElementById('customGoalHoursInput').value = currentGoal;
+            document.getElementById('goalModal').style.display = "flex";
+        }
+        function closeGoalModal() {
+            document.getElementById('goalModal').style.display = "none";
+        }
+        function confirmSaveCustomGoal() {
+            const hrs = parseFloat(document.getElementById('customGoalHoursInput').value);
+            if (hrs && hrs > 0 && hrs <= 18) {
+                db.ref('users/' + currentUser).update({ dailyGoalMins: Math.round(hrs * 60) }).then(() => {
+                    closeGoalModal();
+                    openModal("🎯", "লক্ষ্যমাত্রা নির্ধারিত!", `আজকের পড়ার টার্গেট সফলভাবে ${hrs} ঘণ্টায় সেট করা হয়েছে!`);
+                });
+            } else {
+                openModal("⚠️", "ভুল ইনপুট", "অনুগ্রহ করে ১ থেকে ১৮ ঘণ্টার মধ্যে একটি বাস্তবসম্মত সময় দিন!");
+            }
+        }
+
+        // 📚 Complete Official Syllabus (Bangla Full HSC Included)
         const structuredSyllabus = {
+            "Bangla": {
+                "1st Paper": [
+                    "গদ্য: অপরিচিতা - রবীন্দ্রনাথ ঠাকুর",
+                    "গদ্য: বিলাসী - শরৎচন্দ্র চট্টোপাধ্যায়",
+                    "গদ্য: মানব-কল্যাণ - আবুল ফজল",
+                    "গদ্য: মাসি-পিসি - মানিক বন্দ্যোপাধ্যায়",
+                    "গদ্য: বায়ান্নর দিনগুলো - শেখ মুজিবুর রহমান",
+                    "গদ্য: রেইনকোট - আখতারুজ্জামান ইলিয়াস",
+                    "গদ্য: মহাজাগতিক কিউরেটর - মুহম্মদ জাফর ইকবাল",
+                    "পদ্য: সোনার তরী - রবীন্দ্রনাথ ঠাকুর",
+                    "পদ্য: বিদ্রোহী - কাজী নজরুল ইসলাম",
+                    "পদ্য: প্রতিদান - জসীমউদ্দীন",
+                    "পদ্য: তাহারেই পড়ে মনে - সুফিয়া কামাল",
+                    "পদ্য: সেই অস্ত্র - আহসান হাবীব",
+                    "পদ্য: বিভীষণের প্রতি মেঘনাদ - মাইকেল মধুসূদন দত্ত",
+                    "পদ্য: ফেব্রুয়ারী ১৯৬৯ - শামসুর রাহমান",
+                    "উপন্যাস: লালসালু - সৈয়দ ওয়ালীউল্লাহ্",
+                    "নাটক: সিরাজউদ্দৌলা - সিকান্দার আবু জাফর"
+                ],
+                "2nd Paper": [
+                    "বাংলা উচ্চারণের নিয়ম",
+                    "বাংলা বানানের নিয়ম",
+                    "শব্দের ব্যাকরণিক শ্রেণি",
+                    "বাক্যতত্ত্ব ও বাক্য রূপান্তর",
+                    "প্রতিবেদন ও পত্রলিখন",
+                    "ভাবসম্প্রসারণ ও সারাংশ",
+                    "প্রবন্ধ রচনা"
+                ]
+            },
             "Physics": {
-                "1st Paper": ["অধ্যায় ১: ভৌতজগত ও পরিমাপ", "অধ্যায় ২: ভেক্টর (Vector)", "অধ্যায় ৩: গতিবিদ্যা (Dynamics)", "অধ্যায় ৪: নিউটনিয়ান বলবিদ্যা", "অধ্যায় ৫: কাজ, শক্তি ও ক্ষমতা", "অধ্যায় ৬: মহাকর্ষ ও অভিকর্ষ", "অধ্যায় ৭: পদার্থের গাঠনিক ধর্ম", "অধ্যায় ৮: পর্যাবৃত্ত গতি", "অধ্যায় ৯: তরঙ্গ (Waves)", "অধ্যায় ১০: আদর্শ গ্যাস"],
+                "1st Paper": ["অধ্যায় ১: ভৌতজগত ও পরিমাপ", "অধ্যায় ২: ভেক্টর (Vector)", "অধ্যায় ৩: গতিবিদ্যা (Dynamics)", "অধ্যায় ৪: নিউটনিয়ান বলবিদ্যা", "অধ্যায় ৫: কাজ, শক্তি ও ক্ষমতা", "অধ্যায় ৬: মহাকর্ষ ও অভিকর্ষ", "অধ্যায় ৭: পদার্থের গাঠনিক ধর্ম", "অধ্যায় ৮: পর্যাবৃত্ত গতি", "অধ্যায় ৯: তরঙ্গ (Waves)", "অধ্যায় ১০: আদর্শ গ্যাস ও গতিতত্ত্ব"],
                 "2nd Paper": ["অধ্যায় ১: তাপগতিবিদ্যা (Thermodynamics)", "অধ্যায় ২: স্থির তড়িৎ (Electrostatics)", "অধ্যায় ৩: চল তড়িৎ (Current Electricity)", "অধ্যায় ৪: তড়িৎ প্রবাহের চৌম্বক ক্রিয়া", "অধ্যায় ৫: তাড়িতচৌম্বক আবেশ", "অধ্যায় ৬: জ্যামিতিক আলোকবিজ্ঞান", "অধ্যায় ৭: ভৌত আলোকবিজ্ঞান", "অধ্যায় ৮: আধুনিক পদার্থবিজ্ঞান", "অধ্যায় ৯: পরমাণু মডেল", "অধ্যায় ১০: সেমিকন্ডাক্টর"]
             },
             "Chemistry": {
@@ -1176,10 +1281,6 @@
             "Biology": {
                 "1st Paper": ["অধ্যায় ১: কোষ ও এর গঠন (Cell)", "অধ্যায় ২: কোষ বিভাজন (Cell Division)", "অধ্যায় ৪: অণুজীব (Microorganisms)", "অধ্যায় ৮: টিস্যুতন্ত্র", "অধ্যায় ৯: উদ্ভিদ শারীরতত্ত্ব", "অধ্যায় ১১: জীবপ্রযুক্তি (Biotech)"],
                 "2nd Paper": ["অধ্যায় ১: প্রাণীর বিভিন্নতা", "অধ্যায় ২: হাইড্রা ও ঘাসফড়িং", "অধ্যায় ৩: পরিপাক ও শোষণ", "অধ্যায় ৪: রক্ত ও সংবহন", "অধ্যায় ৫: শ্বাসক্রিয়া ও শ্বসন", "অধ্যায় ১১: জিনতত্ত্ব ও বিবর্তন"]
-            },
-            "Bangla": {
-                "1st Paper": ["গদ্য: অপরিচিতা - রবীন্দ্রনাথ ঠাকুর", "গদ্য: বিলাসী - শরৎচন্দ্র চট্টোপাধ্যায়", "গদ্য: আমার পথ - কাজী নজরুল ইসলাম", "পদ্য: সোনার তরী - রবীন্দ্রনাথ ঠাকুর", "পদ্য: বিদ্রোহী - কাজী নজরুল ইসলাম", "নাটক: সিরাজউদ্দৌলা - সিকান্দার আবু জাফর"],
-                "2nd Paper": ["বাংলা উচ্চারণের নিয়ম", "বাংলা বানানের নিয়ম", "শব্দের ব্যাকরণিক শ্রেণি", "বাক্য রূপান্তর", "প্রতিবেদন ও পত্রলিখন"]
             },
             "English": {
                 "1st Paper": ["Unit 1: People & Personalities", "Unit 2: Dreams & Aspirations", "Seen Comprehension & Cloze Test", "Theme & Summary Writing"],
@@ -1211,53 +1312,80 @@
             });
         }
 
-        // প্র্যাকটিস বট ও ব্যাটল ডাটাবেস
+        // Expanded Multi-Question Pool with Source Citations
         const intelligentQuestionBank = {
+            "Bangla": [
+                { q: "'অপরিচিতা' গল্পে কল্যাণীর বাবার নাম কী ছিল?", options: ["অনুপম", "শম্ভুনাথ সেন", "হরিদাস", "হরিশ"], correct: 1, source: "এনসিটিবি মূল সাহিত্যপাঠ | সকল বোর্ড", explain: "রবীন্দ্রনাথ ঠাকুরের 'অপরিচিতা' গল্পে কল্যাণীর পিতা ছিলেন শম্ভুনাথ সেন।" },
+                { q: "'বিদ্রোহী' কবিতাটি নজরুলের কোন কাব্যগ্রন্থের অন্তর্গত?", options: ["অগ্নিবীণা", "বিষের বাঁশী", "সাম্যবাদী", "সর্বহারা"], correct: 0, source: "অগ্নিবীণা কাব্যগ্রন্থ | এইচএসসি বোর্ড", explain: "১৯২২ সালে প্রকাশিত 'অগ্নিবীণা' কাব্যগ্রন্থের দ্বিতীয় কবিতা হলো 'বিদ্রোহী'।" },
+                { q: "'রেইনকোট' গল্পে নুরুল হুদার গায়ে রেইনকোটটি কার ছিল?", options: ["আসবাব", "ইসহাক", "মিন্টু", "আনোয়ার"], correct: 2, source: "আখতারুজ্জামান ইলিয়াস | ঢাকা বোর্ড", explain: "মুক্তিযোদ্ধা শ্যালক মিন্টুর রেইনকোট গায়ে দিয়ে নুরুল হুদা সাহস অনুভব করতেন।" },
+                { q: "'লালসালু' উপন্যাসে মজিদের দ্বিতীয় স্ত্রীর নাম কী ছিল?", options: ["রহিমা", "জমিলা", "আমেনা", "হাসুনির মা"], correct: 1, source: "সৈয়দ ওয়ালীউল্লাহ্ | বোর্ড প্রশ্ন", explain: "মজিদের প্রথম স্ত্রী রহিমা এবং দ্বিতীয় তরুণী স্ত্রী ছিলেন জমিলা।" }
+            ],
             "Physics": [
-                { q: "ভেক্টর A = 3i + 4j হলে, এর মান (Magnitude) কত?", options: ["5", "7", "1", "25"], correct: 0, source: "আমীর হোসেন ও ইসহাক স্যার পাঠ্যবই | ঢাকা বোর্ড", explain: "|A| = √(3² + 4²) = √(9 + 16) = √25 = 5 একক।" },
-                { q: "নিউটনের ৩য় সূত্র অনুযায়ী ক্রিয়া ও প্রতিক্রিয়ার মধ্যবর্তী কোণ কত?", options: ["0°", "90°", "180°", "360°"], correct: 2, source: "শাহজাহান তপন স্যার পাঠ্যবই | রাজশাহী বোর্ড", explain: "ক্রিয়া এবং প্রতিক্রিয়া বল সর্বদা সমান ও বিপরীতমুখী, তাই এদের মধ্যকার কোণ ১৮০ ডিগ্রি।" }
+                { q: "ভেক্টর A = 3i + 4j হলে, এর মান কত?", options: ["5", "7", "1", "25"], correct: 0, source: "ইসহাক স্যার পাঠ্যবই | ঢাকা বোর্ড", explain: "|A| = √(3² + 4²) = √25 = 5 একক।" },
+                { q: "নিউটনের ৩য় সূত্র অনুযায়ী ক্রিয়া ও প্রতিক্রিয়ার মধ্যবর্তী কোণ কত?", options: ["0°", "90°", "180°", "360°"], correct: 2, source: "তপন স্যার পাঠ্যবই | রাজশাহী বোর্ড", explain: "ক্রিয়া ও প্রতিক্রিয়া বল সর্বদা বিপরীতমুখী, তাই মধ্যবর্তী কোণ ১৮০ ডিগ্রি।" },
+                { q: "কাজের মাত্রা সমীকরণ কোনটি?", options: ["MLT^-1", "ML^2T^-2", "MLT^-2", "ML^2T^-1"], correct: 1, source: "রয়েল টেস্ট পেপার | বুয়েট প্রশ্নব্যাংক", explain: "কাজ = বল × সরণ = [MLT^-2] × [L] = [ML^2T^-2]।" },
+                { q: "একটি কণার সরণ r = 4t² + 2t হলে, t = 2s এ এর বেগ কত?", options: ["18 m/s", "16 m/s", "8 m/s", "10 m/s"], correct: 0, source: "মেডিকেল ও ডুয়েট প্রশ্নব্যাংক", explain: "v = dr/dt = 8t + 2। অতএব t=2 হলে v = 8(2) + 2 = 18 m/s।" }
             ],
             "Chemistry": [
-                { q: "পর্যায় সারণীর কোন গ্রুপের মৌলগুলোকে হ্যালোজেন বলা হয়?", options: ["Group 1", "Group 2", "Group 17", "Group 18"], correct: 2, source: "হাজারী ও নাগ স্যার মূল বই | চট্টগ্রাম বোর্ড", explain: "গ্রুপ ১৭ এর F, Cl, Br, I মৌলগুলোকে সামুদ্রিক লবণ উৎপাদনকারী বা হ্যালোজেন বলে।" },
-                { q: "ইথেন অণুতে কার্বন-কার্বন একক বন্ধন দৈর্ঘ্য কত?", options: ["0.154 nm", "0.134 nm", "0.120 nm", "0.109 nm"], correct: 0, source: "মেডিকেল ভর্তি প্রশ্নব্যাংক | সিসটেক গাইড", explain: "কার্বন-কার্বন একক বন্ধন (sp3) এর আদর্শ দৈর্ঘ্য 0.154 nm।" }
+                { q: "পর্যায় সারণীর কোন গ্রুপের মৌলগুলোকে হ্যালোজেন বলা হয়?", options: ["Group 1", "Group 2", "Group 17", "Group 18"], correct: 2, source: "হাজারী ও নাগ স্যার বই | চট্টগ্রাম বোর্ড", explain: "গ্রুপ ১৭ এর মৌলগুলোকে হ্যালোজেন বা লবণ উৎপাদক বলে।" },
+                { q: "ইথেন অণুতে কার্বন-কার্বন একক বন্ধন দৈর্ঘ্য কত?", options: ["0.154 nm", "0.134 nm", "0.120 nm", "0.109 nm"], correct: 0, source: "মেডিকেল ভর্তি প্রশ্নব্যাংক", explain: "কার্বন-কার্বন একক বন্ধন (sp3) এর আদর্শ দৈর্ঘ্য 0.154 nm।" },
+                { q: "কোনটি লুইস এসিড?", options: ["NH3", "H2O", "BF3", "OH-"], correct: 2, source: "পাঞ্জেরী টেস্ট পেপার স্পেশাল", explain: "BF3 এর অষ্টক অপূর্ণ থাকায় এটি ইলেকট্রন জোড় গ্রহণ করে, তাই লুইস এসিড।" }
             ],
             "HigherMath": [
-                { q: "d/dx(sin 2x) এর অন্তরক সহগ কোনটি?", options: ["cos 2x", "2 cos 2x", "-2 cos 2x", "cos^2 x"], correct: 1, source: "এস ইউ আহাম্মদ ও কেতাব স্যার বই | কুমিল্লা বোর্ড", explain: "d/dx(sin 2x) = cos 2x * d/dx(2x) = 2 cos 2x।" },
-                { q: "বৃত্তের সমীকরণ x² + y² = 16 হলে ব্যাসার্ধ কত?", options: ["2", "4", "8", "16"], correct: 1, source: "অক্ষরপত্র প্রকাশনী | যশোর বোর্ড", explain: "আদর্শ রূপ x² + y² = r² এর সাথে তুলনা করলে r² = 16 বা r = 4।" }
+                { q: "d/dx(sin 2x) এর অন্তরক সহগ কোনটি?", options: ["cos 2x", "2 cos 2x", "-2 cos 2x", "cos^2 x"], correct: 1, source: "কেতাব স্যার পাঠ্যবই | কুমিল্লা বোর্ড", explain: "d/dx(sin 2x) = cos 2x * d/dx(2x) = 2 cos 2x।" },
+                { q: "বৃত্তের সমীকরণ x² + y² = 16 হলে ব্যাসার্ধ কত?", options: ["2", "4", "8", "16"], correct: 1, source: "অক্ষরপত্র প্রকাশনী | যশোর বোর্ড", explain: "x² + y² = r² এর সাথে তুলনা করলে r = 4।" }
             ],
             "Biology": [
-                { q: "কোষের প্রোটিন ফ্যাক্টরি বলা হয় কোন অঙ্গাণুকে?", options: ["মাইটোকন্ড্রিয়া", "লাইসোজোম", "রাইবোসোম", "গলগি বডি"], correct: 2, source: "ড. আবুল হাসান স্যার পাঠ্যবই | ঢাকা বোর্ড", explain: "রাইবোসোম কোষে প্রোটিন সংশ্লেষণের মূল কেন্দ্র।" }
-            ],
-            "Bangla": [
-                { q: "'অপরিচিতা' গল্পে কল্যাণীর বাবার নাম কী ছিল?", options: ["অনুপম", "শম্ভুনাথ সেন", "হরিদাস", "হরিশ"], correct: 1, source: "এনসিটিবি মূল সাহিত্যপাঠ | সকল বোর্ড", explain: "রবীন্দ্রনাথ ঠাকুরের 'অপরিচিতা' গল্পে কল্যাণীর পিতা ছিলেন শম্ভুনাথ সেন।" }
+                { q: "কোষের প্রোটিন ফ্যাক্টরি বলা হয় কোন অঙ্গাণুকে?", options: ["মাইটোকন্ড্রিয়া", "লাইসোজোম", "রাইবোসোম", "গলগি বডি"], correct: 2, source: "ড. আবুল হাসান স্যার পাঠ্যবই | ঢাকা বোর্ড", explain: "রাইবোসোম কোষে প্রোটিন তৈরির মূল কেন্দ্র।" },
+                { q: "রক্তের সার্বজনীন দাতা গ্রুপ কোনটি?", options: ["A+", "B+", "AB+", "O-"], correct: 3, source: "গাজী আজমল স্যার প্রাণিবিজ্ঞান", explain: "O নেগেটিভ রক্তে কোনো অ্যান্টিজেন থাকে না।" }
             ],
             "English": [
-                { q: "Which preposition is correct: 'He is proficient ___ English'?", options: ["at", "in", "with", "for"], correct: 1, source: "পাঞ্জেরী টেস্ট পেপার স্পেশাল | ঢাকা বোর্ড", explain: "ভাষায় দক্ষতা বোঝাতে 'proficient in' এপ্রোপ্রিয়েট প্রিপজিশন বসে।" }
+                { q: "Which preposition is correct: 'He is proficient ___ English'?", options: ["at", "in", "with", "for"], correct: 1, source: "পাঞ্জেরী টেস্ট পেপার স্পেশাল", explain: "ভাষায় দক্ষতা বোঝাতে 'proficient in' বসে।" }
             ],
             "ICT": [
-                { q: "বাইনারি সংখ্যা (1011)₂ এর ডেসিমাল মান কত?", options: ["9", "11", "13", "15"], correct: 1, source: "প্রকৌশলী মুজিবুর রহমান পাঠ্যবই | সিলেট বোর্ড", explain: "1×8 + 0×4 + 1×2 + 1×1 = 11।" }
+                { q: "বাইনারি সংখ্যা (1011)₂ এর ডেসিমাল মান কত?", options: ["9", "11", "13", "15"], correct: 1, source: "প্রকৌশলী মুজিবুর রহমান বই | সিলেট বোর্ড", explain: "1×8 + 0×4 + 1×2 + 1×1 = 11।" }
             ]
         };
 
+        // Anti-Repeat Smart Bot Execution
         let battleTimerInterval = null;
         let currentBattleQuestion = null;
-        let currentBattleStake = 20;
+        let currentQuestionSet = [];
+        let currentQIndex = 0;
+        let userCorrectCount = 0;
 
-        // এআই বট শুরু (বাগ ফিক্সড)
         function startSmartBotFight() {
             const sub = document.getElementById('battleSubjectSelect').value;
             const paper = document.getElementById('battlePaperSelect').value;
             const chap = document.getElementById('battleChapterSelect').value;
+            const qCount = parseInt(document.getElementById('battleQuestionCountSelect').value) || 1;
             const timeLimit = Math.max(10, parseInt(document.getElementById('battleTimeInput').value) || 15);
 
-            const qList = intelligentQuestionBank[sub] || intelligentQuestionBank["Physics"];
-            currentBattleQuestion = qList[Math.floor(Math.random() * qList.length)];
+            let pool = intelligentQuestionBank[sub] || intelligentQuestionBank["Physics"];
+            
+            // Fisher-Yates Random Shuffle to prevent duplicate repeating
+            let shuffled = [...pool];
+            for (let i = shuffled.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+            }
+
+            currentQuestionSet = shuffled.slice(0, Math.min(qCount, shuffled.length));
+            currentQIndex = 0;
+            userCorrectCount = 0;
 
             document.getElementById('battleSetupSection').style.display = "none";
+            document.getElementById('liveChallengesBoard').style.display = "none";
             document.getElementById('battleActiveStage').style.display = "block";
+
+            loadNextBotQuestion(sub, paper, chap, timeLimit);
+        }
+
+        function loadNextBotQuestion(sub, paper, chap, timeLimit) {
+            currentBattleQuestion = currentQuestionSet[currentQIndex];
             document.getElementById('botExplanationContainer').innerHTML = "";
 
-            document.getElementById('battleSubjectHeader').innerText = `${sub} (${paper}) ➡️ ${chap}`;
+            document.getElementById('battleSubjectHeader').innerText = `${sub} (${paper}) ➡️ ${chap} [প্রশ্ন ${currentQIndex + 1}/${currentQuestionSet.length}]`;
             document.getElementById('questionSourceBadge').innerText = currentBattleQuestion.source || "বোর্ড বই ও টেস্ট পেপার সংকলন";
             document.getElementById('battleQuestionText').innerText = currentBattleQuestion.q;
 
@@ -1268,11 +1396,10 @@
                 const btn = document.createElement('button');
                 btn.className = "battle-option-btn";
                 btn.innerText = `${i + 1}. ${optText}`;
-                btn.onclick = () => handleBattleAnswer(i);
+                btn.onclick = () => handleBotAnswer(i, sub, paper, chap, timeLimit);
                 optContainer.appendChild(btn);
             });
 
-            // টাইমার চালু
             let remainingSec = timeLimit;
             document.getElementById('battleCountdown').innerText = remainingSec + "s";
             
@@ -1282,24 +1409,33 @@
                 document.getElementById('battleCountdown').innerText = remainingSec + "s";
                 if (remainingSec <= 0) {
                     clearInterval(battleTimerInterval);
-                    finishBattleSession(false, true);
+                    handleBotAnswer(-1, sub, paper, chap, timeLimit); // Timeout
                 }
             }, 1000);
         }
 
-        function handleBattleAnswer(selectedIndex) {
+        function handleBotAnswer(selectedIndex, sub, paper, chap, timeLimit) {
             clearInterval(battleTimerInterval);
             const isCorrect = (selectedIndex === currentBattleQuestion.correct);
-            finishBattleSession(isCorrect, false);
+            if (isCorrect) userCorrectCount++;
+
+            currentQIndex++;
+            if (currentQIndex < currentQuestionSet.length) {
+                // Next question in set
+                loadNextBotQuestion(sub, paper, chap, timeLimit);
+            } else {
+                // Completed set
+                finishBotExamSet(userCorrectCount, currentQuestionSet.length);
+            }
         }
 
-        function finishBattleSession(isWinner, isTimeout) {
+        function finishBotExamSet(correct, total) {
             const explainHtml = `
                 <div class="bot-explanation-box">
-                    <strong style="color:var(--neon-green);">💡 সঠিক উত্তর ও সমাধান:</strong><br>
-                    সঠিক উত্তর: <strong style="color:var(--neon-gold);">${currentBattleQuestion.options[currentBattleQuestion.correct]}</strong><br>
-                    <strong>উৎস:</strong> ${currentBattleQuestion.source || "পাঠ্যবই ও টেস্ট পেপার"}<br>
-                    <strong>ব্যাখ্যা:</strong> ${currentBattleQuestion.explain || "পাঠ্যবইয়ের নিয়ম অনুযায়ী সঠিক উত্তর নির্ধারিত হয়েছে।"}<br>
+                    <strong style="color:var(--neon-green);">💡 কুইজ সম্পন্ন! আপনার স্কোর: ${correct} / ${total}</strong><br>
+                    সর্বশেষ প্রশ্নের সঠিক উত্তর: <strong style="color:var(--neon-gold);">${currentBattleQuestion.options[currentBattleQuestion.correct]}</strong><br>
+                    <strong>উৎস:</strong> ${currentBattleQuestion.source}<br>
+                    <strong>ব্যাখ্যা:</strong> ${currentBattleQuestion.explain}<br>
                 </div>
                 <button class="btn-dual-action blue" style="width:100%; margin-top:10px;" onclick="exitBattleToSetup()">
                     <span class="act-en">Back To Arena Lobby</span>
@@ -1307,15 +1443,100 @@
                 </button>
             `;
             document.getElementById('botExplanationContainer').innerHTML = explainHtml;
-            openModal(isWinner ? "🤖" : "❌", isWinner ? "স্মার্ট বট পরাজিত!" : "ভুল উত্তর হয়েছে", isWinner ? "অভিনন্দন! আপনি সঠিক উত্তর দিয়েছেন।" : "স্মার্ট বটের বিপক্ষে আপনার উত্তরটি ভুল হয়েছে। নিচে সমাধান দেখে নিন।");
+            openModal("🤖", "কুইজ সেট সমাপ্ত!", `আপনি ${total}টি প্রশ্নের মধ্যে ${correct}টি সঠিক উত্তর দিয়েছেন!`);
         }
 
         function exitBattleToSetup() {
             document.getElementById('battleSetupSection').style.display = "block";
+            document.getElementById('liveChallengesBoard').style.display = "block";
             document.getElementById('battleActiveStage').style.display = "none";
         }
 
-        // লিডারবোর্ড সিঙ্ক
+        // Broadcast Challenge
+        function broadcastBattleRoom() {
+            const sub = document.getElementById('battleSubjectSelect').value;
+            const paper = document.getElementById('battlePaperSelect').value;
+            const chap = document.getElementById('battleChapterSelect').value;
+            const diff = document.getElementById('battleDifficultySelect').value;
+            const mode = document.getElementById('battleModeSelect').value;
+            const stake = parseInt(document.getElementById('battleStakeSelect').value);
+            const timeLimit = parseInt(document.getElementById('battleTimeInput').value);
+
+            if (isNaN(timeLimit) || timeLimit < 10) {
+                openModal("⚠️", "অবৈধ সময়সীমা", "Fair Timer Guard: প্রতি প্রশ্নের সময় কমপক্ষে ১০ সেকেন্ড হতে হবে!");
+                return;
+            }
+
+            const roomId = "WAR_" + Date.now();
+            db.ref('battle_rooms/' + roomId).set({
+                host: currentUser,
+                hostSquad: userData.squad || "Independent",
+                subject: sub,
+                paper: paper,
+                chapter: chap,
+                difficulty: diff,
+                mode: mode,
+                stake: stake,
+                timeLimit: timeLimit,
+                status: "waiting",
+                createdAt: Date.now()
+            }).then(() => {
+                openModal("📡", "চ্যালেঞ্জ ব্রডকাস্ট সফল", `আপনার ${sub} (${paper}) [${chap}] চ্যালেঞ্জটি ওপেন রুমে যুক্ত হয়েছে!`);
+            });
+        }
+
+        // Live Open Rooms Listener
+        db.ref('battle_rooms').orderByChild('status').equalTo('waiting').limitToLast(6).on('value', snap => {
+            const container = document.getElementById('liveRoomsList');
+            const counter = document.getElementById('liveRoomCount');
+            const data = snap.val();
+            
+            if (!data) {
+                container.innerHTML = '<p style="font-size: 12px; color: var(--text-muted); text-align: center;">কোনো সক্রিয় চ্যালেঞ্জ নেই। আপনি নিজেই একটি চ্যালেঞ্জ হোস্ট করুন!</p>';
+                counter.innerText = "0 Available";
+                return;
+            }
+
+            const rooms = Object.keys(data);
+            counter.innerText = `${rooms.length}টি রুম সক্রিয়`;
+            container.innerHTML = "";
+
+            rooms.reverse().forEach(rKey => {
+                const room = data[rKey];
+                const isMyRoom = (room.host === currentUser);
+
+                const card = document.createElement('div');
+                card.className = "battle-room-card";
+                card.innerHTML = `
+                    <div>
+                        <div style="font-size: 13px; font-weight: 800; color: #fff;">
+                            ${room.subject} (${room.paper || '১ম পত্র'}) ➡️ <span style="color: var(--neon-blue);">${room.chapter}</span>
+                        </div>
+                        <div style="font-size: 11px; color: var(--text-muted); margin-top: 3px;">
+                            হোস্ট: <strong style="color: var(--neon-green);">@${room.host}</strong> (${room.hostSquad}) | লেভেল: <strong style="color:var(--neon-gold);">${room.difficulty || 'Easy'}</strong> | সময়: <strong>${room.timeLimit}s</strong>
+                        </div>
+                    </div>
+                    <div style="text-align: right;">
+                        <div style="font-size: 13px; font-weight: 900; color: var(--neon-gold); margin-bottom: 5px;">🔥 ${room.stake} XP বাজি</div>
+                        ${isMyRoom ? 
+                            `<button onclick="cancelMyBattleRoom('${rKey}')" class="btn-dual-action red" style="padding: 4px 8px;"><span class="act-en">Cancel</span><span class="act-bn">বাতিল</span></button>` : 
+                            `<button onclick="acceptLiveBattleRoom('${rKey}')" class="btn-dual-action green" style="padding: 4px 10px;"><span class="act-en">Accept & Fight</span><span class="act-bn">লড়াই গ্রহণ</span></button>`
+                        }
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        });
+
+        function cancelMyBattleRoom(rKey) {
+            db.ref('battle_rooms/' + rKey).remove();
+        }
+
+        function acceptLiveBattleRoom(rKey) {
+            openModal("⚔️", "ম্যাচ শুরু হচ্ছে", "চ্যালেঞ্জ গ্রহণ করা হয়েছে! ব্যাটল বোর্ডে প্রবেশ করুন।");
+        }
+
+        // Leaderboard Listener
         db.ref('users').on('value', snap => {
             cachedAllUsers = [];
             const data = snap.val() || {};
@@ -1429,7 +1650,64 @@
             });
         }
 
-        // ট্যাব পরিবর্তন
+        // Squad Actions
+        function createNewVerifiedSquad() {
+            const nameInput = document.getElementById('createSquadNameInput').value.trim();
+            const slogan = document.getElementById('createSquadSloganInput').value.trim();
+            const tier = document.getElementById('createSquadTierSelect').value;
+            const subject = document.getElementById('createSquadSubjectSelect').value;
+            const pin = document.getElementById('createSquadPinInput').value.trim();
+
+            if (!nameInput || pin.length !== 4) {
+                openModal("⚠️", "ভুল তথ্য", "সঠিক নাম এবং ৪-সংখ্যার পিন প্রদান করুন!");
+                return;
+            }
+
+            const autoCode = "SQ-" + Math.floor(1000 + Math.random() * 9000);
+            const squadKey = autoCode.toLowerCase();
+            db.ref('squads/' + squadKey).set({
+                name: nameInput, code: autoCode, slogan: slogan, tier: tier, subject: subject, pin: pin, creator: currentUser, members: { [currentUser]: true }
+            }).then(() => {
+                db.ref('users/' + currentUser).update({ squad: nameInput, squadKey: squadKey });
+                openModal("🎉", "স্কোয়াড তৈরি সফল", `Code: ${autoCode} | PIN: ${pin}`);
+            });
+        }
+
+        function joinVerifiedSquadByCode() {
+            const codeInput = document.getElementById('joinSquadCodeInput').value.trim().toLowerCase();
+            const pinInput = document.getElementById('joinSquadPinInput').value.trim();
+            db.ref('squads/' + codeInput).once('value').then((snap) => {
+                if (!snap.exists()) {
+                    openModal("❌", "কোড সঠিক নয়", "প্রদত্ত কোডের কোনো স্কোয়াড পাওয়া যায়নি!");
+                    return;
+                }
+                const sq = snap.val();
+                if (sq.pin !== pinInput) {
+                    openModal("🔒", "ভুল পিন", "স্কোয়াডের সঠিক ৪-ডিজিট পিন প্রদান করুন!");
+                    return;
+                }
+                db.ref(`squads/${codeInput}/members/${currentUser}`).set(true);
+                db.ref('users/' + currentUser).update({ squad: sq.name, squadKey: codeInput }).then(() => {
+                    openModal("🔥", "সফলভাবে যুক্ত হয়েছেন", `'${sq.name}' স্কোয়াডে আপনাকে স্বাগতম!`);
+                });
+            });
+        }
+
+        function leaveCurrentSquad() {
+            if (confirm("আপনি কি নিশ্চিতভাবে এই স্কোয়াড ত্যাগ করতে চান?")) {
+                if (userData.squadKey) db.ref(`squads/${userData.squadKey}/members/${currentUser}`).remove();
+                db.ref('users/' + currentUser).update({ squad: "None", squadKey: null });
+            }
+        }
+
+        function copySquadInvite() {
+            const code = document.getElementById('displaySquadCode').innerText;
+            const pin = document.getElementById('displaySquadPin').innerText;
+            navigator.clipboard.writeText(`Squad: ${userData.squad}\nCode: ${code}\nPIN: ${pin}`).then(() => {
+                openModal("📋", "কপি হয়েছে", "ইনভাইট কোড ও পিন ক্লিপবোর্ডে কপি করা হয়েছে!");
+            });
+        }
+
         function switchTab(tabId, el) {
             document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
             document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
@@ -1460,7 +1738,7 @@
             }, 1400);
         }
 
-        // প্রাথমিক শুরু
+        // Run Initial Triggers
         onBattleSubjectChange();
         onDivisionChangeCascade();
     </script>
